@@ -1,0 +1,772 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Research Methods HS23",
+    "section": "",
+    "text": "Willkommen\nDas Modul „Research Methods” vermittelt vertiefte Methodenkompetenzen für praxisorientiertes und angewandtes wissenschaftliches Arbeiten im Fachbereich „Umwelt und Natürliche Ressourcen” auf MSc-Niveau. Die Studierenden erarbeiten sich vertiefte Methodenkompetenzen für die analytische Betrachtung der Zusammenhänge im Gesamtsystem „Umwelt und Natürliche Ressourcen”. Die Studierenden erlernen die methodischen Kompetenzen, auf denen die nachfolgenden Module im MSc Programm UNR aufbauen. Das Modul vermittelt einerseits allgemeine, fächerübergreifende methodische Kompetenzen (z.B. Wissenschaftstheorie, computer-gestützte Datenverarbeitung und Statistik).\nHier werden die Unterlagen für die R-Übungsteile bereitgestellt. Es werden sukzessive sowohl Demo-Files, Aufgabenstellungen und Lösungen veröffentlicht.\nDiese Website wurde am 2023-11-01 11:57:59.533269 zum letzten Mal aktualisiert."
+  },
+  {
+    "objectID": "PrePro.html",
+    "href": "PrePro.html",
+    "title": "Pre-Processing",
+    "section": "",
+    "text": "Die Datenkunde 2.0 gibt den Studierenden das Wissen und die Fertigkeiten an die Hand, selbst erhobene und bezogene Daten für Ihre eigenen Analysen vorzubereiten und anzureichern (preprocessing). Die Einheit vermittelt zentrale Datenverarbeitungskompetenzen und thematisiert bekannte Problemzonen der umweltwissenschaftlichen Datenverarbeitung – immer mit einer „hands-on” Perspektive auf die begleitenden R-Übungen. Die Studierenden lernen die Eigenschaften ihrer Datensätze in der Fachsprache korrekt zu beschreiben. Sie lernen ausserdem Metadaten zu verstehen und die Implikationen derselben für ihre eigenen Analyseprojekte kritisch zu beurteilen. Zentrale Konzepte der lesson sind Skalenniveaus, Datentypen, Zeitdaten und Typumwandlungen.\nDie Lesson vermittelt zentralste Fertigkeiten zur Vorverarbeitung von strukturierten Daten in der umweltwissenschaftlichen Forschung: Datensätze verbinden (Joins) und umformen („reshape”, „split-apply-combine”). Im Anwendungskontext haben Daten selten von Anfang an diejenige Struktur, welche für die statistische Auswertung oder für die Informationsvisualisierung erforderlich wäre. In dieser lesson lernen die Studierenden die für diese oft zeitraubenden Preprocessing-Schritte notwendigen Konzepte und R-Werkzeuge kennen und kompetent anzuwenden.\n\n\n\n\n\n\n\n\n\n\nTitel\n\n\nDatum\n\n\nLesson\n\n\nThema\n\n\n\n\n\n\nVorbereitung\n\n\n2023-10-10\n\n\nPrePro1\n\n\nVorbereitung\n\n\n\n\nPrepro 1: Demo\n\n\n2023-10-10\n\n\nPrePro1\n\n\nDatentypen\n\n\n\n\nPrePro 1: Übung\n\n\n2023-10-10\n\n\nPrePro1\n\n\nDatentypen\n\n\n\n\nPrepro 2: Demo\n\n\n2023-10-16\n\n\nPrePro2\n\n\nPiping / Joins\n\n\n\n\nPrepro 2: Übung A\n\n\n2023-10-16\n\n\nPrePro2\n\n\nPiping / Joins\n\n\n\n\nPrepro 2: Übung B\n\n\n2023-10-16\n\n\nPrePro2\n\n\nPiping / Joins\n\n\n\n\nPrepro 3: Demo\n\n\n2023-10-17\n\n\nPrePro3\n\n\nSplit-Apply-Combine\n\n\n\n\nPrepro 3: Übung\n\n\n2023-10-17\n\n\nPrePro3\n\n\nSplit-Apply-Combine\n\n\n\n\n\n\nKeine Treffer"
+  },
+  {
+    "objectID": "prepro/Prepro1_Vorbereitung.html",
+    "href": "prepro/Prepro1_Vorbereitung.html",
+    "title": "Vorbereitung",
+    "section": "",
+    "text": "Im Rahmen von Prepro 1 - 3 werden wir folgende Packages brauchen: dplyr, ggplot2, lubridate, readr und tidyr. Wir empfehlen, diese bereits vor der ersten Lektion zu installieren. Einzelne Packages werden typischerweise folgendermassen installiert:\n\ninstall.packages(\"dplyr\")     # Anführungs- und Schlusszeichen sind zwingend\ninstall.packages(\"ggplot2\")\n...                           # usw.\n\nMit nachstehendem Code werden alle noch nicht installierten packages automatisch installiert.\n\nipak &lt;- function(pkg) {\n  new.pkg &lt;- pkg[!(pkg %in% installed.packages()[, \"Package\"])]\n  if (length(new.pkg)) {\n    install.packages(new.pkg, dependencies = TRUE)\n  }\n}\n\npackages &lt;- c(\"dplyr\", \"ggplot2\", \"lubridate\", \"readr\", \"tidyr\")\n\nipak(packages)\n\nZudem könnt ihr die Daten für die Übungen auf Moodle herunterladen."
+  },
+  {
+    "objectID": "prepro/Prepro1_Demo.html#footnotes",
+    "href": "prepro/Prepro1_Demo.html#footnotes",
+    "title": "Prepro 1: Demo",
+    "section": "",
+    "text": "ordered = T kann nur bei der Funktion factor() spezifiziert werden, nicht bei as.factor(). Ansonsten sind factor() und as.factor() sehr ähnlich.↩︎"
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html#arbeiten-mit-rstudio-project",
+    "href": "prepro/Prepro1_Uebung.html#arbeiten-mit-rstudio-project",
+    "title": "PrePro 1: Übung",
+    "section": "Arbeiten mit RStudio “Project”",
+    "text": "Arbeiten mit RStudio “Project”\nWir empfehlen die Verwendung von “Projects” innerhalb von RStudio. RStudio legt für jedes Projekt dann einen Ordner an, in welches die Projekt-Datei abgelegt wird (Dateiendung .Rproj). Sollen innerhalb des Projekts dann R-Skripts geladen oder erzeugt werden, werden diese dann auch im angelegten Ordner abgelegt. Mehr zu RStudio Projects findet ihr hier.\nDas Verwenden von Projects bringt verschiedene Vorteile, wie zum Beispiel:\n\nFestlegen der Working Directory ohne die Verwendung des expliziten Pfades (setwd()). Das ist sinnvoll, da sich dieser Pfad ändern kann (Zusammenarbeit mit anderen Usern, Ausführung des Scripts zu einem späteren Zeitpunkt)\nAutomatisches Zwischenspeichern geöffneter Scripts und Wiederherstellung der geöffneten Scripts bei der nächsten Session\nFestlegen verschiedener projektspezifischer Optionen\nVerwendung von Versionsverwaltungssystemen (z.B. git)"
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html#arbeiten-mit-libraries-packages",
+    "href": "prepro/Prepro1_Uebung.html#arbeiten-mit-libraries-packages",
+    "title": "PrePro 1: Übung",
+    "section": "Arbeiten mit Libraries / Packages",
+    "text": "Arbeiten mit Libraries / Packages\nR ist ohne Zusatzpackete, sogenannte “Packages” nicht mehr denkbar. Die allermeisten Packages werden auf CRAN gehostet und können leicht mittels install.packages() installiert werden. Eine sehr wichtige Sammlung von Packages wird von RStudio entwickelt. Unter dem Namen Tidyverse werden eine Reihe von Packages angeboten, den R-Alltag enorm erleichtert. Wir werden später näher auf das “Tidy”-Universum eingehen, an dieser Stelle können wir einfach mal die wichtigsten Packages aus tidyverse installieren (heute werden wir davon nur einen kleinen Teil benutzen).\nUm ein package in R verwenden zu können, gibt es zwei Möglichkeiten:\n\nentweder man lädt es zu Beginn der R-session mittles library(\"dplyr\") (ohne Anführungs- und Schlusszeichen).\noder man ruft eine function mit vorangestelltem Packetname sowie zwei Doppelpunkten auf. dplyr::filter() ruft die Funktion filter() des Packets dplyr auf.\n\nLetztere Notation ist vor allem dann sinnvoll, wenn sich zwei unterschiedliche Funktionen mit dem gleichen namen in verschiedenen pacakges existieren. filter() existiert als Funktion einersits im package dplyr sowie in stats. Dieses Phänomen nennt man “masking”.\nZu Beginn laden wir die nötigen Pakete:\n\nlibrary(\"readr\")\nlibrary(\"lubridate\")"
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html#aufgabe-1",
+    "href": "prepro/Prepro1_Uebung.html#aufgabe-1",
+    "title": "PrePro 1: Übung",
+    "section": "Aufgabe 1",
+    "text": "Aufgabe 1\nErstelle eine data.frame mit nachstehenden Daten.\n\n\nCode\ndf &lt;- data.frame(\n  Tierart = c(\"Fuchs\", \"Bär\", \"Hase\", \"Elch\"),\n  Anzahl = c(2, 5, 1, 3),\n  Gewicht = c(4.4, 40.3, 1.1, 120),\n  Geschlecht = c(\"m\", \"f\", \"m\", \"m\"),\n  Beschreibung = c(\"Rötlich\", \"Braun, gross\", \"klein, mit langen Ohren\", \"Lange Beine, Schaufelgeweih\")\n)\n\n\n\n\n\n\n\nTierart\nAnzahl\nGewicht\nGeschlecht\nBeschreibung\n\n\n\n\nFuchs\n2\n4.4\nm\nRötlich\n\n\nBär\n5\n40.3\nf\nBraun, gross\n\n\nHase\n1\n1.1\nm\nklein, mit langen Ohren\n\n\nElch\n3\n120.0\nm\nLange Beine, Schaufelgeweih"
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html#aufgabe-2",
+    "href": "prepro/Prepro1_Uebung.html#aufgabe-2",
+    "title": "PrePro 1: Übung",
+    "section": "Aufgabe 2",
+    "text": "Aufgabe 2\nWas für Datentypen wurden in der letzten Aufgabe automatisch angenommen? Ermittle diese mit str() und prüfe, ob diese sinnvoll sind und wandle um wo nötig.\n\n\nCode\nstr(df)\n## 'data.frame':    4 obs. of  5 variables:\n##  $ Tierart     : chr  \"Fuchs\" \"Bär\" \"Hase\" \"Elch\"\n##  $ Anzahl      : num  2 5 1 3\n##  $ Gewicht     : num  4.4 40.3 1.1 120\n##  $ Geschlecht  : chr  \"m\" \"f\" \"m\" \"m\"\n##  $ Beschreibung: chr  \"Rötlich\" \"Braun, gross\" \"klein, mit langen Ohren\" \"Lange Beine, Schaufelgeweih\"\ntypeof(df$Anzahl)\n## [1] \"double\"\n# Anzahl wurde als `double` interpretiert, ist aber eigentlich ein `integer`.\n\ndf$Anzahl &lt;- as.integer(df$Anzahl)"
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html#aufgabe-3",
+    "href": "prepro/Prepro1_Uebung.html#aufgabe-3",
+    "title": "PrePro 1: Übung",
+    "section": "Aufgabe 3",
+    "text": "Aufgabe 3\nNutze die Spalte Gewicht um die Tiere in 3 Gewichtskategorien einzuteilen:\n\nleicht: &lt; 5kg\nmittel: 5 - 100 kg\nschwer: &gt; 100kg\n\n\n\nCode\ndf$Gewichtsklasse[df$Gewicht &gt; 100] &lt;- \"schwer\"\ndf$Gewichtsklasse[df$Gewicht &lt;= 100 & df$Gewicht &gt; 5] &lt;- \"mittel\"\ndf$Gewichtsklasse[df$Gewicht &lt;= 5] &lt;- \"leicht\"\n\n\nDas Resultat:\n\n\n\n\n\n\n\n\n\n\n\n\n\nTierart\nAnzahl\nGewicht\nGeschlecht\nBeschreibung\nGewichtsklasse\n\n\n\n\nFuchs\n2\n4.4\nm\nRötlich\nleicht\n\n\nBär\n5\n40.3\nf\nBraun, gross\nmittel\n\n\nHase\n1\n1.1\nm\nklein, mit langen Ohren\nleicht\n\n\nElch\n3\n120.0\nm\nLange Beine, Schaufelgeweih\nschwer"
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html#aufgabe-4",
+    "href": "prepro/Prepro1_Uebung.html#aufgabe-4",
+    "title": "PrePro 1: Übung",
+    "section": "Aufgabe 4",
+    "text": "Aufgabe 4\nAuf Moodle findest du ein Zip-Files mit dem Namen prepro.zip. Lade das File herunter und entpacke es in deinem Projektordner. Importiere die Datei weather.csv. Falls du dafür das RStudio GUI verwendest, speichere den Import-Befehl in deinem R-Script ab. Bitte verwende einen relativen Pfad (also kein Pfad der mit C:/, ~/ o.ä. beginnt).)\n\n\n\n\n\n\nHinweis\n\n\n\nWir nutzen readr um csvs zu importieren und verwenden die Funktion read_delim (mit underscore) als alternative zu read.csv oder read.delim (mit Punkt). Das ist eine persönliche Präferenz1, es ist euch überlassen welche Funktion ihr verwendet. Beachtet, dass die beiden Funktionen leicht andere Parameter erwarten.\n\n\n\n\nCode\nwetter &lt;- read_delim(\"datasets/prepro/weather.csv\", \",\")\n\n\n\n\n\n\n\nstn\ntime\ntre200h0\n\n\n\n\nABO\n2000010100\n-2.6\n\n\nABO\n2000010101\n-2.5\n\n\nABO\n2000010102\n-3.1\n\n\nABO\n2000010103\n-2.4\n\n\nABO\n2000010104\n-2.5\n\n\nABO\n2000010105\n-3.0\n\n\nABO\n2000010106\n-3.7\n\n\nABO\n2000010107\n-4.4\n\n\nABO\n2000010108\n-4.1\n\n\nABO\n2000010109\n-4.1"
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html#aufgabe-5",
+    "href": "prepro/Prepro1_Uebung.html#aufgabe-5",
+    "title": "PrePro 1: Übung",
+    "section": "Aufgabe 5",
+    "text": "Aufgabe 5\nSchau dir die Rückmeldung von read_csv()an. Sind die Daten korrekt interpretiert worden?\n\n\nCode\n# Die Spalte 'time' wurde als 'integer' interpretiert. Dabei handelt es\n# sich offensichtlich um Zeitangaben."
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html#aufgabe-6",
+    "href": "prepro/Prepro1_Uebung.html#aufgabe-6",
+    "title": "PrePro 1: Übung",
+    "section": "Aufgabe 6",
+    "text": "Aufgabe 6\nDie Spalte time ist eine Datum/Zeitangabe im Format JJJJMMTTHH (siehe meta.txt). Damit R dies als Datum-/Zeitangabe erkennt, müssen wir die Spalte in einem R-Format (POSIXct) einlesen und dabei R mitteilen, wie sie aktuell formatiert ist. Lies die Spalte mit as.POSIXct() ein und spezifiziere sowohl format wie auch tz.\n\n\n\n\n\n\nTipp\n\n\n\n\nWenn keine Zeitzone festgelegt wird, trifft as.POSIXct() eine Annahme (basierend auf Sys.timezone()). In unserem Fall handelt es sich aber um Werte in UTC (siehe metadata.csv)\nas.POSIXcterwartet character: Wenn du eine Fehlermeldung hast die 'origin' must be supplied (o.ä) heisst, hast du der Funktion vermutlich einen Numeric übergeben.\n\n\n\n\n\nCode\nwetter$time &lt;- as.POSIXct(as.character(wetter$time), format = \"%Y%m%d%H\", tz = \"UTC\")\n\n\n\n\n\nDie neue Tabelle sollte so aussehen\n\n\nstn\ntime\ntre200h0\n\n\n\n\nABO\n2000-01-01 00:00:00\n-2.6\n\n\nABO\n2000-01-01 01:00:00\n-2.5\n\n\nABO\n2000-01-01 02:00:00\n-3.1\n\n\nABO\n2000-01-01 03:00:00\n-2.4\n\n\nABO\n2000-01-01 04:00:00\n-2.5\n\n\nABO\n2000-01-01 05:00:00\n-3.0\n\n\nABO\n2000-01-01 06:00:00\n-3.7\n\n\nABO\n2000-01-01 07:00:00\n-4.4\n\n\nABO\n2000-01-01 08:00:00\n-4.1\n\n\nABO\n2000-01-01 09:00:00\n-4.1"
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html#aufgabe-7",
+    "href": "prepro/Prepro1_Uebung.html#aufgabe-7",
+    "title": "PrePro 1: Übung",
+    "section": "Aufgabe 7",
+    "text": "Aufgabe 7\nErstelle zwei neue Spalten mit Wochentag (Montag, Dienstag, etc) und Kalenderwoche. Verwende dazu die neu erstellte POSIXct-Spalte sowie eine geeignete Funktion aus lubridate.\n\n\nCode\nwetter$wochentag &lt;- wday(wetter$time, label = T)\nwetter$kw &lt;- week(wetter$time)\n\n\n\n\n\n\n\nstn\ntime\ntre200h0\nwochentag\nkw\n\n\n\n\nABO\n2000-01-01 00:00:00\n-2.6\nSa\n1\n\n\nABO\n2000-01-01 01:00:00\n-2.5\nSa\n1\n\n\nABO\n2000-01-01 02:00:00\n-3.1\nSa\n1\n\n\nABO\n2000-01-01 03:00:00\n-2.4\nSa\n1\n\n\nABO\n2000-01-01 04:00:00\n-2.5\nSa\n1\n\n\nABO\n2000-01-01 05:00:00\n-3.0\nSa\n1\n\n\nABO\n2000-01-01 06:00:00\n-3.7\nSa\n1\n\n\nABO\n2000-01-01 07:00:00\n-4.4\nSa\n1\n\n\nABO\n2000-01-01 08:00:00\n-4.1\nSa\n1\n\n\nABO\n2000-01-01 09:00:00\n-4.1\nSa\n1"
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html#aufgabe-8",
+    "href": "prepro/Prepro1_Uebung.html#aufgabe-8",
+    "title": "PrePro 1: Übung",
+    "section": "Aufgabe 8",
+    "text": "Aufgabe 8\nErstelle eine neue Spalte basierend auf die Temperaturwerte mit der Einteilung “kalt” (unter Null Grad) und “warm” (über Null Grad)\n\n\nCode\nwetter$temp_kat[wetter$tre200h0 &gt; 0] &lt;- \"warm\"\nwetter$temp_kat[wetter$tre200h0 &lt;= 0] &lt;- \"kalt\"\n\n\n\n\n\n\n\nstn\ntime\ntre200h0\nwochentag\nkw\ntemp_kat\n\n\n\n\nABO\n2000-01-01 00:00:00\n-2.6\nSa\n1\nkalt\n\n\nABO\n2000-01-01 01:00:00\n-2.5\nSa\n1\nkalt\n\n\nABO\n2000-01-01 02:00:00\n-3.1\nSa\n1\nkalt\n\n\nABO\n2000-01-01 03:00:00\n-2.4\nSa\n1\nkalt\n\n\nABO\n2000-01-01 04:00:00\n-2.5\nSa\n1\nkalt\n\n\nABO\n2000-01-01 05:00:00\n-3.0\nSa\n1\nkalt\n\n\nABO\n2000-01-01 06:00:00\n-3.7\nSa\n1\nkalt\n\n\nABO\n2000-01-01 07:00:00\n-4.4\nSa\n1\nkalt\n\n\nABO\n2000-01-01 08:00:00\n-4.1\nSa\n1\nkalt\n\n\nABO\n2000-01-01 09:00:00\n-4.1\nSa\n1\nkalt"
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html#footnotes",
+    "href": "prepro/Prepro1_Uebung.html#footnotes",
+    "title": "PrePro 1: Übung",
+    "section": "",
+    "text": "Vorteile von read_delim gegenüber read.csv: https://stackoverflow.com/a/60374974/4139249↩︎"
+  },
+  {
+    "objectID": "prepro/Prepro2_Demo.html#piping",
+    "href": "prepro/Prepro2_Demo.html#piping",
+    "title": "Prepro 2: Demo",
+    "section": "Piping",
+    "text": "Piping\nGegeben ist ein character string (diary). Wir wollen aus diesem Text die Temperaturangabe aus dem String extrahieren und danach den Wert von Kelvin in Celsius nach der folgenden Formel umwandeln und zum Schluss den Mittelwert über all diese Werte berechnen.\n\\[°C = K - 273.15\\]\n\ndiary &lt;- c(\n  \"The temperature is 310° Kelvin\",\n  \"The temperature is 322° Kelvin\",\n  \"The temperature is 410° Kelvin\"\n)\n\ndiary\n## [1] \"The temperature is 310° Kelvin\" \"The temperature is 322° Kelvin\"\n## [3] \"The temperature is 410° Kelvin\"\n\nDazu brauchen wir die Funktion substr(), welche aus einem character einen Teil “raus schnipseln” kann.\n\n# Wenn die Buchstaben einzelne _Elemente_ eines Vektors wären, würden wir diese\n# folgendermassen subsetten:\n\ncharvec1 &lt;- c(\"a\", \"b\", \"c\", \"d\", \"e\", \"f\", \"g\", \"h\")\ncharvec1[4:6]\n## [1] \"d\" \"e\" \"f\"\n\n# Aber wenn diese in einem einzigen character gespeichert sind, brauchen wir substr:\ncharvec2 &lt;- \"abcdefgh\"\nsubstr(charvec2, 4, 6)\n## [1] \"def\"\n\nZudem nutzen haben wir eine Hilfsfunktion subtrahieren, welche zwei Werte annimmt, den minuend und den subtrahend:\n\nsubtrahieren &lt;- function(minuend, subtrahend) {\n  minuend - subtrahend\n}\n\nsubtrahieren(10, 4)\n## [1] 6\n\nÜbersetzt in R-Code entsteht folgende Operation:\n\noutput &lt;- mean(subtrahieren(as.numeric(substr(diary, 20, 22)), 273.15))\n#                                             \\_1_/\n#                                      \\________2__________/\n#                           \\___________________3___________/\n#              \\________________________________4__________________/\n#         \\_____________________________________5____________________/\n\n# 1. Nimm diary\n# 2. Extrahiere auf jeder Zeile die Werte 20 bis 22\n# 3. Konvertiere \"character\" zu \"numeric\"\n# 4. Subtrahiere 273.15\n# 5. Berechne den Mittlwert\n\nDie ganze Operation liest sich etwas leichter, wenn diese sequentiell notiert wird:\n\ntemp &lt;- substr(diary, 20, 22)      # 2\ntemp &lt;- as.numeric(temp)           # 3\ntemp &lt;- subtrahieren(temp, 273.15) # 4\noutput &lt;- mean(temp)               # 5\n\nUmständlich ist dabei einfach, dass die Zwischenresultate immer abgespeichert und in der darauf folgenden Operation wieder abgerufen werden müssen. Hier kommt “piping” ins Spiel: Mit “piping” wird der Output der einen Funktion der erste Parameter der darauf folgenden Funktion.\n\ndiary |&gt;                  # 1\n  substr(20, 22) |&gt;       # 2\n  as.numeric() |&gt;         # 3\n  subtrahieren(273.15) |&gt; # 4\n  mean()                  # 5\n## [1] 74.18333\n\n\n\n\n\n\n\nWichtig\n\n\n\n\nder |&gt; Pipe Operator wurde erst in R 4.1 eingeführt\nNeben dem base R Pipe Operator existiert im Package magrittr ein sehr ähnlicher1 Pipe Operator: %&gt;%\nDie Tastenkombination Ctrl+Shift+M in RStudio fügt einen Pipe Operator ein.\nWelcher Pipe Operator |&gt; oder %&gt;% mit der obigen Tastenkombination eingeführt wird, kann über die RStudio Settings Tools → Global Options → Code → Häckchen setzen bei Use nativ pipe operator\nWir empfehlen die base-R Pipe |&gt; zu verwenden"
+  },
+  {
+    "objectID": "prepro/Prepro2_Demo.html#joins",
+    "href": "prepro/Prepro2_Demo.html#joins",
+    "title": "Prepro 2: Demo",
+    "section": "Joins",
+    "text": "Joins\n\nstudierende &lt;- data.frame(\n  Matrikel_Nr = c(100002, 100003, 200003),\n  Studi = c(\"Patrick\", \"Manuela\", \"Eva\"),\n  PLZ = c(8006, 8001, 8820)\n)\n\nstudierende\n##   Matrikel_Nr   Studi  PLZ\n## 1      100002 Patrick 8006\n## 2      100003 Manuela 8001\n## 3      200003     Eva 8820\n\nortschaften &lt;- data.frame(\n  PLZ = c(8003, 8006, 8810, 8820),\n  Ortsname = c(\"Zürich\", \"Zürich\", \"Horgen\", \"Wädenswil\")\n)\n\nortschaften\n##    PLZ  Ortsname\n## 1 8003    Zürich\n## 2 8006    Zürich\n## 3 8810    Horgen\n## 4 8820 Wädenswil\n\n\n# Load library\nlibrary(\"dplyr\")\n\ninner_join(studierende, ortschaften, by = \"PLZ\")\n##   Matrikel_Nr   Studi  PLZ  Ortsname\n## 1      100002 Patrick 8006    Zürich\n## 2      200003     Eva 8820 Wädenswil\n\nleft_join(studierende, ortschaften, by = \"PLZ\")\n##   Matrikel_Nr   Studi  PLZ  Ortsname\n## 1      100002 Patrick 8006    Zürich\n## 2      100003 Manuela 8001      &lt;NA&gt;\n## 3      200003     Eva 8820 Wädenswil\n\nright_join(studierende, ortschaften, by = \"PLZ\")\n##   Matrikel_Nr   Studi  PLZ  Ortsname\n## 1      100002 Patrick 8006    Zürich\n## 2      200003     Eva 8820 Wädenswil\n## 3          NA    &lt;NA&gt; 8003    Zürich\n## 4          NA    &lt;NA&gt; 8810    Horgen\n\nfull_join(studierende, ortschaften, by = \"PLZ\")\n##   Matrikel_Nr   Studi  PLZ  Ortsname\n## 1      100002 Patrick 8006    Zürich\n## 2      100003 Manuela 8001      &lt;NA&gt;\n## 3      200003     Eva 8820 Wädenswil\n## 4          NA    &lt;NA&gt; 8003    Zürich\n## 5          NA    &lt;NA&gt; 8810    Horgen\n\n\nstudierende &lt;- data.frame(\n  Matrikel_Nr = c(100002, 100003, 200003),\n  Studi = c(\"Patrick\", \"Manuela\", \"Pascal\"),\n  Wohnort = c(8006, 8001, 8006)\n)\n\nleft_join(studierende, ortschaften, by = c(\"Wohnort\" = \"PLZ\"))\n##   Matrikel_Nr   Studi Wohnort Ortsname\n## 1      100002 Patrick    8006   Zürich\n## 2      100003 Manuela    8001     &lt;NA&gt;\n## 3      200003  Pascal    8006   Zürich"
+  },
+  {
+    "objectID": "prepro/Prepro2_Demo.html#footnotes",
+    "href": "prepro/Prepro2_Demo.html#footnotes",
+    "title": "Prepro 2: Demo",
+    "section": "",
+    "text": "siehe https://stackoverflow.com/q/67633022/4139249↩︎"
+  },
+  {
+    "objectID": "prepro/Prepro2_Uebung_A.html#aufgabe-1",
+    "href": "prepro/Prepro2_Uebung_A.html#aufgabe-1",
+    "title": "Prepro 2: Übung A",
+    "section": "Aufgabe 1",
+    "text": "Aufgabe 1\nLese die Wetterdaten von letzer Woche weather.csv (Quelle MeteoSchweiz) in R ein. Sorge dafür, dass die Spalten korrekt formatiert sind (stn als factor, time als POSIXct, tre200h0 als numeric.)\n\n\nCode\n# Variante 1\nwetter &lt;- read_delim(\"datasets/prepro/weather.csv\", \",\")\nwetter$stn &lt;- as.factor(wetter$stn)\nwetter$time &lt;- as.POSIXct(as.character(wetter$time), format = \"%Y%m%d%H\", tz = \"UTC\")\n\n\n\n\nCode\n# Variate 2 (für Profis)\nwetter &lt;- read_csv(\"datasets/prepro/weather.csv\",\n  col_types = cols(\n    col_factor(levels = NULL),\n    col_datetime(format = \"%Y%m%d%H\"),\n    col_double()\n  )\n)"
+  },
+  {
+    "objectID": "prepro/Prepro2_Uebung_A.html#aufgabe-2",
+    "href": "prepro/Prepro2_Uebung_A.html#aufgabe-2",
+    "title": "Prepro 2: Übung A",
+    "section": "Aufgabe 2",
+    "text": "Aufgabe 2\nLese den Datensatz metadata.csv ebenfalls als csv ein.\n\n\n\n\n\n\nTipp\n\n\n\nWenn Umlaute und Sonderzeichen nicht korrekt dargestellt werden (z.B. das è in Genève), hat das vermutlich mit der Zeichencodierung zu tun. Das File ist aktuell in UTF-8 codiert. Wenn Umlaute nicht korrekt dargestellt werden, hat R diese Codierung nicht erkannt und sie muss in der Import-Funktion spezifitiert werden. Dies wird je nach verwendete import Funktion unterschiedlich gemacht:\n\nFunktionen aus dem Package readr: locale = locale(encoding = \"UTF-8\")\nBase-R Funktionen: fileEncoding = \"UTF-8\"\n\nWenn ihr die codierung eines Files nicht kennt, könnt wie folgt vorgehen: Anleitung für Windows, für Mac und für Linux.\n\n\n\n\nCode\nmetadata &lt;- read_delim(\"datasets/prepro/metadata.csv\", delim = \";\", locale = locale(encoding = \"UTF-8\"))"
+  },
+  {
+    "objectID": "prepro/Prepro2_Uebung_A.html#aufgabe-3",
+    "href": "prepro/Prepro2_Uebung_A.html#aufgabe-3",
+    "title": "Prepro 2: Übung A",
+    "section": "Aufgabe 3",
+    "text": "Aufgabe 3\nNun wollen wir den Datensatz wettermit den Informationen aus metadata anreichern. Uns interessiert aber nur das Stationskürzel, der Name, die x/y Koordinaten sowie die Meereshöhe, selektiere diese Spalten.\n\n\nCode\nmetadata &lt;- metadata[, c(\"stn\", \"Name\", \"x\", \"y\", \"Meereshoehe\")]"
+  },
+  {
+    "objectID": "prepro/Prepro2_Uebung_A.html#aufgabe-4",
+    "href": "prepro/Prepro2_Uebung_A.html#aufgabe-4",
+    "title": "Prepro 2: Übung A",
+    "section": "Aufgabe 4",
+    "text": "Aufgabe 4\nJetzt kann metadata mit dem Datensatz wetter verbunden werden. Überlege dir, welcher Join dafür sinnvoll ist und mit welchem Attribut wir “joinen” können.\nNutze die Join-Möglichkeiten von dplyr (Hilfe via ?dplyr::join) um die Datensätze wetter und metadata zu verbinden.\n\n\nCode\nwetter &lt;- left_join(wetter, metadata, by = \"stn\")\n\n# Jointyp: Left-Join auf 'wetter', da uns nur die Stationen im Datensatz 'wetter' interessieren.\n# Attribut: \"stn\""
+  },
+  {
+    "objectID": "prepro/Prepro2_Uebung_A.html#aufgabe-5",
+    "href": "prepro/Prepro2_Uebung_A.html#aufgabe-5",
+    "title": "Prepro 2: Übung A",
+    "section": "Aufgabe 5",
+    "text": "Aufgabe 5\nErstelle eine neue Spalte month welche den jeweiligen Monat (aus time) beinhaltet. Nutze dafür die Funktion lubridate::month().\n\n\nCode\nwetter$month &lt;- month(wetter$time)"
+  },
+  {
+    "objectID": "prepro/Prepro2_Uebung_A.html#aufgabe-6",
+    "href": "prepro/Prepro2_Uebung_A.html#aufgabe-6",
+    "title": "Prepro 2: Übung A",
+    "section": "Aufgabe 6",
+    "text": "Aufgabe 6\nBerechne mit der Spalte month die Durchschnittstemperatur pro Monat.\n\n\nCode\nmean(wetter$tre200h0[wetter$month == 1])\n## [1] -1.963239\nmean(wetter$tre200h0[wetter$month == 2])\n## [1] 0.3552632\nmean(wetter$tre200h0[wetter$month == 3])\n## [1] 2.965054\n\n# usw. für alle 12 Monate"
+  },
+  {
+    "objectID": "prepro/Prepro2_Uebung_B.html#aufgabe-1",
+    "href": "prepro/Prepro2_Uebung_B.html#aufgabe-1",
+    "title": "Prepro 2: Übung B",
+    "section": "Aufgabe 1",
+    "text": "Aufgabe 1\nGegeben sind die Daten von drei Sensoren (sensor1.csv, sensor2.csv, sensor3.csv). Lese die Datensätze ein.\n\n\nCode\nsensor1 &lt;- read_delim(\"datasets/prepro/sensor1.csv\", \";\")\nsensor2 &lt;- read_delim(\"datasets/prepro/sensor2.csv\", \";\")\nsensor3 &lt;- read_delim(\"datasets/prepro/sensor3.csv\", \";\")"
+  },
+  {
+    "objectID": "prepro/Prepro2_Uebung_B.html#aufgabe-2",
+    "href": "prepro/Prepro2_Uebung_B.html#aufgabe-2",
+    "title": "Prepro 2: Übung B",
+    "section": "Aufgabe 2",
+    "text": "Aufgabe 2\nErstelle aus den 3 Dataframes eine einzige Dataframe, die aussieht wie unten dargestellt. Nutze dafür zwei joins aus dplyr um 3 data.frames miteinander zu verbinden. Bereinige im Anschluss die Spaltennamen (wie geht das?).\n\n\nCode\nsensor1_2 &lt;- full_join(sensor1, sensor2, \"Datetime\")\n\nsensor1_2 &lt;- rename(sensor1_2, sensor1 = Temp.x, sensor2 = Temp.y)\n\nsensor_all &lt;- full_join(sensor1_2, sensor3, by = \"Datetime\")\n\nsensor_all &lt;- rename(sensor_all, sensor3 = Temp)\n\n\n\n\n\n\n\nDatetime\nsensor1\nsensor2\nsensor3\n\n\n\n\n16102017_1800\n23.5\n13.5\n26.5\n\n\n17102017_1800\n25.4\n24.4\n24.4\n\n\n18102017_1800\n12.4\n22.4\n13.4\n\n\n19102017_1800\n5.4\n12.4\n7.4\n\n\n23102017_1800\n23.5\n13.5\nNA\n\n\n24102017_1800\n21.3\n11.3\nNA"
+  },
+  {
+    "objectID": "prepro/Prepro2_Uebung_B.html#aufgabe-3",
+    "href": "prepro/Prepro2_Uebung_B.html#aufgabe-3",
+    "title": "Prepro 2: Übung B",
+    "section": "Aufgabe 3",
+    "text": "Aufgabe 3\nImportiere die Datei sensor_fail.csv in R.\n\n\nCode\nsensor_fail &lt;- read_delim(\"datasets/prepro/sensor_fail.csv\", delim = \";\")\n\n\nsensor_fail.csv hat eine Variabel SensorStatus: 1 bedeutet der Sensor misst, 0 bedeutet der Sensor misst nicht. Fälschlicherweise wurde auch dann der Messwert Temp = 0 erfasst, wenn Sensorstatus = 0. Richtig wäre hier NA (not available). Korrigiere den Datensatz entsprechend.\n\n\n\n\n\nSensor\nTemp\nHum_%\nDatetime\nSensorStatus\n\n\n\n\nSen102\n0.6\n98\n16102017_1800\n1\n\n\nSen102\n0.3\n96\n17102017_1800\n1\n\n\nSen102\n0.0\n87\n18102017_1800\n1\n\n\nSen102\n0.0\n86\n19102017_1800\n0\n\n\nSen102\n0.0\n98\n23102017_1800\n0\n\n\nSen102\n0.0\n98\n24102017_1800\n0\n\n\nSen102\n0.0\n96\n25102017_1800\n1\n\n\nSen103\n-0.3\n87\n26102017_1800\n1\n\n\nSen103\n-0.7\n98\n27102017_1800\n1\n\n\nSen103\n-1.2\n98\n28102017_1800\n1\n\n\n\n\n\n\n\nCode\n# mit base-R:\nsensor_fail$Temp_correct[sensor_fail$SensorStatus == 0] &lt;- NA\nsensor_fail$Temp_correct[sensor_fail$SensorStatus != 0] &lt;- sensor_fail$Temp #Warnmeldung kann ignoriert werden.\n\n# das gleiche mit dplyr:\nsensor_fail &lt;- sensor_fail |&gt;\n  mutate(Temp_correct = ifelse(SensorStatus == 0, NA, Temp))"
+  },
+  {
+    "objectID": "prepro/Prepro2_Uebung_B.html#aufgabe-4",
+    "href": "prepro/Prepro2_Uebung_B.html#aufgabe-4",
+    "title": "Prepro 2: Übung B",
+    "section": "Aufgabe 4",
+    "text": "Aufgabe 4\nWarum spielt das es eine Rolle, ob 0 oder NA erfasst wird? Berechne die Mittlere der Temperatur / Feuchtigkeit nach der Korrektur.\n\n\nCode\n# Mittelwerte der falschen Sensordaten: 0 fliesst in die Berechnung\n# ein und verfälscht den Mittelwert\nmean(sensor_fail$Temp)\n## [1] -0.13\n\n# Mittelwerte der korrigierten Sensordaten: mit na.rm = TRUE werden\n# NA-Werte aus der Berechnung entfernt.\nmean(sensor_fail$Temp_correct, na.rm = TRUE)\n## [1] -0.1857143"
+  },
+  {
+    "objectID": "prepro/Prepro3_Demo.html#split-apply-combine",
+    "href": "prepro/Prepro3_Demo.html#split-apply-combine",
+    "title": "Prepro 3: Demo",
+    "section": "Split-Apply-Combine",
+    "text": "Split-Apply-Combine\n\nDaten Laden\nWir laden die Wetterdaten (Quelle MeteoSchweiz) der letzten Übung.\n\nwetter &lt;- read_delim(\"datasets/prepro/weather.csv\", \",\")\n\nwetter &lt;- wetter |&gt;\n  mutate(\n    stn = as.factor(stn),\n    time = as.POSIXct(as.character(time), format = \"%Y%m%d%H\")\n  )\n\n\n\nKennwerte berechnen\nWir möchten den Mittelwert aller gemessenen Temperaturwerte berechnen. Dazu könnten wir folgenden Befehl verwenden:\n\nmean(wetter$tre200h0, na.rm = TRUE)\n## [1] 6.324744\n\nDie Option na.rm = T bedeutet, dass NA Werte von der Berechnung ausgeschlossen werden sollen.\nMit der selben Herangehensweise können diverse Werte berechnet werden (z.B. das Maximum (max()), Minimum (min()), Median (median()) u.v.m.).\nDiese Herangehensweise funktioniert nur dann gut, wenn wir die Kennwerte über alle Beobachtungen für eine Variable (Spalte) berechnen wollen. Sobald wir die Beobachtungen gruppieren wollen, wird es schwierig. Zum Beispiel, wenn wir die durchschnittliche Temperatur pro Monat berechnen wollen.\n\n\nConvenience Variablen\nUm diese Aufgabe zu lösen, muss zuerst der Monat extrahiert werden (der Monat ist die convenience variable). Hierfür brauchen wir die Funktion lubridate::month().\nNun kann kann die convenience Variable “Month” erstellt werden. Ohne dpylr wird eine neue Spalte folgendermassen hinzugefügt.\n\nwetter$month &lt;- month(wetter$time)\n\nMit dplyr (siehe 3) sieht der gleiche Befehl folgendermassen aus:\n\nwetter &lt;- mutate(wetter, month = month(time))\n\nDer grosse Vorteil von dplyr ist an dieser Stelle noch nicht ersichtlich. Dieser wird aber später klar.\n\n\nKennwerte nach Gruppen berechnen\nUm mit base R den Mittelwert pro Monat zu berechnen, kann man zuerst ein Subset mit [] erstellen und davon den Mittelwert berechnen, z.B. folgendermassen:\n\nmean(wetter$tre200h0[wetter$month == 1], na.rm = TRUE)\n## [1] -1.963239\n\nDies müssen wir pro Monat wiederholen, was natürlich sehr umständlich ist. Deshalb nutzen wir das package dplyr. Damit geht die Aufgabe (Temperaturmittel pro Monat berechnen) folgendermassen:\n\nsummarise(group_by(wetter, month), temp_mittel = mean(tre200h0, na.rm = TRUE))\n## # A tibble: 12 × 2\n##    month temp_mittel\n##    &lt;dbl&gt;       &lt;dbl&gt;\n##  1     1      -1.96 \n##  2     2       0.355\n##  3     3       2.97 \n##  4     4       4.20 \n##  5     5      11.0  \n##  6     6      12.4  \n##  7     7      13.0  \n##  8     8      15.0  \n##  9     9       9.49 \n## 10    10       8.79 \n## 11    11       1.21 \n## 12    12      -0.898\n\n\n\nVerketten vs. verschachteln\nAuf Deutsch übersetzt heisst die obige Operation folgendermassen:\n\nnimm den Datensatz wetter\nBilde Gruppen pro Jahr (group_by(wetter,year))\nBerechne das Temperaturmittel (mean(tre200h0))\n\nDiese Übersetzung R-&gt; Deutsch unterscheidet sich vor allem darin, dass die Operation auf Deutsch verkettet ausgesprochen wird (Operation 1-&gt;2-&gt;3) während der Computer verschachtelt liest 3(2(1)). Um R näher an die gesprochene Sprache zu bringen, kann man den |&gt;-Operator verwenden (siehe 4).\n\n# 1 nimm den Datensatz \"wetter\"\n# 2 Bilde Gruppen pro Monat\n# 3 berechne das Temperaturmittel\n\nsummarise(group_by(wetter, month), temp_mittel = mean(tre200h0))\n#                  \\_1_/\n#         \\__________2_________/\n# \\__________________3_______________________________________/\n\n# wird zu:\n\nwetter |&gt;                                 # 1\n  group_by(month) |&gt;                      # 2\n  summarise(temp_mittel = mean(tre200h0)) # 3\n\nDieses Verketten mittels |&gt; (genannt “pipe”) macht den Code einiges schreib- und leserfreundlicher, und wir werden ihn in den nachfolgenden Übungen verwenden. Die “pipe” wird mit dem package magrittr bereitgestellt und mit dplyr mitinstalliert.\nZu dplyr gibt es etliche Tutorials online (siehe5), deshalb werden wir diese Tools nicht in allen Details erläutern. Nur noch folgenden wichtigen Unterschied zu zwei wichtigen Funktionen in dpylr: mutate() und summarise().\n\nsummarise() fasst einen Datensatz zusammen. Dabei reduziert sich die Anzahl Beobachtungen (Zeilen) auf die Anzahl Gruppen (z.B. eine zusammengefasste Beobachtung (Zeile) pro Jahr). Zudem reduziert sich die Anzahl Variablen (Spalten) auf diejenigen, die in der “summarise” Funktion spezifiziert wurde (z.B. temp_mittel).\nmit mutate wird ein data.frame vom Umfang her belassen, es werden lediglich zusätzliche Variablen (Spalten) hinzugefügt (siehe Beispiel unten).\n\n\n# Maximal und minimal Temperatur pro Kalenderwoche\nweather_summary &lt;- wetter |&gt;                # 1) nimm den Datensatz \"wetter\"\n  filter(month == 1) |&gt;                     # 2) filter auf den Monat Januar\n  mutate(day = day(time)) |&gt;                # 3) erstelle eine neue Spalte \"day\"\n  group_by(day) |&gt;                          # 4) Nutze die neue Spalte um Gruppen zu bilden\n  summarise(\n    temp_max = max(tre200h0, na.rm = TRUE), # 5) Berechne das Maximum\n    temp_min = min(tre200h0, na.rm = TRUE)  # 6) Berechne das Minimum\n  )\n\nweather_summary\n## # A tibble: 31 × 3\n##      day temp_max temp_min\n##    &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n##  1     1      5.8     -4.4\n##  2     2      2.8     -4.3\n##  3     3      4.2     -3.1\n##  4     4      4.7     -2.8\n##  5     5     11.4     -0.6\n##  6     6      6.7     -1.6\n##  7     7      2.9     -2.8\n##  8     8      0.2     -3.6\n##  9     9      2.1     -8.8\n## 10    10      1.6     -2.4\n## # ℹ 21 more rows"
+  },
+  {
+    "objectID": "prepro/Prepro3_Demo.html#reshaping-data",
+    "href": "prepro/Prepro3_Demo.html#reshaping-data",
+    "title": "Prepro 3: Demo",
+    "section": "Reshaping data",
+    "text": "Reshaping data\n\nBreit → lang\nDie Umformung von Tabellen breit→lang erfolgt mittels tidyr(siehe 6). Auch dieses Package funktioniert wunderbar mit piping (|&gt;).\n\nweather_summary |&gt;\n  pivot_longer(c(temp_max, temp_min))\n## # A tibble: 62 × 3\n##      day name     value\n##    &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;\n##  1     1 temp_max   5.8\n##  2     1 temp_min  -4.4\n##  3     2 temp_max   2.8\n##  4     2 temp_min  -4.3\n##  5     3 temp_max   4.2\n##  6     3 temp_min  -3.1\n##  7     4 temp_max   4.7\n##  8     4 temp_min  -2.8\n##  9     5 temp_max  11.4\n## 10     5 temp_min  -0.6\n## # ℹ 52 more rows\n\nIm Befehl pivot_longer() müssen wir festlegen, welche Spalten zusammengefasst werden sollen (hier: temp_max,temp_min,temp_mean). Alternativ können wir angeben, welche Spalten wir nicht zusammenfassen wollen:\n\nweather_summary |&gt;\n  pivot_longer(-day)\n## # A tibble: 62 × 3\n##      day name     value\n##    &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;\n##  1     1 temp_max   5.8\n##  2     1 temp_min  -4.4\n##  3     2 temp_max   2.8\n##  4     2 temp_min  -4.3\n##  5     3 temp_max   4.2\n##  6     3 temp_min  -3.1\n##  7     4 temp_max   4.7\n##  8     4 temp_min  -2.8\n##  9     5 temp_max  11.4\n## 10     5 temp_min  -0.6\n## # ℹ 52 more rows\n\nWenn wir die Namen neuen Spalten festlegen wollen (anstelle von name und value) erreichen wir dies mit names_to bzw. values_to:\n\nweather_summary_long &lt;- weather_summary |&gt;\n  pivot_longer(-day, names_to = \"Messtyp\", values_to = \"Messwert\")\n\nDie ersten 6 Zeilen von weather_summary_long:\n\n\n\n\n\nday\nMesstyp\nMesswert\n\n\n\n\n1\ntemp_max\n5.8\n\n\n1\ntemp_min\n-4.4\n\n\n2\ntemp_max\n2.8\n\n\n2\ntemp_min\n-4.3\n\n\n3\ntemp_max\n4.2\n\n\n3\ntemp_min\n-3.1\n\n\n\n\n\nDie ersten 6 Zeilen von wetter_sry:\n\n\n\n\n\nday\ntemp_max\ntemp_min\n\n\n\n\n1\n5.8\n-4.4\n\n\n2\n2.8\n-4.3\n\n\n3\n4.2\n-3.1\n\n\n4\n4.7\n-2.8\n\n\n5\n11.4\n-0.6\n\n\n6\n6.7\n-1.6\n\n\n\n\n\nBeachte: weather_summary_long umfasst 62 Beobachtungen (Zeilen), das sind doppelt soviel wie weather_summary, da wir ja zwei Spalten zusammengefasst haben.\n\nnrow(weather_summary)\n## [1] 31\nnrow(weather_summary_long)\n## [1] 62\n\nLange Tabellen sind in verschiedenen Situationen praktischer. Beispielsweise ist das Visualisieren mittels ggplot2 (dieses Package werdet ihr im Block “InfoVis” kennenlernen) mit long tables wesentlich einfacher.\n\nggplot(weather_summary_long, aes(day, Messwert, colour = Messtyp)) +\n  geom_line()\n\n\n\n\n\n\nLang → breit\nDas Gegenstück zu pivot_longer ist pivot_wider. Mit dieser Funktion können wir eine lange Tabelle in eine breite überführen. Dazu müssen wir in names_from angeben, aus welcher Spalte die neuen Spaltennamen erstellt werden sollen (names_from) und aus welcher Spalte die Werte entstammen sollen (values_from):\n\nweather_summary_long |&gt;\n  pivot_wider(names_from = Messtyp, values_from = Messwert)\n## # A tibble: 31 × 3\n##      day temp_max temp_min\n##    &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n##  1     1      5.8     -4.4\n##  2     2      2.8     -4.3\n##  3     3      4.2     -3.1\n##  4     4      4.7     -2.8\n##  5     5     11.4     -0.6\n##  6     6      6.7     -1.6\n##  7     7      2.9     -2.8\n##  8     8      0.2     -3.6\n##  9     9      2.1     -8.8\n## 10    10      1.6     -2.4\n## # ℹ 21 more rows\n\nZum Vergleich: mit einer wide table müssen wir in ggplot2 jede Spalte einzeln plotten. Dies ist bei wenigen Variabeln wie hier noch nicht problematisch, aber bei einer hohen Anzahl wird dies schnell mühsam.\n\nggplot(weather_summary) +\n  geom_line(aes(day, temp_max)) +\n  geom_line(aes(day, temp_min))\n\n\n\n\n\n\n\n\nWickham, Hadley, und Garrett Grolemund. 2017. R for Data Science. O’Reilly. https://ebookcentral.proquest.com/lib/zhaw/detail.action?docID=4770093."
+  },
+  {
+    "objectID": "prepro/Prepro3_Demo.html#footnotes",
+    "href": "prepro/Prepro3_Demo.html#footnotes",
+    "title": "Prepro 3: Demo",
+    "section": "",
+    "text": "http://r4ds.had.co.nz/↩︎\nhttps://ebookcentral.proquest.com/lib/zhaw/detail.action?docID=4770093↩︎\nWickham und Grolemund (2017), Kapitel 10 / http://r4ds.had.co.nz/transform.html↩︎\nWickham und Grolemund (2017), Kapitel 14 / http://r4ds.had.co.nz/pipes.html↩︎\nWickham und Grolemund (2017), Kapitel 10 / http://r4ds.had.co.nz/transform.html, oder Hands-on dplyr tutorial..↩︎\nhttps://r4ds.had.co.nz/tidy-data.html#pivoting↩︎"
+  },
+  {
+    "objectID": "prepro/Prepro3_Uebung.html#aufgabe-1",
+    "href": "prepro/Prepro3_Uebung.html#aufgabe-1",
+    "title": "Prepro 3: Übung",
+    "section": "Aufgabe 1",
+    "text": "Aufgabe 1\nGegeben sei ein Datensatz sensors_combined.csv, mit den Temperaturwerten von drei verschiedenen Sensoren. Importiere ihn als csv in R (als sensors_combined).\nFormatiere die Datetime Spalte in POSIXct um. Verwende dazu die Funktion as.POSIXct (lies mit ?strftime() nochmal nach wie du das spezfische Format (die “Schablone”) festlegen kannst.\n\n\nCode\nlibrary(\"readr\")\n\nsensors_combined &lt;- read_delim(\"datasets/prepro/sensors_combined.csv\", \",\")\n\nsensors_combined$Datetime &lt;- as.POSIXct(sensors_combined$Datetime, format = \"%d%m%Y_%H%M\")"
+  },
+  {
+    "objectID": "prepro/Prepro3_Uebung.html#aufgabe-2",
+    "href": "prepro/Prepro3_Uebung.html#aufgabe-2",
+    "title": "Prepro 3: Übung",
+    "section": "Aufgabe 2",
+    "text": "Aufgabe 2\nÜberführe die Tabelle in ein langes Format (verwende dazu die Funktion pivot_longer aus tidyr) und speichere den output als sensors_long.\nTipp:\n\nim Argument cols kannst du entweder die Spalten auflisten, die “pivotiert” werden sollen.\nAlternativ kannst du (mit vorangestelltem Minuszeichen, -) die Spalte, bezeichnen, die nicht pivotiert werden soll.\nIn beiden Fällen musst du die Spalten weder mit Anführungs- und Schlusszeichen noch mit dem $-Zeichen versehen.\n\n\n\nCode\nlibrary(\"tidyr\")\n\n# Variante 1 (Spalten abwählen)\nsensors_long &lt;- pivot_longer(sensors_combined, -Datetime) \n\n# Variante 2 (Spalten anwählen)\nsensors_long &lt;- pivot_longer(sensors_combined, c(sensor1:sensor3))"
+  },
+  {
+    "objectID": "prepro/Prepro3_Uebung.html#aufgabe-3",
+    "href": "prepro/Prepro3_Uebung.html#aufgabe-3",
+    "title": "Prepro 3: Übung",
+    "section": "Aufgabe 3",
+    "text": "Aufgabe 3\nGruppiere sensors_long nach der neuen Spalte wo die Sensor-Information enthalten ist (default: name) mit group_by und berechne die mittlere Temperatur pro Sensor (summarise). Hinweis: Beide Funktionen sind Teil des Packages dplyr.\nDer Output sieht folgendermassen aus:\n\n\nCode\nlibrary(\"dplyr\")\n\nsensors_long |&gt;\n  group_by(name) |&gt;\n  summarise(temp_mean = mean(value, na.rm = TRUE))\n## # A tibble: 3 × 2\n##   name    temp_mean\n##   &lt;chr&gt;       &lt;dbl&gt;\n## 1 sensor1      14.7\n## 2 sensor2      12.0\n## 3 sensor3      14.4"
+  },
+  {
+    "objectID": "prepro/Prepro3_Uebung.html#aufgabe-4",
+    "href": "prepro/Prepro3_Uebung.html#aufgabe-4",
+    "title": "Prepro 3: Übung",
+    "section": "Aufgabe 4",
+    "text": "Aufgabe 4\nErstelle für sensors_long eine neue convenience Variabel month welche den Monat beinhaltet (Tipp: verwende dazu die Funktion month aus lubridate). Gruppiere nun nach month und Sensor und berechne die mittlere Temperatur.\n\n\nCode\nlibrary(\"lubridate\")\n\nsensors_long |&gt;\n  mutate(month = month(Datetime)) |&gt;\n  group_by(month, name) |&gt;\n  summarise(temp_mean = mean(value, na.rm = TRUE))\n## # A tibble: 6 × 3\n## # Groups:   month [2]\n##   month name    temp_mean\n##   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;\n## 1    10 sensor1     14.7 \n## 2    10 sensor2     12.7 \n## 3    10 sensor3     14.4 \n## 4    11 sensor1    NaN   \n## 5    11 sensor2      8.87\n## 6    11 sensor3    NaN"
+  },
+  {
+    "objectID": "prepro/Prepro3_Uebung.html#aufgabe-5",
+    "href": "prepro/Prepro3_Uebung.html#aufgabe-5",
+    "title": "Prepro 3: Übung",
+    "section": "Aufgabe 5",
+    "text": "Aufgabe 5\nLade jetzt nochmal den Datensatz weather.csv (Quelle MeteoSchweiz) herunter und importiere ihn als CSV mit den korrekten Spaltentypen (stn als factor, time als POSIXct, tre200h0 als double).\n\n\nCode\nweather &lt;- read_delim(\"datasets/prepro/weather.csv\", col_types = cols(col_factor(), col_datetime(\"%Y%m%d%H\"), col_double()), \",\")"
+  },
+  {
+    "objectID": "prepro/Prepro3_Uebung.html#aufgabe-6",
+    "href": "prepro/Prepro3_Uebung.html#aufgabe-6",
+    "title": "Prepro 3: Übung",
+    "section": "Aufgabe 6",
+    "text": "Aufgabe 6\nErstelle nun eine convenience Variable für die Kalenderwoche pro Messung (lubridate::isoweek). Berechne im Anschluss den mittleren Temperaturwert pro Kalenderwoche.\n\n\nCode\nweather_summary &lt;- weather |&gt;\n  mutate(week = isoweek(time)) |&gt;\n  group_by(week) |&gt;\n  summarise(\n    temp_mean = mean(tre200h0, na.rm = TRUE)\n  )\n\n\nVisualisiere im Anschluss das Resultat:\n\nCode\nplot(weather_summary$week, weather_summary$temp_mean, type = \"l\")"
+  },
+  {
+    "objectID": "prepro/Prepro3_Uebung.html#aufgabe-7",
+    "href": "prepro/Prepro3_Uebung.html#aufgabe-7",
+    "title": "Prepro 3: Übung",
+    "section": "Aufgabe 7",
+    "text": "Aufgabe 7\nIn der vorherigen Aufgabe haben wir die mittlere Temperatur pro Kalenderwoche über alle Jahre (2000 und 2001) berechnet. Wenn wir die Jahre aber miteinander vergleichen wollen, müssen wir das Jahr als zusätzliche convenience Variable erstellen und danach gruppieren. Versuche dies mit den Wetterdaten und visualisiere den Output anschliessend.\n\n\nCode\nweather_summary2 &lt;- weather |&gt;\n  mutate(\n    week = week(time),\n    year = year(time)\n    ) |&gt;\n  group_by(year, week) |&gt;\n  summarise(\n    temp_mean = mean(tre200h0, na.rm = TRUE)\n  )\n\n\n\n\nCode\nplot(weather_summary2$week, weather_summary2$temp_mean, type = \"l\")\n\n\n\n\n\nAbbildung 8.1: baseplot mag keine long tables und macht aus den beiden Jahren eine kontinuierliche Linie"
+  },
+  {
+    "objectID": "prepro/Prepro3_Uebung.html#aufgabe-8",
+    "href": "prepro/Prepro3_Uebung.html#aufgabe-8",
+    "title": "Prepro 3: Übung",
+    "section": "Aufgabe 8",
+    "text": "Aufgabe 8\nÜberführe den Output aus der letzten Übung in eine wide table. Nun lassen sich die beiden Jahre viel besser miteinander vergleichen.\n\n\nCode\nweather_summary2 &lt;- weather_summary2 |&gt;\n  pivot_wider(names_from = year, values_from = temp_mean,names_prefix = \"year\")\n\n\n\n\nCode\nplot(weather_summary2$week, weather_summary2$year2000, type = \"l\",col = \"blue\")\nlines(weather_summary2$week, weather_summary2$year2001, type = \"l\",col = \"red\")"
+  },
+  {
+    "objectID": "InfoVis.html#infovis-1",
+    "href": "InfoVis.html#infovis-1",
+    "title": "Informationsvisualisierung",
+    "section": "Infovis 1",
+    "text": "Infovis 1\nDie konventionelle schliessende Statistik arbeitet in der Regel konfirmatorisch, sprich aus der bestehenden Theorie heraus werden Hypothesen formuliert, welche sodann durch Experimente geprüft und akzeptiert oder verworfen werden. Die Explorative Datenanalyse (EDA) nimmt dazu eine antagonistische Analyseperspektive ein und will in den Daten zunächst Zusammenhänge aufdecken, welche dann wiederum zur Formulierung von prüfbaren Hypothesen führen kann. Die Einheit stellt dazu den klassischen 5-stufigen EDA-Prozess nach Tukey (1980!) vor. Abschliessend wird dann noch die Brücke geschlagen zur modernen Umsetzung der EDA in Form von Visual Analytics."
+  },
+  {
+    "objectID": "InfoVis.html#infovis-2",
+    "href": "InfoVis.html#infovis-2",
+    "title": "Informationsvisualisierung",
+    "section": "Infovis 2",
+    "text": "Infovis 2\nDie Informationsvisualisierung ist eine vielseitige, effektive und effiziente Methode für die explorative Datenanalyse. Während Scatterplots und Histogramme weitherum bekannt sind, bieten weniger bekannte Informationsvisualisierungs-Typen wie etwa Parallelkoordinatenplots, TreeMaps oder Chorddiagramme originelle alternative Darstellungsformen zur visuellen Analyse von Datensätze, welche stets grösser und komplexer werden. Die Studierenden lernen in dieser lesson eine Reihe von Informationsvisualisierungstypen kennen, lernen diese zielführend zu gestalten und selber zu erstellen."
+  },
+  {
+    "objectID": "infovis/Infovis1_Vorbereitung.html",
+    "href": "infovis/Infovis1_Vorbereitung.html",
+    "title": "Vorbereitung",
+    "section": "",
+    "text": "Im Rahmen von InfoVis 1 - 2 werden wir einige R Packages brauchen. Wir empfehlen, diese bereits vor der ersten Lektion zu installieren. Analog Kapitel 1 könnt ihr mit nachstehendem Code alle noch nicht installierten packages automatisch installieren.\n\nipak &lt;- function(pkg) {\n  new.pkg &lt;- pkg[!(pkg %in% installed.packages()[, \"Package\"])]\n  if (length(new.pkg)) {\n    install.packages(new.pkg, dependencies = TRUE)\n  }\n}\n\npackages &lt;- c(\"dplyr\", \"ggplot2\", \"lubridate\", \"readr\", \"scales\", \"tidyr\")\n\nipak(packages)\n\nZudem könnt ihr die Daten für die Übungen auf Moodle herunterladen."
+  },
+  {
+    "objectID": "infovis/Infovis1_Demo.html#base-plot-vs.-ggplot",
+    "href": "infovis/Infovis1_Demo.html#base-plot-vs.-ggplot",
+    "title": "Infovis 1: Demo A",
+    "section": "Base-plot vs. ggplot",
+    "text": "Base-plot vs. ggplot\nUm in “base-R” einen Scatterplot zu erstellen wo Datum der Temperatur gegenübersteht, gehen wir wie folgt vor:\n\nplot(temperature$time, temperature$SHA, type = \"l\", col = \"red\")\nlines(temperature$time, temperature$ZER, col = \"blue\")\n\n\n\n\nIn ggplot sieht das etwas anders und auf den ersten Blick etwas komplizierter aus: Ein plot wird durch den Befehl ggplot() initiiert. Hier wird einerseits der Datensatz festgelegt, auf dem der Plot beruht (data =), sowie die Variablen innerhalb des Datensatzes, die Einfluss auf den Plot ausüben (mapping = aes()).\n\n# Datensatz: \"temperature\" | Beeinflussende Variabeln: \"time\" und \"temp\"\nggplot(data = temperature, mapping = aes(time, SHA))\n\n\n\n\nWeiter braucht es mindestens ein “Layer” der beschreibt, wie die Daten dargestellt werden sollen (z.B. geom_point()). Anders als bei “Piping” (|&gt;) wird ein Layer mit + hinzugefügt.\n\nggplot(data = temperature, mapping = aes(time, SHA)) +\n  # Layer: \"geom_point\" entspricht Punkten in einem Scatterplot\n  geom_point()\n\n\n\n\nDa ggplot die Eingaben in der Reihenfolge data = und dann mapping =erwartet, können wir diese Spezifizierungen auch weglassen.\n\nggplot(temperature, aes(time, SHA)) +\n  geom_point()"
+  },
+  {
+    "objectID": "infovis/Infovis1_Demo.html#long-vs.-wide",
+    "href": "infovis/Infovis1_Demo.html#long-vs.-wide",
+    "title": "Infovis 1: Demo A",
+    "section": "Long vs. wide",
+    "text": "Long vs. wide\nWie wir in PrePro 2 bereits erwähnt haben, ist ggplot2 auf long tables ausgelegt. Wir überführen deshalb an dieser Stelle die breite in eine lange Tabelle:\n\ntemperature_long &lt;- pivot_longer(temperature, -time, names_to = \"station\", values_to = \"temp\")\n\nNun wollen wir die unterschiedlichen Stationen unterschiedlich einfärben. Da wir Variablen definieren wollen, welche Einfluss auf die Grafik haben sollen, gehört diese Information in aes().\n\nggplot(temperature_long, aes(time, temp, colour = station)) +\n  geom_point()\n\n\n\n\nWir können noch einen Layer mit Linien hinzufügen:\n\nggplot(temperature_long, aes(time, temp, colour = station)) +\n  geom_point() +\n  geom_line()"
+  },
+  {
+    "objectID": "infovis/Infovis1_Demo.html#beschriftungen-labels",
+    "href": "infovis/Infovis1_Demo.html#beschriftungen-labels",
+    "title": "Infovis 1: Demo A",
+    "section": "Beschriftungen (labels)",
+    "text": "Beschriftungen (labels)\nWeiter können wir die Achsen beschriften und einen Titel hinzufügen. Zudem lasse ich die Punkte (geom_point()) nun weg, da mir diese nicht gefallen.\n\nggplot(temperature_long, aes(time, temp, colour = station)) +\n  geom_line() +\n  labs(\n    x = \"Zeit\",\n    y = \"Temperatur in Grad C°\",\n    title = \"Temperaturdaten Schweiz\",\n    subtitle = \"2001 bis 2002\",\n    color = \"Station\"\n  )"
+  },
+  {
+    "objectID": "infovis/Infovis1_Demo.html#split-apply-combine",
+    "href": "infovis/Infovis1_Demo.html#split-apply-combine",
+    "title": "Infovis 1: Demo A",
+    "section": "Split Apply Combine",
+    "text": "Split Apply Combine\nIm obigen Plot fällt auf, dass stündliche Werte eine zu hohe Auflösung ist, wenn wir daten über 2 Jahre visualisieren. Mit Split Apply Combine (PrePro 3) können wir die Auflösung unserer Daten verändern:\n\ntemperature_day &lt;- temperature_long |&gt;\n  mutate(time = as.Date(time))\n\ntemperature_day\n## # A tibble: 35,088 × 3\n##    time       station  temp\n##    &lt;date&gt;     &lt;chr&gt;   &lt;dbl&gt;\n##  1 2000-01-01 SHA       0.2\n##  2 2000-01-01 ZER      -8.8\n##  3 2000-01-01 SHA       0.3\n##  4 2000-01-01 ZER      -8.7\n##  5 2000-01-01 SHA       0.3\n##  6 2000-01-01 ZER      -9  \n##  7 2000-01-01 SHA       0.3\n##  8 2000-01-01 ZER      -8.7\n##  9 2000-01-01 SHA       0.4\n## 10 2000-01-01 ZER      -8.5\n## # ℹ 35,078 more rows\n\ntemperature_day &lt;- temperature_day |&gt;\n  group_by(station, time) |&gt;\n  summarise(temp = mean(temp))\n\ntemperature_day\n## # A tibble: 1,462 × 3\n## # Groups:   station [2]\n##    station time        temp\n##    &lt;chr&gt;   &lt;date&gt;     &lt;dbl&gt;\n##  1 SHA     2000-01-01  1.25\n##  2 SHA     2000-01-02  1.73\n##  3 SHA     2000-01-03  1.59\n##  4 SHA     2000-01-04  1.78\n##  5 SHA     2000-01-05  4.66\n##  6 SHA     2000-01-06  3.49\n##  7 SHA     2000-01-07  3.87\n##  8 SHA     2000-01-08  3.28\n##  9 SHA     2000-01-09  3.24\n## 10 SHA     2000-01-10  3.24\n## # ℹ 1,452 more rows"
+  },
+  {
+    "objectID": "infovis/Infovis1_Demo.html#xy-achse-anpassen",
+    "href": "infovis/Infovis1_Demo.html#xy-achse-anpassen",
+    "title": "Infovis 1: Demo A",
+    "section": "X/Y-Achse anpassen",
+    "text": "X/Y-Achse anpassen\nMan kann auch Einfluss auf die x-/y-Achsen nehmen. Dabei muss man zuerst festlegen, was für ein Achsentyp der Plot hat (vorher hat ggplot eine Annahme auf der Basis der Daten getroffen).\nBei unserer y-Achse handelt es sich um numerische Daten, ggplot nennt diese: scale_y_continuous(). Unter ggplot2.tidyverse.org findet man noch andere x/y-Achsentypen (scale_x_irgenwas bzw. scale_y_irgendwas).\n\nggplot(temperature_day, aes(time, temp, colour = station)) +\n  geom_line() +\n  labs(\n    x = \"Zeit\",\n    y = \"Temperatur in Grad C°\",\n    title = \"Temperaturdaten Schweiz\",\n    subtitle = \"2001 bis 2002\",\n    color = \"Station\"\n  ) +\n  scale_y_continuous(limits = c(-30, 30)) # y-Achsenabschnitt bestimmen\n\n\n\n\nDas gleiche Spiel kann man für die y-Achse betreiben. Bei unserer y-Achse handelt es sich ja um Datumsangaben. ggplot nennt diese: scale_x_date().\n\nggplot(temperature_day, aes(time, temp, colour = station)) +\n  geom_line() +\n  labs(\n    x = \"Zeit\",\n    y = \"Temperatur in Grad C°\",\n    title = \"Temperaturdaten Schweiz\",\n    subtitle = \"2001 bis 2002\",\n    color = \"Station\"\n  ) +\n  scale_y_continuous(limits = c(-30, 30)) +\n  scale_x_date(\n    date_breaks = \"3 months\",\n    date_labels = \"%b\"\n  )"
+  },
+  {
+    "objectID": "infovis/Infovis1_Demo.html#themes",
+    "href": "infovis/Infovis1_Demo.html#themes",
+    "title": "Infovis 1: Demo A",
+    "section": "Themes",
+    "text": "Themes\nMit theme verändert man das allgmeine Layout der Plots. Beispielsweise kann man mit theme_classic() ggplot-Grafiken etwas weniger “Poppig” erscheinen lassen: so sind sie besser für Bachelor- / Masterarbeiten sowie Publikationen geeignet. theme_classic() kann man indiviudell pro Plot anwenden, oder für die aktuelle Session global setzen (s.u.)\nIndividuell pro Plot:\n\nggplot(temperature_day, aes(time, temp, colour = station)) +\n  geom_line() +\n  theme_classic()\n\nGlobal (für alle nachfolgenden Plots der aktuellen Session):\n\ntheme_set(theme_classic())"
+  },
+  {
+    "objectID": "infovis/Infovis1_Demo.html#facets-small-multiples",
+    "href": "infovis/Infovis1_Demo.html#facets-small-multiples",
+    "title": "Infovis 1: Demo A",
+    "section": "Facets / Small Multiples",
+    "text": "Facets / Small Multiples\nSehr praktisch sind auch die Funktionen für “Small multiples”. Dies erreicht man mit facet_wrap() (oder facet_grid(), mehr dazu später). Man muss mit einem Tilde-Symbol “~” nur festlegen, welche Variable für das Aufteilen des Plots in kleinere Subplots verantwortlich sein soll.\n\nggplot(temperature_day, aes(time, temp, colour = station)) +\n  geom_line() +\n  labs(\n    x = \"Zeit\",\n    y = \"Temperatur in Grad C°\",\n    title = \"Temperaturdaten Schweiz\",\n    subtitle = \"2001 bis 2002\",\n    color = \"Station\"\n  ) +\n  scale_y_continuous(limits = c(-30, 30)) +\n  scale_x_date(\n    date_breaks = \"3 months\",\n    date_labels = \"%b\"\n  ) +\n  facet_wrap(station ~ .)\n\n\n\n\nAuch facet_wrap kann man auf seine Bedürfnisse anpassen: Beispielweise kann man mit ncol = die Anzahl facets pro Zeile bestimmen.\nZudem brauchen wir die Legende nicht mehr, da der Stationsnamen über jedem Facet steht. Ich setze deshalb theme(legend.position=\"none\")\n\nggplot(temperature_day, aes(time, temp, colour = station)) +\n  geom_line() +\n  labs(\n    x = \"Zeit\",\n    y = \"Temperatur in Grad C°\",\n    title = \"Temperaturdaten Schweiz\",\n    subtitle = \"2001 bis 2002\"\n  ) +\n  scale_y_continuous(limits = c(-30, 30)) +\n  scale_x_date(\n    date_breaks = \"3 months\",\n    date_labels = \"%b\"\n  ) +\n  facet_wrap(~station, ncol = 1) +\n  theme(legend.position = \"none\")"
+  },
+  {
+    "objectID": "infovis/Infovis1_Demo.html#in-variabel-abspeichern-und-exportieren",
+    "href": "infovis/Infovis1_Demo.html#in-variabel-abspeichern-und-exportieren",
+    "title": "Infovis 1: Demo A",
+    "section": "In Variabel abspeichern und Exportieren",
+    "text": "In Variabel abspeichern und Exportieren\nGenau wie data.frames und andere Objekte, kann man einen ganzen Plot auch in einer Variabel speichern. Dies kann nützlich sein um einen Plot zu exportieren (als png, jpg usw.) oder sukzessive erweitern wie in diesem Beispiel.\n\np &lt;- ggplot(temperature_day, aes(time, temp, colour = station)) +\n  geom_line() +\n  labs(\n    x = \"Zeit\",\n    y = \"Temperatur in Grad C°\",\n    title = \"Temperaturdaten Schweiz\",\n    subtitle = \"2001 bis 2002\"\n  ) +\n  scale_y_continuous(limits = c(-30, 30)) +\n  scale_x_date(\n    date_breaks = \"3 months\",\n    date_labels = \"%b\"\n  ) +\n  facet_wrap(~station, ncol = 1)\n# ich habe an dieser Stelle theme(legend.position=\"none\") entfernt\n\nFolgendermassen kann ich den Plot als png-File abspeichern (ohne Angabe von “plot =” wird einfach der letzte Plot gespeichert)\n\nggsave(filename = \"plot.png\", plot = p)\n\n.. und so kann ich einen bestehenden Plot (in einer Variabel) mit einem Layer / einer Option erweitern\n\np +\n  theme(legend.position = \"none\")\n\nWie üblich wurde diese Änderung nicht gespeichert, sondern nur das Resultat davon ausgeben. Wenn die Änderung in meinem Plot (in der Variabel) abspeichern will, muss ich die Variabel überschreiben:\n\np &lt;- p +\n  theme(legend.position = \"none\")"
+  },
+  {
+    "objectID": "infovis/Infovis1_Demo.html#smoothing",
+    "href": "infovis/Infovis1_Demo.html#smoothing",
+    "title": "Infovis 1: Demo A",
+    "section": "Smoothing",
+    "text": "Smoothing\nMit geom_smooth() kann ggplot eine Trendlinie auf der Baiss von Punktdaten berechnen. Die zugrunde liegende statistische Methode kann selbst gewählt werden (ohne Angabe verwendet ggplot bei &lt; 1’000 Messungen stats::loess, ansonsten mgcv::gam)\n\np &lt;- p +\n  geom_smooth(colour = \"black\")\np"
+  },
+  {
+    "objectID": "infovis/Infovis1_Uebung.html#aufgabe-1",
+    "href": "infovis/Infovis1_Uebung.html#aufgabe-1",
+    "title": "Infovis 1: Übung",
+    "section": "Aufgabe 1",
+    "text": "Aufgabe 1\nRekonstrukturiere folgenden Plot aus Kovic (2014) mithilfe von ggplot und dem tagi_data_kanton.csv Datensatz:\nTipp:\n\nNutze ggplot(kanton, aes(auslanderanteil, ja_anteil)) um den ggplot zu initiieren. Füge danach ein einen Punkte Layer hinzu (geom_point())\nNutze coord_fixed() um die beiden Achsen in ein fixes Verhältnis zu setzen (1:1).\nOptional:\n\nSetze die Achsen Start- und Endwerte mittels scale_y_continuous bzw. scale_x_continuous.\nSetze analog Kovic (2014) die breaks (0.0, 0.1…0.7) manuell (innerhalb scale_*_continuous)\nNutze labs() für die Beschriftung der Achsen\n\n\n\n\nCode\n# Lösung zu Aufgabe 1\n\nplot1 &lt;- ggplot(kanton, aes(auslanderanteil, ja_anteil)) +\n  geom_point() +\n  coord_fixed(1) +\n  scale_y_continuous(breaks = c(0, 0.1, 0.3, 0.5, 0.7), limits = c(0, 0.7)) +\n  scale_x_continuous(breaks = c(0, 0.1, 0.3, 0.5, 0.7), limits = c(0, 0.7)) +\n  labs(y = \"Anteil Ja-Stimmen\", x = \"Ausländeranteil\")\n\nplot1"
+  },
+  {
+    "objectID": "infovis/Infovis1_Uebung.html#aufgabe-2",
+    "href": "infovis/Infovis1_Uebung.html#aufgabe-2",
+    "title": "Infovis 1: Übung",
+    "section": "Aufgabe 2",
+    "text": "Aufgabe 2\nRekonstrukturiere folgenden Plot aus Kovic (2014) mithilfe von ggplot:\nTipp:\n\nNutze geom_smooth\n\n\n\nCode\n# Lösung zu Aufgabe 2\n\nplot1 +\n  geom_smooth()"
+  },
+  {
+    "objectID": "infovis/Infovis1_Uebung.html#aufgabe-3",
+    "href": "infovis/Infovis1_Uebung.html#aufgabe-3",
+    "title": "Infovis 1: Übung",
+    "section": "Aufgabe 3",
+    "text": "Aufgabe 3\nImportiere die Gemeindedaten tagi_data_gemeinden.csv.\nRekonstrukturiere folgenden Plot aus Kovic (2014) mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:\nTipp:\n\nNutze geom_point()\nNutze labs()\nNutze coord_fixed()\n\n\n\nCode\n# Lösung zu Aufgabe 3\n\ngemeinde &lt;- read_delim(\"datasets/infovis/tagi_data_gemeinden.csv\", \",\")\n\nplot2 &lt;- ggplot(gemeinde, aes(anteil_ausl, anteil_ja)) +\n  geom_point() +\n  labs(x = \"Ausländeranteil\", y = \"Anteil Ja-Stimmen\") +\n  coord_fixed(1) +\n  lims(x = c(0, 1), y = c(0, 1))\n\nplot2"
+  },
+  {
+    "objectID": "infovis/Infovis1_Uebung.html#aufgabe-4",
+    "href": "infovis/Infovis1_Uebung.html#aufgabe-4",
+    "title": "Infovis 1: Übung",
+    "section": "Aufgabe 4",
+    "text": "Aufgabe 4\nRekonstrukturiere folgenden Plot aus Kovic (2014) mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:\nTipp:\n\nNutze geom_smooth\n\n\n\nCode\n# Lösung zu Aufgabe 4\n\nplot2 +\n  geom_smooth()"
+  },
+  {
+    "objectID": "infovis/Infovis1_Uebung.html#aufgabe-5",
+    "href": "infovis/Infovis1_Uebung.html#aufgabe-5",
+    "title": "Infovis 1: Übung",
+    "section": "Aufgabe 5",
+    "text": "Aufgabe 5\nRekonstrukturiere folgenden Plot aus Kovic (2014) mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:\nTipp:\n\nNutze facet_wrap um einen Plot pro Kanton darzustellen.\n\n\n\nCode\n# Lösung zu Aufgabe 5\n\nplot3 &lt;- plot2 +\n  facet_wrap(~kanton)\nplot3"
+  },
+  {
+    "objectID": "infovis/Infovis1_Uebung.html#aufgabe-6",
+    "href": "infovis/Infovis1_Uebung.html#aufgabe-6",
+    "title": "Infovis 1: Übung",
+    "section": "Aufgabe 6",
+    "text": "Aufgabe 6\nRekonstrukturiere folgenden Plot aus Kovic (2014) mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:\nTipp:\n\nNutze geom_smooth\n\n\n\nCode\n# Lösung zu Aufgabe 6\n\nplot3 +\n  geom_smooth()"
+  },
+  {
+    "objectID": "infovis/Infovis1_Uebung.html#aufgabe-7",
+    "href": "infovis/Infovis1_Uebung.html#aufgabe-7",
+    "title": "Infovis 1: Übung",
+    "section": "Aufgabe 7",
+    "text": "Aufgabe 7\nRekonstrukturieren folgenden Plot aus Kovic (2014) mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:\nTipp:\n\nNutze facet_wrap\n\n\n\nCode\n# Lösung zu Aufgabe 7\n\nplot4 &lt;- plot2 +\n  facet_wrap(~quantile)\nplot4"
+  },
+  {
+    "objectID": "infovis/Infovis1_Uebung.html#aufgabe-8",
+    "href": "infovis/Infovis1_Uebung.html#aufgabe-8",
+    "title": "Infovis 1: Übung",
+    "section": "Aufgabe 8",
+    "text": "Aufgabe 8\nRekonstrukturiere folgenden Plot aus Kovic (2014) mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:\nTipp:\n\nNutze geom_smooth\n\n\n\nCode\n# Lösung zu Aufgabe 8\n\nplot4 +\n  geom_smooth()\n\n\n\n\n\n\n\n\n\nKovic, Marko. 2014. „Je weniger Ausländer, desto mehr Ja-Stimmen? Wirklich?“ Tagesanzeiger Datenblog. https://blog.tagesanzeiger.ch/datenblog/index.php/668/je-weniger-auslaender-desto-mehr-ja-stimmen-wirklich."
+  },
+  {
+    "objectID": "infovis/Infovis1_Script_eda.html",
+    "href": "infovis/Infovis1_Script_eda.html",
+    "title": "Infovis 1: Script EDA",
+    "section": "",
+    "text": "library(\"ggplot2\")\nlibrary(\"dplyr\")\nlibrary(\"scales\")\n\n# create some data about age and height of people\npeople &lt;- data.frame(\n  ID = c(1:30),\n  age = c(\n    5.0, 7.0, 6.5, 9.0, 8.0, 5.0, 8.6, 7.5, 9.0, 6.0,\n    63.5, 65.7, 57.6, 98.6, 76.5, 78.0, 93.4, 77.5, 256.6, 512.3,\n    15.5, 18.6, 18.5, 22.8, 28.5, 39.5, 55.9, 50.3, 31.9, 41.3\n  ),\n  height = c(\n    0.85, 0.93, 1.1, 1.25, 1.33, 1.17, 1.32, 0.82, 0.89, 1.13,\n    1.62, 1.87, 1.67, 1.76, 1.56, 1.71, 1.65, 1.55, 1.87, 1.69,\n    1.49, 1.68, 1.41, 1.55, 1.84, 1.69, 0.85, 1.65, 1.94, 1.80\n  ),\n  weight = c(\n    45.5, 54.3, 76.5, 60.4, 43.4, 36.4, 50.3, 27.8, 34.7, 47.6,\n    84.3, 90.4, 76.5, 55.6, 54.3, 83.2, 80.7, 55.6, 87.6, 69.5,\n    48.0, 55.6, 47.6, 60.5, 54.3, 59.5, 34.5, 55.4, 100.4, 110.3\n  )\n)\n\n# build a scatterplot for a first inspection\nggplot(people, aes(x = age, y = height)) +\n  geom_point()\n\n\n\n\n\nggplot(people, aes(x = age, y = height)) +\n  geom_point() +\n  scale_y_continuous(limits = c(0.75, 2))\n\n\n\n# Go to help page: http://docs.ggplot2.org/current/ -&gt; Search for icon of fit-line\n# http://docs.ggplot2.org/current/geom_smooth.html\n\n\n# build a scatterplot for a first inspection, with regression line\nggplot(people, aes(x = age, y = height)) +\n  geom_point() +\n  scale_y_continuous(limits = c(0, 2.0)) +\n  geom_smooth()\n\n\n\n\n\n# stem and leaf plot\nstem(people$height)\n## \n##   The decimal point is 1 digit(s) to the left of the |\n## \n##    8 | 25593\n##   10 | 037\n##   12 | 523\n##   14 | 19556\n##   16 | 255789916\n##   18 | 04774\nstem(people$height, scale = 2)\n## \n##   The decimal point is 1 digit(s) to the left of the |\n## \n##    8 | 2559\n##    9 | 3\n##   10 | \n##   11 | 037\n##   12 | 5\n##   13 | 23\n##   14 | 19\n##   15 | 556\n##   16 | 2557899\n##   17 | 16\n##   18 | 0477\n##   19 | 4\n\n\n# explore the two variables with box-whiskerplots\nsummary(people$age)\n##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n##    5.00    8.70   30.20   59.14   65.15  512.30\nboxplot(people$age)\n\n\n\n\n\nsummary(people$height)\n##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n##   0.820   1.190   1.555   1.455   1.690   1.940\nboxplot(people$height)\n\n\n\n\n\n# explore data with a histgram\nggplot(people, aes(x = age)) +\n  geom_histogram(binwidth = 20)\n\n\n\n\n\ndensity(x = people$height)\n## \n## Call:\n##  density.default(x = people$height)\n## \n## Data: people$height (30 obs.);   Bandwidth 'bw' = 0.1576\n## \n##        x                y           \n##  Min.   :0.3472   Min.   :0.001593  \n##  1st Qu.:0.8636   1st Qu.:0.102953  \n##  Median :1.3800   Median :0.510601  \n##  Mean   :1.3800   Mean   :0.483553  \n##  3rd Qu.:1.8964   3rd Qu.:0.722660  \n##  Max.   :2.4128   Max.   :1.216350\n\n# re-expression: use log or sqrt axes\n#\n# Find here guideline about scaling axes\n# http://www.cookbook-r.com/Graphs/Axes_(ggplot2)/\n# http://docs.ggplot2.org/0.9.3.1/scale_continuous.html\n\n\n# logarithmic axis: respond to skewness in the data, e.g. log10\nggplot(people, aes(x = age, y = height)) +\n  geom_point() +\n  scale_y_continuous(limits = c(0, 2.0)) +\n  geom_smooth() +\n  scale_x_log10()\n\n\n\n\n\n# outliers: Remove very small and very old people\n\npeopleClean &lt;- people |&gt;\n  filter(ID != 27) |&gt; # Diese Person war zu klein.\n  filter(age &lt; 100) # Fehler in der Erhebung des Alters\n\n\nggplot(peopleClean, aes(x = age)) +\n  geom_histogram(binwidth = 10)\n\n\n\n\n\nggplot(peopleClean, aes(x = age, y = height)) +\n  geom_point() +\n  scale_y_continuous(limits = c(0, 2.0)) +\n  geom_smooth()\n\n\n\n\n\n# with custom binwidth\nggplot(peopleClean, aes(x = age)) +\n  geom_histogram(binwidth = 10) +\n  theme_bw() # specifying the theme\n\n\n\n\n\n# quadratic axis\nggplot(peopleClean, aes(x = age, y = height)) +\n  geom_point() +\n  scale_y_continuous(limits = c(0, 2.0)) +\n  geom_smooth(method = \"lm\", fill = \"lightblue\", size = 0.5, alpha = 0.5) +\n  scale_x_sqrt()\n\n\n\n\n\n# filter \"teenies\": No trend\nfilter(peopleClean, age &lt; 15) |&gt;\n  ggplot(aes(x = age, y = height)) +\n  geom_point() +\n  scale_y_continuous(limits = c(0, 2.0)) +\n  geom_smooth(method = \"lm\", fill = \"lightblue\", size = 0.5, alpha = 0.5)\n\n\n\n\n\n# filter \"teenies\": No trend\npeopleClean |&gt;\n  filter(age &gt; 55) |&gt;\n  ggplot(aes(x = age, y = height)) +\n  geom_point() +\n  scale_y_continuous(limits = c(0, 2.0)) +\n  geom_smooth(method = \"lm\", fill = \"lightblue\", size = 0.5, alpha = 0.5)\n\n\n\n\n\n# Onwards towards multidimensional data\n\n# Finally, make a scatterplot matrix\npairs(peopleClean[, 2:4], panel = panel.smooth)\n\n\n\n\n\npairs(peopleClean[, 2:4], panel = panel.smooth)"
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_A.html#aufgabe-1",
+    "href": "infovis/Infovis2_Uebung_A.html#aufgabe-1",
+    "title": "Infovis 2: Übung A",
+    "section": "Aufgabe 1",
+    "text": "Aufgabe 1\nMache aus der wide table eine long table die wie folgt aussieht.\n\n\nCode\ntemperature_long &lt;- pivot_longer(temperature, -time, names_to = \"station\", values_to = \"temperature\")\n\nknitr::kable(head(temperature_long))\n\n\n\n\n\ntime\nstation\ntemperature\n\n\n\n\n2005-01-01\nALT\n1.3\n\n\n2005-01-01\nBUS\n1.5\n\n\n2005-01-01\nGVE\n1.1\n\n\n2005-01-01\nINT\n0.2\n\n\n2005-01-01\nOTL\n2.2\n\n\n2005-01-01\nLUG\n1.7\n\n\n\n\n\nImportiere anschliessend den Datensatz temperature_2005_metadata.csv und verbinde die beiden Datensätze mit einem left_join via station (bzw. stn).\n\n\nCode\nmetadata &lt;- read_delim(\"datasets/infovis/temperature_2005_metadata.csv\", \",\")\n\ntemperature_long &lt;- left_join(temperature_long, metadata, by = c(station = \"stn\"))"
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_A.html#aufgabe-2",
+    "href": "infovis/Infovis2_Uebung_A.html#aufgabe-2",
+    "title": "Infovis 2: Übung A",
+    "section": "Aufgabe 2",
+    "text": "Aufgabe 2\nErstelle ein Scatterplot (time vs. temperature) wobei die Punkte aufgrund ihrer Meereshöhe eingefärbt werden sollen. Tiefe Werte sollen dabei blau eingefärbt werden und hohe Werte rot (scale_color_gradient). Verkleinere die Punkte um übermässiges Überplotten der Punkten zu vermeiden (size =). Weiter sollen auf der x-Achse im Abstand von 3 Monaten der jeweilige Monat vermerkt sein (date_breaks bzw. date_labels von scale_x_datetime()).\n\n\nCode\n# Musterlösung\nggplot(temperature_long, aes(time, temperature, color = Meereshoehe)) +\n  geom_point(size = 0.5) +\n  labs(x = \"\", y = \"Temperatur in ° Celsius\") +\n  scale_x_datetime(date_breaks = \"3 months\", date_labels = \"%b\") +\n  scale_color_gradient(low = \"blue\", high = \"red\")"
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_A.html#aufgabe-3",
+    "href": "infovis/Infovis2_Uebung_A.html#aufgabe-3",
+    "title": "Infovis 2: Übung A",
+    "section": "Aufgabe 3",
+    "text": "Aufgabe 3\nErstelle eine Zusatzvariabel Date mit dem Datum der jeweiligen Messung ( mit as.Date). Nutze diese Spalte um die Tagesmitteltemperatur pro Station zu berechnen (mit summarise()).\nUm die Metadaten (Name, Meereshoehe, x, y) nicht zu verlieren kannst du den Join aus der ersten Übung wieder ausführen. Alternativ (schneller aber auch schwerer zu verstehen) kannst du diese Variabeln innerhalb deines group_by verwenden.\n\n\nCode\ntemperature_long &lt;- temperature_long |&gt;\n  mutate(time = as.Date(time)) |&gt;\n  group_by(time, station, Name, Meereshoehe, x, y) |&gt;\n  summarise(temperature = mean(temperature))"
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_A.html#aufgabe-4",
+    "href": "infovis/Infovis2_Uebung_A.html#aufgabe-4",
+    "title": "Infovis 2: Übung A",
+    "section": "Aufgabe 4",
+    "text": "Aufgabe 4\nWiederhole nun den Plot aus der ersten Aufgabe mit den aggregierten Daten aus der vorherigen Aufgabe. Um die labels korrekt zu setzen musst du scale_x_datetime mit scale_x_date ersetzen.\n\n\nCode\np &lt;- ggplot(temperature_long, aes(time, temperature, color = Meereshoehe)) +\n  geom_point(size = 0.5) +\n  labs(x = \"\", y = \"Temperatur in ° Celsius\") +\n  scale_x_date(date_breaks = \"3 months\", date_labels = \"%b\") +\n  scale_color_gradient(low = \"blue\", high = \"red\")\np"
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_A.html#aufgabe-5",
+    "href": "infovis/Infovis2_Uebung_A.html#aufgabe-5",
+    "title": "Infovis 2: Übung A",
+    "section": "Aufgabe 5",
+    "text": "Aufgabe 5\nFüge am obigen Plot eine schwarze, gestrichelte Trendlinie hinzu.\n\n\nCode\n# Musterlösung\np &lt;- p +\n  stat_smooth(colour = \"black\", lty = 2)\np"
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_A.html#aufgabe-6",
+    "href": "infovis/Infovis2_Uebung_A.html#aufgabe-6",
+    "title": "Infovis 2: Übung A",
+    "section": "Aufgabe 6",
+    "text": "Aufgabe 6\nPositioniere die Legende oberhalb des Plots (nutze dazu theme() mit legend.position).\n\n\nCode\n# Musterlösung\np &lt;- p +\n  theme(legend.position = \"top\")\np"
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_A.html#aufgabe-7-optional-fortgeschritten",
+    "href": "infovis/Infovis2_Uebung_A.html#aufgabe-7-optional-fortgeschritten",
+    "title": "Infovis 2: Übung A",
+    "section": "Aufgabe 7 (optional, fortgeschritten)",
+    "text": "Aufgabe 7 (optional, fortgeschritten)\nFüge den Temperaturwerten auf der y-Ache ein °C hinzu (siehe unten und studiere diesen Tipp zur Hilfe).\n\n\nCode\n# Musterlösung\np &lt;- p +\n  scale_y_continuous(labels = function(x) paste0(x, \"°C\")) +\n  labs(x = \"Kalenderwoche\", y = \"Temperatur\")\np"
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_A.html#aufgabe-8",
+    "href": "infovis/Infovis2_Uebung_A.html#aufgabe-8",
+    "title": "Infovis 2: Übung A",
+    "section": "Aufgabe 8",
+    "text": "Aufgabe 8\nJetzt verlassen wir den Scatterplot und machen einen Boxplot mit den Temperaturdaten. Färbe die Boxplots wieder in Abhängigkeit der Meereshöhe ein.\n\nBeachte den Unterschied zwischen colour = und fill =\nBeachte den Unterschied zwischen facet_wrap() und facet_grid()\nfacet_grid() braucht übrigens noch einen Punkt (.) zur Tilde (~).\nBeachte den Unterschied zwischen “.~” und “~.” bei facet_grid()\nverschiebe nach Bedarf die Legende\n\n\n\nCode\n# Musterlösung\ntemperature_long &lt;- mutate(temperature_long, monat = month(time, label = T, abbr = F))\n\nggplot(temperature_long, aes(monat, temperature, fill = Meereshoehe)) +\n  geom_boxplot() +\n  labs(x = \"Station\", y = \"Temperatur\") +\n  facet_wrap(~station) +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1))"
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_A.html#aufgabe-9",
+    "href": "infovis/Infovis2_Uebung_A.html#aufgabe-9",
+    "title": "Infovis 2: Übung A",
+    "section": "Aufgabe 9",
+    "text": "Aufgabe 9\nAls letzter wichtiger Plottyp noch zwei Übungen zum Histogramm. Erstelle ein Histogramm geom_histogram() mit den Temperaturwerten. Teile dazu die Stationen in verschiedene Höhenlagen ein (Tieflage [&lt; 400 m], Mittellage [400 - 600 m] und Hochlage [&gt; 600 m]). Vergleiche die Verteilung der Temperaturwerte in den verschiedenen Lagen mit einem Histogramm.\nTip: Nutze cut um die Stationen in die drei Gruppen aufzuteilen\n\n\nCode\n# Musterlösung\ntemperature_long &lt;- temperature_long |&gt;\n  mutate(lage = cut(Meereshoehe, c(0, 400, 600, 1000), labels = c(\"Tieflage\", \"Mittellage\", \"Hochlage\")))\n\nggplot(temperature_long, aes(temperature)) +\n  geom_histogram() +\n  facet_grid(~lage) +\n  labs(x = \"Lage\", y = \"Temperatur\") +\n  theme(axis.text.x = element_text(angle = 45, hjust = 1))"
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_B.html#aufgabe-1-parallel-coordinate-plots",
+    "href": "infovis/Infovis2_Uebung_B.html#aufgabe-1-parallel-coordinate-plots",
+    "title": "Infovis 2: Übung optional",
+    "section": "Aufgabe 1: Parallel coordinate plots",
+    "text": "Aufgabe 1: Parallel coordinate plots\nErstelle einen parallel coordinate plot. Dafür eignet sich der integrierte Datensatz mtcars. Extrahiere die Fahrzeugnamen mit rownames_to_column.\nZudem müssen die Werte jeweiles auf eine gemeinsame Skala normalisiert werden. Hierfür kannst du die Funktion scales::rescale verwenden.\n\n\nCode\nmtcars2 &lt;- mtcars |&gt;\n  tibble::rownames_to_column(\"car\") |&gt;\n  pivot_longer(-car)\n\nmtcars2 &lt;- mtcars2 |&gt;\n  group_by(name) |&gt;\n  mutate(value_scaled = scales::rescale(value))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmpg\ncyl\ndisp\nhp\ndrat\nwt\nqsec\nvs\nam\ngear\ncarb\n\n\n\n\nMazda RX4\n21.0\n6\n160\n110\n3.90\n2.620\n16.46\n0\n1\n4\n4\n\n\nMazda RX4 Wag\n21.0\n6\n160\n110\n3.90\n2.875\n17.02\n0\n1\n4\n4\n\n\nDatsun 710\n22.8\n4\n108\n93\n3.85\n2.320\n18.61\n1\n1\n4\n1\n\n\nHornet 4 Drive\n21.4\n6\n258\n110\n3.08\n3.215\n19.44\n1\n0\n3\n1\n\n\nHornet Sportabout\n18.7\n8\n360\n175\n3.15\n3.440\n17.02\n0\n0\n3\n2\n\n\nValiant\n18.1\n6\n225\n105\n2.76\n3.460\n20.22\n1\n0\n3\n1\n\n\n\n\n\nSo sieht der fertige Plot aus:\n\n\nCode\nmtcars2 &lt;- mtcars2 |&gt;\n  group_by(car) |&gt;\n  mutate(gear = value[name == \"gear\"])\n\nggplot(mtcars2, aes(name, value_scaled, group = car, color = factor(gear))) +\n  geom_point() +\n  geom_line() +\n  theme_minimal() +\n  theme(legend.position = \"none\", axis.title.y = element_blank())"
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_B.html#aufgabe-2-polar-plot-mit-biber-daten",
+    "href": "infovis/Infovis2_Uebung_B.html#aufgabe-2-polar-plot-mit-biber-daten",
+    "title": "Infovis 2: Übung optional",
+    "section": "Aufgabe 2: Polar Plot mit Biber Daten",
+    "text": "Aufgabe 2: Polar Plot mit Biber Daten\nPolar Plots eignen sich unter anderem für Daten, die zyklischer Natur sind, wie zum Beispiel zeitlich geprägte Daten (Tages-, Wochen-, oder Jahresrhythmen). Aus den Beispiels-Datensätzen habe ich zwei Datensätze gefunden, die zeitlich geprägt sind:\n\nbeaver1 und beaver2\nAirPassenger\n\nBeide Datensätze müssen noch etwas umgeformt werden, bevor wir sie für einen Radialplot verwenden können. In Aufgabe 2 verwenden wir die Biber-Datensätze, in der nächsten Aufgabe (3) die Passagier-Daten.\nWenn wir die Daten von beiden Bibern verwenden wollen, müssen wir diese noch zusammenfügen.\n\n\nCode\nbeaver1_new &lt;- beaver1 |&gt;\n  mutate(beaver = \"nr1\")\n\nbeaver2_new &lt;- beaver2 |&gt;\n  mutate(beaver = \"nr2\")\n\nbeaver_new &lt;- rbind(beaver1_new, beaver2_new)\n\n\nZudem müssen wir die Zeitangabe noch anpassen: Gemäss der Datenbeschreibung handelt es sich bei der Zeitangabe um ein sehr programmier-unfreundliches Format. 3:30 wird als “0330” notiert. Wir müssen diese Zeitangabe, noch in ein Dezimalsystem umwandeln.\n\n\nCode\nbeaver_new &lt;- beaver_new |&gt;\n  mutate(\n    hour_dec = (time / 100) %/% 1, # Ganze Stunden (mittels ganzzaliger Division)\n    min_dec = (time / 100) %% 1 / 0.6, # Dezimalminuten (15 min wird zu 0.25, via Modulo)\n    hour_min_dec = hour_dec + min_dec # Dezimal-Zeitangabe (03:30 wird zu 3.5)\n  )\n\n\nSo sieht der fertige Plot aus:\n\n\nCode\n# Lösung Aufgabe 2\n\nbeaver_new |&gt;\n  ggplot(aes(hour_min_dec, temp, color = beaver)) +\n  geom_point() +\n  scale_x_continuous(breaks = seq(0, 23, 2)) +\n  coord_polar() +\n  theme_minimal() +\n  theme(axis.title = element_blank())"
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_B.html#aufgabe-3-raster-visualisierung-mit-flugpassagieren",
+    "href": "infovis/Infovis2_Uebung_B.html#aufgabe-3-raster-visualisierung-mit-flugpassagieren",
+    "title": "Infovis 2: Übung optional",
+    "section": "Aufgabe 3: Raster Visualisierung mit Flugpassagieren",
+    "text": "Aufgabe 3: Raster Visualisierung mit Flugpassagieren\nAnalog Aufgabe 2, dieses Mal mit dem Datensatz AirPassengers\nAirPassengers kommt in einem Format daher, das ich selbst noch gar nicht kannte. Es sieht zwar aus wie ein data.frame oder eine matrix, ist aber von der Klasse ts.\n\n\nCode\nAirPassengers\n##      Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec\n## 1949 112 118 132 129 121 135 148 148 136 119 104 118\n## 1950 115 126 141 135 125 149 170 170 158 133 114 140\n## 1951 145 150 178 163 172 178 199 199 184 162 146 166\n## 1952 171 180 193 181 183 218 230 242 209 191 172 194\n## 1953 196 196 236 235 229 243 264 272 237 211 180 201\n## 1954 204 188 235 227 234 264 302 293 259 229 203 229\n## 1955 242 233 267 269 270 315 364 347 312 274 237 278\n## 1956 284 277 317 313 318 374 413 405 355 306 271 306\n## 1957 315 301 356 348 355 422 465 467 404 347 305 336\n## 1958 340 318 362 348 363 435 491 505 404 359 310 337\n## 1959 360 342 406 396 420 472 548 559 463 407 362 405\n## 1960 417 391 419 461 472 535 622 606 508 461 390 432\n\nclass(AirPassengers)\n## [1] \"ts\"\n\n\nDamit wir den Datensatz verwenden können, müssen wir ihn zuerst in eine matrix umwandeln. Wie das geht habe ich hier erfahren.\n\n\nCode\nAirPassengers2 &lt;- tapply(AirPassengers, list(year = floor(time(AirPassengers)), month = month.abb[cycle(AirPassengers)]), c)\n\nAirPassengers2\n##       month\n## year   Apr Aug Dec Feb Jan Jul Jun Mar May Nov Oct Sep\n##   1949 129 148 118 118 112 148 135 132 121 104 119 136\n##   1950 135 170 140 126 115 170 149 141 125 114 133 158\n##   1951 163 199 166 150 145 199 178 178 172 146 162 184\n##   1952 181 242 194 180 171 230 218 193 183 172 191 209\n##   1953 235 272 201 196 196 264 243 236 229 180 211 237\n##   1954 227 293 229 188 204 302 264 235 234 203 229 259\n##   1955 269 347 278 233 242 364 315 267 270 237 274 312\n##   1956 313 405 306 277 284 413 374 317 318 271 306 355\n##   1957 348 467 336 301 315 465 422 356 355 305 347 404\n##   1958 348 505 337 318 340 491 435 362 363 310 359 404\n##   1959 396 559 405 342 360 548 472 406 420 362 407 463\n##   1960 461 606 432 391 417 622 535 419 472 390 461 508\n\n\nAus der matrix muss noch ein Dataframe her, zudem müssen wir aus der breiten Tabelle eine lange Tabelle machen.\n\n\nCode\nAirPassengers3 &lt;- AirPassengers2 |&gt;\n  as.data.frame() |&gt;\n  tibble::rownames_to_column(\"year\") |&gt;\n  pivot_longer(-year, names_to = \"month\", values_to = \"n\") |&gt;\n  mutate(\n    # ich nutze einen billigen Trick um ausgeschriebene Monate in Nummern umzuwandeln\n    month = factor(month, levels = month.abb, ordered = T),\n    month_numb = as.integer(month),\n    year = as.integer(year)\n  )\n\n\nSo sieht der fertige Plot aus:\n\n\nCode\nggplot(AirPassengers3, aes(month, year, fill = n)) +\n  geom_raster() +\n  scale_y_reverse() +\n  scale_fill_viridis_c(guide = guide_colourbar(barwidth = 15, title.position = \"top\")) +\n  theme_minimal() +\n  labs(fill = \"Anzahl Passagiere\") +\n  coord_equal() +\n  theme(axis.title = element_blank(), legend.position = \"bottom\")"
+  },
+  {
+    "objectID": "RaumAn.html",
+    "href": "RaumAn.html",
+    "title": "Räumliche Analysen",
+    "section": "",
+    "text": "Titel\n\n\nDatum\n\n\nLesson\n\n\nThema\n\n\n\n\n\n\nVorbereitung\n\n\n2023-11-27\n\n\nRaumAn1\n\n\nVorbereitung\n\n\n\n\nRauman 1: Übung A\n\n\n2023-11-27\n\n\nRaumAn1\n\n\nEinführung\n\n\n\n\nRauman 1: Übung B\n\n\n2023-11-27\n\n\nRaumAn1\n\n\nSpatial Joins\n\n\n\n\nRauman 2: Übung A\n\n\n2023-11-28\n\n\nRaumAn2\n\n\nVector Data\n\n\n\n\nRauman 2: Übung B\n\n\n2023-11-28\n\n\nRaumAn2\n\n\nEinführung Rasterdaten\n\n\n\n\nRauman 3: Übung A\n\n\n2023-12-04\n\n\nRaumAn3\n\n\nDichteschätzung\n\n\n\n\nRauman 3: Übung B\n\n\n2023-12-04\n\n\nRaumAn3\n\n\nRäumliche Interpolation\n\n\n\n\nRauman 3: Übung C (Optional)\n\n\n2023-12-04\n\n\nRaumAn3\n\n\nG-Funktion\n\n\n\n\nRauman 4: Übung\n\n\n2023-12-05\n\n\nRaumAn4\n\n\nMorans I\n\n\n\n\nRauman 5: Übung A\n\n\n2023-12-11\n\n\nRaumAn5\n\n\nMulti-Criteria Evaluation (MCE)\n\n\n\n\nRauman 5: Übung B\n\n\n2023-12-11\n\n\nRaumAn5\n\n\nMulti-Criteria Evaluation (MCE)\n\n\n\n\n\n\nKeine Treffer"
+  },
+  {
+    "objectID": "rauman/Rauman0_Vorbereitung.html",
+    "href": "rauman/Rauman0_Vorbereitung.html",
+    "title": "Vorbereitung",
+    "section": "",
+    "text": "Im Rahmen von Rauman 1 - 5 werden wir einige R Packages brauchen. Wir empfehlen, diese bereits vor der ersten Lektion zu installieren. Analog der Vorbereitungsübung in Prepro1 könnt ihr mit nachstehendem Code alle noch nicht installierten packages automatisch installieren.\n\nipak &lt;- function(pkg) {\n  new.pkg &lt;- pkg[!(pkg %in% installed.packages()[, \"Package\"])]\n  if (length(new.pkg)) {\n    install.packages(new.pkg, dependencies = TRUE)\n  }\n}\n\npackages &lt;- c(\n  \"sf\", \"dplyr\", \"ggplot2\", \"spatstat.geom\", \"spatstat.explore\",\n  \"gstat\", \"tidyr\", \"terra\", \"tmap\"\n)\n\nipak(packages)\n\nZudem könnt ihr die Daten für die Übungen auf Moodle herunterladen."
+  },
+  {
+    "objectID": "rauman/Rauman1_Uebung_A.html#aufgabe-1-vektor-daten-importieren",
+    "href": "rauman/Rauman1_Uebung_A.html#aufgabe-1-vektor-daten-importieren",
+    "title": "Rauman 1: Übung A",
+    "section": "Aufgabe 1: Vektor Daten importieren",
+    "text": "Aufgabe 1: Vektor Daten importieren\nImportiere die Datensätze kantone.gpkg und gemeinden.gpkg wie folgt. Es handelt sich um Geodatensätze im Format Geopackage (“*.gpkg”), eine alternatives Datenformat zum bekannteren Format “Shapefiles”.\n\nkantone &lt;- read_sf(\"datasets/rauman/kantone.gpkg\")\ngemeinden &lt;- read_sf(\"datasets/rauman/gemeinden.gpkg\")\n\nSchau Dir die importierten Datensätze an.\n\n\n\n\n\n\nHinweis\n\n\n\nAm meisten Informationen zu sf Objekten bekommst du, wenn du dir den Datensatz in der Konsole anschaust (in dem du den Variabel-Name in der Konsole eintippst). Mit dem RStudio Viewer werden sf Objekte nur sehr langsam geladen und die Metadaten werden nicht angezeigt."
+  },
+  {
+    "objectID": "rauman/Rauman1_Uebung_A.html#aufgabe-2-daten-visualisieren",
+    "href": "rauman/Rauman1_Uebung_A.html#aufgabe-2-daten-visualisieren",
+    "title": "Rauman 1: Übung A",
+    "section": "Aufgabe 2: Daten visualisieren",
+    "text": "Aufgabe 2: Daten visualisieren\nEine sehr einfache Möglichkeit, sf-Objekte zu visualiseren ist die base-R Funktion plot(). Führe die angegebenen R-Befehle aus und studiere die entstehenden Plots. Welche Unterschiede findest Du? Wie erklärst Du diese Unterschiede?\n\n# ohne max.plot = 1 macht R einen Plot pro Spalte\nplot(gemeinden, max.plot = 1)\n\n\n\n\n# Alternativ kann man auch eine spezifische Spalte plotten\nplot(kantone[\"KANTONSFLA\"])"
+  },
+  {
+    "objectID": "rauman/Rauman1_Uebung_A.html#input-koodinatensysteme",
+    "href": "rauman/Rauman1_Uebung_A.html#input-koodinatensysteme",
+    "title": "Rauman 1: Übung A",
+    "section": "Input: Koodinatensysteme",
+    "text": "Input: Koodinatensysteme\nIn der obigen Visualierung fällt folgendes auf:\n\ndie X/Y Achsen weisen zwei ganz unterschiedliche Zahlenbereiche auf (vergleiche die Achsenbeschriftungen)\nder Umriss der Schweiz sieht in den beiden Datensätzen unterschiedlich aus (kantone ist gegenüber gemeinden gestaucht)\n\nDies hat natürlich damit zu tun, dass die beiden Datensätze in unterschiedlichen Koordinatensystemen erfasst wurden. Koordinatensysteme werden mit CRS (Coordinate Reference System) abgekürzt. Mit st_crs() können die zugewiesenen Koordinatensysteme abgefragt werden.\n\nst_crs(kantone)\n## Coordinate Reference System:\n##   User input: Undefined Cartesian SRS \n##   wkt:\n## ENGCRS[\"Undefined Cartesian SRS\",\n##     EDATUM[\"Unknown engineering datum\"],\n##     CS[Cartesian,2],\n##         AXIS[\"(E)\",east,\n##             ORDER[1],\n##             LENGTHUNIT[\"Meter\",1]],\n##         AXIS[\"(N)\",north,\n##             ORDER[2],\n##             LENGTHUNIT[\"Meter\",1]]]\nst_crs(gemeinden)\n## Coordinate Reference System:\n##   User input: Undefined Cartesian SRS \n##   wkt:\n## ENGCRS[\"Undefined Cartesian SRS\",\n##     EDATUM[\"Unknown engineering datum\"],\n##     CS[Cartesian,2],\n##         AXIS[\"(E)\",east,\n##             ORDER[1],\n##             LENGTHUNIT[\"Meter\",1]],\n##         AXIS[\"(N)\",north,\n##             ORDER[2],\n##             LENGTHUNIT[\"Meter\",1]]]\n\nLeider sind in unserem Fall keine Koordinatensysteme zugewiesen. Mit etwas Erfahrung kann man das Koordinatensystem aber erraten, so viele kommen nämlich gar nicht in Frage. Am häufigsten trifft man hierzulande eines der drei folgenden Koordinatensysteme an:\n\nCH1903 LV03: das alte Koordinatensystem der Schweiz\nCH1903+ LV95: das neue Koordinatensystem der Schweiz\nWGS84: ein häufig genutztes, weltumspannendes geodätisches Koordinatensystem, sprich die Koordinaten werden in Länge und Breite angegeben (Lat/Lon).\n\nNun gilt es, anhand der Koordinaten die in der Spalte geometry ersichtlich sind, das korrekte Koordinatensystem festzustellen. Wenn man auf map.geo.admin.ch mit der rechten Maustaste einen Ort anwählt, erfährt man die Koordinaten dieses Ortes in verschiedenen Koordinatenbezugssystemen.\n\n\nWenn man diese Koordinaten mit den Koordinaten unserer Datensätze vergleicht, dann ist schnell klar, dass es sich beim Datensatz kantone um das Koordinatenbezugsystem (CRS) WGS84 handelt. Wir können diese Information nutzen um das CRS unserers Datensatzes mit st_set_crs() zu setzen.\n\n# Zuweisen mit st_set_crs()...\nkantone &lt;- st_set_crs(kantone, \"WGS84\")\n\nWenn wir die CRS Information nun abrufen, sehen wir das diese Zuweisung funktioniert hat.\n\n# ... abfragen mit st_crs()\nst_crs(kantone)\n## Coordinate Reference System:\n##   User input: WGS84 \n##   wkt:\n## GEOGCRS[\"WGS 84\",\n##     DATUM[\"World Geodetic System 1984\",\n##         ELLIPSOID[\"WGS 84\",6378137,298.257223563,\n##             LENGTHUNIT[\"metre\",1]]],\n##     PRIMEM[\"Greenwich\",0,\n##         ANGLEUNIT[\"degree\",0.0174532925199433]],\n##     CS[ellipsoidal,2],\n##         AXIS[\"geodetic latitude (Lat)\",north,\n##             ORDER[1],\n##             ANGLEUNIT[\"degree\",0.0174532925199433]],\n##         AXIS[\"geodetic longitude (Lon)\",east,\n##             ORDER[2],\n##             ANGLEUNIT[\"degree\",0.0174532925199433]],\n##     ID[\"EPSG\",4326]]\n\nEtwas komplizierter ist es, wenn wir das CRS vom Datensatz gemeinden setzen wollen. Im Vergleich mit map.geo.admin.ch sehen wir, dass es sich hier um das CRS CH1903+ LV95 handeln muss. Wenn wir diesen Namen für unsere CRS Zuweisung verwenden möchten, funktioniert das nicht:\n\n# Zuweisen mit st_set_crs()...\ngemeinden &lt;- st_set_crs(gemeinden, \"CH1903+ LV95\")\n\n# ... abfragen mit st_crs()\nst_crs(gemeinden)\n\nDie ausgeschriebenen Namen dieser CRS sind fehleranfällig. Deshalb ist es besser, mit den jeweiligen EPSG Codes der Bezugssysteme zu arbeiten. Diese EPSG Codes kann man auf folgender Website erfahren: epsg.io/map. Es lohnt sich aber, die EPSG Codes der für uns relevanten CRS zu notieren:\n\nCH1903 LV03: EPSG:21781\nCH1903+ LV95: EPSG:2056\nWGS84: EPSG:4326\n\nDieser Code können wir nutzen, um das CRS des Datensatz gemeinde zu setzen:\n\n# Zuweisen mit st_set_crs()...\ngemeinden &lt;- st_set_crs(gemeinden, 2056)\n\n# ... abfragen mit st_crs()\nst_crs(gemeinden)\n## Coordinate Reference System:\n##   User input: EPSG:2056 \n##   wkt:\n## PROJCRS[\"CH1903+ / LV95\",\n##     BASEGEOGCRS[\"CH1903+\",\n##         DATUM[\"CH1903+\",\n##             ELLIPSOID[\"Bessel 1841\",6377397.155,299.1528128,\n##                 LENGTHUNIT[\"metre\",1]]],\n##         PRIMEM[\"Greenwich\",0,\n##             ANGLEUNIT[\"degree\",0.0174532925199433]],\n##         ID[\"EPSG\",4150]],\n##     CONVERSION[\"Swiss Oblique Mercator 1995\",\n##         METHOD[\"Hotine Oblique Mercator (variant B)\",\n##             ID[\"EPSG\",9815]],\n##         PARAMETER[\"Latitude of projection centre\",46.9524055555556,\n##             ANGLEUNIT[\"degree\",0.0174532925199433],\n##             ID[\"EPSG\",8811]],\n##         PARAMETER[\"Longitude of projection centre\",7.43958333333333,\n##             ANGLEUNIT[\"degree\",0.0174532925199433],\n##             ID[\"EPSG\",8812]],\n##         PARAMETER[\"Azimuth of initial line\",90,\n##             ANGLEUNIT[\"degree\",0.0174532925199433],\n##             ID[\"EPSG\",8813]],\n##         PARAMETER[\"Angle from Rectified to Skew Grid\",90,\n##             ANGLEUNIT[\"degree\",0.0174532925199433],\n##             ID[\"EPSG\",8814]],\n##         PARAMETER[\"Scale factor on initial line\",1,\n##             SCALEUNIT[\"unity\",1],\n##             ID[\"EPSG\",8815]],\n##         PARAMETER[\"Easting at projection centre\",2600000,\n##             LENGTHUNIT[\"metre\",1],\n##             ID[\"EPSG\",8816]],\n##         PARAMETER[\"Northing at projection centre\",1200000,\n##             LENGTHUNIT[\"metre\",1],\n##             ID[\"EPSG\",8817]]],\n##     CS[Cartesian,2],\n##         AXIS[\"(E)\",east,\n##             ORDER[1],\n##             LENGTHUNIT[\"metre\",1]],\n##         AXIS[\"(N)\",north,\n##             ORDER[2],\n##             LENGTHUNIT[\"metre\",1]],\n##     USAGE[\n##         SCOPE[\"Cadastre, engineering survey, topographic mapping (large and medium scale).\"],\n##         AREA[\"Liechtenstein; Switzerland.\"],\n##         BBOX[45.82,5.96,47.81,10.49]],\n##     ID[\"EPSG\",2056]]\n\nJetzt wo das CRS der Datensätze bekannt ist, können wir ggplot2 nutzen um usere Daten zu visualisieren. In InfoVis 1 & 2 haben wir intensiv mit ggplot2 gearbeitet und dort die Layers geom_point() und geom_line() kennen gelernt. Zusätzlich beinhaltet ggplot die Möglichkeit, mit geom_sf() Vektordaten direkt und sehr einfach zu plotten."
+  },
+  {
+    "objectID": "rauman/Rauman1_Uebung_A.html#aufgabe-3-koordinatensyteme-transformieren",
+    "href": "rauman/Rauman1_Uebung_A.html#aufgabe-3-koordinatensyteme-transformieren",
+    "title": "Rauman 1: Übung A",
+    "section": "Aufgabe 3: Koordinatensyteme transformieren",
+    "text": "Aufgabe 3: Koordinatensyteme transformieren\nIn der vorherigen Übung haben wir das bestehende Koordinatensystem zugewiesen. Dabei haben wir die bestehenden Koordinaten (in der Spalte geom) nicht manipuliert. Ganz anders ist eine Transformation der Daten von einem Koordinatensystem in das andere. Bei einer Transformation werden die Koordinaten in das neue Koordinatensystem umgerechnet und somit manipuliert. Aus praktischen Gründen wollen  wir all unsere Daten ins neue Schweizer Koordinatensystem CH1903+ LV95 transfomieren. Transformiere den Datensatz kantone mit st_transform()in CH1903+ LV95, nutze dafür den korrekten EPSG-Code.\nVor der Transformation (betrachte die Attribute Bounding box, Projected CRS sowie die Werte in der Spalte geom):\n\nkantone\n## Simple feature collection with 51 features and 6 fields\n## Geometry type: POLYGON\n## Dimension:     XY\n## Bounding box:  xmin: 5.955902 ymin: 45.81796 xmax: 10.49217 ymax: 47.80845\n## Geodetic CRS:  WGS 84\n## # A tibble: 51 × 7\n##    NAME       KANTONSNUM SEE_FLAECH KANTONSFLA KT_TEIL EINWOHNERZ\n##  * &lt;chr&gt;           &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;        &lt;int&gt;\n##  1 Graubünden         18         NA     710530 0           197888\n##  2 Bern                2      11897     595952 1          1031126\n##  3 Valais             23       1060     522463 0           341463\n##  4 Vaud               22      39097     321201 1           793129\n##  5 Ticino             21       7147     281216 0           353709\n##  6 St. Gallen         17       7720     202820 1           504686\n##  7 Zürich              1       6811     172894 0          1504346\n##  8 Fribourg           10       7818     167142 1           315074\n##  9 Luzern              3       6438     149352 0           406506\n## 10 Aargau             19        870     140380 1           670988\n## # ℹ 41 more rows\n## # ℹ 1 more variable: geom &lt;POLYGON [°]&gt;\n\nNach der Transformation (betrachte die Attribute Bounding box, Projected CRS sowie die Werte in der Spalte geom):\n\nkantone\n## Simple feature collection with 51 features and 6 fields\n## Geometry type: POLYGON\n## Dimension:     XY\n## Bounding box:  xmin: 2485410 ymin: 1075268 xmax: 2833858 ymax: 1295934\n## Projected CRS: CH1903+ / LV95\n## # A tibble: 51 × 7\n##    NAME       KANTONSNUM SEE_FLAECH KANTONSFLA KT_TEIL EINWOHNERZ\n##  * &lt;chr&gt;           &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;        &lt;int&gt;\n##  1 Graubünden         18         NA     710530 0           197888\n##  2 Bern                2      11897     595952 1          1031126\n##  3 Valais             23       1060     522463 0           341463\n##  4 Vaud               22      39097     321201 1           793129\n##  5 Ticino             21       7147     281216 0           353709\n##  6 St. Gallen         17       7720     202820 1           504686\n##  7 Zürich              1       6811     172894 0          1504346\n##  8 Fribourg           10       7818     167142 1           315074\n##  9 Luzern              3       6438     149352 0           406506\n## 10 Aargau             19        870     140380 1           670988\n## # ℹ 41 more rows\n## # ℹ 1 more variable: geom &lt;POLYGON [m]&gt;"
+  },
+  {
+    "objectID": "rauman/Rauman1_Uebung_A.html#aufgabe-4-tidyverse-funktionen",
+    "href": "rauman/Rauman1_Uebung_A.html#aufgabe-4-tidyverse-funktionen",
+    "title": "Rauman 1: Übung A",
+    "section": "Aufgabe 4: Tidyverse Funktionen",
+    "text": "Aufgabe 4: Tidyverse Funktionen\nsf Objekte sind im wesentlichen data.frames mit ein paar Metadaten und einer speziellen geometry-Spalte. Wir können ihnen die gleichen Operationen durchführen, wie mit data.frames. Beispielsweise können wir aus den Spalten EINWOHNERZ und KANTONSFLA die Einwohnerdichte berechnen:\n\nkantone &lt;- kantone |&gt;\n  mutate(\n    # hektaren in km2 konvertieren\n    flaeche_km2 = KANTONSFLA / 100,\n    # dichte pro km2 berechnen\n    bevoelkerungsdichte = EINWOHNERZ / flaeche_km2\n  )\n\nBerechne nun die Einwohnerdichte auf der Ebene der Gemeinden."
+  },
+  {
+    "objectID": "rauman/Rauman1_Uebung_A.html#aufgabe-5-choroplethen-karte",
+    "href": "rauman/Rauman1_Uebung_A.html#aufgabe-5-choroplethen-karte",
+    "title": "Rauman 1: Übung A",
+    "section": "Aufgabe 5: Choroplethen Karte",
+    "text": "Aufgabe 5: Choroplethen Karte\nNun wollen wir die Gemeinden respektive die Kantone nach ihrer Bevölkerungsdichte einfärben. Dafür verwenden wir wie gewohnt die Methode aes(fill = ...) von ggplot.\n\n\n\n\n\nHier sind farblich kaum Unterschiede erkennbar, weil die extrem hohe Bevölkerungsdichte vom Halbkanton Basel-Stadt (&gt;5’000 Einwohner pro km2!) die ganze Farbskala dominiert. Der Statistischer Atlas der Schweiz löst das Problem, indem es Klassen mit irregulären Schwellwerte verwendet und alle zahlen &gt;2’000 gruppiert. Diese Vorgehensweise können wir mit cut() rekonstruieren.\n\n# Schwellwerte analog BFS \"Statistischer Atlas der Schweiz\"\nbreaks = c(0, 50, 100, 150, 200, 300, 500, 750, 1000, 2000, Inf)\n\n# Klassen auf der Basis dieser Schwellenwerte bilden\nkantone &lt;- kantone |&gt;\n    mutate(bevoelkerungsdichte_klassen = cut(bevoelkerungsdichte, breaks))\n\n# Farbpalette erstellen: Wir brauchen so viele Farben, wie wir \"breaks\" haben, minus 1\nncols &lt;- length(breaks) - 1\n\n# Farbpalette erstellen (siehe RColorBrewer::display.brewer.all())\nred_yellow_green &lt;- RColorBrewer::brewer.pal(ncols, \"RdYlGn\")\n\n# Farbpalette umdrehen (zu green-red-yellow)\ngreen_red_yellow &lt;- rev(red_yellow_green)\n\np_kantone &lt;- ggplot(kantone, aes(fill = bevoelkerungsdichte_klassen)) +\n  geom_sf(colour = NA) +\n  scale_fill_manual(values = green_red_yellow) +\n  theme_void() +\n  theme(legend.position = \"none\")\n\nErstelle die gleichen Klassen für die Bevölkerungsdichte der Gemeinden und vergleiche die Plots.\n\n\n\n\n\n\n\n(a) Kantone\n\n\n\n\n\n\n\n(b) Gemeinde\n\n\n\n\nAbbildung 16.1: Der Vergleich dieser beiden Darstellungen veranschaulicht die MAUP Problematik sehr deutlich"
+  },
+  {
+    "objectID": "rauman/Rauman1_Uebung_B.html",
+    "href": "rauman/Rauman1_Uebung_B.html",
+    "title": "Rauman 1: Übung B",
+    "section": "",
+    "text": "Für die kommende Übung arbeiten wir mit dem Datensatz gruental.gpkg. Importiere ihn in R. Zudem brauchen wir die folgenden libraries:\n\nlibrary(\"dplyr\")\nlibrary(\"sf\")\nlibrary(\"ggplot2\")\n\n\nAufgabe 1: Geopackage “Layers”\nAllenfalls ist euch beim Importieren des Geopackage gruental.gpkg folgende Warnmeldung aufgefallen:\nWarning message:\nIn evalq((function (..., call. = TRUE, immediate. = FALSE, noBreaks. = FALSE,  :\n  automatically selected the first layer in a data source containing more than one.\nDiese Warnmeldung weist darauf hin, dass das Geopackage gruental.gpkg mehrere Layers (rep. Datensätze) enthält und nur der erste Layer importiert wurde. Bringe mit dem Befehl st_layers die Layer Namen in Erfahrung und nutze diese im Anschluss in st_read (als Argument layer =) um die layers einzeln zu importieren und in variablen zu speichern (zB in als Variable wiesen und baeume).\n\n\nAufgabe 2: Datensätze erkunden\nNimm dir etwas Zeit und erkunde die beiden Datensätze. Nutze dafür auch die Visualisierungsmöglichkeiten von ggplot (insbesondere geom_sf). Du kannst mehrere geom_sf() übereinander lagern, um gleichzeitig mehrere Datensätze darzustellen.\n\n\n\n\n\n\nAbbildung 17.1: Wiesen-Flächen eingefärbt nach Typ\n\n\n\n\n\n\n\nAbbildung 17.2: Bäume eingefärbt nach Baumtyp\n\n\n\n\n\n\n\nAufgabe 3: Spatial Join mit Punkten\nWir wollen nun für jeden Baum wissen, ob er sich in einer Wiese befindet oder nicht. Dazu nutzen wir die GIS-Technik Spatial Join, die in der Vorlesung beschrieben wurde. In sf können wir Spatial Joins mit der Funktion st_join durchführen, dabei gibt es nur left sowie inner-Joins (vgl. PrePro 1 & 2). So müssen die Punkte “Links”, also an erste Stelle aufgeführt werden, da wir ja Attribute an die Punkte anheften wollen.\nBeachte, dass der Output eine neue Spalte flaechen_typ aufweist. Diese ist leer (NA) wenn sich der entsprechende Baum nicht in einer Wiese befindet. Wie viele Bäume befinden sich in einer Wiese, wie viele nicht?"
+  },
+  {
+    "objectID": "rauman/Rauman2_Uebung_A.html#aufgabe-1",
+    "href": "rauman/Rauman2_Uebung_A.html#aufgabe-1",
+    "title": "Rauman 2: Übung A",
+    "section": "Aufgabe 1",
+    "text": "Aufgabe 1\nAls erster Schritt müssen wir jeden Baum mit einem 20m Puffer verstehen. Nutze dazu st_buffer um speichere den Output als baeume_20m. Schau dir baeume_20m nun genau an. Um welchen Geometrietyp handelt es sich dabei nun?\n\n\n\n\n\nAbbildung 18.1: Dargestellt sind die Bäume als Punkte mit einem 20m Puffer, sowie die Wiesen im Hintergrund."
+  },
+  {
+    "objectID": "rauman/Rauman2_Uebung_A.html#aufgabe-2",
+    "href": "rauman/Rauman2_Uebung_A.html#aufgabe-2",
+    "title": "Rauman 2: Übung A",
+    "section": "Aufgabe 2",
+    "text": "Aufgabe 2\nBerechnen nun die Schnittmenge aus baeume_20m und wiesen mit der Funktion st_intersection und speichere den Output als baeume_wiesen. Exploriere nun baeume_wiesen. Was ist passiert? Überprüfe die Anzahl Zeilen pro Datensatz. Haben die sich verändert? Wenn ja, warum?"
+  },
+  {
+    "objectID": "rauman/Rauman2_Uebung_A.html#aufgabe-3",
+    "href": "rauman/Rauman2_Uebung_A.html#aufgabe-3",
+    "title": "Rauman 2: Übung A",
+    "section": "Aufgabe 3",
+    "text": "Aufgabe 3\nBerechnen nun die Flächengrösse pro Geometrie mit der Funktion st_area(). Speichere den Output in einer neuen Spalte von baeume_wiesen (z.B. mit dem Namen wiesen_flaeche). Tipp: Konvertiere den Output aus st_area in einen nummerischen Vektor mit as.numeric()."
+  },
+  {
+    "objectID": "rauman/Rauman2_Uebung_A.html#aufgabe-4-optional",
+    "href": "rauman/Rauman2_Uebung_A.html#aufgabe-4-optional",
+    "title": "Rauman 2: Übung A",
+    "section": "Aufgabe 4 (Optional)",
+    "text": "Aufgabe 4 (Optional)\nBerechne nun aus wiesen_flaeche den wiesen_anteil. Tipp: 100% ist die Kreisfläche aus \\(r^2\\times \\pi\\), wobei in unserem Fall \\(r = 20\\) entspricht.\nÜberführe anschliessend die berechneten Anteilswerte in den Datensatz baeume mit einem left_join zwischen baeume und baeume_wiesen. Welche Spalte wäre für diesen Join geeignet? Hinweis: Nutze st_drop_geometry() um die Geometriespalte in baeme_wiesen vor dem Join zu entfernen.\n\n\n\n\n\nAbbildung 18.2: Nach dieser Übung kannst du das Resultat in dieser Weise visualisieren."
+  },
+  {
+    "objectID": "rauman/Rauman2_Uebung_A.html#sec-raster-intro1",
+    "href": "rauman/Rauman2_Uebung_A.html#sec-raster-intro1",
+    "title": "Rauman 2: Übung A",
+    "section": "Aufgabe 5",
+    "text": "Aufgabe 5\nNun habt ihr ein paar Vektoroperationen wie st_buffer() und st_intersection() und st_area() durchgeführt. Gewisse Fragen lassen sich aber besser in der Raster-Welt beantworten. Wollen wir beispielsweise für jeden Punkt im Raum wissen, wie weit der nächstgelegene Baum ist, lässt sich das besser in einem Raster darstellen.\nBevor wir die Frage aber beantworten können, müssen wir den Vektordatensatz in ein Rasterdatensatz konvertieren. Dafür wiederum braucht es ein Raster “Template”, damit R in etwa weiss, wie der Raster Output auszusehen hat.\nDer Unterschied zwischen Raster und Vektor kann sehr anschaulich dargestellt werden, wenn die beiden Datensätze übereinander gelagert werden.\n\n\n\n\n\nMit baeume_rast können wir nun mit der Funktion distance() die Distanz zu jedem Baum berechnen:"
+  },
+  {
+    "objectID": "rauman/Rauman2_Uebung_B.html#aufgabe-1",
+    "href": "rauman/Rauman2_Uebung_B.html#aufgabe-1",
+    "title": "Rauman 2: Übung B",
+    "section": "Aufgabe 1",
+    "text": "Aufgabe 1\nIn dieser Übung werden wir weiter mit terra arbeiten, um zu zeigen, wie wir einen Rasterdatensatz importieren, visualisieren und weiter verarbeiten können. In euren Daten findet ihr einen Datensatz namens dhm250m.tif, der das “Digitale Höhenmodell” (DHM) des Kantons Schwyz darstellt. Führen Sie den angegebenen Code aus.\n\nlibrary(\"terra\")\n\nImportieren Sie Ihr Raster mit der Funktion rast\n\ndhm_schwyz &lt;- rast(\"datasets/rauman/dhm250m.tif\")\n\nSie erhalten einige wichtige Metadaten über den Rasterdatensatz, wenn Sie den Variablennamen in die Konsole eingeben.\n\n## class       : SpatRaster \n## dimensions  : 150, 186, 1  (nrow, ncol, nlyr)\n## resolution  : 250, 250  (x, y)\n## extent      : 2672175, 2718675, 1193658, 1231158  (xmin, xmax, ymin, ymax)\n## coord. ref. : CH1903+ / LV95 (EPSG:2056) \n## source      : dhm250m.tif \n## name        :   dhm250m \n## min value   :  389.1618 \n## max value   : 2850.0203\n\nUm einen schnellen Überblick eines Rasterdatensatz zu erhalten, können wir einfach die plot() Funktion verwenden.\n\n\n\n\n\nLeider ist das Verwenden von Rastern in ggplot nicht sehr einfach. Da ggplot ein universelles Plot-Framework ist, stossen wir schnell an die Grenzen des Möglichen, wenn wir etwas so Spezielles wie Karten erstellen. Mit plot können wir zwar sehr schnell plotten, aber auch hier stossen wir schnell an Grenzen.\nAus diesem Grund werden wir ein neues Plot-Framework einführen, das auf Karten spezialisiert ist und in einem sehr ähnlichen Design wie ggplot gebaut wurde: tmap. Laden Sie dieses Paket jetzt in Ihre Session:\n\nlibrary(\"tmap\")\n\nGenau wie ggplot basiert tmap auf der Idee von “Ebenen”, die durch ein + verbunden sind. Jede Ebene hat zwei Komponenten:\n\neine Datensatzkomponente, die immer tm_shape(dataset) ist (ersetzen Sie dataset durch Ihre Variable)\neine Geometriekomponente, die beschreibt, wie das vorangegangene tm_shape() visualisiert werden soll. Dies kann tm_dots() für Punkte, tm_polygons() für Polygone, tm_lines() für Linien usw. sein. Für Einzelbandraster (was bei dhm_schwyz der Fall ist) ist es tm_raster()\n\n\n\n\n\n\nBeachten Sie, dass tm_shape() und tm_raster() (in diesem Fall) zusammengehören. Das eine kann nicht ohne das andere leben.\nWenn Sie die Hilfe von ?tm_raster konsultieren, werden Sie eine Vielzahl von Optionen sehen, mit denen Sie die Visualisierung Ihrer Daten verändern können. Zum Beispiel ist der Standardstil von tm_raster() die Erstellung von “Bins” mit einer diskreten Farbskala. Wir können dies mit style = \"cont\" ausser Kraft setzen.\n\n\n\n\n\nDas sieht schon ziemlich toll aus, aber vielleicht wollen wir die Standard-Farbpalette ändern. Glücklicherweise ist das in tmap viel einfacher als in ggplot2. Um sich die verfügbaren Paletten anzusehen, geben Sie tmaptools::palette_explorer() oder RColorBrewer::display.brewer.all() in der Konsole ein (für Ersteres müssen Sie möglicherweise zusätzliche Pakete installieren, z.B. shinyjs).\n\n\n\n\n\nEine grosse Stärke von tmap ist die Tatsache, das mit dem gleichen Befehl sowohl statische wie auch interative Plots erstellt werden können. Dafür muss der Modus von statisch auf interaktiv gewechselt werden."
+  },
+  {
+    "objectID": "rauman/Rauman2_Uebung_B.html#sec-raster-slope",
+    "href": "rauman/Rauman2_Uebung_B.html#sec-raster-slope",
+    "title": "Rauman 2: Übung B",
+    "section": "Aufgabe 2",
+    "text": "Aufgabe 2\nMit terra können wir eine Vielzahl von Rasteroperationen über unser Höhenmodell laufen lassen. Eine klassische Rasteroperation ist zum Beispiel das Berechnen der Hangneigung (“slope”) oder dessen Orientierung (“aspect”). Nutzen Sie die Funktion terrain() aus terra um die Hangneigung und Orientierung zu berechnen. Visualisieren Sie die Resultate.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHinweis\n\n\n\nBei “aspect” handelt es sich ja um Werte, die von 0 bis 360 reichen. In klassischen Palettes liegen die beiden Extremwerte (in diesem Fall 0 und 360) farblich weit auseinander. Bei Aspect sollten diese aber nahe beieinander liegen (da eine Ausrichtung von 1° nur 2 Grad von einer Ausrichtung von 359° entfernt ist). Um dieser Tatsache Rechnung zu Tragen können wir eine eine eigene Colourpalette erstellen, wo die erste Farbe wiederholt ist."
+  },
+  {
+    "objectID": "rauman/Rauman2_Uebung_B.html#aufgabe-3",
+    "href": "rauman/Rauman2_Uebung_B.html#aufgabe-3",
+    "title": "Rauman 2: Übung B",
+    "section": "Aufgabe 3",
+    "text": "Aufgabe 3\nMit Hangneigung und -ausrichtung können wir einen Hillshading-Effekt berechnen. Hillshading bedeutet, dass der Schattenwurf des Oberflächenmodells bei gegebenen Einfallswinkel der Sonne (Höhe und Azimut) berechnet wird. Der typische Einfallswinkel liegt bei 45° über dem Horizont und von Nordwesten bei 315°.\nUm einen Hillshading Effekt zu erzeugen, berechne zuerst slope und aspect von dhm_schwyz analog der letzten Aufgabe, achte aber darauf das die Einheit radians entspricht. Nutze diese beiden Objekte in der Funktion shade() um den Hillshade zu berechnen. Visualisiere den Output anschliessend mit plot oder tmap.\n\n\n\n\n\nFür diese Visualisierung verwende ich tmap und als colour palette cividis"
+  },
+  {
+    "objectID": "rauman/Rauman3_Uebung_A.html#aufgabe-1-rotmilan-bewegungsdaten-visualisieren",
+    "href": "rauman/Rauman3_Uebung_A.html#aufgabe-1-rotmilan-bewegungsdaten-visualisieren",
+    "title": "Rauman 3: Übung A",
+    "section": "Aufgabe 1: Rotmilan Bewegungsdaten visualisieren",
+    "text": "Aufgabe 1: Rotmilan Bewegungsdaten visualisieren\nDie erste Frage, die bei solchen Bewegungsstudien typischerweise gestellt wird, lautet: Wo hält sich das Tier hauptsächlich auf? Um diese Frage zu beantworten, kann man als erstes einfach die Datenpunkte in einer einfachen Karte visualisieren. Erstellt zur Beantwortung dieser Frage nachstehende Karte."
+  },
+  {
+    "objectID": "rauman/Rauman3_Uebung_A.html#aufgabe-2-kernel-density-estimation-berechnen",
+    "href": "rauman/Rauman3_Uebung_A.html#aufgabe-2-kernel-density-estimation-berechnen",
+    "title": "Rauman 3: Übung A",
+    "section": "Aufgabe 2: Kernel Density Estimation berechnen",
+    "text": "Aufgabe 2: Kernel Density Estimation berechnen\nIn einer ersten Annäherung funktioniert dies, doch wir sehen hier ein klassisches Problem des “Overplotting”. Das heisst, dass wir durch die Überlagerung vieler Punkte in den dichten Regionen nicht abschätzen können, wie viele Punkte dort effektiv liegen und ggf. übereinander liegen. Es gibt hier verschiedene Möglichkeiten, die Punktdichte klarer zu visualisieren. Eine unter Biologen sehr beliebte Methode ist die Dichteverteilung mit einer Kernel Density Estimation (KDE). Dies v.a. darum, weil mit KDE das Habitat (Streifgebiet) eines Tieres abgeschätzt werden kann. Homeranges werden oft mit KDE95 und Core Areas mit KDE50 definiert (Fleming C., Calabrese J., 2016).\nFür die Berechnung der Density verwenden wir die Funktion density.ppp aus spatstat. Diese library ist etwas komplex in der Anwendung, damit wir dieses Verfahren aber dennoch auf unsere Rotmilan-Daten anwenden können, haben wir eine eigene KDE-Funktion erstellt, die wir Euch zur Verfügung stellen.\nWir ermutigen alle, die dafür Kapazität haben, unsere Function eingehend zu studieren und allenfalls ganz auf die Funktion zu verzichten und stattdessen direkt spatstat zu verwenden. Wenn ihr mit unserer Funktion arbeiten möchtet, müsst ihr den unten stehenden Code in euer Skript kopieren und ausführen.\n\nmy_kde &lt;- function(points, cellsize, bandwith, extent = NULL){\n  library(\"spatstat.geom\")    # um sf in ppp zu konvertieren\n  library(\"spatstat.explore\") # um die Dichte zu berechnen\n  \n  points_ppp &lt;- as.ppp(points) # konvertiert sf &gt; ppp\n\n  if(!is.null(extent)){\n    # falls ein extent angegeben ist, wird dieser verwendet\n    # um das \"Beobachtungsfenster\" zu setzen\n    Window(points_ppp) &lt;- as.owin(st_bbox(extent))\n  } \n\n  # macht eine Dichteschätzung\n  points_density &lt;- density.ppp(x = points_ppp, sigma = bandwith, eps = cellsize)\n\n  # konvertiert den Output in ein DataFrame\n  points_density_df &lt;- as.data.frame(points_density)\n\n  points_density_df\n}\n\nDie Parameter der Funktion sollten relativ klar sein:\n\npoints: Ein Punktdatensatz aus der Class sf\ncellsize: Die Zellgrösse des output-Rasters\nbandwith: Der Suchradius für die Dichteberechnung\nextent (optional): Der Perimeter, in dem die Dichteverteilung berechnet werden soll. Wenn kein Perimeter angegeben wird, wird die “bounding box” von points genutzt.\n\nWenn wir nun mit my_kde() die Dichteverteilung berechnen, erhalten wir ein data.frame mit X und Y Koordinaten sowie eine Spalte value zurück. Nutzt diese drei Spalten mit geom_raster() um eure Daten mit ggplot zu visualisieren (aes(x = X, y = Y, fill = value).\n\nrotmilan_kde &lt;- my_kde(points = rotmilan, cellsize = 1000, bandwith = 10000, extent = schweiz)\n\nhead(rotmilan_kde)\n##         x       y        value\n## 1 2485909 1075767 5.632740e-24\n## 2 2485909 1076766 8.290197e-23\n## 3 2485909 1077764 3.032138e-23\n## 4 2485909 1078763 6.522508e-23\n## 5 2485909 1079761 9.599267e-23\n## 6 2485909 1080760 1.183168e-22\n\n\n\n\n\n\nDie Kernel Density Estimation ist nun sehr stark von den tiefen Werten dominiert, da die Dichte in den meisten Zellen unseres Untersuchungsgebiets nahe bei Null liegt. Wie erwähnt sind Wissenschaftler häufig nur an den höchsten 95% der Werte interessiert. Folge folgende Schritte um das Resultat etwas besser zu verantschaulichen:\n\nBerechne die 95. Perzentile aller Werte mit der Funktion quantile und benne diesen q95\nErstelle eine neue Spalte in rotmilan_kde, wo alle Werte tiefer als q95 NA entsprechen\n(Optional): Transformiere die Werte mit log10, um einen differenzierteren Farbverlauf zu erhalten\n\nWir können die tiefen Werte ausblenden, indem wir nur die höchsten 5% der Werte darstellen. Dafür berechnen wir mit raster::quantile die 95. Perzentile aller Werte und nutzen diesen Wert als “Grenzwert” für die Darstellung.\nZusätzlich hilft eine logarithmische Transformation der Werte, die Farbskala etwas sichtbarer zu machen."
+  },
+  {
+    "objectID": "rauman/Rauman3_Uebung_A.html#aufgabe-3-dichteverteilung-mit-thiessen-polygonen",
+    "href": "rauman/Rauman3_Uebung_A.html#aufgabe-3-dichteverteilung-mit-thiessen-polygonen",
+    "title": "Rauman 3: Übung A",
+    "section": "Aufgabe 3: Dichteverteilung mit Thiessen Polygonen",
+    "text": "Aufgabe 3: Dichteverteilung mit Thiessen Polygonen\nThiessen Polygone bieten eine spannende Alternative um Unterschiede in der Dichteverteilung von Punktdatensätzen zu visualisieren. Wir wollen dies nun ausprobieren und konstruieren zum Schluss die Thiessenpolygone für die Rotmilan-Daten für das Untersuchungsgebiet Schweiz. Nutze die Anleitung für das Erstellen von Thiessenpolygonen aus der Übung B um Thiessenpolygone für die Rotmilanpositionen zu erstellen.\n\n\n\n\n\nAbbildung 20.1: Wenn wir jetzt die Thiessenpolygone (ohne Punkte) darstellen, wird deutlicher, wie die Dichteverteilung im Innern des Clusters aussieht.\n\n\n\n\n\n\n\n\nScherler, Patrick. 2020. „Drivers of Departure and Prospecting in Dispersing Juvenile Red Kites (Milvus milvus).“ Phdthesis, University of Zurich."
+  },
+  {
+    "objectID": "rauman/Rauman3_Uebung_B.html",
+    "href": "rauman/Rauman3_Uebung_B.html",
+    "title": "Rauman 3: Übung B",
+    "section": "",
+    "text": "In dieser Übung geht es darum, zwei verschiedene Interpolationsverfahren in R umzusetzen. Im ersten Interpolationsverfahren verwenden wir die inverse distance weighted interpolation, später verwenden wir die nearest neighbour methode. Dazu braucht ihr die folgenden Packages:\n\nlibrary(\"sf\")\nlibrary(\"dplyr\")\nlibrary(\"ggplot2\")\nlibrary(\"gstat\")\n\nWeiter benötigt ihr die nachstehenden Datensätze:\nluftqualitaet &lt;- read_sf(\"datasets/rauman/luftqualitaet.gpkg\")\nschweiz &lt;- read_sf(\"datasets/rauman/schweiz.gpkg\")\nDie Library gstat bietet verschiedene Möglichkeiten, Datenpunkte zu interpolieren, unter anderem auch die inverse distance weighted Methode. Leider ist das Package noch nicht so benutzerfreundlich wie sf: Das Package wird aber aktuell überarbeitet und in mittlerer Zukunft sollte es ebenso einfach zugänglich sein. Damit Ihr Euch nicht mit den Eigenheiten dieser Library umschlagen müsst, haben wir eine Function vorbereitet, die Euch die Verwendung der IDW-Interpolation erleichtern soll.\nWir nehmen Euch damit etwas Komplexität weg und liefern Euch ein pfannenfertiges Werkzeug. Das hat auch Nachteile und wir ermutigen alle, die dafür Kapazität haben, unsere Function eingehend zu studieren und allenfalls ganz auf die Function zu verzichten und stattdessen direkt gstat zu verwenden. Wenn ihr mit unserer Function arbeiten möchtet, müsst ihr den unten stehenden Code in euer Skript kopieren und ausführen.\n\nmy_idw &lt;- function(groundtruth,column,cellsize, nmax = Inf, maxdist = Inf, idp = 2, extent = NULL){\n  library(\"gstat\")\n  library(\"sf\")\n  \n  if(is.null(extent)){\n    extent &lt;- groundtruth\n  }\n  \n  samples &lt;- st_make_grid(extent,cellsize,what = \"centers\")\n  my_formula &lt;- formula(paste(column,\"~1\"))\n  idw_sf &lt;- gstat::idw(formula = my_formula,groundtruth, newdata = samples, nmin = 1, nmax = nmax, maxdist = maxdist, idp = idp)\n  \n  idw_matrix &lt;- cbind(as.data.frame(st_coordinates(idw_sf)),pred = st_drop_geometry(idw_sf)[,1])\n  idw_matrix\n}\n\nNun könnt Ihr mit my_idw() den Datensatz luftqualitaet folgendermassen interpolieren.\n\nmy_idw(groundtruth = luftqualitaet, column = \"value\", cellsize = 10000, extent = schweiz)\n\nFolgende Parameter stehen Euch zur Verfügung:\n\nNotwendige Parameter:\n\ngroundtruth: Punktdatensatz mit den Messwerten (sf-Objekt)\ncolumn: Name der Spalte mit den Messwerten (in Anführungs- und Schlusszeichen)\ncellsize: Zellgrösse des output Rasters\n\nOptionale Parameter\n\nnmax: Maximale Anzahl Punkte, die für die Interpolation berücksichtigt werden sollen. Default: Inf (alle Werte im gegebenen Suchradius)\nmaxdist: Suchradius, welcher für die Interpolation verwendet werden soll. Default Inf (alle Werte bis nmax)\nidp: Inverse Distance Power: die Potenz, mit der der Nenner gesteigert werden soll. Default: 2. Werte werden im Kehrwert des Quadrates gewichtet: \\(\\frac{1}{dist^{idp}}\\).\nextent: Gebiet, für welches die Interpolation durchgeführt werden soll. Wenn nichts angegeben wird (Default NULL), wird die Ausdehnung von groundtruth verwendet.\n\nOuput\n\nder Output der Funktion ist eine data.frame mit 3 Spalten:\n\nX, Y Koordinaten der interpolierten Werte\npred: der Interpolierte Wert\n\n\n\nBeim Output handelt sich hier um einen Raster-ähnlichen Datentyp (siehe Vorlesung Spatial DataScience 1). Diesen können wir mit geom_raster mit ggplot visualisieren. Dafür müsst ihr in aes die X und Y Koordinaten angeben, und der interpolierte Wert mit fill einfärben.\n\nAufgabe 1: Raeumliche Interpolation mit IDW\nRechnet so den IDW für die Luftqualitätsmessungen mit verschiedenen Parametern und visualisiert jeweils die Resultate. Experimentiert mit nmax sowie maxdist. Was stellt ihr fest?\nTips:\n\nWas für Distanzen bei maxdist Sinn machen, könnt ihr dem Output aus der G-Funktion (vorherige Übung) entnehmen\nWählt am Anfang eine etwas Konvervative (grosse) cellsize und verringert diesen nur wenn euer Rechner damit gut klar kommt\nDa der Output aus der Interpolation im gleichen Koordinatenbezugssystem sind wie schweiz.gpkg kann man diese beiden Datensätze im gleichen ggplot darstellen. Dafür müsst ihr die aesthetics (aes()) für jeden Layer einzeln setzen, und nicht auf der Ebene von ggplot().\n\n\n\n## [inverse distance weighted interpolation]\n## [inverse distance weighted interpolation]\n## [inverse distance weighted interpolation]\n## [inverse distance weighted interpolation]\n\n\n\n\nAbbildung 21.1: Stickstoffdioxid (NO2) in μg/m3, Interpoliert über die ganze Schweiz mit der Inverse Distance Weighted Methode. Die verschiedenen Plots zeigen die Veränderung der Interpolation bei steigendem IDP-Wert\n\n\n\n\n\n\n\nAufgabe 2: Interpolation mit Nearest Neighbour\nEine weitere einfache Möglichkeit zur Interpolation bietet die Erstellung eines Voronoi-Diagrammes, auch als Thiessen-Polygone oder Dirichlet-Zerlegung bekannt. sf liefert dazu die Funktion st_voronoi(), die einen Punktdatensatz annimmt und eben um die Punkte die Thiessenpolygone konstruiert. Dazu braucht es lediglich einen kleinen Vorverarbeitungsschritt: sf möchte für jedes Feature, also für jede Zeile in unserem Datensatz, ein Voronoidiagramm. Das macht bei uns wenig Sinn, weil jede Zeile nur aus einem Punkt besteht. Deshalb müssen wir vorher luftqualitaet mit st_union() von einem POINT in ein MULTIPOINT Objekt konvertieren, in welchem alle Punkte in einer Zeile zusammengefasst sind.\n\n\n\n\n\nst_voronoi hat die Thiessenpolygone etwas weiter gezogen als wir sie wollen. Dies ist allerdings eine schöne Illustration der Randeffekte von Thiessenpolygonen, die zum Rand hin (wo es immer weniger Punkte hat) sehr gross werden können. Wir können die Polygone auf die Ausdehnung der Schweiz mit st_intersection() clippen. Auch hier braucht es zwei kleine Vorverarbeitungsschritte:\n\nwie vorher müssen wir die einzelnen Kantons-Polygone miteinander verschmelzen. Dies erreichen wir mit st_union(). Wir speichern den Output als schweiz, was als Resultat ein einzelnes Polygon der Schweizergrenze retourniert.\nfür die Thiessen-Polygone machen wir genau das Umgekehrte: st_voronoi() liefert ein einzelnes Feature mit allen Polygonen, welches sich nicht gerne clippen lässt. Mit st_cast() wird die GEOMETRYCOLLECTION in Einzelpolygone aufgeteilt.\n\n\n\n\n\n\nJetzt müssen wir nur noch den jeweiligen Wert für jedes Polygon ermitteln. Dies erreichen wir wieder durch st_join. Auch hier ist noch ein kleiner Vorverarbeitungsschritt nötig: Wir konvertieren das sfc Objekt (nur Geometrien) in ein sf Objekt (Geometrien mit Attributtabelle).\n\n\n\n\n\nAbbildung 21.2: Stickstoffdioxid (NO2) in μg/m3, Interpoliert über die ganze Schweiz nach der Nearest Neighbour Methode."
+  },
+  {
+    "objectID": "rauman/Rauman3_Uebung_C.html#aufgabe-1",
+    "href": "rauman/Rauman3_Uebung_C.html#aufgabe-1",
+    "title": "Rauman 3: Übung C (Optional)",
+    "section": "Aufgabe 1",
+    "text": "Aufgabe 1\n\nlibrary(\"sf\")\nlibrary(\"dplyr\")\nlibrary(\"ggplot2\")\n\nrotmilan &lt;- read_sf(\"datasets/rauman/rotmilan.gpkg\")\n\nschweiz &lt;- read_sf(\"datasets/rauman/schweiz.gpkg\")\n\nluftqualitaet &lt;- read_sf(\"datasets/rauman/luftqualitaet.gpkg\")\n\n\n\n\n\n\nAbbildung 22.1: Eine solche Visualisierung zeigt dir beispielsweise die räumliche Ausdehnung der Datenpunkte"
+  },
+  {
+    "objectID": "rauman/Rauman3_Uebung_C.html#aufgabe-2",
+    "href": "rauman/Rauman3_Uebung_C.html#aufgabe-2",
+    "title": "Rauman 3: Übung C (Optional)",
+    "section": "Aufgabe 2",
+    "text": "Aufgabe 2\nAls erstes berechnen wir die G-Function für die Rotmilanpositionen:\n\nSchritt 1\nMit st_distance() können Distanzen zwischen zwei sf Datensätze berechnet werden. Wird nur ein Datensatz angegeben, wird eine Kreuzmatrix erstellt wo die Distanzen zwischen allen Features zu allen anderen Features dargestellt werden. Wir nützen diese Funktion zur Berechnung der nächsten Nachbarn.\n\n\nSchritt 2\nNun wollen wir wissen, wie gross die kürzeste Distanz von jedem Punkt zu seinem nächsten Nachbarn beträgt, also die kürzeste Distanz pro Zeile. Bevor wir diese ermitteln müssen wir die diagonalen Werte noch entfernen, denn diese stellen ja jeweils die Distanz zu sich selber dar und sind immer 0. Danach kann mit apply() eine Funktion (FUN = min) über die Zeilen (MARGIN = 1) einer Matrix (X = rotmilan_distanzmatrix) gerechnet werden. Zusätzlich müssen wir noch na.rm = TRUE setzen, damit NA Werte von der Berechnung ausgeschlossen werden. Das Resultat ist ein Vektor mit gleich vielen Werten wie Zeilen in der Matrix.\n\n\nSchritt 3\nNun müssen wir die Distanzen nach ihrer Grösse sortieren\n\n\nSchritt 4\nJetzt berechnen wir die kummulierte Häufigkeit von jeder Distanz berechnen. Die kummulierte Häufikgeit vom ersten Wert ist 1 (der Index des ersten Wertes) dividiert durch die Anzahl Werte insgesamt. Mit seq_along erhalten wir die Indizes aller Werte, mit lenth die Anzahl Werte insgesamt.\n\n\nSchritt 5\nNun wollen wir die kumulierte Häufigkeit der Werte in einer Verteilungsfunktion (engl: Empirical Cumulative Distribution Function, ECDF) darstellen. Dafür müssen wir die beiden Vektoren zuerst noch in einen Dataframe packen, damit ggplot damit klar kommt.\n\n\n\n\n\nLesehilfe:"
+  },
+  {
+    "objectID": "rauman/Rauman3_Uebung_C.html#aufgabe-3",
+    "href": "rauman/Rauman3_Uebung_C.html#aufgabe-3",
+    "title": "Rauman 3: Übung C (Optional)",
+    "section": "Aufgabe 3",
+    "text": "Aufgabe 3\nFühre nun die gleichen Schritte mit luftqualitaet durch und vergleiche die ECDF-Plots."
+  },
+  {
+    "objectID": "rauman/Rauman4_Uebung_A.html#aufgabe-1-morans-i-für-kantone",
+    "href": "rauman/Rauman4_Uebung_A.html#aufgabe-1-morans-i-für-kantone",
+    "title": "Rauman 4: Übung",
+    "section": "Aufgabe 1: Morans \\(I\\) für Kantone",
+    "text": "Aufgabe 1: Morans \\(I\\) für Kantone\n\nGewichtete Ähnlichkeitsmatrix\nWidmen wir uns dem Kern von Morans \\(I\\), der Berechnung der gewichteten Ähnlichkeitsmatrix.\n\nNachbarschaftsmatrix \\(w_{ij}\\)\n\\[\\text{Morans } I = \\frac{n}{\\sum_{i=1}^n (y_i - \\bar{y})^2} \\times \\frac{\\sum_{i=1}^n \\sum_{j=1}^n {\\color{red}w_{ij}}(y_i - \\bar{y})(y_j - \\bar{y})}{\\sum_{i=1}^n \\sum_{j=1}^n w_{ij}}\\]\n\\(w\\) beschreibt die räumlichen Gewichte der Kantone (den “Schalter” aus der Vorlesung). \\(w_{ij}\\) ist das Gewicht vom Kanton \\(i\\) im Vergleich zum Kanton \\(j\\). Sind Kantone \\(i\\) und \\(j\\) räumlich nah, gilt ein Gewicht von 1, sind sie weit entfernt, gilt ein Gewicht von 0. Dabei ist die Definition von “räumlich nah” nicht festgelegt. Denkbar wären verschiedene Optionen (siehe Vorlesung). Wer werden es mit die Bedigungen touches verwenden. Die Funktion st_touches prüft zwischen allen Kantonen, ob sie sich berühren. Mit der Option sparse = TRUE wird eine 26x26 Kreuzmatrix erstellt, wo jeder Kanton mit jedem anderen verglichen wird. Berühren sie sich, steht in der entsprechenden Stelle der Wert TRUE, was in R gleichbedeutend ist wie 1. Berühren sie sich nicht, steht der Wert FALSE, was gleichbedeutend ist wie 0.\n\n# st_touches berechnet eine Kreuzmatrix aller Objekte\nw_ij &lt;- st_touches(zweitwohnung_kanton, sparse = FALSE)\n\n# Schauen wir uns matrix mal an\n# (aus Platzmangen beschränken wir uns auf die ersten 5 Zeilen und Spalten\n# in RStudio könnt ihr mit View(w_ij) die gesamte Matrix anschauen)\nw_ij[1:5, 1:5]\n\n\nDie erste Zeile entspricht dem ersten Kanton in zweitwohnung_kanton, die zweite Zeile dem zweiten Kanton usw. Das gleiche Gilt für die Spalten. Um die Kreuzmatrix besser interpretieren zu können, können wir die Namen aus der Spalte KANTONSNAME verwenden, um die Zeilen und Spalten unserer Kreuzmatrix zu benennen.\n\nrownames(w_ij) &lt;- zweitwohnung_kanton$kuerzel\ncolnames(w_ij) &lt;- zweitwohnung_kanton$kuerzel\n\nw_ij[1:5, 1:5]\n# Alterantiv: mit View(w_ij)\n\n\n\nAttributs-Ähnlichkeitsmatrix \\(c_{ij}\\)\n\\[\\text{Morans } I = \\frac{n}{\\sum_{i=1}^n (y_i - \\bar{y})^2} \\times \\frac{\\sum_{i=1}^n \\sum_{j=1}^n w_{ij}{\\color{red}(y_i - \\bar{y})(y_j - \\bar{y})}}{\\sum_{i=1}^n \\sum_{j=1}^n w_{ij}}\\]\nUm die Attributs-Ähnlichkeit zwischen zwei Kantonen zu bestimmen, subtrahieren wir von jedem Kanton den Mittelwert aller Kantone und multiplizieren die beiden Differenzen. Die Funktion tcrossprod() erstellt diese Kreuzmatrix mit den multiplizierten Differenzen.\n\n# speichere die Variable in einem neuen Vektor\ny &lt;- zweitwohnung_kanton$ja_in_percent\n\ny_diff &lt;- y - mean(y) # erstellt ein Vector mit 26 Werten\nc_ij &lt;- tcrossprod(y_diff) # erstellt eine Matrix 26x26\n\n# Zeilen- und Spaltennamen hinzufügen\nrownames(c_ij) &lt;- zweitwohnung_kanton$kuerzel\ncolnames(c_ij) &lt;- zweitwohnung_kanton$kuerzel\n\nc_ij[1:5, 1:5]\n\n\n\nBerechnung von zaehler2\n\\[\\text{Morans } I = \\frac{n}{\\sum_{i=1}^n (y_i - \\bar{y})^2} \\times \\frac{\\color{red}\\sum_{i=1}^n \\sum_{j=1}^n w_{ij}(y_i - \\bar{y})(y_j - \\bar{y})}{\\sum_{i=1}^n \\sum_{j=1}^n w_{ij}}\\]\nDer gesamte Term zaehler2 ist die Summe aus der Multiplikation von w_ij und c_ij.\n\n# Matrix multiplikation\ncw_ij &lt;- w_ij * c_ij\n\n# Summe bilden\nzaehler2 &lt;- sum(cw_ij)\n\nzaehler2\n\n\n\n\nNormalisieren\nUm das Resultat aus der bisherigen Berechung auf einen Wert von -1 bis +1 zu normalisieren, müssen wir noch folgende Terme berechnen:\n\\[\\text{Morans } I = \\frac{\\color{cyan}n}{\\color{cyan}\\sum_{i=1}^n (y_i - \\bar{y})^2} \\times \\frac{\\sum_{i=1}^n \\sum_{j=1}^n w_{ij}(y_i - \\bar{y})(y_j - \\bar{y})}{\\color{cyan}\\sum_{i=1}^n \\sum_{j=1}^n w_{ij}} \\]\n\nBerechnung von \\(n\\) (zaehler1)\nDer Termin zaehler1 resp. n entspricht der Anzahl Objekte (hier: Kantone) in unserem Datensatz.\n\nzaehler1 &lt;- n &lt;- nrow(zweitwohnung_kanton)\n\nzaehler1\n\n\n\nAbweichung vom Mittelwert (nenner1)\nWir haben bereits in der Berechnung der Attributs-Ähnlichkeit die Differenz zum Mittelwert berechnet. Für nenner1 müssen wir diesen lediglich quadrieren und die Resultate summieren.\n\\[\\text{Morans } I = \\frac{n}{\\color{cyan}\\sum_{i=1}^n (y_i - \\bar{y})^2} \\times \\frac{\\sum_{i=1}^n \\sum_{j=1}^n w_{ij}(y_i - \\bar{y})(y_j - \\bar{y})}{\\sum_{i=1}^n \\sum_{j=1}^n w_{ij}}\\]\n\n# Di bereits berechneten Abweichungen müssen wir quadrieren:\ny_diff2 &lt;- y_diff^2\n\n# Und danach die Summe bilden:\nnenner1 &lt;- sum(y_diff2)\n\n\n\nSumme der Gewichte (nenner2)\n\\[\\text{Morans } I = \\frac{n}{\\sum_{i=1}^n (y_i - \\bar{y})^2} \\times \\frac{\\sum_{i=1}^n \\sum_{j=1}^n w_{ij}(y_i - \\bar{y})(y_j - \\bar{y})}{\\color{cyan}\\sum_{i=1}^n \\sum_{j=1}^n w_{ij}}\\]\nIm Term nenner2 müssen wir lediglich die Gewichte w_ij summieren.\n\nnenner2 &lt;- sum(w_ij)\n\n\n\n\nAuflösung der Formel\nNun haben wir alle Bestandteile von Morans \\(I\\) Berechnet und müssen diese nur noch Zusammenrechnen.\n\nMI_kantone &lt;- zaehler1 / nenner1 * zaehler2 / nenner2\n\nMI_kantone\n\nDer Global Morans \\(I\\) für die Abstimmungsdaten beträgt auf Kantonsebene also 0.31. Wie interpretiert ihr dieses Resultate? Was erwartet ihr für eine Resultat auf Bezirksebene?"
+  },
+  {
+    "objectID": "rauman/Rauman4_Uebung_A.html#aufgabe-2-morans-i-für-bezirke-berechnen",
+    "href": "rauman/Rauman4_Uebung_A.html#aufgabe-2-morans-i-für-bezirke-berechnen",
+    "title": "Rauman 4: Übung",
+    "section": "Aufgabe 2: Morans I für Bezirke berechnen",
+    "text": "Aufgabe 2: Morans I für Bezirke berechnen\nNun könnt ihr Morans \\(I\\) auf der Ebene der Bezirke und untersuchen, ob und wie sich Morans \\(I\\) verändert. Importiert dazu den Layer bezirk aus dem Datensatz zweitwohnungsinitiative.gpkg. Visualisiert in einem ersten Schritt die Abstimmungsresultate. Formuliert nun eine Erwartungshaltung: ist Morans \\(I\\) auf der Ebene Bezirke tiefer oder Höher als auf der Ebene Kantone?\n\n\n\n\n\n\nFür Fortgeschrittene\n\n\n\nErstellt aus dem erarbeiten Workflow eine function um Morans I auf der Basis von einem sf Objekt sowie einer Spalte dessen zu berechnen."
+  },
+  {
+    "objectID": "rauman/Rauman5_Uebung_A.html#aufgabe-1-vektor-daten-laden-und-anzeigen",
+    "href": "rauman/Rauman5_Uebung_A.html#aufgabe-1-vektor-daten-laden-und-anzeigen",
+    "title": "Rauman 5: Übung A",
+    "section": "Aufgabe 1: Vektor Daten laden und anzeigen",
+    "text": "Aufgabe 1: Vektor Daten laden und anzeigen\nLaden Sie das File windkraft_geodata.gpkg von Moodle herunter (siehe Tabelle 24.1). Dieses beinhaltet alle Vektordaten, die für die Bearbeitung der Multikriterien-Evaluation benötigt wird (Bewohnte Flächen, Nationale Schutzgebiete, Seeflächen, Strassen, Waldgebiete sowie die Kantonsgrenze von Schwyz). Die Namen der verfügbaren Listen können Sie mit sf::st_layers() ermitteln.\nImportiere die benötigten Vektordatensätze und exploriere die Daten. Zur Visualisierung könnt ihr die Funktionen plot oder die Packages tmap oder ggplot2 verwenden.\nSchau dir auch das Koordinatensystem an. Was fällt dir auf? Wir würden gerne mit dem neuen Schweizer Koordinatensystem arbeiten (LV95). Um ein Koordinatensystem umzuwandeln benutze die Funktion st_transform()."
+  },
+  {
+    "objectID": "rauman/Rauman5_Uebung_A.html#sec-raster-distance",
+    "href": "rauman/Rauman5_Uebung_A.html#sec-raster-distance",
+    "title": "Rauman 5: Übung A",
+    "section": "Aufgabe 2: Erschliessung berechnen",
+    "text": "Aufgabe 2: Erschliessung berechnen\nBeginnen wir mit dem Kriterium “Erschliessung”. Wir müssen für den ganzen Kanton Schwyz wissen, wie weit die nächste Strasse entfernt ist. Wie wir bereits in Kapitel 18.5 erläutert haben, lässt sich diese Information am besten in einem Raster abbilden.\nAnalog Kapitel 18.5 müssen wir hierfür den Vektordatensatz auf der Basis eines Templates in ein Raster konvertieren. Für die Erstellung des Templates verwenden wir an dieser Stelle die Kantonsgrenze vom Kanton Schwyz.\nNutze der obige Code um den Wald Datensatz zu rasterisieren und die Distanz zum Wald mit der Funktion distance() zu berechnen. Plausibilisiere den Output indem du ihn visualisierst.\n\n\n\n\n\n\nDie rasterisierte Form des “Strassen” Datensatzes\n\n\n\n\n\n\n\nDie Distanz zur nächstgelegenen Strasse für jeden Punkt im Kanton Schwyz”\n\n\n\n\n\nFühre nun die gleiche Operation durch um die Entfernung zu nationalen Schutzgebieten zu ermitteln.\n\n\n\n\n\n\nDie rasterisierte Form des “Schutzgebiete” Datensatzes\n\n\n\n\n\n\n\nDie Distanz zum nächstgelegenen Schutzgebiet für jeden Punkt im Kanton Schwyz”"
+  },
+  {
+    "objectID": "rauman/Rauman5_Uebung_A.html#sec-classify1",
+    "href": "rauman/Rauman5_Uebung_A.html#sec-classify1",
+    "title": "Rauman 5: Übung A",
+    "section": "Aufgabe 3: Distanzkriterien bewerten",
+    "text": "Aufgabe 3: Distanzkriterien bewerten\nJetzt haben wir die Distanzen zu den relevanten Gebieten berechnet, nun müssen wir diese Distanzen bewerten. Dafür teilen wir die kontinuierlichen Distanzwerte in diskrete Kategorien ein. Wir verwenden für die Aufgabe folgende Einteilung:\nHierfür brauchen wir die Function classify(). Wie wir aus der Dokumentation der Funktion (mit ?classify) entnehmen können, gibt es verschiedene Wege wie wir einen Raster Reklassifizieren können (siehe Beschreibung für das Argument rcl). Eine sehr explizite Variante ist, dass wir für rcl eine Matrix mit 3 Spalten verwenden. Diese drei Spalte stellen from, to und becomes dar.\nWir könnten diese Tabelle in einem Spreadsheet-Programm schreiben und in R einlesen. Alternativ können wir sie auch “von Hand” in R erstellen. Um in R tabellarische Daten zu schreiben empfehlen wir die Funktion tribble(), welche eine sehr anschauliche Art bietet, Tabellen in R zu generieren.\n\n\n\n\n\nJetzt wo wir diese Matrix haben, können wir sie nutzen um den Kanton Schwyz hinsichtlich der Distanz zum Wald zu bewerten. Dafür verwenden wir die Funktion classify() mit dem Argument include.lowest = TRUE damit eine Distanz von 0m ebenfalls in 1 reklassifiziert wird.\n\n\n\n\n\nBewerte auf die gleiche Art die Distanz zu den Schutzgebieten. Wir nutzen die Schwellwerte, wie sie in der der nachstehenden Tabelle ersichtlich ist. Du kannst diese aber frei wählen.\n\n\n\n\n\nvon\nbis\nzu\n\n\n\n\n0\n250\n0.0\n\n\n250\n500\n0.2\n\n\n500\n750\n0.4\n\n\n750\n1000\n0.6\n\n\n1000\n1250\n0.8\n\n\n1250\nInf\n1.0"
+  },
+  {
+    "objectID": "rauman/Rauman5_Uebung_A.html#sec-raster-overlay1",
+    "href": "rauman/Rauman5_Uebung_A.html#sec-raster-overlay1",
+    "title": "Rauman 5: Übung A",
+    "section": "Aufgabe 4: Raster Overlay",
+    "text": "Aufgabe 4: Raster Overlay\nWir haben zwar erst zwei der Kriterien berechnet, die wir für unsere Standortsuche berücksichtigen wollen, doch mit denen können wir schon mal eine erste, unvollständige Beurteilung wagen.\nWeil wir für alle Raster das gleiche Template verwendet haben, sind diese perfekt aneinander ausgerichtet. So können wir auf die denkbar einfachste Art die einezelnen Zellen miteinander verrechnen. Auf folgende Weise können wir beispielsweise den Mittlwert pro Zelle berechnen:"
+  },
+  {
+    "objectID": "rauman/Rauman5_Uebung_A.html#sec-rauman5-mask",
+    "href": "rauman/Rauman5_Uebung_A.html#sec-rauman5-mask",
+    "title": "Rauman 5: Übung A",
+    "section": "Aufgabe 5: Mask Raster",
+    "text": "Aufgabe 5: Mask Raster\nIm letzten Plot fällt auf, dass wir auch eine Bewertung für Gebiete ausserhalb des Untersuchungsgebiets haben. Da wir für diese Gebiete keine Geodaten verwendet haben, sind die Resultate ausserhalb des Untersuchungsgebiets nicht gültig. Deshalb ist es sinnvoll, die Werte ausserhalb des Untersuchungsgebeits zu entfernen. Dafür verwenden wir die Funktion mask() zusammen mit dem Vektordatensatz kt_schwzy. Diese setzt alle Werte ausserhalb des Polygons zu NA:"
+  },
+  {
+    "objectID": "rauman/Rauman5_Uebung_A.html#sec-raster-overlay1b",
+    "href": "rauman/Rauman5_Uebung_A.html#sec-raster-overlay1b",
+    "title": "Rauman 5: Übung A",
+    "section": "Aufgabe 6: Weighted Raster Overlay",
+    "text": "Aufgabe 6: Weighted Raster Overlay\nIm obigen Raster Overlay haben wir alle Kriterien gleich stark gewichtet. Wir können aber auch eine gewichtete Verschneidung durchführen: Wenn wir beispielsweise die Distanz zu den Strassen stärker gewichten wollen als die Distanz zu den Schutzgebieten. Auch das ist sehr einfach:\n\n\n\n\n\n\n\n\n\nGilgen, Kurt, und Alma Sartoris. 2010. „Empfehlung zur Planung von Windenergieanlagen: Die Anwendung von Raumplanungsinstrumenten und Kriterien zur Standortwahl“. Eidgenössisches Departement für Umwelt, Verkehr, Energie und Kommunikation UVEK.\n\n\nTegou, Leda-Ioanna, Heracles Polatidis, und Dias A. Haralambopoulos. 2010. „Environmental management framework for wind farm siting: Methodology and case study“. Journal of Environmental Management 91 (11): 2134–47. https://doi.org/10.1016/j.jenvman.2010.05.010."
+  },
+  {
+    "objectID": "rauman/Rauman5_Uebung_B.html#aufgabe-1-rasterdaten-einlesen",
+    "href": "rauman/Rauman5_Uebung_B.html#aufgabe-1-rasterdaten-einlesen",
+    "title": "Rauman 5: Übung B",
+    "section": "Aufgabe 1: Rasterdaten einlesen",
+    "text": "Aufgabe 1: Rasterdaten einlesen\nZur Bewertung der Standorte hinsichtlich Windgeschwindigkeit steht uns der Datensatz wind250m.tif zur Verfügung (siehe Tabelle 24.1). Lade den Datensatz mit der Funktion rast() in R ein. Explorieren Sie den Datensatz visuell und versuchen Sie ein Verständnis für die Datensätze zu bekommen.\n\n\n\n\n\nDatensatz ‘wind250m’ zur Windgeschwindigkeit in m pro Sekunde"
+  },
+  {
+    "objectID": "rauman/Rauman5_Uebung_B.html#aufgabe-2-wind-bewerten",
+    "href": "rauman/Rauman5_Uebung_B.html#aufgabe-2-wind-bewerten",
+    "title": "Rauman 5: Übung B",
+    "section": "Aufgabe 2: Wind bewerten",
+    "text": "Aufgabe 2: Wind bewerten\nDiese Rasterdaten müssen wir nicht weiter verarbeiten, wir können sie direkt bewerten. Führen Sie diese Bewertung aufgrund nachstehender Tabelle durch. Nutzen Sie dafür die Funktion classify() analog Kapitel 24.3. Sie können die Schwellwerte frei wählen, wir werden diejenigen verwenden, die in Tabelle 25.1 festgehalten sind."
+  },
+  {
+    "objectID": "rauman/Rauman5_Uebung_B.html#aufgabe-3-slope-berechnen-und-bewerten",
+    "href": "rauman/Rauman5_Uebung_B.html#aufgabe-3-slope-berechnen-und-bewerten",
+    "title": "Rauman 5: Übung B",
+    "section": "Aufgabe 3: Slope berechnen und bewerten",
+    "text": "Aufgabe 3: Slope berechnen und bewerten\nFür die Berechnung und anschilessende Bewertung der Hangneigung brauchen wir ein Höhenmodell. Lade das Höhenmodell dhm250m.tif herunter (siehe Tabelle 24.1) und in R ein. Berechne anschliessend die Hangneigung mit der Funktion terrain() analog Kapitel 19.2 (beachten Sie die Einheit des Output!).\nBewerten Sie die Hangneigung danach gemäss Tabelle Tabelle 25.1.\n\n\n\n\n\nTabelle 25.1: Bewertungstabelle die Windgeschwindigkeit (m/s) und Hangneigung (Grad)\n\n\n\n\n\n\n\n\n\n\n\nWindgeschwindigkeit\n\n\nHangneigung\n\n\n\nvon\nbis\nzu\nvon\nbis\nzu\n\n\n\n\n0\n20\n0.0\n0\n4\n1.0\n\n\n20\n30\n0.2\n4\n8\n0.8\n\n\n30\n40\n0.4\n8\n12\n0.6\n\n\n40\n50\n0.6\n12\n16\n0.4\n\n\n50\n60\n0.8\n16\n20\n0.2\n\n\n60\nInf\n1.0\n20\n90\n0.0"
+  },
+  {
+    "objectID": "rauman/Rauman5_Uebung_B.html#sec-raster-overlay2",
+    "href": "rauman/Rauman5_Uebung_B.html#sec-raster-overlay2",
+    "title": "Rauman 5: Übung B",
+    "section": "Aufgabe 4: Raster Overlay",
+    "text": "Aufgabe 4: Raster Overlay\nAnalog Kapitel 24.4 können wir an dieser Stelle eine vorläufige Beurteilung der Gebiete durchführen.\n\n\n\n\n\nAbbildung 25.1: Ungewichtetes Überlagern aller Kriterien mit Ausnahme der Ausschlussgebiete"
+  },
+  {
+    "objectID": "rauman/Rauman5_Uebung_B.html#aufgabe-5-ausschlusskriterien",
+    "href": "rauman/Rauman5_Uebung_B.html#aufgabe-5-ausschlusskriterien",
+    "title": "Rauman 5: Übung B",
+    "section": "Aufgabe 5: Ausschlusskriterien",
+    "text": "Aufgabe 5: Ausschlusskriterien\nAls Auschlussgebiete gelten Flächen, wo keine Windkraftanlagen gebaut werden können. Dazu gehören bewohnte Flächen, nationale Schutzgebiete, Waldgebiete und Seen. (Zwar werden Schutzgebiete in unserer Analyse bereits berücksichtigt, aber nicht kategorisch vom Resultat ausgeschlossen.)\nUm diese Flächen aus von unserem Resultat auzuschliessen, können wir wieder die Funktion mask() verwenden (siehe Kapitel 24.5). Doch diesmal möchten wir nicht die Flächen ausserhalb der Polygone mit NA ersetzen, sondern die Flächen innerhalb der Polygone. Deshalb verwenden wir mask() mit dem Argument inverse = TRUE.\nVersuche mit mask(), den oben erwähnten Vektordatensätze sowie der Option inverse = TRUE die Ausschlussgebiete vom Raster-Overlay zu entfernen und visualisiere das Resultat."
+  },
+  {
+    "objectID": "References.html",
+    "href": "References.html",
+    "title": "Literaturverzeichnis",
+    "section": "",
+    "text": "Gilgen, Kurt, and Alma Sartoris. 2010. “Empfehlung Zur Planung von\nWindenergieanlagen: Die Anwendung von Raumplanungsinstrumenten Und\nKriterien Zur Standortwahl.” Eidgenössisches Departement für\nUmwelt, Verkehr, Energie und Kommunikation UVEK.\n\n\nKovic, Marko. 2014. “Je Weniger Ausländer, Desto Mehr Ja-Stimmen?\nWirklich?” Tagesanzeiger Datenblog. https://blog.tagesanzeiger.ch/datenblog/index.php/668/je-weniger-auslaender-desto-mehr-ja-stimmen-wirklich.\n\n\nScherler, Patrick. 2020. “Drivers of Departure and Prospecting in\nDispersing Juvenile Red Kites (Milvus Milvus).” PhD thesis,\nUniversity of Zurich.\n\n\nTegou, Leda-Ioanna, Heracles Polatidis, and Dias A. Haralambopoulos.\n2010. “Environmental Management Framework for Wind Farm Siting:\nMethodology and Case Study.” Journal of Environmental\nManagement 91 (11): 2134–47. https://doi.org/10.1016/j.jenvman.2010.05.010.\n\n\nWickham, Hadley, and Garrett Grolemund. 2017. R for Data\nScience. O’Reilly. https://ebookcentral.proquest.com/lib/zhaw/detail.action?docID=4770093."
+  }
+]
