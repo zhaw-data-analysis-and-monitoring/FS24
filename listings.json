@@ -28,7 +28,16 @@
     "items": []
   },
   {
-    "listing": "/RaumAn.html",
-    "items": []
+    "listing": "/SpatAn.html",
+    "items": [
+      "/spatan/Spatan0_Vorbereitung.html",
+      "/spatan/Spatan1_Uebung_A.html",
+      "/spatan/Spatan1_Uebung_B.html",
+      "/spatan/Spatan2_Uebung_A.html",
+      "/spatan/Spatan2_Uebung_B.html",
+      "/spatan/Spatan3_Uebung_A.html",
+      "/spatan/Spatan3_Uebung_B.html",
+      "/spatan/Spatan3_Uebung_C.html"
+    ]
   }
 ]
