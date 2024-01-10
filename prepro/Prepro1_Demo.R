@@ -32,10 +32,10 @@ f <- 6
 e > f
 
 
-sonnig <- TRUE
-trocken <- FALSE
+sunny <- TRUE
+dry <- FALSE
 
-sonnig & !trocken
+sunny & !dry
 
 s <- as.character(3.14)
 s
@@ -48,38 +48,38 @@ paste(fname, lname)
 fname2 <- "Simon"
 fname == fname2
 
-wochentage <- c("Donnerstag", "Freitag", "Samstag")
+weekdays <- c("Thursday", "Friday", "Saturday")
 
-typeof(wochentage)
+typeof(weekdays)
 
-wochentage_fac <- as.factor(wochentage)
+weekdays_fac <- as.factor(weekdays)
 
-wochentage
-wochentage_fac
+weekdays
+weekdays_fac
 
-factor(wochentage, levels = c("Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"), ordered = TRUE)
+factor(weekdays, levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"), ordered = TRUE)
 
-datum <- "2017-10-01 13:45:10"
+date <- "2017-10-01 13:45:10"
 
-# konvertiert character in POSIXct:
-as.POSIXct(datum)
+# converts character to POSIXct:
+as.POSIXct(date)
 
-datum <- "01.10.2017 13:45"
+date <- "01.10.2017 13:45"
 
-# konvertiert character in POSIXct:
-as.POSIXct(datum, format = "%d.%m.%Y %H:%M")
+# converts character to POSIXct:
+as.POSIXct(date, format = "%d.%m.%Y %H:%M")
 
-datum2 <- as.POSIXct(datum, format = "%d.%m.%Y %H:%M")
+date2 <- as.POSIXct(date, format = "%d.%m.%Y %H:%M")
 
-strftime(datum2, format = "%m") # extrahiert den Monat als Zahl
-strftime(datum2, format = "%b") # extrahiert den Monat mit Namen (abgekürzt)
-strftime(datum2, format = "%B") # extrahiert den Monat mit Namen (ausgeschrieben)
+strftime(date2, format = "%m") # extracts the month as a number
+strftime(date2, format = "%b") # extracts the month by name (abbreviated)
+strftime(date2, format = "%B") # extracts the month by name (full)
 
 library("lubridate")
 
-month(datum2) # extrahiert den Monat als Zahl
-month(datum2, label = TRUE, abbr = TRUE) # extrahiert den Monat mit Namen (abgekürzt)
-month(datum2, label = TRUE, abbr = FALSE) # extrahiert den Monat mit Namen (ausgeschrieben)
+month(date2) # extracts the month as a number
+month(date2, label = TRUE, abbr = TRUE) # extracts the month by name (abbreviated)
+month(date2, label = TRUE, abbr = FALSE) # extracts the month by name (full)
 
 vec <- c(10, 20, 33, 42, 54, 66, 77)
 vec
@@ -88,20 +88,17 @@ vec[2:4]
 
 vec2 <- vec[2:4]
 
-
 mylist <- list("q", TRUE, 3.14)
-
 
 mylist2 <- list(fav_letter = "q", fav_boolean = TRUE, fav_number = 3.14)
 
 mylist2
 
-
 as.data.frame(mylist2)
 
 df <- data.frame(
-  Stadt = c("Zürich", "Genf", "Basel", "Bern", "Lausanne"),
-  Ankunft = c(
+  City = c("Zurich", "Geneva", "Basel", "Bern", "Lausanne"),
+  Arrival = c(
     "1.1.2017 10:00", "1.1.2017 14:00",
     "1.1.2017 13:00", "1.1.2017 18:00", "1.1.2017 21:00"
   )
@@ -109,25 +106,24 @@ df <- data.frame(
 
 str(df)
 
-df$Stadt
+df$City
 
-df$Einwohner <- c(400000, 200000, 175000, 14000, 130000)
+df$Residents <- c(400000, 200000, 175000, 14000, 130000)
 
-df$Einwohner <- as.integer(df$Einwohner)
+df$Residents <- as.integer(df$Residents)
 
+df$Arrival <- as.POSIXct(df$Arrival, format = "%d.%m.%Y %H:%M")
 
-df$Ankunft <- as.POSIXct(df$Ankunft, format = "%d.%m.%Y %H:%M")
+df$Arrival
 
-df$Ankunft
+df$Arrival_hour <- hour(df$Arrival)
 
-df$Ankunft_stunde <- hour(df$Ankunft)
+df$Arrival_hour
 
-df$Ankunft_stunde
+df$Size <- "no information"
 
-df$Groesse <- "keine Angabe"
+df$Size[df$Residents > 300000] <- "large"
+df$Size[df$Residents <= 300000 & df$Residents > 150000] <- "medium"
+df$Size[df$Residents <= 150000] <- "small"
 
-df$Groesse[df$Einwohner > 300000] <- "gross"
-df$Groesse[df$Einwohner <= 300000 & df$Einwohner > 150000] <- "mittel"
-df$Groesse[df$Einwohner <= 150000] <- "klein"
-
-df$Groesse
+df$Size

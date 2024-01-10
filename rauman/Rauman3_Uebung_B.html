@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2023-12-04">
 
-<title>Research Methods HS23 - 22&nbsp; Rauman 3: Übung B</title>
+<title>Data Analysis and Monitoring FS24 - Rauman 3: Exercise B</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,9 +18,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +48,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -114,15 +86,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "type": "textbox",
   "limit": 20,
   "language": {
-    "search-no-results-text": "Keine Treffer",
-    "search-matching-documents-text": "Treffer",
-    "search-copy-link-title": "Link in die Suche kopieren",
-    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
-    "search-more-match-text": "weitere Treffer in diesem Dokument",
-    "search-more-matches-text": "weitere Treffer in diesem Dokument",
-    "search-clear-button-title": "Zurücksetzen",
-    "search-detached-cancel-button-title": "Abbrechen",
-    "search-submit-button-title": "Abschicken"
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -162,6 +135,7 @@ window.onload = function() {
 
 </script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../custom.css">
@@ -172,11 +146,16 @@ window.onload = function() {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Rauman 3: Übung B</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../RaumAn.html">Spatial Analysis</a></li><li class="breadcrumb-item"><a href="../rauman/Rauman3_Uebung_B.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Rauman 3: Exercise B</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -184,16 +163,16 @@ window.onload = function() {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../images/zhaw_sw_neg.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Research Methods HS23</a> 
+      <a href="../">Data Analysis and Monitoring FS24</a> 
         <div class="sidebar-tools-main">
-  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
@@ -201,29 +180,31 @@ window.onload = function() {
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Willkommen</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../PrePro.html" class="sidebar-item-text sidebar-link">Pre-Processing</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a href="../PrePro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pre-Processing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../prepro/Prepro1_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Vorbereitung</span></a>
+  <a href="../prepro/Prepro1_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preparation</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -234,7 +215,7 @@ window.onload = function() {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../prepro/Prepro1_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">PrePro 1: Übung</span></a>
+  <a href="../prepro/Prepro1_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">PrePro 1: Exercise</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -245,12 +226,12 @@ window.onload = function() {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../prepro/Prepro2_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prepro 2: Übung A</span></a>
+  <a href="../prepro/Prepro2_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prepro 2: Exercise A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../prepro/Prepro2_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prepro 2: Übung B</span></a>
+  <a href="../prepro/Prepro2_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prepro 2: Exercise B</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -261,22 +242,23 @@ window.onload = function() {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../prepro/Prepro3_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prepro 3: Übung</span></a>
+  <a href="../prepro/Prepro3_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prepro 3: Exercise</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../InfoVis.html" class="sidebar-item-text sidebar-link">Informationsvisualisierung</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a href="../InfoVis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Information Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../infovis/Infovis1_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Vorbereitung</span></a>
+  <a href="../infovis/Infovis1_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preparation</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -287,128 +269,114 @@ window.onload = function() {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../infovis/Infovis1_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Infovis 1: Übung</span></a>
+  <a href="../infovis/Infovis1_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Infovis 1: Exercise</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../infovis/Infovis1_Script_eda.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Infovis 1: Script EDA</span></a>
+  <a href="../infovis/Infovis1_Script_eda.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Infovis 1: EDA Script</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../infovis/Infovis2_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Infovis 2: Übung A</span></a>
+  <a href="../infovis/Infovis2_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Infovis 2: Exercise A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../infovis/Infovis2_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Infovis 2: Übung optional</span></a>
+  <a href="../infovis/Infovis2_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Infovis 2: Exercise B (Optional)</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../statistic.html" class="sidebar-item-text sidebar-link">Untitled</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a href="../Statistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistic</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../statistic/statistic.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">statistic.html</span></a>
+  <a href="../statistic/Statistic.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistic</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../RaumAn.html" class="sidebar-item-text sidebar-link">Räumliche Analysen</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a href="../RaumAn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spatial Analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../rauman/Rauman0_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Vorbereitung</span></a>
+  <a href="../rauman/Rauman0_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preparation</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../rauman/Rauman1_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 1: Übung A</span></a>
+  <a href="../rauman/Rauman1_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 1: Exercise A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../rauman/Rauman1_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 1: Übung B</span></a>
-  </div>
-</li>
-          <li class="px-0"><hr class="sidebar-divider hi "></li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../rauman/Rauman2_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 2: Übung A</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../rauman/Rauman2_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 2: Übung B</span></a>
+  <a href="../rauman/Rauman1_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 1: Exercise B</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../rauman/Rauman3_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 3: Übung A</span></a>
+  <a href="../rauman/Rauman2_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 2: Exercise A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../rauman/Rauman3_Uebung_B.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Rauman 3: Übung B</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../rauman/Rauman3_Uebung_C.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 3: Übung C (Optional)</span></a>
+  <a href="../rauman/Rauman2_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 2: Exercise B</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../rauman/Rauman4_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 4: Übung</span></a>
-  </div>
-</li>
-          <li class="px-0"><hr class="sidebar-divider hi "></li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../rauman/Rauman5_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 5: Übung A</span></a>
+  <a href="../rauman/Rauman3_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 3: Exercise A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../rauman/Rauman5_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 5: Übung B</span></a>
+  <a href="../rauman/Rauman3_Uebung_B.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Rauman 3: Exercise B</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rauman/Rauman3_Uebung_C.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 3: Exercise C (Optional)</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../References.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Literaturverzeichnis</span></a>
+  <a href="../References.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Inhaltsverzeichnis</h2>
+    <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#aufgabe-1-raeumliche-interpolation-mit-idw" id="toc-aufgabe-1-raeumliche-interpolation-mit-idw" class="nav-link active" data-scroll-target="#aufgabe-1-raeumliche-interpolation-mit-idw">Aufgabe 1: Raeumliche Interpolation mit IDW</a></li>
-  <li><a href="#aufgabe-2-interpolation-mit-nearest-neighbour" id="toc-aufgabe-2-interpolation-mit-nearest-neighbour" class="nav-link" data-scroll-target="#aufgabe-2-interpolation-mit-nearest-neighbour">Aufgabe 2: Interpolation mit Nearest Neighbour</a></li>
+  <li><a href="#task-1-spatial-interpolation-with-idw" id="toc-task-1-spatial-interpolation-with-idw" class="nav-link active" data-scroll-target="#task-1-spatial-interpolation-with-idw">Task 1: Spatial interpolation with IDW</a></li>
+  <li><a href="#task-2-interpolation-with-nearest-neighbour" id="toc-task-2-interpolation-with-nearest-neighbour" class="nav-link" data-scroll-target="#task-2-interpolation-with-nearest-neighbour">Task 2: Interpolation with Nearest Neighbour</a></li>
   </ul>
 </nav>
     </div>
@@ -417,7 +385,7 @@ window.onload = function() {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-title">Rauman 3: Übung B</span></h1>
+<h1 class="title"><span class="chapter-title">Rauman 3: Exercise B</span></h1>
 </div>
 
 
@@ -426,9 +394,9 @@ window.onload = function() {
 
     
     <div>
-    <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
+    <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">4. Dezember 2023</p>
+      <p class="date">December 4, 2023</p>
     </div>
   </div>
   
@@ -438,75 +406,72 @@ window.onload = function() {
 
 </header>
 
-<div class="cell">
-
-</div>
-<p>In dieser Übung geht es darum, zwei verschiedene Interpolationsverfahren in R umzusetzen. Im ersten Interpolationsverfahren verwenden wir die <em>inverse distance weighted interpolation</em>, später verwenden wir die <em>nearest neighbour</em> methode. Dazu braucht ihr die folgenden Packages:</p>
+<p>This exercise is about implementing two different interpolation methods in R. In the first interpolation method we will use <em>inverse distance weighted interpolation</em>. Later, we will use the <em>nearest neighbour</em> method. To do this, you will need the following packages:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"sf"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"gstat"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"gstat"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Weiter benötigt ihr die nachstehenden Datensätze:</p>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>luftqualitaet <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"datasets/rauman/luftqualitaet.gpkg"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>schweiz <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"datasets/rauman/schweiz.gpkg"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Die Library <code>gstat</code> bietet verschiedene Möglichkeiten, Datenpunkte zu interpolieren, unter anderem auch die <em>inverse distance weighted</em> Methode. Leider ist das Package noch nicht so benutzerfreundlich wie <code>sf</code>: Das Package wird aber aktuell überarbeitet und in mittlerer Zukunft sollte es ebenso einfach zugänglich sein. Damit Ihr Euch nicht mit den Eigenheiten dieser Library umschlagen müsst, haben wir eine Function vorbereitet, die Euch die Verwendung der IDW-Interpolation erleichtern soll.</p>
-<p>Wir nehmen Euch damit etwas Komplexität weg und liefern Euch ein pfannenfertiges Werkzeug. Das hat auch Nachteile und wir ermutigen alle, die dafür Kapazität haben, unsere Function eingehend zu studieren und allenfalls ganz auf die Function zu verzichten und stattdessen direkt <code>gstat</code> zu verwenden. Wenn ihr mit unserer Function arbeiten möchtet, müsst ihr den unten stehenden Code in euer Skript kopieren und ausführen.</p>
+<p>You will also need the following datasets:</p>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>air_quality <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"datasets/rauman/luftqualitaet.gpkg"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>switzerland <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"datasets/rauman/schweiz.gpkg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>gstat</code> library offers various options for interpolating data points, including the <em>inverse distance weighted</em> method. Unfortunately, the package is not yet as user-friendly as <code>sf</code>: however, the package is currently being revised and it should be just as easily accessible in the future. So that you do not have to deal with the peculiarities of this library, we have prepared a function that should make it easier for you to use the IDW interpolation.</p>
+<p>We have taken away some of the complexity and have provided you with a ready-to-use tool. While we provide a simpler function for ease of use, we also encourage those who can to explore and understand this function in detail, or even better, use the <code>gstat</code> package instead. If you want to work with our function, you have to copy and execute the code below into your script.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>my_idw <span class="ot">&lt;-</span> <span class="cf">function</span>(groundtruth,column,cellsize, <span class="at">nmax =</span> <span class="cn">Inf</span>, <span class="at">maxdist =</span> <span class="cn">Inf</span>, <span class="at">idp =</span> <span class="dv">2</span>, <span class="at">extent =</span> <span class="cn">NULL</span>){</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>my_idw <span class="ot">&lt;-</span> <span class="cf">function</span>(groundtruth, column, cellsize, <span class="at">nmax =</span> <span class="cn">Inf</span>, <span class="at">maxdist =</span> <span class="cn">Inf</span>, <span class="at">idp =</span> <span class="dv">2</span>, <span class="at">extent =</span> <span class="cn">NULL</span>){</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(<span class="st">"gstat"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(<span class="st">"sf"</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.null</span>(extent)){</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    extent <span class="ot">&lt;-</span> groundtruth</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  samples <span class="ot">&lt;-</span> <span class="fu">st_make_grid</span>(extent,cellsize,<span class="at">what =</span> <span class="st">"centers"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  samples <span class="ot">&lt;-</span> <span class="fu">st_make_grid</span>(extent, cellsize, <span class="at">what =</span> <span class="st">"centers"</span>)</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  my_formula <span class="ot">&lt;-</span> <span class="fu">formula</span>(<span class="fu">paste</span>(column,<span class="st">"~1"</span>))</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  idw_sf <span class="ot">&lt;-</span> gstat<span class="sc">::</span><span class="fu">idw</span>(<span class="at">formula =</span> my_formula,groundtruth, <span class="at">newdata =</span> samples, <span class="at">nmin =</span> <span class="dv">1</span>, <span class="at">nmax =</span> nmax, <span class="at">maxdist =</span> maxdist, <span class="at">idp =</span> idp)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  idw_matrix <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">as.data.frame</span>(<span class="fu">st_coordinates</span>(idw_sf)),<span class="at">pred =</span> <span class="fu">st_drop_geometry</span>(idw_sf)[,<span class="dv">1</span>])</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  idw_sf <span class="ot">&lt;-</span> gstat<span class="sc">::</span><span class="fu">idw</span>(<span class="at">formula =</span> my_formula, groundtruth, <span class="at">newdata =</span> samples, <span class="at">nmin =</span> <span class="dv">1</span>, <span class="at">nmax =</span> nmax, <span class="at">maxdist =</span> maxdist, <span class="at">idp =</span> idp)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  idw_matrix <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">as.data.frame</span>(<span class="fu">st_coordinates</span>(idw_sf)), <span class="at">pred =</span> <span class="fu">st_drop_geometry</span>(idw_sf)[,<span class="dv">1</span>])</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  idw_matrix</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Nun könnt Ihr mit <code>my_idw()</code> den Datensatz <code>luftqualitaet</code> folgendermassen interpolieren.</p>
+<p>Now you can interpolate the <code>air_quality</code> data set with <code>my_idw()</code>as follows.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">my_idw</span>(<span class="at">groundtruth =</span> luftqualitaet, <span class="at">column =</span> <span class="st">"value"</span>, <span class="at">cellsize =</span> <span class="dv">10000</span>, <span class="at">extent =</span> schweiz)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">my_idw</span>(<span class="at">groundtruth =</span> air_quality, <span class="at">column =</span> <span class="st">"value"</span>, <span class="at">cellsize =</span> <span class="dv">10000</span>, <span class="at">extent =</span> switzerland)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Folgende Parameter stehen Euch zur Verfügung:</p>
+<p>The following parameters are available:</p>
 <ul>
-<li><strong>Notwendige Parameter</strong>:
+<li><strong>Necessary parameters</strong>:
 <ul>
-<li><code>groundtruth</code>: Punktdatensatz mit den Messwerten (<code>sf</code>-Objekt)</li>
-<li><code>column</code>: Name der Spalte mit den Messwerten (in Anführungs- und Schlusszeichen)</li>
-<li><code>cellsize</code>: Zellgrösse des output Rasters</li>
+<li><code>groundtruth</code>: point data record with measured values (<code>sf</code>object)</li>
+<li><code>column</code>: name of the column with the measured values (in quotation marks and closing characters)</li>
+<li><code>cellsize</code>: cell size of the output raster</li>
 </ul></li>
-<li><strong>Optionale Parameter</strong>
+<li><strong>Optional parameters</strong>
 <ul>
-<li><code>nmax</code>: Maximale Anzahl Punkte, die für die Interpolation berücksichtigt werden sollen. Default: <code>Inf</code> (alle Werte im gegebenen Suchradius)</li>
-<li><code>maxdist</code>: Suchradius, welcher für die Interpolation verwendet werden soll. Default <code>Inf</code> (alle Werte bis <code>nmax</code>)</li>
-<li><code>idp</code>: <strong>I</strong>nverse <strong>D</strong>istance <strong>P</strong>ower: die Potenz, mit der der Nenner gesteigert werden soll. Default: <code>2</code>. Werte werden im Kehrwert des Quadrates gewichtet: <span class="math inline">\(\frac{1}{dist^{idp}}\)</span>.</li>
-<li><code>extent</code>: Gebiet, für welches die Interpolation durchgeführt werden soll. Wenn nichts angegeben wird (Default <code>NULL</code>), wird die Ausdehnung von <code>groundtruth</code> verwendet.</li>
+<li><code>nmax</code>: maximum number of points to be taken into account for the interpolation. Default: <code>Inf</code> (all values in the given search radius)</li>
+<li><code>maxdist</code>: Search radius to be used for interpolation. Default <code>Inf</code> (all values up to <code>nmax</code>)</li>
+<li><code>idp</code>: <strong><em>Inverse Distance</em> Power:</strong> the power with which the denominator is to be increased. Default: <code>2</code>. Values are weighted in the reciprocal of the square: <span class="math inline">\(\frac{1}{dist^{idp}}\)</span>.</li>
+<li><code>extent</code>: area for which the interpolation is to be carried out. If nothing is specified (default <code>ZERO</code>), the extension of groundtruth <code>is</code> used.</li>
 </ul></li>
 <li><strong>Ouput</strong>
 <ul>
-<li>der Output der Funktion ist eine <code>data.frame</code> mit 3 Spalten:
+<li>the output of the function is a <code>data.frame</code> with 3 columns:
 <ul>
-<li><code>X</code>, <code>Y</code> Koordinaten der interpolierten Werte</li>
-<li><code>pred</code>: der Interpolierte Wert</li>
+<li><code>X</code>, <code>Y</code> coordinates of the interpolated values</li>
+<li><code>pred</code>: the Interpolated Value</li>
 </ul></li>
 </ul></li>
 </ul>
-<p>Beim Output handelt sich hier um einen Raster-ähnlichen Datentyp (siehe Vorlesung <em>Spatial DataScience 1</em>). Diesen können wir mit <code>geom_raster</code> mit <code>ggplot</code> visualisieren. Dafür müsst ihr in <code>aes</code> die <code>X</code> und <code>Y</code> Koordinaten angeben, und der interpolierte Wert mit <code>fill</code> einfärben.</p>
-<section id="aufgabe-1-raeumliche-interpolation-mit-idw" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="aufgabe-1-raeumliche-interpolation-mit-idw">Aufgabe 1: Raeumliche Interpolation mit IDW</h3>
-<p>Rechnet so den IDW für die Luftqualitätsmessungen mit verschiedenen Parametern und visualisiert jeweils die Resultate. Experimentiert mit <code>nmax</code> sowie <code>maxdist</code>. Was stellt ihr fest?</p>
+<p>The output is a raster-like data type (see <em>Spatial Data Science</em> 1 lecture). We can visualise this with <code>geom_raster()</code> with <code>ggplot</code>. To do this, you must specify the <code>X</code> and <code>Y</code> coordinates in <code>aes</code>, and colour the interpolated value with <code>fill</code>.</p>
+<section id="task-1-spatial-interpolation-with-idw" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="task-1-spatial-interpolation-with-idw">Task 1: Spatial interpolation with IDW</h3>
+<p>Calculates the IDW for the air quality measurements with different parameters and visualise the results in each case. Experiment with <code>nmax</code> and <code>maxdist</code>. What do you find?</p>
 <p>Tips:</p>
 <ul>
-<li>Was für Distanzen bei <code>maxdist</code> Sinn machen, könnt ihr dem Output aus der G-Funktion (vorherige Übung) entnehmen</li>
-<li>Wählt am Anfang eine etwas Konvervative (grosse) <code>cellsize</code> und verringert diesen nur wenn euer Rechner damit gut klar kommt</li>
-<li>Da der Output aus der Interpolation im gleichen Koordinatenbezugssystem sind wie <code>schweiz.gpkg</code> kann man diese beiden Datensätze im gleichen <code>ggplot</code> darstellen. Dafür müsst ihr die <em>aesthetics</em> (<code>aes()</code>) für jeden Layer einzeln setzen, und nicht auf der Ebene von <code>ggplot()</code>.</li>
+<li>You can find out what distances make sense with <code>maxdist</code> from the output of the G function (previous exercise)</li>
+<li>At the beginning, choose a slightly conservative (large) <code>cellsize</code> and only reduce it if your computer can handle it well</li>
+<li>Since the output from the interpolation is in the same coordinate reference system as <code>schweiz.gpkg</code>, these two data sets can be displayed in the same <code>ggplot</code>. For this, you have to set the <em>aesthetics</em> (<code>aes()</code>) for each layer individually, and not at the level of <code>ggplot()</code>.</li>
 </ul>
 <div class="column-body">
 <div class="cell">
@@ -518,47 +483,38 @@ window.onload = function() {
 <div id="fig-ggplot-ex1" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="Rauman3_Uebung_B_files/figure-html/fig-ggplot-ex1-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Abbildung&nbsp;22.1: Stickstoffdioxid (NO2) in μg/m3, Interpoliert über die ganze Schweiz mit der Inverse Distance Weighted Methode. Die verschiedenen Plots zeigen die Veränderung der Interpolation bei steigendem IDP-Wert</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;22.1: Nitrogen Dioxide (NO2) in μg/m3, Interpolate over all of Switzerland using the Inverse Distance Weighted Method. The various plots depict changes in the Interpolation with increasing IDP values</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="aufgabe-2-interpolation-mit-nearest-neighbour" class="level3">
-<h3 class="anchored" data-anchor-id="aufgabe-2-interpolation-mit-nearest-neighbour">Aufgabe 2: Interpolation mit Nearest Neighbour</h3>
-<p>Eine weitere einfache Möglichkeit zur Interpolation bietet die Erstellung eines Voronoi-Diagrammes, auch als Thiessen-Polygone oder Dirichlet-Zerlegung bekannt. <code>sf</code> liefert dazu die Funktion <code>st_voronoi()</code>, die einen Punktdatensatz annimmt und eben um die Punkte die Thiessenpolygone konstruiert. Dazu braucht es lediglich einen kleinen Vorverarbeitungsschritt: <code>sf</code> möchte für jedes Feature, also für jede <em>Zeile</em> in unserem Datensatz, ein Voronoidiagramm. Das macht bei uns wenig Sinn, weil jede Zeile nur aus einem Punkt besteht. Deshalb müssen wir vorher <code>luftqualitaet</code> mit <code>st_union()</code> von einem <code>POINT</code> in ein <code>MULTIPOINT</code> Objekt konvertieren, in welchem alle Punkte in einer Zeile zusammengefasst sind.</p>
-<div class="cell">
-
-</div>
+<section id="task-2-interpolation-with-nearest-neighbour" class="level3">
+<h3 class="anchored" data-anchor-id="task-2-interpolation-with-nearest-neighbour">Task 2: Interpolation with Nearest Neighbour</h3>
+<p>Another simple way to interpolate is the creation of a Voronoi diagram, also known as Thiessen polygons or Dirichlet decomposition. <code>sf</code> has a <code>st_voronoi()</code> function, which assumes a point data set and constructs Thiessen polygons around the points. All it takes is a small preprocessing step: <code>sf</code> wants a voronoi diagram for each feature, i.e.&nbsp;for each <em>line</em> in our data set. This makes little sense for us, because each line consists of only one point. Therefore, we must first convert <code>air_quality</code> with <code>st_union()</code> from a <code>POINT</code> to a <code>MULTIPOINT</code> object in which all points are summarised in one line.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="Rauman3_Uebung_B_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p><code>st_voronoi</code> hat die Thiessenpolygone etwas weiter gezogen als wir sie wollen. Dies ist allerdings eine schöne Illustration der Randeffekte von Thiessenpolygonen, die zum Rand hin (wo es immer weniger Punkte hat) sehr gross werden können. Wir können die Polygone auf die Ausdehnung der Schweiz mit <code>st_intersection()</code> clippen. Auch hier braucht es zwei kleine Vorverarbeitungsschritte:</p>
+<p><code>st_voronoi()</code> has pulled the Thiessen polygons a little further than we want them. However, this is a nice illustration of the edge effects of Thiessen polygons, which can become very large towards the edge (where it has fewer and fewer points). We can clip the polygons to just Switzerland with <code>st_intersection()</code>. Here, too, two small pre-processing steps are required:</p>
 <ol type="1">
-<li>wie vorher müssen wir die einzelnen Kantons-Polygone miteinander verschmelzen. Dies erreichen wir mit <code>st_union()</code>. Wir speichern den Output als <code>schweiz</code>, was als Resultat ein einzelnes Polygon der Schweizergrenze retourniert.</li>
-<li>für die Thiessen-Polygone machen wir genau das Umgekehrte: <code>st_voronoi()</code> liefert ein einzelnes Feature mit allen Polygonen, welches sich nicht gerne clippen lässt. Mit <code>st_cast()</code> wird die <code>GEOMETRYCOLLECTION</code> in Einzelpolygone aufgeteilt.</li>
+<li>As before, we have to merge the individual cantonal polygons. We achieve this with <code>st_union()</code>. We save the output as <code>switzerland</code>, which as a result returns a single polygon in the shape of the Swiss borders.</li>
+<li>For the Thiessen polygons, we do exactly the opposite: <code>st_voronoi()</code> provides a single feature with all polygons, which has not been clipped. With <code>st_cast()</code>, the <code>GEOMETRYCOLLECTION</code> is divided into single polygons.</li>
 </ol>
-<div class="cell">
-
-</div>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="Rauman3_Uebung_B_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Jetzt müssen wir nur noch den jeweiligen Wert für jedes Polygon ermitteln. Dies erreichen wir wieder durch <code>st_join</code>. Auch hier ist noch ein <em>kleiner</em> Vorverarbeitungsschritt nötig: Wir konvertieren das <code>sfc</code> Objekt (nur Geometrien) in ein <code>sf</code> Objekt (Geometrien mit Attributtabelle).</p>
-<div class="cell">
-
-</div>
+<p>Now we just need to determine the respective value for each polygon. We achieve this again with <code>st_join()</code>. Here, too, a <em>small</em> preprocessing step is necessary: We convert the <code>sfc</code> object (only geometries) into an <code>sf</code> object (geometries with attribute table).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-ggplot-ex2-final" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="Rauman3_Uebung_B_files/figure-html/fig-ggplot-ex2-final-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Abbildung&nbsp;22.2: Stickstoffdioxid (NO2) in μg/m3, Interpoliert über die ganze Schweiz nach der Nearest Neighbour Methode.</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;22.2: Nitrogen Dioxide (NO2) in μg/m3, Interpolate all of Switzerland using the Nearest Neighbour method.</figcaption>
 </figure>
 </div>
 </div>
@@ -710,9 +666,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -723,12 +693,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Kopiert");
+    button.setAttribute("title", "Copied!");
     let tooltip;
     if (window.bootstrap) {
       button.setAttribute("data-bs-toggle", "tooltip");
       button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Kopiert");
+      button.setAttribute("data-bs-title", "Copied!");
       tooltip = new bootstrap.Tooltip(button, 
         { trigger: "manual", 
           customClass: "code-copy-button-tooltip",
@@ -828,6 +798,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -870,12 +926,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../rauman/Rauman3_Uebung_A.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Rauman 3: Übung A</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Rauman 3: Exercise A</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../rauman/Rauman3_Uebung_C.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-title">Rauman 3: Übung C (Optional)</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-title">Rauman 3: Exercise C (Optional)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

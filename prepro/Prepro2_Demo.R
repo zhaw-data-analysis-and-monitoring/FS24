@@ -6,76 +6,75 @@ diary <- c(
 
 diary
 
-# Wenn die Buchstaben einzelne _Elemente_ eines Vektors wären, würden wir diese
-# folgendermassen subsetten:
+# If the letters were individual _elements_ of a vector, we would subset them like this:
 
 charvec1 <- c("a", "b", "c", "d", "e", "f", "g", "h")
 charvec1[4:6]
 
-# Aber wenn diese in einem einzigen character gespeichert sind, brauchen wir substr:
+# But if these are stored in a single character, we need substr:
 charvec2 <- "abcdefgh"
 substr(charvec2, 4, 6)
 
-subtrahieren <- function(minuend, subtrahend) {
+subtract <- function(minuend, subtrahend) {
   minuend - subtrahend
 }
 
-subtrahieren(10, 4)
+subtract(10, 4)
 
-output <- mean(subtrahieren(as.numeric(substr(diary, 20, 22)), 273.15))
-#                                             \_1_/
-#                                      \________2__________/
-#                           \___________________3___________/
-#              \________________________________4__________________/
-#         \_____________________________________5____________________/
+output <- mean(subtract(as.numeric(substr(diary, 20, 22)), 273.15))
+#                                         \_1_/
+#                                  \________2__________/
+#                       \___________________3__________/
+#              \____________________________4____________________/
+#         \_________________________________5____________________/
 
-# 1. Nimm diary
-# 2. Extrahiere auf jeder Zeile die Werte 20 bis 22
-# 3. Konvertiere "character" zu "numeric"
-# 4. Subtrahiere 273.15
-# 5. Berechne den Mittlwert
+# 1. Take diary
+# 2. Extract values 20 to 22 on each line
+# 3. Convert "character" to "numeric"
+# 4. Subtract 273.15
+# 5. Calculate the mean
 
-temp <- substr(diary, 20, 22)      # 2
-temp <- as.numeric(temp)           # 3
-temp <- subtrahieren(temp, 273.15) # 4
-output <- mean(temp)               # 5
+temp <- substr(diary, 20, 22)  # 2
+temp <- as.numeric(temp)       # 3
+temp <- subtract(temp, 273.15) # 4
+output <- mean(temp)           # 5
 
-diary |>                  # 1
-  substr(20, 22) |>       # 2
-  as.numeric() |>         # 3
-  subtrahieren(273.15) |> # 4
-  mean()                  # 5
+diary |>              # 1
+  substr(20, 22) |>   # 2
+  as.numeric() |>     # 3
+  subtract(273.15) |> # 4
+  mean()              # 5
 
-studierende <- data.frame(
-  Matrikel_Nr = c(100002, 100003, 200003),
-  Studi = c("Patrick", "Manuela", "Eva"),
-  PLZ = c(8006, 8001, 8820)
+students <- data.frame(
+  Matriculation_No = c(100002, 100003, 200003),
+  Student = c("Patrick", "Manuela", "Eva"),
+  ZIP = c(8006, 8001, 8820)
 )
 
-studierende
+students
 
-ortschaften <- data.frame(
-  PLZ = c(8003, 8006, 8810, 8820),
-  Ortsname = c("Zürich", "Zürich", "Horgen", "Wädenswil")
+localities <- data.frame(
+  ZIP = c(8003, 8006, 8810, 8820),
+  LocalityName = c("Zurich", "Zurich", "Horgen", "Wadenswil")
 )
 
-ortschaften
+localities
 
 # Load library
 library("dplyr")
 
-inner_join(studierende, ortschaften, by = "PLZ")
+inner_join(students, localities, by = "ZIP")
 
-left_join(studierende, ortschaften, by = "PLZ")
+left_join(students, localities, by = "ZIP")
 
-right_join(studierende, ortschaften, by = "PLZ")
+right_join(students, localities, by = "ZIP")
 
-full_join(studierende, ortschaften, by = "PLZ")
+full_join(students, localities, by = "ZIP")
 
-studierende <- data.frame(
-  Matrikel_Nr = c(100002, 100003, 200003),
-  Studi = c("Patrick", "Manuela", "Pascal"),
-  Wohnort = c(8006, 8001, 8006)
+students <- data.frame(
+  Matriculation_No = c(100002, 100003, 200003),
+  Student = c("Patrick", "Manuela", "Pascal"),
+  Residence = c(8006, 8001, 8006)
 )
 
-left_join(studierende, ortschaften, by = c("Wohnort" = "PLZ"))
+left_join(students, localities, by = c("Residence" = "ZIP"))

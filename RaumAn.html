@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Research Methods HS23 - Räumliche Analysen</title>
+<title>Data Analysis and Monitoring FS24 - Spatial Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,7 +17,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./rauman/Rauman0_Vorbereitung.html" rel="next">
-<link href="./statistic/statistic.html" rel="prev">
+<link href="./statistic/Statistic.html" rel="prev">
 <script src="site_libs/quarto-listing/list.min.js"></script>
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -53,15 +53,16 @@ ul.task-list li input[type="checkbox"] {
   "type": "textbox",
   "limit": 20,
   "language": {
-    "search-no-results-text": "Keine Treffer",
-    "search-matching-documents-text": "Treffer",
-    "search-copy-link-title": "Link in die Suche kopieren",
-    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
-    "search-more-match-text": "weitere Treffer in diesem Dokument",
-    "search-more-matches-text": "weitere Treffer in diesem Dokument",
-    "search-clear-button-title": "Zurücksetzen",
-    "search-detached-cancel-button-title": "Abbrechen",
-    "search-submit-button-title": "Abschicken"
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script>
@@ -74,9 +75,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-date','listing-lesson','listing-thema',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      valueNames: ['listing-title','listing-date','listing-lesson','listing-topic',{ data: ['index'] },{ data: ['categories'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author"],
+      searchColumns: [],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -130,6 +131,7 @@ window.onload = function() {
 
 </script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="custom.css">
@@ -140,11 +142,16 @@ window.onload = function() {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Räumliche Analysen</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./RaumAn.html">Spatial Analysis</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -152,16 +159,16 @@ window.onload = function() {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="./index.html" class="sidebar-logo-link">
       <img src="./images/zhaw_sw_neg.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Research Methods HS23</a> 
+      <a href="./">Data Analysis and Monitoring FS24</a> 
         <div class="sidebar-tools-main">
-  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
@@ -169,29 +176,31 @@ window.onload = function() {
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Willkommen</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./PrePro.html" class="sidebar-item-text sidebar-link">Pre-Processing</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a href="./PrePro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pre-Processing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./prepro/Prepro1_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Vorbereitung</span></a>
+  <a href="./prepro/Prepro1_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preparation</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -202,7 +211,7 @@ window.onload = function() {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./prepro/Prepro1_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">PrePro 1: Übung</span></a>
+  <a href="./prepro/Prepro1_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">PrePro 1: Exercise</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -213,12 +222,12 @@ window.onload = function() {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./prepro/Prepro2_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prepro 2: Übung A</span></a>
+  <a href="./prepro/Prepro2_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prepro 2: Exercise A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./prepro/Prepro2_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prepro 2: Übung B</span></a>
+  <a href="./prepro/Prepro2_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prepro 2: Exercise B</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -229,22 +238,23 @@ window.onload = function() {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./prepro/Prepro3_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prepro 3: Übung</span></a>
+  <a href="./prepro/Prepro3_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prepro 3: Exercise</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./InfoVis.html" class="sidebar-item-text sidebar-link">Informationsvisualisierung</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a href="./InfoVis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Information Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./infovis/Infovis1_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Vorbereitung</span></a>
+  <a href="./infovis/Infovis1_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preparation</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -255,120 +265,106 @@ window.onload = function() {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./infovis/Infovis1_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Infovis 1: Übung</span></a>
+  <a href="./infovis/Infovis1_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Infovis 1: Exercise</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./infovis/Infovis1_Script_eda.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Infovis 1: Script EDA</span></a>
+  <a href="./infovis/Infovis1_Script_eda.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Infovis 1: EDA Script</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./infovis/Infovis2_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Infovis 2: Übung A</span></a>
+  <a href="./infovis/Infovis2_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Infovis 2: Exercise A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./infovis/Infovis2_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Infovis 2: Übung optional</span></a>
+  <a href="./infovis/Infovis2_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Infovis 2: Exercise B (Optional)</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./statistic.html" class="sidebar-item-text sidebar-link">Untitled</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a href="./Statistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistic</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./statistic/statistic.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">statistic.html</span></a>
+  <a href="./statistic/Statistic.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistic</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./RaumAn.html" class="sidebar-item-text sidebar-link active">Räumliche Analysen</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a href="./RaumAn.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Spatial Analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rauman/Rauman0_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Vorbereitung</span></a>
+  <a href="./rauman/Rauman0_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preparation</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rauman/Rauman1_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 1: Übung A</span></a>
+  <a href="./rauman/Rauman1_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 1: Exercise A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rauman/Rauman1_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 1: Übung B</span></a>
-  </div>
-</li>
-          <li class="px-0"><hr class="sidebar-divider hi "></li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./rauman/Rauman2_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 2: Übung A</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./rauman/Rauman2_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 2: Übung B</span></a>
+  <a href="./rauman/Rauman1_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 1: Exercise B</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rauman/Rauman3_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 3: Übung A</span></a>
+  <a href="./rauman/Rauman2_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 2: Exercise A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rauman/Rauman3_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 3: Übung B</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./rauman/Rauman3_Uebung_C.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 3: Übung C (Optional)</span></a>
+  <a href="./rauman/Rauman2_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 2: Exercise B</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rauman/Rauman4_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 4: Übung</span></a>
-  </div>
-</li>
-          <li class="px-0"><hr class="sidebar-divider hi "></li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./rauman/Rauman5_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 5: Übung A</span></a>
+  <a href="./rauman/Rauman3_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 3: Exercise A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rauman/Rauman5_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 5: Übung B</span></a>
+  <a href="./rauman/Rauman3_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 3: Exercise B</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rauman/Rauman3_Uebung_C.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 3: Exercise C (Optional)</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./References.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Literaturverzeichnis</span></a>
+  <a href="./References.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
@@ -378,7 +374,7 @@ window.onload = function() {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Räumliche Analysen</h1>
+<h1 class="title">Spatial Analysis</h1>
 </div>
 
 
@@ -393,27 +389,27 @@ window.onload = function() {
 
 </header>
 
-<!-- ## Teil 1
+<!-- ## Part 1
 
-Die erste Übung zur Raumanalyse illustriert das einfache Laden und Anzeigen von Geodaten im Vektor- und Raster-Datenformat. Zusätzlich veranschaulicht die Übung den Umgang mit Koordinatensystemen sowie die Vektor-Raster-Konvertierung. Einfach erste Analysen illustrieren den Spatial Join, die Annotieren von Punkten mit Attributen von die Punkte einbettenden Vektordaten. Zum Abschluss thematisiert die Übung die Aggregationsabhängigkeit räumlicher Daten durch die Illustration des Modifiable Areal Unit Problem (MAUP). 
+The first exercise introduces the basics of loading and displaying geospatial data in both vector and raster formats. It also covers the fundamentals of coordinate systems and vector-to-raster conversion. Initial analyses demonstrate the use of Spatial Joins and the annotation of points with attributes from enclosing vector data. Finally, the issue of spatial data aggregation dependency is addressed, illustrated by the Modifiable Areal Unit Problem (MAUP).
 
-## Teil 2
+## Part 2
 
-In dieser zweiten Übung wirst Du wiederum Geodatensätze verarbeiten und darstellen. Wir starten mit einem Punktdatensatz zu einem Messnetz zur Erhebung der Luftqualität in der Schweiz (Stickstoffdioxid NO2 um genau zu sein). Im Gegensatz zum Punktdatensatz zur Wasserverfügbarkeit aus der vorherigen Übung, sind die Messstellen des Messnetzes zur Luftqualität sehr unregelmässig im Raum verteilt. Trotzdem möchten wir versuchen einen kontinuierlichen Layer von Luftqualitätswerten für die ganze Schweiz zu interpolieren. Wir starten mit der einfachen Interpolations-Methode Inverse Distance Weighting IDW. Danach wollen wir für den gleichen Datensatz nach dem Ansatz der nächsten Nachbarn die Thiessen Polygone konstruieren. Im zweiten Teil der Übung wollen wir Dichteverteilung untersuchen. Dabei untersuchen wir einen Datensatz mit Bewegungsdaten eines Rotmilans in der Schweiz. Mittels einer Kernel Density Estimation (KDE) berechnen wir eine kontinuierliche Dichteverteilung, über die wir eine Annäherung an das Habitat des untersuchten Greifvogels berechnen können. Wer mag, kann sich in der optionalen Übung C die Punktdatensätze genauer anschauen, über die Berechnung der G-Function.
+The second exercise focuses on processing and visualising geospatial datasets, starting with a point dataset on air quality measurement in Switzerland (specifically nitrogen dioxide (NO2) levels). Unlike the point dataset on water availability from the previous exercise, the air quality monitoring sites have an irregular spatial distribution. Nevertheless, the goal is to interpolate a continuous layer of air quality values across Switzerland. We begin with the Inverse Distance Weighting (IDW) interpolation method, followed by constructing Thiessen Polygons using a nearest-neighbor approach. The latter part of the exercise examines density distribution, utilising a dataset on the movement of red kites in Switzerland. A Kernel Density Estimation (KDE) will be used to calculate a continuous density distribution, providing an approximation of the habitat of this bird of prey species. An optional exercise C allows for a deeper exploration of the point datasets through the calculation of the G-Function.
 
-## Teil 3
+## Part 3
 
-Im dritten Teil von Spatial Data Science berechnen wir mit dem Moran’s I einen Index zur Berechnung der räumlichen Autokorrelation einer Choroplethenkarte. Wir verwenden nochmals die aggregierten Choroplethenkarten zur Wasserverfügbarkeit aus der ersten Übung und schauen uns an, wie stark die Werte für die Kantone und die Bezirke autokorreliert sind. Anstatt einfach eine Funktion zur Berechnung von Moran’s I aufzurufen und diese dann wie eine Black Box anzuwenden, wollen wir Formel für die Berechnung des Index in Ihre Bausteine zerlegen und diese Schritt für Schritt selber nachrechnen. So seht Ihr, wie  Moran’s I wirklich funktioniert und könnte dabei erst noch die zuvor gelernten Data Science Techniken repetieren. 
+The third part focuses on calculating spatial autocorrelation with Moran’s I for a choropleth map. Revisiting the aggregated water availability maps from the first exercise, we will examine the degree to which the cantons and districts are autocorrelated. Instead of simply applying a function to calculate Moran’s I without understanding how it works, we will break down the formula into its components and work through it step by step. This hands-on approach not only highlights how Moran’s I operates but also reinforces the data science techniques learned previously.
 
-## Teil 4
+## Part 4
 
-In der Übung 4 lernt ihr einfache räumliche Analyse-Werkezeuge kennen, und zwar für Vektor- und Rasterdaten. Zuerst kehren wir zurück zu den Vegeationsdaten des Campus Grüental. Jetzt wollen wir anstelle des Spatial Joins aber mit Puffern arbeiten. Die kreisförmigen Puffer sollen für jeden Datenpunkt eine räumliche Nachbarschaft der Raumnutzung berechnen. Im zweiten Teil nähern wir uns dem Rasterdatenformat an, und zwar über klassische Operationen über ein digitales Geländemodell. Dabei berechnen wir Hangneigung und Exposition.
+In exercise 4, you will become familiar with basic spatial analysis tools for both vector and raster data. We will first revisit the vegetation data from the Grüental Campus, this time using buffers instead of spatial joins to calculate the spatial neighbourhood land use for each data point. Next, we will transition to the raster data format by applying classic analytical operations to a digital elevation model, where we calculate the slope and aspect of the terrain.
 
-## Teil 5
+## Part 5
 
-Den krönenden Abschluss des Themenblocks Raumanalyse bildet die Durchführung einer Multi-Kriterien Analyse zur Bestimmung von optimalen Standorten für Windturbinen. Dabei orientieren wir uns an die in der Vorlesung behandelten Vorgaben und setzen die geforderten Kriterien mit Raumdaten um. Für die Vorbereitung der Datensätze kommen nun viele Konzepte und Verfahren wieder zum Zug, die Ihr bisher kennen gelernt habt. Zum Schluss gewichten wir die einzelnen Layer und verschneiden sie zu einer Eignungskarte.
+The focus on spatial analysis culminates with a multi-criteria analysis to determine optimal locations for wind turbines. Following the guidelines discussed in the lectures, you will apply the required criteria using spatial data. This exercise integrates many of the concepts and methods you have learned so far. At the end, individual layers are weighted and combined to create a suitability map for wind turbine placement.
 
-Auf geht’s! -->
+Let's get started! -->
 
 
 
@@ -424,179 +420,25 @@ Auf geht’s! -->
 <thead>
 <tr>
 <th>
-Titel
+Title
 </th>
 <th>
-Datum
+Date
 </th>
 <th>
 Lesson
 </th>
 <th>
-Thema
+Topic
 </th>
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-listing-date-sort="1701039600000" data-listing-file-modified-sort="1700745785970" data-listing-reading-time-sort="0.44" data-listing-title-sort="Vorbereitung">
-<td class="listing-title">
-<a href="./rauman/Rauman0_Vorbereitung.html" class="title">Vorbereitung</a>
-</td>
-<td class="listing-date">
-2023-11-27
-</td>
-<td class="listing-lesson">
-RaumAn1
-</td>
-<td class="listing-thema">
-Vorbereitung
-</td>
-</tr>
-<tr data-index="1" data-listing-date-sort="1701039600000" data-listing-file-modified-sort="1700745785972" data-listing-reading-time-sort="6.08" data-listing-title-sort="Rauman 1: Übung A">
-<td class="listing-title">
-<a href="./rauman/Rauman1_Uebung_A.html" class="title">Rauman 1: Übung A</a>
-</td>
-<td class="listing-date">
-2023-11-27
-</td>
-<td class="listing-lesson">
-RaumAn1
-</td>
-<td class="listing-thema">
-Einführung
-</td>
-</tr>
-<tr data-index="2" data-listing-date-sort="1701039600000" data-listing-file-modified-sort="1700745785973" data-listing-reading-time-sort="1.665" data-listing-title-sort="Rauman 1: Übung B">
-<td class="listing-title">
-<a href="./rauman/Rauman1_Uebung_B.html" class="title">Rauman 1: Übung B</a>
-</td>
-<td class="listing-date">
-2023-11-27
-</td>
-<td class="listing-lesson">
-RaumAn1
-</td>
-<td class="listing-thema">
-Spatial Joins
-</td>
-</tr>
-<tr data-index="3" data-listing-date-sort="1701126000000" data-listing-file-modified-sort="1700745785974" data-listing-reading-time-sort="3.27" data-listing-title-sort="Rauman 2: Übung A">
-<td class="listing-title">
-<a href="./rauman/Rauman2_Uebung_A.html" class="title">Rauman 2: Übung A</a>
-</td>
-<td class="listing-date">
-2023-11-28
-</td>
-<td class="listing-lesson">
-RaumAn2
-</td>
-<td class="listing-thema">
-Vector Data
-</td>
-</tr>
-<tr data-index="4" data-listing-date-sort="1701126000000" data-listing-file-modified-sort="1700745785975" data-listing-reading-time-sort="3.835" data-listing-title-sort="Rauman 2: Übung B">
-<td class="listing-title">
-<a href="./rauman/Rauman2_Uebung_B.html" class="title">Rauman 2: Übung B</a>
-</td>
-<td class="listing-date">
-2023-11-28
-</td>
-<td class="listing-lesson">
-RaumAn2
-</td>
-<td class="listing-thema">
-Einführung Rasterdaten
-</td>
-</tr>
-<tr data-index="5" data-listing-date-sort="1701644400000" data-listing-file-modified-sort="1700745785976" data-listing-reading-time-sort="4.9" data-listing-title-sort="Rauman 3: Übung A">
-<td class="listing-title">
-<a href="./rauman/Rauman3_Uebung_A.html" class="title">Rauman 3: Übung A</a>
-</td>
-<td class="listing-date">
-2023-12-04
-</td>
-<td class="listing-lesson">
-RaumAn3
-</td>
-<td class="listing-thema">
-Dichteschätzung
-</td>
-</tr>
-<tr data-index="6" data-listing-date-sort="1701644400000" data-listing-file-modified-sort="1700745785977" data-listing-reading-time-sort="5.655" data-listing-title-sort="Rauman 3: Übung B">
-<td class="listing-title">
-<a href="./rauman/Rauman3_Uebung_B.html" class="title">Rauman 3: Übung B</a>
-</td>
-<td class="listing-date">
-2023-12-04
-</td>
-<td class="listing-lesson">
-RaumAn3
-</td>
-<td class="listing-thema">
-Räumliche Interpolation
-</td>
-</tr>
-<tr data-index="7" data-listing-date-sort="1701644400000" data-listing-file-modified-sort="1700745785978" data-listing-reading-time-sort="3.105" data-listing-title-sort="Rauman 3: Übung C (Optional)">
-<td class="listing-title">
-<a href="./rauman/Rauman3_Uebung_C.html" class="title">Rauman 3: Übung C (Optional)</a>
-</td>
-<td class="listing-date">
-2023-12-04
-</td>
-<td class="listing-lesson">
-RaumAn3
-</td>
-<td class="listing-thema">
-G-Funktion
-</td>
-</tr>
-<tr data-index="8" data-listing-date-sort="1701730800000" data-listing-file-modified-sort="1700745785980" data-listing-reading-time-sort="6.215" data-listing-title-sort="Rauman 4: Übung">
-<td class="listing-title">
-<a href="./rauman/Rauman4_Uebung_A.html" class="title">Rauman 4: Übung</a>
-</td>
-<td class="listing-date">
-2023-12-05
-</td>
-<td class="listing-lesson">
-RaumAn4
-</td>
-<td class="listing-thema">
-Morans I
-</td>
-</tr>
-<tr data-index="9" data-listing-date-sort="1702249200000" data-listing-file-modified-sort="1700745785981" data-listing-reading-time-sort="6.125" data-listing-title-sort="Rauman 5: Übung A">
-<td class="listing-title">
-<a href="./rauman/Rauman5_Uebung_A.html" class="title">Rauman 5: Übung A</a>
-</td>
-<td class="listing-date">
-2023-12-11
-</td>
-<td class="listing-lesson">
-RaumAn5
-</td>
-<td class="listing-thema">
-Multi-Criteria Evaluation (MCE)
-</td>
-</tr>
-<tr data-index="10" data-listing-date-sort="1702249200000" data-listing-file-modified-sort="1700745785982" data-listing-reading-time-sort="2.995" data-listing-title-sort="Rauman 5: Übung B">
-<td class="listing-title">
-<a href="./rauman/Rauman5_Uebung_B.html" class="title">Rauman 5: Übung B</a>
-</td>
-<td class="listing-date">
-2023-12-11
-</td>
-<td class="listing-lesson">
-RaumAn5
-</td>
-<td class="listing-thema">
-Multi-Criteria Evaluation (MCE)
-</td>
-</tr>
 </tbody>
 
 </table>
 <div class="listing-no-matching d-none">
-Keine Treffer
+No matching items
 </div>
 </div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -741,9 +583,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -754,12 +610,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Kopiert");
+    button.setAttribute("title", "Copied!");
     let tooltip;
     if (window.bootstrap) {
       button.setAttribute("data-bs-toggle", "tooltip");
       button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Kopiert");
+      button.setAttribute("data-bs-title", "Copied!");
       tooltip = new bootstrap.Tooltip(button, 
         { trigger: "manual", 
           customClass: "code-copy-button-tooltip",
@@ -859,6 +715,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -900,13 +842,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./statistic/statistic.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">statistic.html</span></span>
+      <a href="./statistic/Statistic.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Statistic</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./rauman/Rauman0_Vorbereitung.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-title">Vorbereitung</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-title">Preparation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
