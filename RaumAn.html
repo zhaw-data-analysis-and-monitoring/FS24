@@ -319,39 +319,39 @@ window.onload = function() {
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rauman/Rauman1_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 1: Exercise A</span></a>
+  <a href="./rauman/Rauman1_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">StatAn 1: Exercise A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rauman/Rauman1_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 1: Exercise B</span></a>
-  </div>
-</li>
-          <li class="px-0"><hr class="sidebar-divider hi "></li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./rauman/Rauman2_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 2: Exercise A</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./rauman/Rauman2_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 2: Exercise B</span></a>
+  <a href="./rauman/Rauman1_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">SpatAn1 1: Exercise B</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rauman/Rauman3_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 3: Exercise A</span></a>
+  <a href="./rauman/Rauman2_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">SpatAn 2: Exercise A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rauman/Rauman3_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 3: Exercise B</span></a>
+  <a href="./rauman/Rauman2_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">SpatAn 2: Exercise B</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rauman/Rauman3_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">SpatAn 3: Exercise A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rauman/Rauman3_Uebung_C.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 3: Exercise C (Optional)</span></a>
+  <a href="./rauman/Rauman3_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">SpatAn 3: Exercise B</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rauman/Rauman3_Uebung_C.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">SpatAn 3: Exercise C (Optional)</span></a>
   </div>
 </li>
       </ul>
@@ -367,7 +367,15 @@ window.onload = function() {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#part-1" id="toc-part-1" class="nav-link active" data-scroll-target="#part-1">Part 1</a></li>
+  <li><a href="#part-2" id="toc-part-2" class="nav-link" data-scroll-target="#part-2">Part 2</a></li>
+  <li><a href="#part-3" id="toc-part-3" class="nav-link" data-scroll-target="#part-3">Part 3</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -389,30 +397,22 @@ window.onload = function() {
 
 </header>
 
-<!-- ## Part 1
-
-The first exercise introduces the basics of loading and displaying geospatial data in both vector and raster formats. It also covers the fundamentals of coordinate systems and vector-to-raster conversion. Initial analyses demonstrate the use of Spatial Joins and the annotation of points with attributes from enclosing vector data. Finally, the issue of spatial data aggregation dependency is addressed, illustrated by the Modifiable Areal Unit Problem (MAUP).
-
-## Part 2
-
-The second exercise focuses on processing and visualising geospatial datasets, starting with a point dataset on air quality measurement in Switzerland (specifically nitrogen dioxide (NO2) levels). Unlike the point dataset on water availability from the previous exercise, the air quality monitoring sites have an irregular spatial distribution. Nevertheless, the goal is to interpolate a continuous layer of air quality values across Switzerland. We begin with the Inverse Distance Weighting (IDW) interpolation method, followed by constructing Thiessen Polygons using a nearest-neighbor approach. The latter part of the exercise examines density distribution, utilising a dataset on the movement of red kites in Switzerland. A Kernel Density Estimation (KDE) will be used to calculate a continuous density distribution, providing an approximation of the habitat of this bird of prey species. An optional exercise C allows for a deeper exploration of the point datasets through the calculation of the G-Function.
-
-## Part 3
-
-The third part focuses on calculating spatial autocorrelation with Moran’s I for a choropleth map. Revisiting the aggregated water availability maps from the first exercise, we will examine the degree to which the cantons and districts are autocorrelated. Instead of simply applying a function to calculate Moran’s I without understanding how it works, we will break down the formula into its components and work through it step by step. This hands-on approach not only highlights how Moran’s I operates but also reinforces the data science techniques learned previously.
-
-## Part 4
-
-In exercise 4, you will become familiar with basic spatial analysis tools for both vector and raster data. We will first revisit the vegetation data from the Grüental Campus, this time using buffers instead of spatial joins to calculate the spatial neighbourhood land use for each data point. Next, we will transition to the raster data format by applying classic analytical operations to a digital elevation model, where we calculate the slope and aspect of the terrain.
-
-## Part 5
-
-The focus on spatial analysis culminates with a multi-criteria analysis to determine optimal locations for wind turbines. Following the guidelines discussed in the lectures, you will apply the required criteria using spatial data. This exercise integrates many of the concepts and methods you have learned so far. At the end, individual layers are weighted and combined to create a suitability map for wind turbine placement.
-
-Let's get started! -->
+<section id="part-1" class="level2">
+<h2 class="anchored" data-anchor-id="part-1">Part 1</h2>
+<p>The first exercise introduces the basics of loading and displaying geospatial data in both vector and raster formats. It also covers the fundamentals of coordinate systems and vector-to-raster conversion. Initial analyses demonstrate the use of Spatial Joins and the annotation of points with attributes from enclosing vector data. Finally, the issue of spatial data aggregation dependency is addressed, illustrated by the Modifiable Areal Unit Problem (MAUP).</p>
+</section>
+<section id="part-2" class="level2">
+<h2 class="anchored" data-anchor-id="part-2">Part 2</h2>
+<p>The second exercise focuses on processing and visualising geospatial datasets, starting with a point dataset on air quality measurement in Switzerland (specifically nitrogen dioxide (NO2) levels). Unlike the point dataset on water availability from the previous exercise, the air quality monitoring sites have an irregular spatial distribution. Nevertheless, the goal is to interpolate a continuous layer of air quality values across Switzerland. We begin with the Inverse Distance Weighting (IDW) interpolation method, followed by constructing Thiessen Polygons using a nearest-neighbor approach. The latter part of the exercise examines density distribution, utilising a dataset on the movement of red kites in Switzerland. A Kernel Density Estimation (KDE) will be used to calculate a continuous density distribution, providing an approximation of the habitat of this bird of prey species. An optional exercise C allows for a deeper exploration of the point datasets through the calculation of the G-Function.</p>
+</section>
+<section id="part-3" class="level2">
+<h2 class="anchored" data-anchor-id="part-3">Part 3</h2>
+<p>The third part focuses on calculating spatial autocorrelation with Moran’s I for a choropleth map. Revisiting the aggregated water availability maps from the first exercise, we will examine the degree to which the cantons and districts are autocorrelated. Instead of simply applying a function to calculate Moran’s I without understanding how it works, we will break down the formula into its components and work through it step by step. This hands-on approach not only highlights how Moran’s I operates but also reinforces the data science techniques learned previously.</p>
+<p>Let’s get started!</p>
 
 
 
+</section>
 
 <div class="quarto-listing quarto-listing-container-table" id="listing-listing">
 
