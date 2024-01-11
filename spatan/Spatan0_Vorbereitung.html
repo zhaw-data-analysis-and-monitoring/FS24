@@ -149,7 +149,7 @@ window.onload = function() {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../SpatAn.html">Spatial Analysis</a></li><li class="breadcrumb-item"><a href="../spatan/Spatan0_Vorbereitung.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Preparation</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../SpatAn.html">Spatial Analysis</a></li><li class="breadcrumb-item"><a href="../spatan/Spatan0_Vorbereitung.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Preparation</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -202,7 +202,7 @@ window.onload = function() {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../prepro/Prepro1_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preparation</span></a>
+  <a href="../prepro/Prepro0_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preparation</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -256,7 +256,7 @@ window.onload = function() {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../infovis/Infovis1_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preparation</span></a>
+  <a href="../infovis/Infovis0_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preparation</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -299,7 +299,25 @@ window.onload = function() {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../statistic/Statistic.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistic</span></a>
+  <a href="../statistic/Stat0_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preparation</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistic/Stat1_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistic 1</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistic/Stat2_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistic 2</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistic/Stat3_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistic 3</span></a>
   </div>
 </li>
       </ul>
@@ -321,7 +339,7 @@ window.onload = function() {
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../spatan/Spatan1_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">StatAn 1: Exercise A</span></a>
+  <a href="../spatan/Spatan1_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">SpatAn 1: Exercise A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -397,7 +415,7 @@ window.onload = function() {
 
 </header>
 
-<p>As part of Rauman 1 - 3, we will need some R packages. We recommend installing them <em>before</em> the first lesson. Similar to the preparation exercise <a href="../prepro/Prepro1_Vorbereitung.html">in Prepro1</a> you can use the code below to automatically install all packages that have not yet been installed.</p>
+<p>As part of Rauman 1 - 3, we will need some R packages. We recommend installing them <em>before</em> the first lesson. Similar to the preparation exercise <a href="../prepro/Prepro0_Vorbereitung.html">in Prepro1</a> you can use the code below to automatically install all packages that have not yet been installed.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ipak <span class="ot">&lt;-</span> <span class="cf">function</span>(pkg) {</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  new.pkg <span class="ot">&lt;-</span> pkg[<span class="sc">!</span>(pkg <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[, <span class="st">"Package"</span>])]</span>
@@ -825,7 +843,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="../spatan/Spatan1_Uebung_A.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-title">StatAn 1: Exercise A</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-title">SpatAn 1: Exercise A</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

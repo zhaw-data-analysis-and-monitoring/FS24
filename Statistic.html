@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./statistic/Statistic.html" rel="next">
+<link href="./statistic/Stat0_Vorbereitung.html" rel="next">
 <link href="./infovis/Infovis2_Uebung_B.html" rel="prev">
 <script src="site_libs/quarto-listing/list.min.js"></script>
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
@@ -75,9 +75,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-date','listing-lesson','listing-topic',{ data: ['index'] },{ data: ['categories'] }],
+      valueNames: ['listing-title','listing-date','listing-lesson','listing-topic',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
       
-      searchColumns: [],
+      searchColumns: ["listing-date","listing-title","listing-author"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -200,7 +200,7 @@ window.onload = function() {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./prepro/Prepro1_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preparation</span></a>
+  <a href="./prepro/Prepro0_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preparation</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -254,7 +254,7 @@ window.onload = function() {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./infovis/Infovis1_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preparation</span></a>
+  <a href="./infovis/Infovis0_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preparation</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -297,7 +297,25 @@ window.onload = function() {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./statistic/Statistic.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistic</span></a>
+  <a href="./statistic/Stat0_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preparation</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./statistic/Stat1_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistic 1</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./statistic/Stat2_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistic 2</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./statistic/Stat3_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistic 3</span></a>
   </div>
 </li>
       </ul>
@@ -319,7 +337,7 @@ window.onload = function() {
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./spatan/Spatan1_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">StatAn 1: Exercise A</span></a>
+  <a href="./spatan/Spatan1_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">SpatAn 1: Exercise A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -389,7 +407,7 @@ window.onload = function() {
 
 </header>
 
-<p>test</p>
+<p>Write Intro</p>
 
 
 
@@ -414,6 +432,62 @@ Topic
 </tr>
 </thead>
 <tbody class="list">
+<tr data-index="0" data-listing-date-sort="1712008800000" data-listing-file-modified-sort="1704983477194" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="Preparation">
+<td>
+<a href="./statistic/Stat0_Vorbereitung.html" class="title listing-title">Preparation</a>
+</td>
+<td>
+<span class="listing-date">2024-04-02</span>
+</td>
+<td>
+<span class="listing-lesson">stat1</span>
+</td>
+<td>
+<span class="listing-topic">Preparation</span>
+</td>
+</tr>
+<tr data-index="1" data-listing-date-sort="1712008800000" data-listing-file-modified-sort="1704983469336" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="Statistic 1">
+<td>
+<a href="./statistic/Stat1_Uebung.html" class="title listing-title">Statistic 1</a>
+</td>
+<td>
+<span class="listing-date">2024-04-02</span>
+</td>
+<td>
+<span class="listing-lesson">stat1</span>
+</td>
+<td>
+<span class="listing-topic">Statistic 1</span>
+</td>
+</tr>
+<tr data-index="2" data-listing-date-sort="1712613600000" data-listing-file-modified-sort="1704983460822" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="Statistic 2">
+<td>
+<a href="./statistic/Stat2_Uebung.html" class="title listing-title">Statistic 2</a>
+</td>
+<td>
+<span class="listing-date">2024-04-09</span>
+</td>
+<td>
+<span class="listing-lesson">stat2</span>
+</td>
+<td>
+<span class="listing-topic">Statistic 2</span>
+</td>
+</tr>
+<tr data-index="3" data-listing-date-sort="1713823200000" data-listing-file-modified-sort="1704983453766" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="Statistic 3">
+<td>
+<a href="./statistic/Stat3_Uebung.html" class="title listing-title">Statistic 3</a>
+</td>
+<td>
+<span class="listing-date">2024-04-23</span>
+</td>
+<td>
+<span class="listing-lesson">stat3</span>
+</td>
+<td>
+<span class="listing-topic">Statistic 3</span>
+</td>
+</tr>
 </tbody>
 
 </table>
@@ -827,8 +901,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./statistic/Statistic.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-title">Statistic</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./statistic/Stat0_Vorbereitung.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">Preparation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
