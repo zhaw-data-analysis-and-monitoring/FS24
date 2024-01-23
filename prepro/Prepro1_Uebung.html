@@ -409,7 +409,7 @@ window.onload = function() {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">PrePro 1: Exercise</span></h1>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">PrePro 1: Exercise</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
 </div>
 
 
@@ -460,6 +460,18 @@ window.onload = function() {
 <h2 class="anchored" data-anchor-id="task-1">Task 1</h2>
 <p>Create a <code>data.frame</code> with the following data.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">AnimalType =</span> <span class="fu">c</span>(<span class="st">"Fox"</span>, <span class="st">"Bear"</span>, <span class="st">"Rabbit"</span>, <span class="st">"Moose"</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Number =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">3</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Weight =</span> <span class="fu">c</span>(<span class="fl">4.4</span>, <span class="fl">40.3</span>, <span class="fl">1.1</span>, <span class="dv">120</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Gender =</span> <span class="fu">c</span>(<span class="st">"m"</span>, <span class="st">"f"</span>, <span class="st">"m"</span>, <span class="st">"m"</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Description =</span> <span class="fu">c</span>(<span class="st">"Reddish"</span>, <span class="st">"Brown, large"</span>, <span class="st">"Small, with long ears"</span>, <span class="st">"Long legs, shovel antlers"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <thead>
@@ -508,6 +520,23 @@ window.onload = function() {
 <section id="task-2" class="level2">
 <h2 class="anchored" data-anchor-id="task-2">Task 2</h2>
 <p>What <em>types</em> of data were automatically accepted in the last task? Check this using <code>str()</code>, see whether they make sense and convert where necessary.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 'data.frame':    4 obs. of  5 variables:</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ AnimalType : chr  "Fox" "Bear" "Rabbit" "Moose"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Number     : num  2 5 1 3</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Weight     : num  4.4 40.3 1.1 120</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Gender     : chr  "m" "f" "m" "m"</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Description: chr  "Reddish" "Brown, large" "Small, with long ears" "Long legs, shovel antlers"</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(df<span class="sc">$</span>Number)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "double"</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Number was interpreted as `double`, but it is actually an `integer`.</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Number <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(df<span class="sc">$</span>Number)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </section>
 <section id="task-3" class="level2">
 <h2 class="anchored" data-anchor-id="task-3">Task 3</h2>
@@ -517,6 +546,14 @@ window.onload = function() {
 <li>medium: 5 - 100 kg</li>
 <li>heavy: &gt; 100kg</li>
 </ul>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>WeightClass[df<span class="sc">$</span>Weight <span class="sc">&gt;</span> <span class="dv">100</span>] <span class="ot">&lt;-</span> <span class="st">"heavy"</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>WeightClass[df<span class="sc">$</span>Weight <span class="sc">&lt;=</span> <span class="dv">100</span> <span class="sc">&amp;</span> df<span class="sc">$</span>Weight <span class="sc">&gt;</span> <span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="st">"medium"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>WeightClass[df<span class="sc">$</span>Weight <span class="sc">&lt;=</span> <span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="st">"light"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <p>Result:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -594,6 +631,12 @@ Note
 </div>
 </div>
 <div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"datasets/prepro/weather.csv"</span>, <span class="st">","</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <thead>
@@ -662,6 +705,13 @@ Note
 <section id="task-5" class="level2">
 <h2 class="anchored" data-anchor-id="task-5">Task 5</h2>
 <p>Check the feedback from <code>read_csv()</code>. Have the data been interpreted correctly?</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The 'time' column was interpreted as 'integer'. However, it is </span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># obviously a time indication.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </section>
 <section id="task-6" class="level2">
 <h2 class="anchored" data-anchor-id="task-6">Task 6</h2>
@@ -681,6 +731,12 @@ Tip
 <li><code>as.POSIXct</code> requires a <code>character</code> input: If you receive the error message <code>'origin' must be supplied</code> (or similar), you have probably tried to input a <code>numeric</code> into the function with.</li>
 </ul>
 </div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>time <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(<span class="fu">as.character</span>(weather<span class="sc">$</span>time), <span class="at">format =</span> <span class="st">"%Y%m%d%H"</span>, <span class="at">tz =</span> <span class="st">"UTC"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -752,6 +808,13 @@ Tip
 <section id="task-7" class="level2">
 <h2 class="anchored" data-anchor-id="task-7">Task 7</h2>
 <p>Create two new columns for day of week (Monday, Tuesday, etc) and calendar week. Use the newly created <code>POSIXct</code> column and a suitable function from <code>lubridate</code>.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>weekday <span class="ot">&lt;-</span> <span class="fu">wday</span>(weather<span class="sc">$</span>time, <span class="at">label =</span> T)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>week <span class="ot">&lt;-</span> <span class="fu">week</span>(weather<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -843,6 +906,13 @@ Tip
 <section id="task-8" class="level2">
 <h2 class="anchored" data-anchor-id="task-8">Task 8</h2>
 <p>Create a new column based on the temperature values that classifies the rows into “cold” (below zero degrees) and “warm” (above zero degrees)</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>temp_cat[weather<span class="sc">$</span>tre200h0 <span class="sc">&gt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="st">"warm"</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>temp_cat[weather<span class="sc">$</span>tre200h0 <span class="sc">&lt;=</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="st">"cold"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
