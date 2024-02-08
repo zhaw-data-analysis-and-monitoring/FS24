@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data Analysis and Monitoring FS24 - Spatial Analysis</title>
+<title>Data Analysis and Monitoring FS24 - Preparation Course</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -30,10 +84,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./spatan/Spatan0_Vorbereitung.html" rel="next">
-<link href="./statistic/Stat3_Uebung.html" rel="prev">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
+<link href="./PrePro.html" rel="next">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -72,35 +124,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-date','listing-lesson','listing-topic',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 
 
 <!-- loads fontawesome, so that I can create a fontawesome button (see below) -->
@@ -138,35 +161,6 @@ window.onload = function() {
 
 </script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="custom.css">
 <link rel="stylesheet" href="theme-custom.scss">
@@ -181,7 +175,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./SpatAn.html">Spatial Analysis</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./preparation.html"><span class="chapter-title">Preparation Course</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -225,7 +219,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./preparation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preparation Course</span></a>
+  <a href="./preparation.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Preparation Course</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -361,13 +355,13 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./SpatAn.html" class="sidebar-item-text sidebar-link active">
+            <a href="./SpatAn.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Spatial Analysis</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./spatan/Spatan0_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preparation</span></a>
@@ -417,8 +411,13 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#part-1" id="toc-part-1" class="nav-link active" data-scroll-target="#part-1">Part 1</a></li>
-  <li><a href="#part-2" id="toc-part-2" class="nav-link" data-scroll-target="#part-2">Part 2</a></li>
+  <li><a href="#install-or-update-r" id="toc-install-or-update-r" class="nav-link active" data-scroll-target="#install-or-update-r">Install or update R</a></li>
+  <li><a href="#install-or-update-rstudio" id="toc-install-or-update-rstudio" class="nav-link" data-scroll-target="#install-or-update-rstudio">Install or update RStudio</a></li>
+  <li><a href="#configure-rstudio" id="toc-configure-rstudio" class="nav-link" data-scroll-target="#configure-rstudio">Configure RStudio</a>
+  <ul class="collapse">
+  <li><a href="#folder-structure" id="toc-folder-structure" class="nav-link" data-scroll-target="#folder-structure">Folder structure for this course</a></li>
+  <li><a href="#create-an-rstudio-project-for-the-first-week" id="toc-create-an-rstudio-project-for-the-first-week" class="nav-link" data-scroll-target="#create-an-rstudio-project-for-the-first-week">Create an RStudio <em>project</em> for the first week</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -427,7 +426,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Spatial Analysis</h1>
+<h1 class="title"><span id="w0-preparation" class="quarto-section-identifier"><span class="chapter-title">Preparation Course</span></span></h1>
 </div>
 
 
@@ -444,127 +443,103 @@ window.Quarto = {
 </header>
 
 
-<section id="part-1" class="level2">
-<h2 class="anchored" data-anchor-id="part-1">Part 1</h2>
-<p>The first exercise introduces the basics of loading and displaying geospatial data in both vector and raster formats. It also covers the fundamentals of coordinate systems and vector-to-raster conversion. Initial analyses demonstrate the use of Spatial Joins and the annotation of points with attributes from enclosing vector data. Finally, the issue of spatial data aggregation dependency is addressed, illustrated by the Modifiable Areal Unit Problem (MAUP).</p>
-</section>
-<section id="part-2" class="level2">
-<h2 class="anchored" data-anchor-id="part-2">Part 2</h2>
-<p>The second exercise focuses on processing and visualising geospatial datasets, starting with a point dataset on air quality measurement in Switzerland (specifically nitrogen dioxide (NO2) levels). Unlike the point dataset on water availability from the previous exercise, the air quality monitoring sites have an irregular spatial distribution. Nevertheless, the goal is to interpolate a continuous layer of air quality values across Switzerland. We begin with the Inverse Distance Weighting (IDW) interpolation method, followed by constructing Thiessen Polygons using a nearest-neighbor approach. The latter part of the exercise examines density distribution, utilising a dataset on the movement of red kites in Switzerland. A Kernel Density Estimation (KDE) will be used to calculate a continuous density distribution, providing an approximation of the habitat of this bird of prey species.</p>
-
-
-
-</section>
-
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-Title
-</th>
-<th>
-Date
-</th>
-<th>
-Lesson
-</th>
-<th>
-Topic
-</th>
-</tr>
-</thead>
-<tbody class="list">
-<tr data-index="0" data-listing-date-sort="1714428000000" data-listing-file-modified-sort="1704982607618" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="93" data-listing-title-sort="Preparation">
-<td>
-<a href="./spatan/Spatan0_Vorbereitung.html" class="title listing-title">Preparation</a>
-</td>
-<td>
-<span class="listing-date">2024-04-30</span>
-</td>
-<td>
-<span class="listing-lesson">SpatAn1</span>
-</td>
-<td>
-<span class="listing-topic">Preparation</span>
-</td>
-</tr>
-<tr data-index="1" data-listing-date-sort="1714428000000" data-listing-file-modified-sort="1706004616696" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1278" data-listing-title-sort="SpatAn 1: Exercise A">
-<td>
-<a href="./spatan/Spatan1_Uebung_A.html" class="title listing-title">SpatAn 1: Exercise A</a>
-</td>
-<td>
-<span class="listing-date">2024-04-30</span>
-</td>
-<td>
-<span class="listing-lesson">SpatAn1</span>
-</td>
-<td>
-<span class="listing-topic">Introduction</span>
-</td>
-</tr>
-<tr data-index="2" data-listing-date-sort="1714428000000" data-listing-file-modified-sort="1706004616696" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="343" data-listing-title-sort="SpatAn 1: Exercise B">
-<td>
-<a href="./spatan/Spatan1_Uebung_B.html" class="title listing-title">SpatAn 1: Exercise B</a>
-</td>
-<td>
-<span class="listing-date">2024-04-30</span>
-</td>
-<td>
-<span class="listing-lesson">SpatAn1</span>
-</td>
-<td>
-<span class="listing-topic">Spatial Joins</span>
-</td>
-</tr>
-<tr data-index="3" data-listing-date-sort="1714428000000" data-listing-file-modified-sort="1706004616697" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="684" data-listing-title-sort="SpatAn 2: Exercise A">
-<td>
-<a href="./spatan/Spatan2_Uebung_A.html" class="title listing-title">SpatAn 2: Exercise A</a>
-</td>
-<td>
-<span class="listing-date">2024-04-30</span>
-</td>
-<td>
-<span class="listing-lesson">SpatAn2</span>
-</td>
-<td>
-<span class="listing-topic">Vector Data</span>
-</td>
-</tr>
-<tr data-index="4" data-listing-date-sort="1714428000000" data-listing-file-modified-sort="1706793907887" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="772" data-listing-title-sort="SpatAn 2: Exercise B">
-<td>
-<a href="./spatan/Spatan2_Uebung_B.html" class="title listing-title">SpatAn 2: Exercise B</a>
-</td>
-<td>
-<span class="listing-date">2024-04-30</span>
-</td>
-<td>
-<span class="listing-lesson">SpatAn2</span>
-</td>
-<td>
-<span class="listing-topic">Raster Data</span>
-</td>
-</tr>
-<tr data-index="5" data-listing-date-sort="1714428000000" data-listing-file-modified-sort="1706794275316" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2224" data-listing-title-sort="SpatAn 2: Exercise C1">
-<td>
-<a href="./spatan/Spatan2_Uebung_C.html" class="title listing-title">SpatAn 2: Exercise C1</a>
-</td>
-<td>
-<span class="listing-date">2024-04-30</span>
-</td>
-<td>
-<span class="listing-lesson">SpatAn2</span>
-</td>
-<td>
-<span class="listing-topic">Raster Data</span>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="listing-no-matching d-none">
-No matching items
+<p>In this course we will be using R, RStudio and Git. We ask you to install and/or update these programs <em>before</em> the start of the course, so that we do not loose time once the course starts. In this chapter, we cover the course requirements and some tips on how you should change your RStudio settings.</p>
+<section id="install-or-update-r" class="level2">
+<h2 class="anchored" data-anchor-id="install-or-update-r">Install or update R</h2>
+<p>If you haven’t installed R yet, do so now by getting the newest version from <a href="https://cran.r-project.org/">CRAN</a>. If you do have R installed, check your Version of <code>R</code> by opening RStudio and typing the following command into the console.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>R.version.string</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "R version 4.3.2 (2023-10-31 ucrt)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div></main> <!-- /main -->
+<p>This returns the version number of your R installation, whereas the first digit (<code>4</code>) indicates the number of the <em>major release</em>, the second digit (<code>3</code>) indicates the <em>minor release</em> and the last digit (<code>2</code>) refers to the <em>patch release</em>. As a general rule of thumb, you will want to update R if you</p>
+<ul>
+<li>don’t have the current <em>major</em> version or</li>
+<li>are lagging two (or more) versions behind the current <em>minor release</em></li>
+</ul>
+<p>In the time of writing (February, 2024), the current <code>R</code> Version is 4.3.2 (released on 31.10.2023, see <a href="https://cran.r-project.org/">cran.r-project.org</a>). Your installation should therefore not be older than 4.2.0. If it is, make sure that you have updated R before the course. Check <a href="https://www.linkedin.com/pulse/3-methods-update-r-rstudio-windows-mac-woratana-ngarmtrakulchol/">these instructions on how to update R</a></p>
+</section>
+<section id="install-or-update-rstudio" class="level2">
+<h2 class="anchored" data-anchor-id="install-or-update-rstudio">Install or update RStudio</h2>
+<p>RStudio is the IDE (integrated development environment) we use in our course to interact with R. There are good alternatives you can use, RStudio simply seems to be <a href="https://twitter.com/mdancho84/status/1502237075550392323">the most popular choice</a>. If you want to use your own IDE, please feel free to do so. However, we don’t recommend this if you are a beginner.</p>
+<p>We recommend updating RStudio to the newest version before the course: check if this is the case by clicking on <em>help &gt; check for updates</em>.</p>
+</section>
+<section id="configure-rstudio" class="level2">
+<h2 class="anchored" data-anchor-id="configure-rstudio">Configure RStudio</h2>
+<p>Now we will set some RStudio Global options. But first, <strong>close all instances of RStudio and restart it (!!!)</strong>. Then go to Tools &gt; Global options.</p>
+<ul>
+<li><strong>R General</strong>
+<ul>
+<li>Deactivate the option “Restore .RData into workspace at startup”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
+<li>Set “Save workspace to .RData on exit” to “Never”<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
+</ul></li>
+<li><strong>Code</strong>
+<ul>
+<li>Activate the option “Use native pipe operator, |&gt; (requires R 4.1+)”</li>
+</ul></li>
+<li><strong>R Markdown</strong>
+<ul>
+<li>Deactivate the option “Show output inline for all R Markdown documents”</li>
+</ul></li>
+<li><strong>Terminal</strong>
+<ul>
+<li>Set option “New terminals open with” to “Git Bash”</li>
+</ul></li>
+</ul>
+<p>Click on “Ok” to apply the change and close the options menu.</p>
+<section id="folder-structure" class="level3">
+<h3 class="anchored" data-anchor-id="folder-structure">Folder structure for this course</h3>
+<p>By this point, you probably have created a folder for this course somewhere on your computer. In our example, we assume this folder is located here: <code>C:/Users/yourname/semester2/Modul_DAM</code> (mentally replace this with your actual path). Before we dive into the exercises, take a minute to think about how you are going to structure your files in this folder. This course will take place over several weeks, and in each week you will receive or produce various files. We recommend creating a separate folder for each week, and one folder for the case studies, like so:</p>
+<pre><code>Course Folder (C:\\Users\\yourname\\semester2\\Modul_DAM)
+ ¦--week_1                                                
+ ¦--week_2                                                
+ ¦--week_3                                                
+ |--...                                                
+ °--case_studies </code></pre>
+<p>For the R-exercises we recommend that you create a new RStudio Project each week in subdirectory of the appropriate week. For example, this week your folder structure could look like this:</p>
+<pre><code>Folder Week 1 (C:\\Users\\yourname\\semester2\\Modul_DAM\\week_1)
+ ¦--slides.pdf                                                  
+ ¦--my_notes.docx                                               
+ ¦--seminar_screenshot.jpg                                      
+ °---week1-rexercise                                             
+     ¦--dam-week1-rexercise.Rproj                                   
+     ¦--test.csv                                      
+     °--my_solution.qmd   </code></pre>
+<p>Note:</p>
+<ul>
+<li>the RStudio Project is located in a subfolder of <code>C:/Users/yourname/semester1/Modul_DAM/week_1</code> and named <code>dam-week1-rexercise</code>.</li>
+<li><code>dam-week1-rexercise</code> is the project’s <em>directory name</em> and the <em>project name</em></li>
+<li>we realize that <code>dam</code> and the week number is redundant, there is a reason<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> for this</li>
+<li>this means each week is a fresh start (which has pros and cons)</li>
+</ul>
+</section>
+<section id="create-an-rstudio-project-for-the-first-week" class="level3">
+<h3 class="anchored" data-anchor-id="create-an-rstudio-project-for-the-first-week">Create an RStudio <em>project</em> for the first week</h3>
+<p>Create a new <em>RStudio Project</em> (File &gt; New Project &gt; New Directory &gt; New Project).</p>
+<ol type="1">
+<li>Click on “Browse” and switch to <em>your equivalent</em> of the folder <code>C:/Users/yourname/semester1/Modul_DAM/week_1</code> (the project we are about to initiate will be be created in a subdirectory of this folder). Click on “open” to confirm the selection</li>
+<li>In the field “Directory name”, type <code>dam-week1-rexercise</code>. This will be the name of your RStudio project and it’s parent directory.</li>
+<li>Click on “Create Project”</li>
+</ol>
+<p>You are all set! You can start working on the tasks of exercise 1.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-wickham2017" class="csl-entry" role="listitem">
+Wickham, Hadley, and Garrett Grolemund. 2017. <em>R for Data Science</em>. O’Reilly. <a href="https://ebookcentral.proquest.com/lib/zhaw/detail.action?docID=4770093">https://ebookcentral.proquest.com/lib/zhaw/detail.action?docID=4770093</a>.
+</div>
+</div>
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>We recommend that you start each RStudio session with a blank slate, as recommended by <span class="citation" data-cites="wickham2017">Wickham and Grolemund (<a href="References.html#ref-wickham2017" role="doc-biblioref">2017</a>)</span> see <a href="https://r4ds.had.co.nz/workflow-projects.html">here</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>If we don’t restore the workspace at startup, there is no need to save it on exit.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>You will see the project names of all your RStudio Projects listed in RStudio. Having the week number in the project name keeps you from getting confused on which project you are working on.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1149,13 +1124,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./statistic/Stat3_Uebung.html" class="pagination-link  aria-label=" &lt;span="" 3&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Statistic 3</span></span>
+      <a href="./index.html" class="pagination-link  aria-label=" welcome"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Welcome</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./spatan/Spatan0_Vorbereitung.html" class="pagination-link" aria-label="<span class='chapter-number'>20</span>&nbsp; <span class='chapter-title'>Preparation</span>">
-        <span class="nav-page-text"><span class="chapter-title">Preparation</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./PrePro.html" class="pagination-link" aria-label="Pre-Processing">
+        <span class="nav-page-text">Pre-Processing</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
