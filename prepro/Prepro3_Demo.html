@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.5.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2024-03-05">
 
-<title>Data Analysis and Monitoring FS24 - Prepro 3: Demo</title>
+<title>Data Analysis and Monitoring FS24 – Prepro 3: Demo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -134,7 +134,7 @@ div.csl-indent {
 // the following function adds padding to all h2 elements, so that I can 
 // easily present the content of the page in a more readable way
 function presenter(){
-    var paragraphs = document.querySelectorAll("h2", "h3");
+    var paragraphs = document.querySelectorAll("h2, h3");
     paragraphs.forEach(function (paragraph) {
         paragraph.classList.toggle("padding-top-500");
     });
@@ -322,8 +322,8 @@ window.onload = function() {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../Statistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Statistic</span></a>
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Statistic.qmd</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -457,7 +457,7 @@ window.onload = function() {
 
 
 <p>In this demo, we will introduce other tools from the Tidyverse and explain them using examples. The tidyverse tools make dealing with data much easier and have now become a must have when dealing with data in R.</p>
-<p>We cannot show you all the possibilities of tidyverse. Therefore, we will focus on the most important components and also introduce additional functionalities that we often use but may not yet be known to you. If you want to delve deeper into the topic, you should read <span class="citation" data-cites="wickham2017">Wickham and Grolemund (<a href="../References.html#ref-wickham2017" role="doc-biblioref">2017</a>)</span>. An extensive, although not comprehensive version is available online<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, and the full eBook can be obtained from the library <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<p>We cannot show you all the possibilities of tidyverse. Therefore, we will focus on the most important components and also introduce additional functionalities that we often use but may not yet be known to you. If you want to delve deeper into the topic, you should read <span class="citation" data-cites="wickham2023">Wickham, Çetinkaya-Rundel, and Grolemund (<a href="../References.html#ref-wickham2023" role="doc-biblioref">2023</a>)</span>, which is available online: <a href="https://r4ds.hadley.nz/" class="uri">https://r4ds.hadley.nz/</a></p>
 <p>We will need the following packages:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
@@ -499,7 +499,7 @@ window.onload = function() {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>month <span class="ot">&lt;-</span> <span class="fu">month</span>(weather<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>With <code>dplyr</code> (see <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>), the same command looks like this:</p>
+<p>With <code>dplyr</code> the same command looks like this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">mutate</span>(weather, <span class="at">month =</span> <span class="fu">month</span>(time))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -515,7 +515,7 @@ window.onload = function() {
 <p>We have to repeat this every month, which of course is very cumbersome. That is why we use the <code>dplyr</code> package. This, allows us to complete the task (calculate temperature means per month) as follows:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(<span class="fu">group_by</span>(weather, month), <span class="at">temp_average =</span> <span class="fu">mean</span>(tre200h0, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 13 × 2</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 12 × 2</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    month temp_average</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;dbl&gt;        &lt;dbl&gt;</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  1     1       -1.96 </span></span>
@@ -529,8 +529,7 @@ window.onload = function() {
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  9     9        9.49 </span></span>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 10    10        8.79 </span></span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 11    11        1.21 </span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 12    12       -0.898</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 13    NA        2.95</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 12    12       -0.898</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="concatenate-vs.-nest" class="level3">
@@ -541,7 +540,7 @@ window.onload = function() {
 <li>Form groups per year (<code>group_by(weather, year)</code>)</li>
 <li>Calculate the mean temperature (<code>mean(tre200h0)</code>)</li>
 </ol>
-<p>The translation from <code>R</code> -&gt; English looks different because we read the operation in a <em>concatenated form</em> in English (operation 1-&gt;2-&gt;3) while the computer reads it as a <em>nested</em> operation 3(2(1)). To make <code>R</code> closer to English, you can use the <code>|&gt;</code> operator (see <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>).</p>
+<p>The translation from R -&gt; English looks different because we read the operation in a <em>concatenated form</em> in English (operation 1 → 2 → 3) while the computer reads it as a <em>nested</em> operation 3(2(1)). To make R closer to English, you can use the <code>|&gt;</code> operator <span class="citation" data-cites="wickham2023">(see <a href="../References.html#ref-wickham2023" role="doc-biblioref">Wickham, Çetinkaya-Rundel, and Grolemund 2023, chap. 4.3</a>)</span>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 take the dataset "weather"</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 form groups per month</span></span>
@@ -558,8 +557,8 @@ window.onload = function() {
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">|&gt;</span>                       <span class="co"># 2</span></span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">temp_average =</span> <span class="fu">mean</span>(tre200h0)) <span class="co"># 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This concatenation by means of <code>|&gt;</code> (called pipe) makes the code a lot easier to write and read, and we will use it in the following exercises. Pipe is provided as part of the <code>magrittr</code> package and installed with <code>dplyr</code>.</p>
-<p>There are several online tutorials about <code>dplyr</code> (see<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>). Therefore, we will not explain all of these tools in full detail. Instead we will just focus on the important differences for two main functions in <code>dpylr</code>: <code>mutate()</code> and <code>summarise()</code>.</p>
+<p>This concatenation by means of <code>|&gt;</code> (called pipe) makes the code a lot easier to write and read, and we will use it in the following exercises. Pipe is provided as part of the <code>magrittr</code> package and installed with <code>dplyr</code>. There are several online tutorials about <code>dplyr</code> <span class="citation" data-cites="wickham2023">(see <a href="../References.html#ref-wickham2023" role="doc-biblioref">Wickham, Çetinkaya-Rundel, and Grolemund 2023</a>, Part “Transform” or <a href="../References.htmlhttps://youtu.be/jWjqLW-u3hc" role="doc-biblioref">this youtube tutorial</a>)</span></p>
+<p>Therefore, we will not explain all of these tools in full detail. Instead we will just focus on the important differences for two main functions in <code>dpylr</code>: <code>mutate()</code> and <code>summarise()</code>.</p>
 <ul>
 <li><code>summarise()</code> summarises a data set. The number of observations (rows) is reduced to the number of groups (e.g., one summarised observation (row) per year). In addition, the number of variables (columns) is reduced to those specified in the “summarise” function (e.g., <code>temp_mean</code>).</li>
 <li><code>mutate</code> adds <em>additional</em> variables (columns) to a <code>data.frame</code> (see example below).</li>
@@ -597,7 +596,7 @@ window.onload = function() {
 <h2 class="anchored" data-anchor-id="reshaping-data">Reshaping data</h2>
 <section id="wide-long" class="level3">
 <h3 class="anchored" data-anchor-id="wide-long">Wide → long</h3>
-<p>Tables can be transformed from <em>wide</em> to* long* using <code>tidyr</code> (see <a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>). This package also works perfectly with piping (<code>|&gt;</code>).</p>
+<p>Tables can be transformed from <em>wide</em> to* long* using <code>tidyr</code> (see <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>). This package also works perfectly with piping (<code>|&gt;</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>weather_summary <span class="sc">|&gt;</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(temp_max, temp_min))</span>
@@ -789,8 +788,8 @@ window.onload = function() {
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-wickham2017" class="csl-entry" role="listitem">
-Wickham, Hadley, and Garrett Grolemund. 2017. <em>R for Data Science</em>. O’Reilly. <a href="https://ebookcentral.proquest.com/lib/zhaw/detail.action?docID=4770093">https://ebookcentral.proquest.com/lib/zhaw/detail.action?docID=4770093</a>.
+<div id="ref-wickham2023" class="csl-entry" role="listitem">
+Wickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data. 2nd Edition</em>. O’Reilly. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>.
 </div>
 </div>
 </section>
@@ -798,12 +797,7 @@ Wickham, Hadley, and Garrett Grolemund. 2017. <em>R for Data Science</em>. O’R
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p> http://r4ds.had.co.nz/<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p> https://ebookcentral.proquest.com/lib/zhaw/detail.action?docID=4770093<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p> <span class="citation" data-cites="wickham2017">Wickham and Grolemund (<a href="../References.html#ref-wickham2017" role="doc-biblioref">2017</a>)</span>, Chapter 10 /http://r4ds.had.co.nz/transform.html<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p> <span class="citation" data-cites="wickham2017">Wickham and Grolemund (<a href="../References.html#ref-wickham2017" role="doc-biblioref">2017</a>)</span>, Chapter 14 / http://r4ds.had.co.nz/pipes.html<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p><span class="citation" data-cites="wickham2017">Wickham and Grolemund (<a href="../References.html#ref-wickham2017" role="doc-biblioref">2017</a>)</span>, Chapter 10 / http://r4ds.had.co.nz/transform.html, or <a href="https://youtu.be/jWjqLW-u3hc">Hands-on dplyr tutorial..</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p> https://r4ds.had.co.nz/tidy-data.html#pivoting<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p> https://r4ds.had.co.nz/tidy-data.html#pivoting<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -1392,12 +1386,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../prepro/Prepro2_Uebung_B.html" class="pagination-link  aria-label=" &lt;span="" 2:="" exercise="" b&lt;="" span&gt;"="">
+      <a href="../prepro/Prepro2_Uebung_B.html" class="pagination-link" aria-label="Prepro 2: Exercise B">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Prepro 2: Exercise B</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../prepro/Prepro3_Uebung.html" class="pagination-link" aria-label="<span class='chapter-number'>9</span>&nbsp; <span class='chapter-title'>Prepro 3: Exercise</span>">
+      <a href="../prepro/Prepro3_Uebung.html" class="pagination-link" aria-label="Prepro 3: Exercise">
         <span class="nav-page-text"><span class="chapter-title">Prepro 3: Exercise</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

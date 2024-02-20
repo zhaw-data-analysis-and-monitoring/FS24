@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.5.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2024-02-27">
 
-<title>Data Analysis and Monitoring FS24 - Prepro 2: Exercise A</title>
+<title>Data Analysis and Monitoring FS24 – Prepro 2: Exercise A</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -114,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 // the following function adds padding to all h2 elements, so that I can 
 // easily present the content of the page in a more readable way
 function presenter(){
-    var paragraphs = document.querySelectorAll("h2", "h3");
+    var paragraphs = document.querySelectorAll("h2, h3");
     paragraphs.forEach(function (paragraph) {
         paragraph.classList.toggle("padding-top-500");
     });
@@ -302,8 +302,8 @@ window.onload = function() {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../Statistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Statistic</span></a>
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Statistic.qmd</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -406,7 +406,7 @@ window.onload = function() {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../PrePro.html">Pre-Processing</a></li><li class="breadcrumb-item"><a href="../prepro/Prepro2_Uebung_A.html"><span class="chapter-title">Prepro 2: Exercise A</span></a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">Prepro 2: Exercise A</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+<h1 class="title"><span class="chapter-title">Prepro 2: Exercise A</span></h1>
 </div>
 
 
@@ -432,102 +432,50 @@ window.onload = function() {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"readr"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lubridate"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively, you can load all tidyverse packages with library("tidyverse")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lubridate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="task-1" class="level2">
 <h2 class="anchored" data-anchor-id="task-1">Task 1</h2>
-<p>Read the weather data from last week <em>weather.csv</em> (source MeteoSchweiz) into <code>R</code>. Make sure that the columns are formatted correctly (<code>stn</code> as a <code>factor</code>, <code>time</code> as <code>POSIXct</code>, <code>tre200h0</code> as a <code>numeric</code>).</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Sample Solution</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"datasets/prepro/weather.csv"</span>, <span class="st">","</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>stn <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(weather<span class="sc">$</span>stn)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>time <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(<span class="fu">as.character</span>(weather<span class="sc">$</span>time), <span class="at">format =</span> <span class="st">"%Y%m%d%H"</span>, <span class="at">tz =</span> <span class="st">"UTC"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details class="code-fold">
-<summary>Sample Solution</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2 (for pros)</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"datasets/prepro/weather.csv"</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">col_factor</span>(<span class="at">levels =</span> <span class="cn">NULL</span>),</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">col_datetime</span>(<span class="at">format =</span> <span class="st">"%Y%m%d%H"</span>),</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">col_double</span>()</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
+<p>Read the weather data from last week <em>weather.csv</em> (source MeteoSchweiz) into R. Make sure that the columns are formatted correctly (<code>stn</code> as a <code>factor</code>, <code>time</code> as <code>POSIXct</code>, <code>tre200h0</code> as a <code>numeric</code>).</p>
 </section>
 <section id="task-2" class="level2">
 <h2 class="anchored" data-anchor-id="task-2">Task 2</h2>
 <p>Read in the <em>metadata.csv</em> dataset as a csv.</p>
-<p>:::{.callout-tip} If umlauts and special characters are not displayed correctly (e.g.&nbsp;the <em>è</em> in Gèneve), this probably has something to do with the <a href="https://de.wikipedia.org/wiki/Zeichenkodierung">character encoding</a>. The file is currently encoded in <em>UTF-8</em>. If special characters are not correctly displayed, R has not recognised this coding and it must be specified in the import function. How this is done depends on the import function used:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If umlauts and special characters are not displayed correctly (e.g.&nbsp;the <em>è</em> in Gèneve), this probably has something to do with the <a href="https://youtu.be/MijmeoH9LT4?si">character encoding</a>. The file is currently encoded in <code>UTF-8</code>. If special characters are not correctly displayed, R has not recognised this encoding and it must be specified in the import function. How this is done depends on the import function used:</p>
 <ul>
 <li>Package functions: <code>readr</code>: <code>locale = locale(encoding = "UTF-8")</code></li>
 <li>Base-R functions: <code>fileEncoding = "UTF-8"</code></li>
 </ul>
-<p>If you do <em>not</em> know how a file is encoded, the following instructions for <a href="https://stackoverflow.com/a/13464816/4139249">Windows</a>, <a href="https://stackoverflow.com/a/2461193/4139249">Mac</a> and <a href="https://stackoverflow.com/a/805474/4139249">Linux</a> will help: ::</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Sample Solution</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"datasets/prepro/metadata.csv"</span>, <span class="at">delim =</span> <span class="st">";"</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">"UTF-8"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<p>Note: If you have a file where you do <em>not</em> know how a file is encoded, the following instructions for <a href="https://stackoverflow.com/a/13464816/4139249">Windows</a>, <a href="https://stackoverflow.com/a/2461193/4139249">Mac</a> and <a href="https://stackoverflow.com/a/805474/4139249">Linux</a> will help.</p>
+</div>
 </div>
 </section>
 <section id="task-3" class="level2">
 <h2 class="anchored" data-anchor-id="task-3">Task 3</h2>
 <p>Now we want to enrich the <code>weather</code> data set with information from <code>metadata</code>. However, we are only interested in the station abbreviation, the name, the x/y coordinates and the sea level. Select these columns.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Sample Solution</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> metadata[, <span class="fu">c</span>(<span class="st">"stn"</span>, <span class="st">"Name"</span>, <span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"Meereshoehe"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
 </section>
 <section id="task-4" class="level2">
 <h2 class="anchored" data-anchor-id="task-4">Task 4</h2>
 <p>Now the <code>metadata</code> can be connected to the <code>weather</code> data set. Which join should we use to do this? And, which attribute can we join?</p>
 <p>Use the join options in <code>dplyr</code> (help via<code>? dplyr::join</code>) to connect the <code>weather</code> data set and the <code>metadata</code>.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Sample Solution</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">left_join</span>(weather, metadata, <span class="at">by =</span> <span class="st">"stn"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Join type: Left-Join on 'weather', as we are only interested in the stations in the 'weather' dataset.</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Attribute: "stn"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
 </section>
 <section id="task-5" class="level2">
 <h2 class="anchored" data-anchor-id="task-5">Task 5</h2>
 <p>Create a new <code>month</code> column (from <code>time</code>). To do this, use the <code>lubridate::month()</code> function.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Sample Solution</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>month <span class="ot">&lt;-</span> <span class="fu">month</span>(weather<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
 </section>
 <section id="task-6" class="level2">
 <h2 class="anchored" data-anchor-id="task-6">Task 6</h2>
 <p>Use the <code>month</code> column to calculate the average temperature per month.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Sample Solution</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(weather<span class="sc">$</span>tre200h0[weather<span class="sc">$</span>month <span class="sc">==</span> <span class="dv">1</span>])</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] -1.963239</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(weather<span class="sc">$</span>tre200h0[weather<span class="sc">$</span>month <span class="sc">==</span> <span class="dv">2</span>])</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.3552632</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(weather<span class="sc">$</span>tre200h0[weather<span class="sc">$</span>month <span class="sc">==</span> <span class="dv">3</span>])</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2.965054</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># etc. for all 12 months</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
 
 
 </section>
@@ -1117,12 +1065,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../prepro/Prepro2_Demo.html" class="pagination-link  aria-label=" &lt;span="" 2:="" demo&lt;="" span&gt;"="">
+      <a href="../prepro/Prepro2_Demo.html" class="pagination-link" aria-label="Prepro 2: Demo">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Prepro 2: Demo</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../prepro/Prepro2_Uebung_B.html" class="pagination-link" aria-label="<span class='chapter-number'>7</span>&nbsp; <span class='chapter-title'>Prepro 2: Exercise B</span>">
+      <a href="../prepro/Prepro2_Uebung_B.html" class="pagination-link" aria-label="Prepro 2: Exercise B">
         <span class="nav-page-text"><span class="chapter-title">Prepro 2: Exercise B</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

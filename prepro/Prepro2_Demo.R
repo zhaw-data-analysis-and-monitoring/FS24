@@ -1,49 +1,31 @@
-diary <- c(
-  "The temperature is 310° Kelvin",
-  "The temperature is 322° Kelvin",
-  "The temperature is 410° Kelvin"
-)
+# these temperature are in Kelvin:
+temperature <- c("310","322","348")
 
-diary
+temperature
 
-# If the letters were individual _elements_ of a vector, we would subset them like this:
 
-charvec1 <- c("a", "b", "c", "d", "e", "f", "g", "h")
-charvec1[4:6]
+subtract <- function(x,y){x-y} # helperfunction to subtract y from x
 
-# But if these are stored in a single character, we need substr:
-charvec2 <- "abcdefgh"
-substr(charvec2, 4, 6)
+output <- mean(subtract(as.integer(temperature), 273.15))
+#                             \_1_/
+#                       \_______2_____________/
+#              \________________3______________________/
+#         \_____________________4_______________________/
 
-subtract <- function(minuend, subtrahend) {
-  minuend - subtrahend
-}
-
-subtract(10, 4)
-
-output <- mean(subtract(as.numeric(substr(diary, 20, 22)), 273.15))
-#                                         \_1_/
-#                                  \________2__________/
-#                       \___________________3__________/
-#              \____________________________4____________________/
-#         \_________________________________5____________________/
-
-# 1. Take diary
-# 2. Extract values 20 to 22 on each line
-# 3. Convert "character" to "numeric"
+# 1. Take temperature
+# 2. Convert "character" → "integer"
 # 4. Subtract 273.15
 # 5. Calculate the mean
 
-temp <- substr(diary, 20, 22)  # 2
-temp <- as.numeric(temp)       # 3
-temp <- subtract(temp, 273.15) # 4
-output <- mean(temp)           # 5
+tmp <- as.integer(temperature)   # 2
+tmp <- subtract(tmp, 273.15)     # 3
+output <- mean(tmp)              # 4
+output
 
-diary |>              # 1
-  substr(20, 22) |>   # 2
-  as.numeric() |>     # 3
-  subtract(273.15) |> # 4
-  mean()              # 5
+temperature |>        # 1
+  as.integer() |>     # 2
+  subtract(273.15) |> # 3
+  mean()              # 4
 
 students <- data.frame(
   Matriculation_No = c(100002, 100003, 200003),

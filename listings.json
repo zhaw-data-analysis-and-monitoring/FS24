@@ -24,15 +24,6 @@
     ]
   },
   {
-    "listing": "/Statistic.html",
-    "items": [
-      "/statistic/Stat0_Vorbereitung.html",
-      "/statistic/Stat1_Uebung.html",
-      "/statistic/Stat2_Uebung.html",
-      "/statistic/Stat3_Uebung.html"
-    ]
-  },
-  {
     "listing": "/SpatAn.html",
     "items": [
       "/spatan/Spatan0_Vorbereitung.html",

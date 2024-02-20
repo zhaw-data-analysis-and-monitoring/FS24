@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.5.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2024-04-30">
 
-<title>Data Analysis and Monitoring FS24 - SpatAn 2: Exercise A</title>
+<title>Data Analysis and Monitoring FS24 – SpatAn 2: Exercise A</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -114,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 // the following function adds padding to all h2 elements, so that I can 
 // easily present the content of the page in a more readable way
 function presenter(){
-    var paragraphs = document.querySelectorAll("h2", "h3");
+    var paragraphs = document.querySelectorAll("h2, h3");
     paragraphs.forEach(function (paragraph) {
         paragraph.classList.toggle("padding-top-500");
     });
@@ -331,8 +331,8 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../Statistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Statistic</span></a>
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Statistic.qmd</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -434,7 +434,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../SpatAn.html">Spatial Analysis</a></li><li class="breadcrumb-item"><a href="../spatan/Spatan2_Uebung_A.html"><span class="chapter-title">SpatAn 2: Exercise A</span></a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">SpatAn 2: Exercise A</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+<h1 class="title"><span class="chapter-title">SpatAn 2: Exercise A</span></h1>
 </div>
 
 
@@ -489,19 +489,6 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="task-1">Task 1</h2>
 <p>As a first step, we need to apply a 20m buffer to each tree. Use <code>st_buffer</code> to save the output as <code>trees_20m</code>. Now take a close look at <code>trees_20m</code>. What type of geometry does it now represent?</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Sample Solution</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>trees_20m <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(trees_sample, <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details class="code-fold">
-<summary>Sample Solution</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> meadows) <span class="sc">+</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> trees_sample) <span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> trees_20m, <span class="at">fill =</span> <span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div id="fig-buffer1" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -520,15 +507,6 @@ Figure&nbsp;23.1: Trees are displayed as points with a 20m buffer. Meadows are d
 <h2 class="anchored" data-anchor-id="task-2">Task 2</h2>
 <p>Now calculate the intersection of <code>trees_20m</code> and <code>meadows</code> with the <code>st_intersection</code> function and save the output as <code>trees_meadows</code>. Next explore <code>trees_meadows</code>. What happened? Check the number of rows per record. Have they changed? If so, why?</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Sample Solution</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>trees_meadows <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(trees_20m, meadows)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> meadows, <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> trees_20m, <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> trees_meadows, <span class="at">fill =</span> <span class="st">"green"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -541,37 +519,12 @@ Figure&nbsp;23.1: Trees are displayed as points with a 20m buffer. Meadows are d
 <section id="task-3" class="level2">
 <h2 class="anchored" data-anchor-id="task-3">Task 3</h2>
 <p>Now calculate the area per geometry with the <code>st_area()</code> function. Save the output in a new column called <code>trees_meadows</code> (e.g.&nbsp;with the name <code>meadow_area</code>). Tip: Convert the output from <code>st_area()</code> to a numeric vector with <code>as.numeric()</code>.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Sample Solution</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>trees_meadows<span class="sc">$</span>meadows_area <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">st_area</span>(trees_meadows))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
 </section>
 <section id="task-4-optional" class="level2">
 <h2 class="anchored" data-anchor-id="task-4-optional">Task 4 (Optional)</h2>
 <p>Now calculate the <code>meadow_share</code> from <code>meadow_area</code>. Tip: The circular area of <span class="math inline">\(r^2\times \pi\)</span> is 100%, whereas in our case, $r = $20.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Sample Solution</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>area_of_a_circle <span class="ot">&lt;-</span> <span class="dv">20</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> pi</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>trees_meadows<span class="sc">$</span>meadows_share <span class="ot">&lt;-</span> trees_meadows<span class="sc">$</span>meadows_area <span class="sc">/</span> area_of_a_circle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
 <p>Then transfer the calculated proportional values to the <code>trees</code> dataset with a <code>left_ join()</code> between <code>trees</code> and <code>trees_meadows</code>. Which column would be suitable for this join? Note: Use <code>st_drop_geometry()</code> to remove the geometry column in <code>trees_meadows</code> before joining.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Sample Solution</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>trees_meadows_df <span class="ot">&lt;-</span> <span class="fu">st_drop_geometry</span>(trees_meadows)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>trees_2 <span class="ot">&lt;-</span> <span class="fu">left_join</span>(trees_sample, trees_meadows_df, <span class="at">by =</span> <span class="st">"baum_id"</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> meadows) <span class="sc">+</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> trees_2, <span class="fu">aes</span>(<span class="at">colour =</span> meadows_share)) <span class="sc">+</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_binned</span>(<span class="st">"meadows share"</span>, <span class="at">low =</span> <span class="st">"blue"</span>, <span class="at">high =</span> <span class="st">"red"</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">label =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>()) <span class="sc">+</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">datum =</span> <span class="dv">2056</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div id="fig-ggplot-ex4" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -590,28 +543,8 @@ Figure&nbsp;23.2: After this exercise, you can visualise the results like this.
 <h2 class="anchored" data-anchor-id="sec-raster-intro1">Task 5</h2>
 <p>By now you have performed a few vector operations such as <code>st_buffer()</code> and <code>st_intersection()</code> and <code>st_area()</code>. However, certain questions are better answered using the raster format. For example, if we want to know how far the nearest tree is for each point in the room, this can be better represented in a raster.</p>
 <p>However, before we can answer that question, we have to convert the vector data set into a raster data set. To do this, a raster “template” is needed so that R knows roughly what the raster output should look like.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Sample Solution</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the "terra" package to work with the raster format.</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"terra"</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We need a template to vectorise data </span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># We will use "meadows" as a template and set the cell size (resolution)</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>template <span class="ot">&lt;-</span> <span class="fu">rast</span>(meadows, <span class="at">resolution =</span> <span class="dv">20</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># When we rasterise, we convert "trees" into a raster format</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Use all trees, not trees_sample</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>trees_rast <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rasterize</span>(trees, template)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
 <p>The difference between raster and vector can be shown very vividly if the two data sets are stored one on top of the other.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Sample Solution</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(trees_rast, <span class="at">col =</span> <span class="st">"grey"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(trees, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">pch =</span> <span class="st">"x"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -622,12 +555,6 @@ Figure&nbsp;23.2: After this exercise, you can visualise the results like this.
 </div>
 <p>we can now use the function <code>distance()</code> with <code>trees_rast</code> to calculate the distance to each tree:</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Sample Solution</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>trees_dist <span class="ot">&lt;-</span> <span class="fu">distance</span>(trees_rast)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(trees_dist)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(trees, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">pch =</span> <span class="st">"x"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1225,12 +1152,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../spatan/Spatan1_Uebung_B.html" class="pagination-link  aria-label=" &lt;span="" 1:="" exercise="" b&lt;="" span&gt;"="">
+      <a href="../spatan/Spatan1_Uebung_B.html" class="pagination-link" aria-label="SpatAn 1: Exercise B">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">SpatAn 1: Exercise B</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../spatan/Spatan2_Uebung_B.html" class="pagination-link" aria-label="<span class='chapter-number'>24</span>&nbsp; <span class='chapter-title'>SpatAn 2: Exercise B</span>">
+      <a href="../spatan/Spatan2_Uebung_B.html" class="pagination-link" aria-label="SpatAn 2: Exercise B">
         <span class="nav-page-text"><span class="chapter-title">SpatAn 2: Exercise B</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

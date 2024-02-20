@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.5.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2024-04-30">
 
-<title>Data Analysis and Monitoring FS24 - SpatAn 1: Exercise B</title>
+<title>Data Analysis and Monitoring FS24 – SpatAn 1: Exercise B</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -114,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 // the following function adds padding to all h2 elements, so that I can 
 // easily present the content of the page in a more readable way
 function presenter(){
-    var paragraphs = document.querySelectorAll("h2", "h3");
+    var paragraphs = document.querySelectorAll("h2, h3");
     paragraphs.forEach(function (paragraph) {
         paragraph.classList.toggle("padding-top-500");
     });
@@ -302,8 +302,8 @@ window.onload = function() {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../Statistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Statistic</span></a>
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Statistic.qmd</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -403,7 +403,7 @@ window.onload = function() {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../SpatAn.html">Spatial Analysis</a></li><li class="breadcrumb-item"><a href="../spatan/Spatan1_Uebung_B.html"><span class="chapter-title">SpatAn 1: Exercise B</span></a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span id="sec-spatan1b" class="quarto-section-identifier"><span class="chapter-title">SpatAn 1: Exercise B</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+<h1 class="title"><span id="sec-spatan1b" class="quarto-section-identifier"><span class="chapter-title">SpatAn 1: Exercise B</span></span></h1>
 </div>
 
 
@@ -439,38 +439,15 @@ window.onload = function() {
 In evalq((function (..., call. = TRUE, immediate. = FALSE, noBreaks. = FALSE,  :
   automatically selected the first layer in a data source containing more than one.</code></pre>
 <p>This warning message indicates that the geopackage <code>gruental.gpkg</code> has several layers (rep. records) and only the first layer has been imported. Use the <code>st_layers</code> command to find out the layer names and then use them in <code>st_read</code> (as argument <code>layer =</code>) to import the layers individually and store them in variables (e.g., such as in the variables <code>wiesen</code> and <code>baeume</code>).</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Sample Solution</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_layers</span>(<span class="st">"datasets/rauman/gruental.gpkg"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Driver: GPKG </span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Available layers:</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   layer_name geometry_type features fields       crs_name</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     wiesen       Polygon       37      1 CH1903+ / LV95</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     baeume         Point      185      2 CH1903+ / LV95</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>meadows <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"datasets/rauman/gruental.gpkg"</span>, <span class="st">"wiesen"</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>trees <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"datasets/rauman/gruental.gpkg"</span>, <span class="st">"baeume"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
 </section>
 <section id="task-2-understanding-the-data-sets" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="task-2-understanding-the-data-sets">Task 2: Understanding the data sets</h3>
 <p>Take some time to explore the two datasets. Use the visualisation options of <code>ggplot</code> (especially <code>geom_sf</code>). You can superimpose multiple <code>geom_sf</code> to represent multiple records at the same time.</p>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(meadows) <span class="sc">+</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> flaechen_typ)) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> trees) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(meadows) <span class="sc">+</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> trees, <span class="fu">aes</span>(<span class="at">colour =</span> baum_typ)) <span class="sc">+</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div>
+
+</div>
 <div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
-<details class="code-fold">
-<summary>Sample Solution</summary>
-</details>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-ggplot-ex2-1" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -483,8 +460,6 @@ Figure&nbsp;22.1: Meadow areas are shown in different colours depending on type
 </figure>
 </div>
 </div>
-</div>
-<div class="quarto-layout-row">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-ggplot-ex2-2" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -504,15 +479,6 @@ Figure&nbsp;22.2: Trees are shown in different colours depending on type
 <h3 class="anchored" data-anchor-id="sec-spatial-join-points">Task 3: Spatial join with points</h3>
 <p>We now want to know whether each <em>tree</em> is in a meadow or not. To do this, we use the GIS technique <em>spatial join</em> as described in the lecture. Using <code>sf</code>, we can perform spatial joins with <code>st_join</code>. There are only <code>left</code> and <code>innerjoins</code> (see PrePro 1 &amp; 2). The “links” points must be listed first, since we want to attach attributes <em>to</em> the points.</p>
 <p>Note that the output has a new column: <code>flaechen_typ</code>. This is empty (<code>NA</code>) if the corresponding tree is not in a meadow. How many trees are in a meadow and how many are not?</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Sample Solution</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>trees_join <span class="ot">&lt;-</span> <span class="fu">st_join</span>(trees, meadows)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>number_in_meadow <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(trees_join<span class="sc">$</span>flaechen_typ))</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>number_not_in_meadow <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(trees_join<span class="sc">$</span>flaechen_typ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
 
 
 </section>
@@ -1102,12 +1068,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../spatan/Spatan1_Uebung_A.html" class="pagination-link  aria-label=" &lt;span="" 1:="" exercise="" a&lt;="" span&gt;"="">
+      <a href="../spatan/Spatan1_Uebung_A.html" class="pagination-link" aria-label="SpatAn 1: Exercise A">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">SpatAn 1: Exercise A</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../spatan/Spatan2_Uebung_A.html" class="pagination-link" aria-label="<span class='chapter-number'>23</span>&nbsp; <span class='chapter-title'>SpatAn 2: Exercise A</span>">
+      <a href="../spatan/Spatan2_Uebung_A.html" class="pagination-link" aria-label="SpatAn 2: Exercise A">
         <span class="nav-page-text"><span class="chapter-title">SpatAn 2: Exercise A</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
