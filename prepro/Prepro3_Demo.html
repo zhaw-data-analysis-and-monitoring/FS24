@@ -412,19 +412,11 @@ window.onload = function() {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#split-apply-combine" id="toc-split-apply-combine" class="nav-link active" data-scroll-target="#split-apply-combine">Split Apply Combine</a>
-  <ul class="collapse">
-  <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data">Load data</a></li>
+  <li><a href="#load-data" id="toc-load-data" class="nav-link active" data-scroll-target="#load-data">Load data</a></li>
   <li><a href="#calculate-values" id="toc-calculate-values" class="nav-link" data-scroll-target="#calculate-values">Calculate values</a></li>
   <li><a href="#convenience-variables" id="toc-convenience-variables" class="nav-link" data-scroll-target="#convenience-variables">Convenience Variables</a></li>
   <li><a href="#calculate-values-from-groups" id="toc-calculate-values-from-groups" class="nav-link" data-scroll-target="#calculate-values-from-groups">Calculate values from groups</a></li>
   <li><a href="#concatenate-vs.-nest" id="toc-concatenate-vs.-nest" class="nav-link" data-scroll-target="#concatenate-vs.-nest">Concatenate vs.&nbsp;Nest</a></li>
-  </ul></li>
-  <li><a href="#reshaping-data" id="toc-reshaping-data" class="nav-link" data-scroll-target="#reshaping-data">Reshaping data</a>
-  <ul class="collapse">
-  <li><a href="#wide-long" id="toc-wide-long" class="nav-link" data-scroll-target="#wide-long">Wide → long</a></li>
-  <li><a href="#long-wide" id="toc-long-wide" class="nav-link" data-scroll-target="#long-wide">Long → wide</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -466,10 +458,9 @@ window.onload = function() {
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"readr"</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="split-apply-combine" class="level2">
-<h2 class="anchored" data-anchor-id="split-apply-combine">Split Apply Combine</h2>
-<section id="load-data" class="level3">
-<h3 class="anchored" data-anchor-id="load-data">Load data</h3>
+<!-- ## Split Apply Combine -->
+<section id="load-data" class="level2">
+<h2 class="anchored" data-anchor-id="load-data">Load data</h2>
 <p>Lets load the weather data (source MeteoSchweiz) from the last exercise.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"datasets/prepro/weather.csv"</span>, <span class="st">","</span>)</span>
@@ -481,8 +472,8 @@ window.onload = function() {
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="calculate-values" class="level3">
-<h3 class="anchored" data-anchor-id="calculate-values">Calculate values</h3>
+<section id="calculate-values" class="level2">
+<h2 class="anchored" data-anchor-id="calculate-values">Calculate values</h2>
 <p>We would like to calculate the average of all measured temperature values. To do this, we could use the following command:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(weather<span class="sc">$</span>tre200h0, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
@@ -492,8 +483,8 @@ window.onload = function() {
 <p>Various values can be calculated using the same approach (e.g.&nbsp;the maximum (<code>max()</code>), minimum (<code>min()</code>), median (<code>median()</code>) and much more).</p>
 <p>This approach only works well if we want to calculate values across <em>all</em> observations for a variable (column). As soon as we want to group the observations, it becomes difficult. For example, if we want to calculate the average temperature <em>per month</em>.</p>
 </section>
-<section id="convenience-variables" class="level3">
-<h3 class="anchored" data-anchor-id="convenience-variables">Convenience Variables</h3>
+<section id="convenience-variables" class="level2">
+<h2 class="anchored" data-anchor-id="convenience-variables">Convenience Variables</h2>
 <p>To solve this task, the month must first be extracted (the month is the <em>convenience variable</em>). For this we need the <code>lubridate::month()</code> function.</p>
 <p>Now the month <strong>convenience variable</strong> can be created. Without using <code>dpylr</code>, a new column can be added as follows:</p>
 <div class="cell">
@@ -505,8 +496,8 @@ window.onload = function() {
 </div>
 <p>The main advantage of <code>dplyr</code> is not yet apparent at this point. However, this will become clear later.</p>
 </section>
-<section id="calculate-values-from-groups" class="level3">
-<h3 class="anchored" data-anchor-id="calculate-values-from-groups">Calculate values from groups</h3>
+<section id="calculate-values-from-groups" class="level2">
+<h2 class="anchored" data-anchor-id="calculate-values-from-groups">Calculate values from groups</h2>
 <p>To calculate the average value per month with base R, you can first create a subset with <code>[]</code> and calculate the average value as follows:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(weather<span class="sc">$</span>tre200h0[weather<span class="sc">$</span>month <span class="sc">==</span> <span class="dv">1</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
@@ -532,8 +523,8 @@ window.onload = function() {
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 12    12       -0.898</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="concatenate-vs.-nest" class="level3">
-<h3 class="anchored" data-anchor-id="concatenate-vs.-nest">Concatenate vs.&nbsp;Nest</h3>
+<section id="concatenate-vs.-nest" class="level2">
+<h2 class="anchored" data-anchor-id="concatenate-vs.-nest">Concatenate vs.&nbsp;Nest</h2>
 <p>Translated into English, the above operation is as follows:</p>
 <ol type="1">
 <li>Take the <code>weather</code> dataset</li>
@@ -590,201 +581,193 @@ window.onload = function() {
 <span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="do">## 10    10      1.6     -2.4</span></span>
 <span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="do">## # ℹ 21 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-</section>
-<section id="reshaping-data" class="level2">
-<h2 class="anchored" data-anchor-id="reshaping-data">Reshaping data</h2>
-<section id="wide-long" class="level3">
-<h3 class="anchored" data-anchor-id="wide-long">Wide → long</h3>
-<p>Tables can be transformed from <em>wide</em> to* long* using <code>tidyr</code> (see <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>). This package also works perfectly with piping (<code>|&gt;</code>).</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>weather_summary <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(temp_max, temp_min))</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 62 × 3</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="do">##      day name     value</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  1     1 temp_max   5.8</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  2     1 temp_min  -4.4</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  3     2 temp_max   2.8</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  4     2 temp_min  -4.3</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  5     3 temp_max   4.2</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  6     3 temp_min  -3.1</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  7     4 temp_max   4.7</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  8     4 temp_min  -2.8</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  9     5 temp_max  11.4</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 10     5 temp_min  -0.6</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="do">## # ℹ 52 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>In the <code>pivot_longer()</code> command, we have to define which columns should be summarised (in this case: <code>temp_max</code>, <code>temp_min</code>, <code>temp_mean</code>). Alternatively, we can specify which columns we do <em>not</em> want to summarise:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>weather_summary <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>day)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 62 × 3</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="do">##      day name     value</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  1     1 temp_max   5.8</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  2     1 temp_min  -4.4</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  3     2 temp_max   2.8</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  4     2 temp_min  -4.3</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  5     3 temp_max   4.2</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  6     3 temp_min  -3.1</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  7     4 temp_max   4.7</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  8     4 temp_min  -2.8</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  9     5 temp_max  11.4</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 10     5 temp_min  -0.6</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="do">## # ℹ 52 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>If we want to set the names of new columns (instead of <code>name</code> and <code>value</code>), this can be achieved by using <code>names_to</code> or <code>values_to</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>weather_summary_long <span class="ot">&lt;-</span> weather_summary <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>day, <span class="at">names_to =</span> <span class="st">"MeasurementType"</span>, <span class="at">values_to =</span> <span class="st">"MeasurementValue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The first 6 lines of <code>weather_summary_long</code>:</p>
-<div class="cell">
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: right;">day</th>
-<th style="text-align: left;">MeasurementType</th>
-<th style="text-align: right;">MeasurementValue</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">temp_max</td>
-<td style="text-align: right;">5.8</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">temp_min</td>
-<td style="text-align: right;">-4.4</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">temp_max</td>
-<td style="text-align: right;">2.8</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">temp_min</td>
-<td style="text-align: right;">-4.3</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">temp_max</td>
-<td style="text-align: right;">4.2</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">temp_min</td>
-<td style="text-align: right;">-3.1</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>The first 6 lines of <code>weather_sry</code>:</p>
-<div class="cell">
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: right;">day</th>
-<th style="text-align: right;">temp_max</th>
-<th style="text-align: right;">temp_min</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">5.8</td>
-<td style="text-align: right;">-4.4</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">2.8</td>
-<td style="text-align: right;">-4.3</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">4.2</td>
-<td style="text-align: right;">-3.1</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">4.7</td>
-<td style="text-align: right;">-2.8</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">11.4</td>
-<td style="text-align: right;">-0.6</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">6.7</td>
-<td style="text-align: right;">-1.6</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>Note: <code>weather_summary_long</code> comprises 62 observations (rows), which is twice as much as <code>weather_summary</code>, because we have combined two of the columns.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(weather_summary)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 31</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(weather_summary_long)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 62</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Long tables are more practical in many situations. For example, visualising using <code>ggplot2</code> (you will learn about this package in the “InfoVis” block) is much easier with <em>long tables</em>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(weather_summary_long, <span class="fu">aes</span>(day, MeasurementValue, <span class="at">colour =</span> MeasurementType)) <span class="sc">+</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Prepro3_Demo_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="long-wide" class="level3">
-<h3 class="anchored" data-anchor-id="long-wide">Long → wide</h3>
-<p>The counterpart to <code>pivot_longer</code> is <code>pivot_wider</code>. This function allows us to convert a <em>long</em> table into a <em>wide</em> one. To do this, we must specify in <code>names_from</code> which column the new column names should be created from (<code>names_from</code>) and which column the values should originate from (<code>values_from</code>):</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>weather_summary_long <span class="sc">|&gt;</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> MeasurementType, <span class="at">values_from =</span> MeasurementValue)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 31 × 3</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="do">##      day temp_max temp_min</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  1     1      5.8     -4.4</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  2     2      2.8     -4.3</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  3     3      4.2     -3.1</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  4     4      4.7     -2.8</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  5     5     11.4     -0.6</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  6     6      6.7     -1.6</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  7     7      2.9     -2.8</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  8     8      0.2     -3.6</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  9     9      2.1     -8.8</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 10    10      1.6     -2.4</span></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="do">## # ℹ 21 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>For comparison: We have to plot each column individually in <code>ggplot2</code> for a <em>wide</em> table. While this is not a problem when we are only working with a few variables, like here, with a high number this quickly becomes tedious.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(weather_summary) <span class="sc">+</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(day, temp_max)) <span class="sc">+</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(day, temp_min))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Prepro3_Demo_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
+<!-- 
+## Reshaping data
+
+## Wide → long
+
+Tables can be transformed from *wide* to* long* using `tidyr` (see ^[ https://r4ds.had.co.nz/tidy-data.html#pivoting]). This package also works perfectly with piping (`|>`).
+
+
+::: {.cell}
+
+```{.r .cell-code}
+weather_summary |>
+  pivot_longer(c(temp_max, temp_min))
+## # A tibble: 62 × 3
+##      day name     value
+##    <int> <chr>    <dbl>
+##  1     1 temp_max   5.8
+##  2     1 temp_min  -4.4
+##  3     2 temp_max   2.8
+##  4     2 temp_min  -4.3
+##  5     3 temp_max   4.2
+##  6     3 temp_min  -3.1
+##  7     4 temp_max   4.7
+##  8     4 temp_min  -2.8
+##  9     5 temp_max  11.4
+## 10     5 temp_min  -0.6
+## # ℹ 52 more rows
+```
+:::
+
+
+In the `pivot_longer()` command, we have to define which columns should be summarised (in this case: `temp_max`, `temp_min`, `temp_mean`). Alternatively, we can specify which columns we do *not* want to summarise:
+
+
+::: {.cell}
+
+```{.r .cell-code}
+weather_summary |>
+  pivot_longer(-day)
+## # A tibble: 62 × 3
+##      day name     value
+##    <int> <chr>    <dbl>
+##  1     1 temp_max   5.8
+##  2     1 temp_min  -4.4
+##  3     2 temp_max   2.8
+##  4     2 temp_min  -4.3
+##  5     3 temp_max   4.2
+##  6     3 temp_min  -3.1
+##  7     4 temp_max   4.7
+##  8     4 temp_min  -2.8
+##  9     5 temp_max  11.4
+## 10     5 temp_min  -0.6
+## # ℹ 52 more rows
+```
+:::
+
+
+If we want to set the names of new columns (instead of `name` and `value`), this can be achieved by using `names_to` or `values_to`:
+
+
+::: {.cell}
+
+```{.r .cell-code}
+weather_summary_long <- weather_summary |>
+  pivot_longer(-day, names_to = "MeasurementType", values_to = "MeasurementValue")
+```
+:::
+
+
+The first 6 lines of `weather_summary_long`:
+
+
+::: {.cell}
+::: {.cell-output-display}
+
+
+| day|MeasurementType | MeasurementValue|
+|---:|:---------------|----------------:|
+|   1|temp_max        |              5.8|
+|   1|temp_min        |             -4.4|
+|   2|temp_max        |              2.8|
+|   2|temp_min        |             -4.3|
+|   3|temp_max        |              4.2|
+|   3|temp_min        |             -3.1|
+
+
+:::
+:::
+
+
+The first 6 lines of `weather_sry`:
+
+
+::: {.cell}
+::: {.cell-output-display}
+
+
+| day| temp_max| temp_min|
+|---:|--------:|--------:|
+|   1|      5.8|     -4.4|
+|   2|      2.8|     -4.3|
+|   3|      4.2|     -3.1|
+|   4|      4.7|     -2.8|
+|   5|     11.4|     -0.6|
+|   6|      6.7|     -1.6|
+
+
+:::
+:::
+
+
+Note: `weather_summary_long` comprises 62 observations (rows), which is twice as much as `weather_summary`, because we have combined two of the columns.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+nrow(weather_summary)
+## [1] 31
+nrow(weather_summary_long)
+## [1] 62
+```
+:::
+
+
+Long tables are more practical in many situations. For example, visualising using `ggplot2` (you will learn about this package in the "InfoVis" block) is much easier with *long tables*.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+ggplot(weather_summary_long, aes(day, MeasurementValue, colour = MeasurementType)) +
+  geom_line()
+```
+
+::: {.cell-output-display}
+![](Prepro3_Demo_files/figure-html/unnamed-chunk-16-1.png){width=672}
+:::
+:::
+
+
+## Long → wide
+
+The counterpart to `pivot_longer` is `pivot_wider`. This function allows us to convert a *long* table into a *wide* one. To do this, we must specify in `names_from` which column the new column names should be created from (`names_from`) and  which column the values should originate from (`values_from`):
+
+
+::: {.cell}
+
+```{.r .cell-code}
+weather_summary_long |>
+  pivot_wider(names_from = MeasurementType, values_from = MeasurementValue)
+## # A tibble: 31 × 3
+##      day temp_max temp_min
+##    <int>    <dbl>    <dbl>
+##  1     1      5.8     -4.4
+##  2     2      2.8     -4.3
+##  3     3      4.2     -3.1
+##  4     4      4.7     -2.8
+##  5     5     11.4     -0.6
+##  6     6      6.7     -1.6
+##  7     7      2.9     -2.8
+##  8     8      0.2     -3.6
+##  9     9      2.1     -8.8
+## 10    10      1.6     -2.4
+## # ℹ 21 more rows
+```
+:::
+
+
+For comparison: We have to plot each column individually in `ggplot2` for a *wide* table. While this is not a problem when we are only working with a few variables, like here, with a high number this quickly becomes tedious.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+ggplot(weather_summary) +
+  geom_line(aes(day, temp_max)) +
+  geom_line(aes(day, temp_min))
+```
+
+::: {.cell-output-display}
+![](Prepro3_Demo_files/figure-html/unnamed-chunk-18-1.png){width=672}
+:::
+:::
+
+
+-->
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -792,13 +775,6 @@ window.onload = function() {
 Wickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data. 2nd Edition</em>. O’Reilly. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>.
 </div>
 </div>
-</section>
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p> https://r4ds.had.co.nz/tidy-data.html#pivoting<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
 
 </main> <!-- /main -->

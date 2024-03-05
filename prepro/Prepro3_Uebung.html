@@ -364,8 +364,6 @@ window.onload = function() {
   <li><a href="#task-4" id="toc-task-4" class="nav-link" data-scroll-target="#task-4">Task 4</a></li>
   <li><a href="#task-5" id="toc-task-5" class="nav-link" data-scroll-target="#task-5">Task 5</a></li>
   <li><a href="#task-6" id="toc-task-6" class="nav-link" data-scroll-target="#task-6">Task 6</a></li>
-  <li><a href="#task-7" id="toc-task-7" class="nav-link" data-scroll-target="#task-7">Task 7</a></li>
-  <li><a href="#task-8" id="toc-task-8" class="nav-link" data-scroll-target="#task-8">Task 8</a></li>
   </ul>
 </nav>
     </div>
@@ -399,21 +397,30 @@ window.onload = function() {
 
 <section id="task-1" class="level2">
 <h2 class="anchored" data-anchor-id="task-1">Task 1</h2>
-<p>You have a dataset, <em>sensors_combined.csv</em>, with temperature values from three different sensors. Import it as a csv into R (as <code>sensors_combined</code>).</p>
+<p>You have a dataset, <em>sensors_long.csv</em>, with temperature values from three different sensors. Import it as a csv into R (as <code>sensors_long</code>).</p>
 <p>Reformat the <code>datetime</code> column to <code>POSIXct</code>. Use the <em>as.POSIXct</em> function (read it in using<code>?strftime())</code> to determine the specific format (the template).</p>
+<!--
+## Task 2
+
+Convert the table to a *long* format (use the `pivot_longer` function from `tidyr`) and save the output as `sensors_long`.
+
+Tips:
+
+- In the `cols` argument, you can list the columns that should be pivoted.
+- Alternatively, you can indicate (by placing a minus sign in front, `-`) the column that should *not* be pivoted.
+- In either case, you do not need to put the columns in quotation marks or end them with the `$`sign.
+
+
+::: {.cell}
+
+:::
+
+
+
+-->
 </section>
 <section id="task-2" class="level2">
 <h2 class="anchored" data-anchor-id="task-2">Task 2</h2>
-<p>Convert the table to a <em>long</em> format (use the <code>pivot_longer</code> function from <code>tidyr</code>) and save the output as <code>sensors_long</code>.</p>
-<p>Tips:</p>
-<ul>
-<li>In the <code>cols</code> argument, you can list the columns that should be pivoted.</li>
-<li>Alternatively, you can indicate (by placing a minus sign in front, <code>-</code>) the column that should <em>not</em> be pivoted.</li>
-<li>In either case, you do not need to put the columns in quotation marks or end them with the <code>$</code>sign.</li>
-</ul>
-</section>
-<section id="task-3" class="level2">
-<h2 class="anchored" data-anchor-id="task-3">Task 3</h2>
 <p>Group <code>sensors_long</code> according to the new column where the sensor information is contained (default: <code>name</code>) with <code>group_by</code> and calculate the average temperature for each sensor (<code>summarise</code>). Note: Both functions are part of the <code>dplyr</code> package.</p>
 <p>The output will look like this:</p>
 <div class="cell">
@@ -425,22 +432,22 @@ window.onload = function() {
 ## 3 sensor3      14.4</code></pre>
 </div>
 </section>
+<section id="task-3" class="level2">
+<h2 class="anchored" data-anchor-id="task-3">Task 3</h2>
+<p>Create a new <em>convenience</em> variable, <code>month</code>, for <code>sensors_long</code> (Tip: use the <code>month</code> function from <code>lubridate</code>). Now group by <code>month</code> <em>and</em> sensor and calculate the mean temperature.</p>
+</section>
 <section id="task-4" class="level2">
 <h2 class="anchored" data-anchor-id="task-4">Task 4</h2>
-<p>Create a new <em>convenience</em> variable, <code>month</code>, for <code>sensors_long</code> (Tip: use the <code>month</code> function from <code>lubridate</code>). Now group by <code>month</code> <em>and</em> sensor and calculate the mean temperature.</p>
+<p>Now download the <em>weather.csv</em> dataset (source MeteoSwiss) and import it as a .csv with the correct column types (<code>stn</code> as a <code>factor</code>, <code>time</code> as <code>POSIXct</code>, <code>tre200h0</code> as <code>double</code>).</p>
 </section>
 <section id="task-5" class="level2">
 <h2 class="anchored" data-anchor-id="task-5">Task 5</h2>
-<p>Now download the <em>weather.csv</em> dataset (source MeteoSwiss) and import it as a .csv with the correct column types (<code>stn</code> as a <code>factor</code>, <code>time</code> as <code>POSIXct</code>, <code>tre200h0</code> as <code>double</code>).</p>
-</section>
-<section id="task-6" class="level2">
-<h2 class="anchored" data-anchor-id="task-6">Task 6</h2>
 <p>Now create a <em>convenience variable</em> for the calendar week for each measurement (<code>lubridate::isoweek</code>). Then calculate the average temperature value for each calendar week.</p>
 <p>Next visualise the result:</p>
 <p><img src="Prepro3_Uebung_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </section>
-<section id="task-7" class="level2">
-<h2 class="anchored" data-anchor-id="task-7">Task 7</h2>
+<section id="task-6" class="level2">
+<h2 class="anchored" data-anchor-id="task-6">Task 6</h2>
 <p>In the previous task, we calculated the average temperature per calendar week over <em>all years</em> (2000 and 2001). However, if we want to compare the years with each other, we have to create the year as an additional <em>convenience variable</em> and group it accordingly. Try this with the weather data and then visualise the output.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -456,19 +463,23 @@ Figure&nbsp;9.1: Base plot does not like long tables and makes a continuous line
 </div>
 </div>
 </div>
-</section>
-<section id="task-8" class="level2">
-<h2 class="anchored" data-anchor-id="task-8">Task 8</h2>
-<p>Transfer the output from the last exercise to a <em>wide table</em>. Now the two years can be compared much more easily.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Prepro3_Uebung_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
+<!--
+
+## Task 8
+
+Transfer the output from the last exercise to a *wide table*. Now the two years can be compared much more easily.
+
+
+::: {.cell}
+
+:::
+
+::: {.cell}
+
+:::
+
+
+-->
 
 
 </section>
