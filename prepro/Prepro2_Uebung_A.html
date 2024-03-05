@@ -406,7 +406,7 @@ window.onload = function() {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../PrePro.html">Pre-Processing</a></li><li class="breadcrumb-item"><a href="../prepro/Prepro2_Uebung_A.html"><span class="chapter-title">Prepro 2: Exercise A</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Prepro 2: Exercise A</span></h1>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">Prepro 2: Exercise A</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
 </div>
 
 
@@ -437,6 +437,14 @@ window.onload = function() {
 <section id="task-1" class="level2">
 <h2 class="anchored" data-anchor-id="task-1">Task 1</h2>
 <p>Read the weather data from last week <em>weather.csv</em> (source MeteoSchweiz) into R. Make sure that the columns are formatted correctly (<code>stn</code> as a <code>factor</code>, <code>time</code> as <code>POSIXct</code>, <code>tre200h0</code> as a <code>numeric</code>).</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Sample Solution</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"datasets/prepro/weather.csv"</span>, <span class="st">","</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>stn <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(weather<span class="sc">$</span>stn)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>time <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(<span class="fu">as.character</span>(weather<span class="sc">$</span>time), <span class="at">format =</span> <span class="st">"%Y%m%d%H"</span>, <span class="at">tz =</span> <span class="st">"UTC"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </section>
 <section id="task-2" class="level2">
 <h2 class="anchored" data-anchor-id="task-2">Task 2</h2>
@@ -459,23 +467,63 @@ Tip
 <p>Note: If you have a file where you do <em>not</em> know how a file is encoded, the following instructions for <a href="https://stackoverflow.com/a/13464816/4139249">Windows</a>, <a href="https://stackoverflow.com/a/2461193/4139249">Mac</a> and <a href="https://stackoverflow.com/a/805474/4139249">Linux</a> will help.</p>
 </div>
 </div>
+<div class="cell">
+<details class="code-fold">
+<summary>Sample Solution</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"datasets/prepro/metadata.csv"</span>, <span class="st">";"</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">"UTF-8"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </section>
 <section id="task-3" class="level2">
 <h2 class="anchored" data-anchor-id="task-3">Task 3</h2>
 <p>Now we want to enrich the <code>weather</code> data set with information from <code>metadata</code>. However, we are only interested in the station abbreviation, the name, the x/y coordinates and the sea level. Select these columns.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Sample Solution</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> metadata[, <span class="fu">c</span>(<span class="st">"stn"</span>, <span class="st">"Name"</span>, <span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"Meereshoehe"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </section>
 <section id="task-4" class="level2">
 <h2 class="anchored" data-anchor-id="task-4">Task 4</h2>
 <p>Now the <code>metadata</code> can be connected to the <code>weather</code> data set. Which join should we use to do this? And, which attribute can we join?</p>
 <p>Use the join options in <code>dplyr</code> (help via<code>? dplyr::join</code>) to connect the <code>weather</code> data set and the <code>metadata</code>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Sample Solution</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">left_join</span>(weather, metadata, <span class="at">by =</span> <span class="st">"stn"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Join type: Left-Join on 'weather', as we are only interested in the stations in the 'weather' dataset.</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Attribute: "stn"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </section>
 <section id="task-5" class="level2">
 <h2 class="anchored" data-anchor-id="task-5">Task 5</h2>
 <p>Create a new <code>month</code> column (from <code>time</code>). To do this, use the <code>lubridate::month()</code> function.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Sample Solution</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>month <span class="ot">&lt;-</span> <span class="fu">month</span>(weather<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </section>
 <section id="task-6" class="level2">
 <h2 class="anchored" data-anchor-id="task-6">Task 6</h2>
 <p>Use the <code>month</code> column to calculate the average temperature per month.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Sample Solution</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(weather<span class="sc">$</span>tre200h0[weather<span class="sc">$</span>month <span class="sc">==</span> <span class="dv">1</span>])</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] -1.963239</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(weather<span class="sc">$</span>tre200h0[weather<span class="sc">$</span>month <span class="sc">==</span> <span class="dv">2</span>])</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.3552632</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(weather<span class="sc">$</span>tre200h0[weather<span class="sc">$</span>month <span class="sc">==</span> <span class="dv">3</span>])</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2.965054</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># etc. for all 12 months</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 
 
 </section>

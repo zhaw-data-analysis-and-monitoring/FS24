@@ -151,7 +151,7 @@
     "href": "prepro/Prepro1_Uebung.html#task-1",
     "title": "PrePro 1: Exercise",
     "section": "Task 1",
-    "text": "Task 1\nCreate a data.frame with the following data. Tipp: Create a vector for each column first.\n\n\n\n\n\nSpecies\nNumber\nWeight\nSex\nDescription\n\n\n\n\nFox\n2\n4.4\nm\nReddish\n\n\nBear\n5\n40.3\nf\nBrown, large\n\n\nRabbit\n1\n1.1\nm\nSmall, with long ears\n\n\nMoose\n3\n120.0\nm\nLong legs, shovel antlers",
+    "text": "Task 1\nCreate a data.frame with the following data. Tipp: Create a vector for each column first.\n\n\nSample Solution\ndf &lt;- data.frame(\n  Species = c(\"Fox\", \"Bear\", \"Rabbit\", \"Moose\"),\n  Number = c(2, 5, 1, 3),\n  Weight = c(4.4, 40.3, 1.1, 120),\n  Sex = c(\"m\", \"f\", \"m\", \"m\"),\n  Description = c(\"Reddish\", \"Brown, large\", \"Small, with long ears\", \"Long legs, shovel antlers\")\n)\n\n\n\n\n\n\n\nSpecies\nNumber\nWeight\nSex\nDescription\n\n\n\n\nFox\n2\n4.4\nm\nReddish\n\n\nBear\n5\n40.3\nf\nBrown, large\n\n\nRabbit\n1\n1.1\nm\nSmall, with long ears\n\n\nMoose\n3\n120.0\nm\nLong legs, shovel antlers",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>PrePro 1: Exercise</span>"
@@ -162,7 +162,7 @@
     "href": "prepro/Prepro1_Uebung.html#task-2",
     "title": "PrePro 1: Exercise",
     "section": "Task 2",
-    "text": "Task 2\nWhat types of data were automatically accepted in the last task? Check this using str(), see whether they make sense and convert where necessary.",
+    "text": "Task 2\nWhat types of data were automatically accepted in the last task? Check this using str(), see whether they make sense and convert where necessary.\n\n\nSample Solution\nstr(df)\n## 'data.frame':    4 obs. of  5 variables:\n##  $ Species    : chr  \"Fox\" \"Bear\" \"Rabbit\" \"Moose\"\n##  $ Number     : num  2 5 1 3\n##  $ Weight     : num  4.4 40.3 1.1 120\n##  $ Sex        : chr  \"m\" \"f\" \"m\" \"m\"\n##  $ Description: chr  \"Reddish\" \"Brown, large\" \"Small, with long ears\" \"Long legs, shovel antlers\"\ntypeof(df$Number)\n## [1] \"double\"\n# Number was interpreted as `double`, but it is actually an `integer`.\n\ndf$Number &lt;- as.integer(df$Number)\n\n# We know sex only has two options:\ndf$Sex &lt;- factor(df$Sex, levels = c(\"m\",\"f\"))",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>PrePro 1: Exercise</span>"
@@ -173,7 +173,7 @@
     "href": "prepro/Prepro1_Uebung.html#task-3",
     "title": "PrePro 1: Exercise",
     "section": "Task 3",
-    "text": "Task 3\nOn Moodle, you will find a folder called Datasets. Download the file and move it in your project folder. Import the weather.csv file. If you use the RStudio GUI for this, save the import command in your R-Script. Please use a relative path (i.e., not a path starting with C:\\, or similar).)\n\n\n\n\n\n\nNote\n\n\n\nI use readr to import csv files and the read_delim function (with underscore) as an alternative to read.csv or read.delim (with a dot). However, this is a personal preference1, and it is up to you which function you use. Remember that the two functions require slightly different parameters.\n\n\n\n\n\n\n\nstn\ntime\ntre200h0\n\n\n\n\nABO\n2000010100\n-2.6\n\n\nABO\n2000010101\n-2.5\n\n\nABO\n2000010102\n-3.1\n\n\nABO\n2000010103\n-2.4\n\n\nABO\n2000010104\n-2.5\n\n\nABO\n2000010105\n-3.0\n\n\nABO\n2000010106\n-3.7\n\n\nABO\n2000010107\n-4.4\n\n\nABO\n2000010108\n-4.1\n\n\nABO\n2000010109\n-4.1",
+    "text": "Task 3\nOn Moodle, you will find a folder called Datasets. Download the file and move it in your project folder. Import the weather.csv file. If you use the RStudio GUI for this, save the import command in your R-Script. Please use a relative path (i.e., not a path starting with C:\\, or similar).)\n\n\n\n\n\n\nNote\n\n\n\nI use readr to import csv files and the read_delim function (with underscore) as an alternative to read.csv or read.delim (with a dot). However, this is a personal preference1, and it is up to you which function you use. Remember that the two functions require slightly different parameters.\n\n\n\n\nSample Solution\nweather &lt;- read_delim(\"datasets/prepro/weather.csv\", \",\")\n\n\n\n\n\n\n\nstn\ntime\ntre200h0\n\n\n\n\nABO\n2000010100\n-2.6\n\n\nABO\n2000010101\n-2.5\n\n\nABO\n2000010102\n-3.1\n\n\nABO\n2000010103\n-2.4\n\n\nABO\n2000010104\n-2.5\n\n\nABO\n2000010105\n-3.0\n\n\nABO\n2000010106\n-3.7\n\n\nABO\n2000010107\n-4.4\n\n\nABO\n2000010108\n-4.1\n\n\nABO\n2000010109\n-4.1",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>PrePro 1: Exercise</span>"
@@ -184,7 +184,7 @@
     "href": "prepro/Prepro1_Uebung.html#task-4",
     "title": "PrePro 1: Exercise",
     "section": "Task 4",
-    "text": "Task 4\nCheck the feedback from read_delim(). Have the data been interpreted correctly?",
+    "text": "Task 4\nCheck the feedback from read_delim(). Have the data been interpreted correctly?\n\n\nSample Solution\n# The 'time' column was interpreted as 'integer'. However, it is \n# obviously a time indication.",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>PrePro 1: Exercise</span>"
@@ -195,7 +195,7 @@
     "href": "prepro/Prepro1_Uebung.html#task-5",
     "title": "PrePro 1: Exercise",
     "section": "Task 5",
-    "text": "Task 5\nThe time column is a date/time with a format of YYYYMMDDHH ( see meta.txt). In order for R to recognise the data in this column as date/time, it must be in the correct format (POSIXct). Therefore, we must tell R what the current format is. Use as.POSIXct() to read the column into R, remembering to specify both format and tz.\n\n\n\n\n\n\nTip\n\n\n\n\nIf no time zone is set, as.POSIXct() sets a default (based on sys.timezone()). In our case, however, these are values in UTC (see metadata.csv)\nas.POSIXct requires a character input: If you receive the error message 'origin' must be supplied (or similar), you have probably tried to input a numeric into the function with.\n\n\n\n\n\n\nThe new table should look like this\n\n\nstn\ntime\ntre200h0\n\n\n\n\nABO\n2000-01-01 00:00:00\n-2.6\n\n\nABO\n2000-01-01 01:00:00\n-2.5\n\n\nABO\n2000-01-01 02:00:00\n-3.1\n\n\nABO\n2000-01-01 03:00:00\n-2.4\n\n\nABO\n2000-01-01 04:00:00\n-2.5\n\n\nABO\n2000-01-01 05:00:00\n-3.0\n\n\nABO\n2000-01-01 06:00:00\n-3.7\n\n\nABO\n2000-01-01 07:00:00\n-4.4\n\n\nABO\n2000-01-01 08:00:00\n-4.1\n\n\nABO\n2000-01-01 09:00:00\n-4.1",
+    "text": "Task 5\nThe time column is a date/time with a format of YYYYMMDDHH ( see meta.txt). In order for R to recognise the data in this column as date/time, it must be in the correct format (POSIXct). Therefore, we must tell R what the current format is. Use as.POSIXct() to read the column into R, remembering to specify both format and tz.\n\n\n\n\n\n\nTip\n\n\n\n\nIf no time zone is set, as.POSIXct() sets a default (based on sys.timezone()). In our case, however, these are values in UTC (see metadata.csv)\nas.POSIXct requires a character input: If you receive the error message 'origin' must be supplied (or similar), you have probably tried to input a numeric into the function with.\n\n\n\n\n\nSample Solution\nweather$time &lt;- as.POSIXct(as.character(weather$time), format = \"%Y%m%d%H\", tz = \"UTC\")\n\n\n\n\n\nThe new table should look like this\n\n\nstn\ntime\ntre200h0\n\n\n\n\nABO\n2000-01-01 00:00:00\n-2.6\n\n\nABO\n2000-01-01 01:00:00\n-2.5\n\n\nABO\n2000-01-01 02:00:00\n-3.1\n\n\nABO\n2000-01-01 03:00:00\n-2.4\n\n\nABO\n2000-01-01 04:00:00\n-2.5\n\n\nABO\n2000-01-01 05:00:00\n-3.0\n\n\nABO\n2000-01-01 06:00:00\n-3.7\n\n\nABO\n2000-01-01 07:00:00\n-4.4\n\n\nABO\n2000-01-01 08:00:00\n-4.1\n\n\nABO\n2000-01-01 09:00:00\n-4.1",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>PrePro 1: Exercise</span>"
@@ -206,7 +206,7 @@
     "href": "prepro/Prepro1_Uebung.html#task-6",
     "title": "PrePro 1: Exercise",
     "section": "Task 6",
-    "text": "Task 6\nCreate two new columns for day of week (Monday, Tuesday, etc) and calendar week. Use the newly created POSIXct column and a suitable function from lubridate.\n\n\n\n\n\nstn\ntime\ntre200h0\nweekday\nweek\n\n\n\n\nABO\n2000-01-01 00:00:00\n-2.6\nSat\n1\n\n\nABO\n2000-01-01 01:00:00\n-2.5\nSat\n1\n\n\nABO\n2000-01-01 02:00:00\n-3.1\nSat\n1\n\n\nABO\n2000-01-01 03:00:00\n-2.4\nSat\n1\n\n\nABO\n2000-01-01 04:00:00\n-2.5\nSat\n1\n\n\nABO\n2000-01-01 05:00:00\n-3.0\nSat\n1\n\n\nABO\n2000-01-01 06:00:00\n-3.7\nSat\n1\n\n\nABO\n2000-01-01 07:00:00\n-4.4\nSat\n1\n\n\nABO\n2000-01-01 08:00:00\n-4.1\nSat\n1\n\n\nABO\n2000-01-01 09:00:00\n-4.1\nSat\n1",
+    "text": "Task 6\nCreate two new columns for day of week (Monday, Tuesday, etc) and calendar week. Use the newly created POSIXct column and a suitable function from lubridate.\n\n\nSample Solution\nweather$weekday &lt;- wday(weather$time, label = T)\nweather$week &lt;- week(weather$time)\n\n\n\n\n\n\n\nstn\ntime\ntre200h0\nweekday\nweek\n\n\n\n\nABO\n2000-01-01 00:00:00\n-2.6\nSat\n1\n\n\nABO\n2000-01-01 01:00:00\n-2.5\nSat\n1\n\n\nABO\n2000-01-01 02:00:00\n-3.1\nSat\n1\n\n\nABO\n2000-01-01 03:00:00\n-2.4\nSat\n1\n\n\nABO\n2000-01-01 04:00:00\n-2.5\nSat\n1\n\n\nABO\n2000-01-01 05:00:00\n-3.0\nSat\n1\n\n\nABO\n2000-01-01 06:00:00\n-3.7\nSat\n1\n\n\nABO\n2000-01-01 07:00:00\n-4.4\nSat\n1\n\n\nABO\n2000-01-01 08:00:00\n-4.1\nSat\n1\n\n\nABO\n2000-01-01 09:00:00\n-4.1\nSat\n1",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>PrePro 1: Exercise</span>"
@@ -272,7 +272,7 @@
     "href": "prepro/Prepro2_Uebung_A.html",
     "title": "Prepro 2: Exercise A",
     "section": "",
-    "text": "Task 1\nRead the weather data from last week weather.csv (source MeteoSchweiz) into R. Make sure that the columns are formatted correctly (stn as a factor, time as POSIXct, tre200h0 as a numeric).",
+    "text": "Task 1\nRead the weather data from last week weather.csv (source MeteoSchweiz) into R. Make sure that the columns are formatted correctly (stn as a factor, time as POSIXct, tre200h0 as a numeric).\nSample Solution\nweather &lt;- read_delim(\"datasets/prepro/weather.csv\", \",\")\nweather$stn &lt;- as.factor(weather$stn)\nweather$time &lt;- as.POSIXct(as.character(weather$time), format = \"%Y%m%d%H\", tz = \"UTC\")",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Prepro 2: Exercise A</span>"
@@ -283,7 +283,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#task-2",
     "title": "Prepro 2: Exercise A",
     "section": "Task 2",
-    "text": "Task 2\nRead in the metadata.csv dataset as a csv.\n\n\n\n\n\n\nTip\n\n\n\nIf umlauts and special characters are not displayed correctly (e.g. the è in Gèneve), this probably has something to do with the character encoding. The file is currently encoded in UTF-8. If special characters are not correctly displayed, R has not recognised this encoding and it must be specified in the import function. How this is done depends on the import function used:\n\nPackage functions: readr: locale = locale(encoding = \"UTF-8\")\nBase-R functions: fileEncoding = \"UTF-8\"\n\nNote: If you have a file where you do not know how a file is encoded, the following instructions for Windows, Mac and Linux will help.",
+    "text": "Task 2\nRead in the metadata.csv dataset as a csv.\n\n\n\n\n\n\nTip\n\n\n\nIf umlauts and special characters are not displayed correctly (e.g. the è in Gèneve), this probably has something to do with the character encoding. The file is currently encoded in UTF-8. If special characters are not correctly displayed, R has not recognised this encoding and it must be specified in the import function. How this is done depends on the import function used:\n\nPackage functions: readr: locale = locale(encoding = \"UTF-8\")\nBase-R functions: fileEncoding = \"UTF-8\"\n\nNote: If you have a file where you do not know how a file is encoded, the following instructions for Windows, Mac and Linux will help.\n\n\n\n\nSample Solution\nmetadata &lt;- read_delim(\"datasets/prepro/metadata.csv\", \";\", locale = locale(encoding = \"UTF-8\"))",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Prepro 2: Exercise A</span>"
@@ -294,7 +294,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#task-3",
     "title": "Prepro 2: Exercise A",
     "section": "Task 3",
-    "text": "Task 3\nNow we want to enrich the weather data set with information from metadata. However, we are only interested in the station abbreviation, the name, the x/y coordinates and the sea level. Select these columns.",
+    "text": "Task 3\nNow we want to enrich the weather data set with information from metadata. However, we are only interested in the station abbreviation, the name, the x/y coordinates and the sea level. Select these columns.\n\n\nSample Solution\nmetadata &lt;- metadata[, c(\"stn\", \"Name\", \"x\", \"y\", \"Meereshoehe\")]",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Prepro 2: Exercise A</span>"
@@ -305,7 +305,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#task-4",
     "title": "Prepro 2: Exercise A",
     "section": "Task 4",
-    "text": "Task 4\nNow the metadata can be connected to the weather data set. Which join should we use to do this? And, which attribute can we join?\nUse the join options in dplyr (help via? dplyr::join) to connect the weather data set and the metadata.",
+    "text": "Task 4\nNow the metadata can be connected to the weather data set. Which join should we use to do this? And, which attribute can we join?\nUse the join options in dplyr (help via? dplyr::join) to connect the weather data set and the metadata.\n\n\nSample Solution\nweather &lt;- left_join(weather, metadata, by = \"stn\")\n\n# Join type: Left-Join on 'weather', as we are only interested in the stations in the 'weather' dataset.\n# Attribute: \"stn\"",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Prepro 2: Exercise A</span>"
@@ -316,7 +316,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#task-5",
     "title": "Prepro 2: Exercise A",
     "section": "Task 5",
-    "text": "Task 5\nCreate a new month column (from time). To do this, use the lubridate::month() function.",
+    "text": "Task 5\nCreate a new month column (from time). To do this, use the lubridate::month() function.\n\n\nSample Solution\nweather$month &lt;- month(weather$time)",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Prepro 2: Exercise A</span>"
@@ -327,7 +327,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#task-6",
     "title": "Prepro 2: Exercise A",
     "section": "Task 6",
-    "text": "Task 6\nUse the month column to calculate the average temperature per month.",
+    "text": "Task 6\nUse the month column to calculate the average temperature per month.\n\n\nSample Solution\nmean(weather$tre200h0[weather$month == 1])\n## [1] -1.963239\nmean(weather$tre200h0[weather$month == 2])\n## [1] 0.3552632\nmean(weather$tre200h0[weather$month == 3])\n## [1] 2.965054\n\n# etc. for all 12 months",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Prepro 2: Exercise A</span>"
@@ -338,7 +338,7 @@
     "href": "prepro/Prepro2_Uebung_B.html",
     "title": "Prepro 2: Exercise B",
     "section": "",
-    "text": "Task 1\nYou have data from three sensors (sensor1.csv, sensor2.csv, sensor3.csv). Read in the data sets.",
+    "text": "Task 1\nYou have data from three sensors (sensor1.csv, sensor2.csv, sensor3.csv). Read in the data sets.\nSample Solution\nsensor1 &lt;- read_delim(\"datasets/prepro/sensor1.csv\", \";\")\nsensor2 &lt;- read_delim(\"datasets/prepro/sensor2.csv\", \";\")\nsensor3 &lt;- read_delim(\"datasets/prepro/sensor3.csv\", \";\")",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Prepro 2: Exercise B</span>"
@@ -349,7 +349,7 @@
     "href": "prepro/Prepro2_Uebung_B.html#task-2",
     "title": "Prepro 2: Exercise B",
     "section": "Task 2",
-    "text": "Task 2\nFrom the 3 data frames, create a single data frame that looks like the one shown below. Use two joins from dplyr to connect 3 data.frames. Then tidy up the column names (how can we do that?).\n\n\n\n\n\nDatetime\nsensor1\nsensor2\nsensor3\n\n\n\n\n16102017_1800\n23.5\n13.5\n26.5\n\n\n17102017_1800\n25.4\n24.4\n24.4\n\n\n18102017_1800\n12.4\n22.4\n13.4\n\n\n19102017_1800\n5.4\n12.4\n7.4\n\n\n23102017_1800\n23.5\n13.5\nNA\n\n\n24102017_1800\n21.3\n11.3\nNA",
+    "text": "Task 2\nFrom the 3 data frames, create a single data frame that looks like the one shown below. Use two joins from dplyr to connect 3 data.frames. Then tidy up the column names (how can we do that?).\n\n\nSample Solution\nsensor1_2 &lt;- full_join(sensor1, sensor2, \"Datetime\")\n\nsensor1_2 &lt;- rename(sensor1_2, sensor1 = Temp.x, sensor2 = Temp.y)\n\nsensor_all &lt;- full_join(sensor1_2, sensor3, by = \"Datetime\")\n\nsensor_all &lt;- rename(sensor_all, sensor3 = Temp)\n\n\n\n\n\n\n\nDatetime\nsensor1\nsensor2\nsensor3\n\n\n\n\n16102017_1800\n23.5\n13.5\n26.5\n\n\n17102017_1800\n25.4\n24.4\n24.4\n\n\n18102017_1800\n12.4\n22.4\n13.4\n\n\n19102017_1800\n5.4\n12.4\n7.4\n\n\n23102017_1800\n23.5\n13.5\nNA\n\n\n24102017_1800\n21.3\n11.3\nNA",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Prepro 2: Exercise B</span>"
@@ -360,7 +360,7 @@
     "href": "prepro/Prepro2_Uebung_B.html#task-3",
     "title": "Prepro 2: Exercise B",
     "section": "Task 3",
-    "text": "Task 3\nImport the sensor_fail.csv file into R.\nsensor_fail.csv has a variable SensorStatus: 1 means the sensor is measuring, 0 means the sensor is not measuring. If sensor status = 0, the Temp = 0 value is incorrect. It should be NA (not available). Correct the dataset accordingly.\n\n\n\n\n\nSensor\nTemp\nHum_%\nDatetime\nSensorStatus\n\n\n\n\nSen102\n0.6\n98\n16102017_1800\n1\n\n\nSen102\n0.3\n96\n17102017_1800\n1\n\n\nSen102\n0.0\n87\n18102017_1800\n1\n\n\nSen102\n0.0\n86\n19102017_1800\n0\n\n\nSen102\n0.0\n98\n23102017_1800\n0\n\n\nSen102\n0.0\n98\n24102017_1800\n0\n\n\nSen102\n0.0\n96\n25102017_1800\n1\n\n\nSen103\n-0.3\n87\n26102017_1800\n1\n\n\nSen103\n-0.7\n98\n27102017_1800\n1\n\n\nSen103\n-1.2\n98\n28102017_1800\n1",
+    "text": "Task 3\nImport the sensor_fail.csv file into R.\n\n\nSample Solution\nsensor_fail &lt;- read_delim(\"datasets/prepro/sensor_fail.csv\", delim = \";\")\n\n\nsensor_fail.csv has a variable SensorStatus: 1 means the sensor is measuring, 0 means the sensor is not measuring. If sensor status = 0, the Temp = 0 value is incorrect. It should be NA (not available). Correct the dataset accordingly.\n\n\n\n\n\nSensor\nTemp\nHum_%\nDatetime\nSensorStatus\n\n\n\n\nSen102\n0.6\n98\n16102017_1800\n1\n\n\nSen102\n0.3\n96\n17102017_1800\n1\n\n\nSen102\n0.0\n87\n18102017_1800\n1\n\n\nSen102\n0.0\n86\n19102017_1800\n0\n\n\nSen102\n0.0\n98\n23102017_1800\n0\n\n\nSen102\n0.0\n98\n24102017_1800\n0\n\n\nSen102\n0.0\n96\n25102017_1800\n1\n\n\nSen103\n-0.3\n87\n26102017_1800\n1\n\n\nSen103\n-0.7\n98\n27102017_1800\n1\n\n\nSen103\n-1.2\n98\n28102017_1800\n1\n\n\n\n\n\n\n\nSample Solution\n# with base-R:\nsensor_fail$Temp_correct[sensor_fail$SensorStatus == 0] &lt;- NA\nsensor_fail$Temp_correct[sensor_fail$SensorStatus != 0] &lt;- sensor_fail$Temp # Warning message can be ignored.\n\n# the same with dplyr:\nsensor_fail &lt;- sensor_fail |&gt;\n  mutate(Temp_correct = ifelse(SensorStatus == 0, NA, Temp))",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Prepro 2: Exercise B</span>"
@@ -371,7 +371,7 @@
     "href": "prepro/Prepro2_Uebung_B.html#task-4",
     "title": "Prepro 2: Exercise B",
     "section": "Task 4",
-    "text": "Task 4\nWhy does it matter if 0 or NA is recorded? Calculate the mean of the temperature / humidity after you have corrected the dataset.",
+    "text": "Task 4\nWhy does it matter if 0 or NA is recorded? Calculate the mean of the temperature / humidity after you have corrected the dataset.\n\n\nSample Solution\n# Mean values of the incorrect sensor data: 0 flows into the calculation\n# and distorts the mean\nmean(sensor_fail$Temp)\n## [1] -0.13\n\n# Mean values of the corrected sensor data: with na.rm = TRUE,\n# NA values are removed from the calculation.\nmean(sensor_fail$Temp_correct, na.rm = TRUE)\n## [1] -0.1857143",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Prepro 2: Exercise B</span>"
