@@ -272,7 +272,7 @@
     "href": "prepro/Prepro2_Uebung_A.html",
     "title": "Prepro 2: Exercise A",
     "section": "",
-    "text": "Task 1\nRead the weather data from last week weather.csv (source MeteoSchweiz) into R. Make sure that the columns are formatted correctly (stn as a factor, time as POSIXct, tre200h0 as a numeric).",
+    "text": "Task 1\nRead the weather data from last week weather.csv (source MeteoSchweiz) into R. Make sure that the columns are formatted correctly (stn as a factor, time as POSIXct, tre200h0 as a numeric).\nSample Solution\nweather &lt;- read_delim(\"datasets/prepro/weather.csv\", \",\")\nweather$stn &lt;- as.factor(weather$stn)\nweather$time &lt;- as.POSIXct(as.character(weather$time), format = \"%Y%m%d%H\", tz = \"UTC\")",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Prepro 2: Exercise A</span>"
@@ -283,7 +283,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#task-2",
     "title": "Prepro 2: Exercise A",
     "section": "Task 2",
-    "text": "Task 2\nRead in the metadata.csv dataset as a csv.\n\n\n\n\n\n\nTip\n\n\n\nIf umlauts and special characters are not displayed correctly (e.g. the è in Gèneve), this probably has something to do with the character encoding. The file is currently encoded in UTF-8. If special characters are not correctly displayed, R has not recognised this encoding and it must be specified in the import function. How this is done depends on the import function used:\n\nPackage functions: readr: locale = locale(encoding = \"UTF-8\")\nBase-R functions: fileEncoding = \"UTF-8\"\n\nNote: If you have a file where you do not know how a file is encoded, the following instructions for Windows, Mac and Linux will help.",
+    "text": "Task 2\nRead in the metadata.csv dataset as a csv.\n\n\n\n\n\n\nTip\n\n\n\nIf umlauts and special characters are not displayed correctly (e.g. the è in Gèneve), this probably has something to do with the character encoding. The file is currently encoded in UTF-8. If special characters are not correctly displayed, R has not recognised this encoding and it must be specified in the import function. How this is done depends on the import function used:\n\nPackage functions: readr: locale = locale(encoding = \"UTF-8\")\nBase-R functions: fileEncoding = \"UTF-8\"\n\nNote: If you have a file where you do not know how a file is encoded, the following instructions for Windows, Mac and Linux will help.\n\n\n\n\nSample Solution\nmetadata &lt;- read_delim(\"datasets/prepro/metadata.csv\", \";\", locale = locale(encoding = \"UTF-8\"))",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Prepro 2: Exercise A</span>"
@@ -294,7 +294,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#task-3",
     "title": "Prepro 2: Exercise A",
     "section": "Task 3",
-    "text": "Task 3\nNow we want to enrich the weather data set with information from metadata. However, we are only interested in the station abbreviation, the name, the x/y coordinates and the sea level. Select these columns.",
+    "text": "Task 3\nNow we want to enrich the weather data set with information from metadata. However, we are only interested in the station abbreviation, the name, the x/y coordinates and the sea level. Select these columns.\n\n\nSample Solution\nmetadata &lt;- metadata[, c(\"stn\", \"Name\", \"x\", \"y\", \"Meereshoehe\")]",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Prepro 2: Exercise A</span>"
@@ -305,7 +305,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#task-4",
     "title": "Prepro 2: Exercise A",
     "section": "Task 4",
-    "text": "Task 4\nNow the metadata can be connected to the weather data set. Which join should we use to do this? And, which attribute can we join?\nUse the join options in dplyr (help via? dplyr::join) to connect the weather data set and the metadata.",
+    "text": "Task 4\nNow the metadata can be connected to the weather data set. Which join should we use to do this? And, which attribute can we join?\nUse the join options in dplyr (help via? dplyr::join) to connect the weather data set and the metadata.\n\n\nSample Solution\nweather &lt;- left_join(weather, metadata, by = \"stn\")\n\n# Join type: Left-Join on 'weather', as we are only interested in the stations in the 'weather' dataset.\n# Attribute: \"stn\"",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Prepro 2: Exercise A</span>"
@@ -316,7 +316,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#task-5",
     "title": "Prepro 2: Exercise A",
     "section": "Task 5",
-    "text": "Task 5\nCreate a new month column (from time). To do this, use the lubridate::month() function.",
+    "text": "Task 5\nCreate a new month column (from time). To do this, use the lubridate::month() function.\n\n\nSample Solution\nweather$month &lt;- month(weather$time)",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Prepro 2: Exercise A</span>"
@@ -327,7 +327,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#task-6",
     "title": "Prepro 2: Exercise A",
     "section": "Task 6",
-    "text": "Task 6\nUse the month column to calculate the average temperature per month.",
+    "text": "Task 6\nUse the month column to calculate the average temperature per month.\n\n\nSample Solution\nmean(weather$tre200h0[weather$month == 1])\n## [1] -1.963239\nmean(weather$tre200h0[weather$month == 2])\n## [1] 0.3552632\nmean(weather$tre200h0[weather$month == 3])\n## [1] 2.965054\n\n# etc. for all 12 months",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Prepro 2: Exercise A</span>"
@@ -338,7 +338,7 @@
     "href": "prepro/Prepro2_Uebung_B.html",
     "title": "Prepro 2: Exercise B",
     "section": "",
-    "text": "Task 1\nYou have data from three sensors (sensor1.csv, sensor2.csv, sensor3.csv). Read in the data sets.",
+    "text": "Task 1\nYou have data from three sensors (sensor1.csv, sensor2.csv, sensor3.csv). Read in the data sets.\nSample Solution\nsensor1 &lt;- read_delim(\"datasets/prepro/sensor1.csv\", \";\")\nsensor2 &lt;- read_delim(\"datasets/prepro/sensor2.csv\", \";\")\nsensor3 &lt;- read_delim(\"datasets/prepro/sensor3.csv\", \";\")",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Prepro 2: Exercise B</span>"
@@ -349,7 +349,7 @@
     "href": "prepro/Prepro2_Uebung_B.html#task-2",
     "title": "Prepro 2: Exercise B",
     "section": "Task 2",
-    "text": "Task 2\nFrom the 3 data frames, create a single data frame that looks like the one shown below. Use two joins from dplyr to connect 3 data.frames. Then tidy up the column names (how can we do that?).\n\n\n\n\n\nDatetime\nsensor1\nsensor2\nsensor3\n\n\n\n\n16102017_1800\n23.5\n13.5\n26.5\n\n\n17102017_1800\n25.4\n24.4\n24.4\n\n\n18102017_1800\n12.4\n22.4\n13.4\n\n\n19102017_1800\n5.4\n12.4\n7.4\n\n\n23102017_1800\n23.5\n13.5\nNA\n\n\n24102017_1800\n21.3\n11.3\nNA",
+    "text": "Task 2\nFrom the 3 data frames, create a single data frame that looks like the one shown below. Use two joins from dplyr to connect 3 data.frames. Then tidy up the column names (how can we do that?).\n\n\nSample Solution\nsensor1_2 &lt;- full_join(sensor1, sensor2, \"Datetime\")\n\nsensor1_2 &lt;- rename(sensor1_2, sensor1 = Temp.x, sensor2 = Temp.y)\n\nsensor_all &lt;- full_join(sensor1_2, sensor3, by = \"Datetime\")\n\nsensor_all &lt;- rename(sensor_all, sensor3 = Temp)\n\n\n\n\n\n\n\nDatetime\nsensor1\nsensor2\nsensor3\n\n\n\n\n16102017_1800\n23.5\n13.5\n26.5\n\n\n17102017_1800\n25.4\n24.4\n24.4\n\n\n18102017_1800\n12.4\n22.4\n13.4\n\n\n19102017_1800\n5.4\n12.4\n7.4\n\n\n23102017_1800\n23.5\n13.5\nNA\n\n\n24102017_1800\n21.3\n11.3\nNA",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Prepro 2: Exercise B</span>"
@@ -360,7 +360,7 @@
     "href": "prepro/Prepro2_Uebung_B.html#task-3",
     "title": "Prepro 2: Exercise B",
     "section": "Task 3",
-    "text": "Task 3\nImport the sensor_fail.csv file into R.\nsensor_fail.csv has a variable SensorStatus: 1 means the sensor is measuring, 0 means the sensor is not measuring. If sensor status = 0, the Temp = 0 value is incorrect. It should be NA (not available). Correct the dataset accordingly.\n\n\n\n\n\nSensor\nTemp\nHum_%\nDatetime\nSensorStatus\n\n\n\n\nSen102\n0.6\n98\n16102017_1800\n1\n\n\nSen102\n0.3\n96\n17102017_1800\n1\n\n\nSen102\n0.0\n87\n18102017_1800\n1\n\n\nSen102\n0.0\n86\n19102017_1800\n0\n\n\nSen102\n0.0\n98\n23102017_1800\n0\n\n\nSen102\n0.0\n98\n24102017_1800\n0\n\n\nSen102\n0.0\n96\n25102017_1800\n1\n\n\nSen103\n-0.3\n87\n26102017_1800\n1\n\n\nSen103\n-0.7\n98\n27102017_1800\n1\n\n\nSen103\n-1.2\n98\n28102017_1800\n1",
+    "text": "Task 3\nImport the sensor_fail.csv file into R.\n\n\nSample Solution\nsensor_fail &lt;- read_delim(\"datasets/prepro/sensor_fail.csv\", delim = \";\")\n\n\nsensor_fail.csv has a variable SensorStatus: 1 means the sensor is measuring, 0 means the sensor is not measuring. If sensor status = 0, the Temp = 0 value is incorrect. It should be NA (not available). Correct the dataset accordingly.\n\n\n\n\n\nSensor\nTemp\nHum_%\nDatetime\nSensorStatus\n\n\n\n\nSen102\n0.6\n98\n16102017_1800\n1\n\n\nSen102\n0.3\n96\n17102017_1800\n1\n\n\nSen102\n0.0\n87\n18102017_1800\n1\n\n\nSen102\n0.0\n86\n19102017_1800\n0\n\n\nSen102\n0.0\n98\n23102017_1800\n0\n\n\nSen102\n0.0\n98\n24102017_1800\n0\n\n\nSen102\n0.0\n96\n25102017_1800\n1\n\n\nSen103\n-0.3\n87\n26102017_1800\n1\n\n\nSen103\n-0.7\n98\n27102017_1800\n1\n\n\nSen103\n-1.2\n98\n28102017_1800\n1\n\n\n\n\n\n\n\nSample Solution\n# with base-R:\nsensor_fail$Temp_correct[sensor_fail$SensorStatus == 0] &lt;- NA\nsensor_fail$Temp_correct[sensor_fail$SensorStatus != 0] &lt;- sensor_fail$Temp # Warning message can be ignored.\n\n# the same with dplyr:\nsensor_fail &lt;- sensor_fail |&gt;\n  mutate(Temp_correct = ifelse(SensorStatus == 0, NA, Temp))",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Prepro 2: Exercise B</span>"
@@ -371,7 +371,7 @@
     "href": "prepro/Prepro2_Uebung_B.html#task-4",
     "title": "Prepro 2: Exercise B",
     "section": "Task 4",
-    "text": "Task 4\nWhy does it matter if 0 or NA is recorded? Calculate the mean of the temperature / humidity after you have corrected the dataset.",
+    "text": "Task 4\nWhy does it matter if 0 or NA is recorded? Calculate the mean of the temperature / humidity after you have corrected the dataset.\n\n\nSample Solution\n# Mean values of the incorrect sensor data: 0 flows into the calculation\n# and distorts the mean\nmean(sensor_fail$Temp)\n## [1] -0.13\n\n# Mean values of the corrected sensor data: with na.rm = TRUE,\n# NA values are removed from the calculation.\nmean(sensor_fail$Temp_correct, na.rm = TRUE)\n## [1] -0.1857143",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Prepro 2: Exercise B</span>"
@@ -437,7 +437,7 @@
     "href": "prepro/Prepro3_Uebung.html",
     "title": "Prepro 3: Exercise",
     "section": "",
-    "text": "Task 1\nYou have a dataset, sensors_long.csv, with temperature values from three different sensors. Import it as a csv into R (as sensors_long).\nReformat the datetime column to POSIXct. Use the as.POSIXct function (read it in using?strftime()) to determine the specific format (the template).",
+    "text": "Task 1\nYou have a dataset, sensors_long.csv, with temperature values from three different sensors. Import it as a csv into R (as sensors_long).\nSample Solution\nlibrary(\"readr\")\n\nsensors_long &lt;- read_delim(\"datasets/prepro/sensors_long.csv\", \",\")",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Prepro 3: Exercise</span>"
@@ -448,7 +448,7 @@
     "href": "prepro/Prepro3_Uebung.html#task-2",
     "title": "Prepro 3: Exercise",
     "section": "Task 2",
-    "text": "Task 2\nGroup sensors_long according to the new column where the sensor information is contained (default: name) with group_by and calculate the average temperature for each sensor (summarise). Note: Both functions are part of the dplyr package.\nThe output will look like this:\n\n## # A tibble: 3 × 2\n##   name    temp_mean\n##   &lt;chr&gt;       &lt;dbl&gt;\n## 1 sensor1      14.7\n## 2 sensor2      12.0\n## 3 sensor3      14.4",
+    "text": "Task 2\nGroup sensors_long according to the column name where the sensor information is contained, using the function group_by, and calculate the average temperature for each sensor (summarise). Note: Both functions are part of the dplyr package.\nThe output will look like this:\n\n\nSample Solution\nlibrary(\"dplyr\")\n\nsensors_long |&gt;\n  group_by(name) |&gt;\n  summarise(temp_mean = mean(value, na.rm = TRUE))\n## # A tibble: 3 × 2\n##   name    temp_mean\n##   &lt;chr&gt;       &lt;dbl&gt;\n## 1 sensor1      14.7\n## 2 sensor2      12.0\n## 3 sensor3      14.4",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Prepro 3: Exercise</span>"
@@ -459,7 +459,7 @@
     "href": "prepro/Prepro3_Uebung.html#task-3",
     "title": "Prepro 3: Exercise",
     "section": "Task 3",
-    "text": "Task 3\nCreate a new convenience variable, month, for sensors_long (Tip: use the month function from lubridate). Now group by month and sensor and calculate the mean temperature.",
+    "text": "Task 3\nCreate a new convenience variable, month, for sensors_long (Tip: use the month function from lubridate). Now group by month and sensor and calculate the mean temperature.\n\n\nSample Solution\nlibrary(\"lubridate\")\n\nsensors_long |&gt;\n  mutate(month = month(Datetime)) |&gt;\n  group_by(month, name) |&gt;\n  summarise(temp_mean = mean(value, na.rm = TRUE))\n## # A tibble: 6 × 3\n## # Groups:   month [2]\n##   month name    temp_mean\n##   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;\n## 1    10 sensor1     14.7 \n## 2    10 sensor2     12.7 \n## 3    10 sensor3     14.4 \n## 4    11 sensor1    NaN   \n## 5    11 sensor2      8.87\n## 6    11 sensor3    NaN",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Prepro 3: Exercise</span>"
@@ -470,7 +470,7 @@
     "href": "prepro/Prepro3_Uebung.html#task-4",
     "title": "Prepro 3: Exercise",
     "section": "Task 4",
-    "text": "Task 4\nNow download the weather.csv dataset (source MeteoSwiss) and import it as a .csv with the correct column types (stn as a factor, time as POSIXct, tre200h0 as double).",
+    "text": "Task 4\nNow download the weather.csv dataset (source MeteoSwiss) and import it as a .csv with the correct column types (timeasPOSIXct,tre200h0asdouble`).\n\n\nSample Solution\nweather &lt;- read_delim(\"datasets/prepro/weather.csv\")\n\nweather$time2 &lt;- as.POSIXct(weather$time, format = \"%Y%m%d%H\", tz = \"UTC\")",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Prepro 3: Exercise</span>"
@@ -481,7 +481,7 @@
     "href": "prepro/Prepro3_Uebung.html#task-5",
     "title": "Prepro 3: Exercise",
     "section": "Task 5",
-    "text": "Task 5\nNow create a convenience variable for the calendar week for each measurement (lubridate::isoweek). Then calculate the average temperature value for each calendar week.\nNext visualise the result:",
+    "text": "Task 5\nNow create a convenience variable for the calendar week for each measurement (lubridate::isoweek). Then calculate the average temperature value for each calendar week.\n\n\nSample Solution\nweather_summary &lt;- weather |&gt;\n  mutate(week = isoweek(time2)) |&gt;\n  group_by(week) |&gt;\n  summarise(\n    temp_mean = mean(tre200h0, na.rm = TRUE)\n  )\n\n\nNext, you can visualise the result using the following function:\n\nSample Solution\nplot(weather_summary$week, weather_summary$temp_mean, type = \"l\")",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Prepro 3: Exercise</span>"
@@ -492,7 +492,7 @@
     "href": "prepro/Prepro3_Uebung.html#task-6",
     "title": "Prepro 3: Exercise",
     "section": "Task 6",
-    "text": "Task 6\nIn the previous task, we calculated the average temperature per calendar week over all years (2000 and 2001). However, if we want to compare the years with each other, we have to create the year as an additional convenience variable and group it accordingly. Try this with the weather data and then visualise the output.\n\n\n\n\n\n\n\n\nFigure 9.1: Base plot does not like long tables and makes a continuous line out of the two years",
+    "text": "Task 6\nIn the previous task, we calculated the average temperature per calendar week over all years (2000 and 2001). However, if we want to compare the years with each other, we have to create the year as an additional convenience variable and group it accordingly. Try this with the weather data and then visualise the output.\n\n\nSample Solution\nweather_summary2 &lt;- weather |&gt;\n  mutate(\n    week = week(time),\n    year = year(time)\n    ) |&gt;\n  group_by(year, week) |&gt;\n  summarise(\n    temp_mean = mean(tre200h0, na.rm = TRUE)\n  )\n\n\n\n\nSample Solution\nplot(weather_summary2$week, weather_summary2$temp_mean, type = \"l\")\n\n\n\n\n\n\n\n\nFigure 9.1: Base plot does not like long tables and makes a continuous line out of the two years",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Prepro 3: Exercise</span>"
