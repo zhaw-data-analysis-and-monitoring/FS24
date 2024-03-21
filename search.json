@@ -567,7 +567,7 @@
     "href": "infovis/Infovis1_Demo.html#split-apply-combine",
     "title": "Infovis 1: Demo A",
     "section": "Split Apply Combine",
-    "text": "Split Apply Combine\nIn our plot, the hourly data points are too detailed for a two-year visualisation. Using the Split Apply Combine technique (covered in PrePro 3), we can adjust the data resolution:\n\ntemperature_day &lt;- temperature_long |&gt;\n  mutate(time = as.Date(time))\n\ntemperature_day\n## # A tibble: 35,088 × 3\n##    time       station  temp\n##    &lt;date&gt;     &lt;chr&gt;   &lt;dbl&gt;\n##  1 2000-01-01 SHA       0.2\n##  2 2000-01-01 ZER      -8.8\n##  3 2000-01-01 SHA       0.3\n##  4 2000-01-01 ZER      -8.7\n##  5 2000-01-01 SHA       0.3\n##  6 2000-01-01 ZER      -9  \n##  7 2000-01-01 SHA       0.3\n##  8 2000-01-01 ZER      -8.7\n##  9 2000-01-01 SHA       0.4\n## 10 2000-01-01 ZER      -8.5\n## # ℹ 35,078 more rows\n\ntemperature_day &lt;- temperature_day |&gt;\n  group_by(station, time) |&gt;\n  summarise(temp = mean(temp))\n\ntemperature_day\n## # A tibble: 1,462 × 3\n## # Groups:   station [2]\n##    station time        temp\n##    &lt;chr&gt;   &lt;date&gt;     &lt;dbl&gt;\n##  1 SHA     2000-01-01  1.25\n##  2 SHA     2000-01-02  1.73\n##  3 SHA     2000-01-03  1.59\n##  4 SHA     2000-01-04  1.78\n##  5 SHA     2000-01-05  4.66\n##  6 SHA     2000-01-06  3.49\n##  7 SHA     2000-01-07  3.87\n##  8 SHA     2000-01-08  3.28\n##  9 SHA     2000-01-09  3.24\n## 10 SHA     2000-01-10  3.24\n## # ℹ 1,452 more rows",
+    "text": "Split Apply Combine\nIn our plot, the hourly data points are too detailed for a two-year visualisation. Using the Split Apply Combine technique (covered in PrePro 3), we can adjust the data resolution:\n\ntemperature_day &lt;- temperature_long |&gt;\n  mutate(time = as.Date(time))\n\ntemperature_day\n\n# A tibble: 35,088 × 3\n   time       station  temp\n   &lt;date&gt;     &lt;chr&gt;   &lt;dbl&gt;\n 1 2000-01-01 SHA       0.2\n 2 2000-01-01 ZER      -8.8\n 3 2000-01-01 SHA       0.3\n 4 2000-01-01 ZER      -8.7\n 5 2000-01-01 SHA       0.3\n 6 2000-01-01 ZER      -9  \n 7 2000-01-01 SHA       0.3\n 8 2000-01-01 ZER      -8.7\n 9 2000-01-01 SHA       0.4\n10 2000-01-01 ZER      -8.5\n# ℹ 35,078 more rows\n\ntemperature_day &lt;- temperature_day |&gt;\n  group_by(station, time) |&gt;\n  summarise(temp = mean(temp))\n\ntemperature_day\n\n# A tibble: 1,462 × 3\n# Groups:   station [2]\n   station time        temp\n   &lt;chr&gt;   &lt;date&gt;     &lt;dbl&gt;\n 1 SHA     2000-01-01  1.25\n 2 SHA     2000-01-02  1.73\n 3 SHA     2000-01-03  1.59\n 4 SHA     2000-01-04  1.78\n 5 SHA     2000-01-05  4.66\n 6 SHA     2000-01-06  3.49\n 7 SHA     2000-01-07  3.87\n 8 SHA     2000-01-08  3.28\n 9 SHA     2000-01-09  3.24\n10 SHA     2000-01-10  3.24\n# ℹ 1,452 more rows",
     "crumbs": [
       "Information Visualisation",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Infovis 1: Demo A</span>"
@@ -633,7 +633,7 @@
     "href": "infovis/Infovis1_Uebung.html",
     "title": "Infovis 1: Exercise",
     "section": "",
-    "text": "Task 1\nYour first task is to recreate the following plot from Kovic (2014) using ggplot and the tagi_data_kanton.csv dataset:\nHere’s are some tips to get you started:",
+    "text": "Task 1\nYour first task is to recreate the following plot from Kovic (2014) using ggplot and the tagi_data_kanton.csv dataset:\nHere’s are some tips to get you started:\nSample Solution\n# Solution to Task 1\n\nplot1 &lt;- ggplot(canton, aes(auslanderanteil, ja_anteil)) +\n  geom_point() +\n  coord_fixed(1) +\n  scale_y_continuous(breaks = c(0, 0.1, 0.3, 0.5, 0.7), limits = c(0, 0.7)) +\n  scale_x_continuous(breaks = c(0, 0.1, 0.3, 0.5, 0.7), limits = c(0, 0.7)) +\n  labs(y = \"Proportion of Yes Votes\", x = \"Foreigner Proportion\")\n\nplot1",
     "crumbs": [
       "Information Visualisation",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Infovis 1: Exercise</span>"
@@ -644,7 +644,7 @@
     "href": "infovis/Infovis1_Uebung.html#task-1",
     "title": "Infovis 1: Exercise",
     "section": "",
-    "text": "Create a ggplot object with ggplot(canton, aes(auslanderanteil, ja_anteil)), then add a point layer with geom_point().\nUse coord_fixed() to set a fixed ratio (1:1) between the axes.\nOptionally, you can:\n\nSet the axis start and end values with scale_y_continuous or scale_x_continuous.\nManually set the breaks (0.0, 0.1…0.7) within scale_*_continuous as in Kovic (2014).\nUse labs() to label the axes.",
+    "text": "Create a ggplot object with ggplot(canton, aes(auslanderanteil, ja_anteil)), then add a point layer with geom_point().\nUse coord_fixed() to set a fixed ratio (1:1) between the axes.\nOptionally, you can:\n\nSet the axis limits with scale_x_continuous (or scale_y_continuous).\nManually set the breaks (0.0, 0.1 0.3 etc) within scale_x_continuous (or scale_y_continuous)\nUse labs() to label the axes.",
     "crumbs": [
       "Information Visualisation",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Infovis 1: Exercise</span>"
@@ -655,7 +655,7 @@
     "href": "infovis/Infovis1_Uebung.html#task-2",
     "title": "Infovis 1: Exercise",
     "section": "Task 2",
-    "text": "Task 2\nNext, replicate the following plot from Kovic (2014) using ggplot:\nHere’s a tip:\n\nUse geom_smooth.",
+    "text": "Task 2\nNext, replicate the following plot from Kovic (2014) using ggplot:\nHere’s a tip:\n\nUse geom_smooth.\n\n\n\nSample Solution\n# Solution to Task 2\n\nplot1 +\n  geom_smooth()",
     "crumbs": [
       "Information Visualisation",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Infovis 1: Exercise</span>"
@@ -666,7 +666,7 @@
     "href": "infovis/Infovis1_Uebung.html#task-3",
     "title": "Infovis 1: Exercise",
     "section": "Task 3",
-    "text": "Task 3\nNow, let’s import the municipal data tagi_data_gemeinden.csv.\nReplicate the following plot from Kovic (2014) using ggplot and the tagi_data_gemeinden.csv dataset:\nHere are some tips:\n\nUse geom_point().\nUse labs().\nUse coord_fixed().",
+    "text": "Task 3\nNow, let’s import the municipal data tagi_data_gemeinden.csv.\nReplicate the following plot from Kovic (2014) using ggplot and the tagi_data_gemeinden.csv dataset:\nHere are some tips:\n\nUse geom_point().\nUse labs().\nUse coord_fixed().\n\n\n\nSample Solution\n# Solution to Task 3\n\nmunicipality &lt;- read_delim(\"datasets/infovis/tagi_data_gemeinden.csv\", \",\")\n\nplot2 &lt;- ggplot(municipality, aes(anteil_ausl, anteil_ja)) +\n  geom_point() +\n  labs(x = \"Foreigner Proportion\", y = \"Proportion of Yes Votes\") +\n  coord_fixed(1) +\n  lims(x = c(0, 1), y = c(0, 1))\n\nplot2",
     "crumbs": [
       "Information Visualisation",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Infovis 1: Exercise</span>"
@@ -677,7 +677,7 @@
     "href": "infovis/Infovis1_Uebung.html#task-4",
     "title": "Infovis 1: Exercise",
     "section": "Task 4",
-    "text": "Task 4\nReplicate the following plot from Kovic (2014) using ggplot and the tagi_data_gemeinden.csv dataset:\nHere’s a tip:\n\nUse geom_smooth.",
+    "text": "Task 4\nReplicate the following plot from Kovic (2014) using ggplot and the tagi_data_gemeinden.csv dataset:\nHere’s a tip:\n\nUse geom_smooth.\n\n\n\nSample Solution\n# Solution to Task 4\n\nplot2 +\n  geom_smooth()",
     "crumbs": [
       "Information Visualisation",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Infovis 1: Exercise</span>"
@@ -688,7 +688,7 @@
     "href": "infovis/Infovis1_Uebung.html#task-5",
     "title": "Infovis 1: Exercise",
     "section": "Task 5",
-    "text": "Task 5\nReplicate the following plot from Kovic (2014) using ggplot and the tagi_data_gemeinden.csv dataset:\nHere’s a tip:\n\nUse facet_wrap to display a separate plot for each canton.",
+    "text": "Task 5\nReplicate the following plot from Kovic (2014) using ggplot and the tagi_data_gemeinden.csv dataset:\nHere’s a tip:\n\nUse facet_wrap to display a separate plot for each canton.\n\n\n\nSample Solution\n# Solution to Task 5\n\nplot3 &lt;- plot2 +\n  facet_wrap(~kanton)\nplot3",
     "crumbs": [
       "Information Visualisation",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Infovis 1: Exercise</span>"
@@ -699,7 +699,7 @@
     "href": "infovis/Infovis1_Uebung.html#task-6",
     "title": "Infovis 1: Exercise",
     "section": "Task 6",
-    "text": "Task 6\nReplicate the following plot from Kovic (2014) using ggplot and the tagi_data_gemeinden.csv dataset:\nHere’s a tip:\n\nUse geom_smooth.",
+    "text": "Task 6\nReplicate the following plot from Kovic (2014) using ggplot and the tagi_data_gemeinden.csv dataset:\nHere’s a tip:\n\nUse geom_smooth.\n\n\n\nSample Solution\n# Solution to Task 6\n\nplot3 +\n  geom_smooth()",
     "crumbs": [
       "Information Visualisation",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Infovis 1: Exercise</span>"
@@ -710,7 +710,7 @@
     "href": "infovis/Infovis1_Uebung.html#task-7",
     "title": "Infovis 1: Exercise",
     "section": "Task 7",
-    "text": "Task 7\nReplicate the following plot from Kovic (2014) using ggplot and the tagi_data_gemeinden.csv dataset:\nHere’s a tip:\n\nUse facet_wrap",
+    "text": "Task 7\nReplicate the following plot from Kovic (2014) using ggplot and the tagi_data_gemeinden.csv dataset:\nHere’s a tip:\n\nUse facet_wrap\n\n\n\nSample Solution\n# Solution to Task 7\n\nplot4 &lt;- plot2 +\n  facet_wrap(~quantile)\nplot4",
     "crumbs": [
       "Information Visualisation",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Infovis 1: Exercise</span>"
@@ -721,7 +721,7 @@
     "href": "infovis/Infovis1_Uebung.html#task-8",
     "title": "Infovis 1: Exercise",
     "section": "Task 8",
-    "text": "Task 8\nReplicate the following plot from Kovic (2014) using ggplot and the tagi_data_gemeinden.csv dataset:\nHere’s a tip:\n\nUse geom_smooth.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nKovic, Marko. 2014. “Je Weniger Ausländer, Desto Mehr Ja-Stimmen? Wirklich?” Tagesanzeiger Datenblog. https://blog.tagesanzeiger.ch/datenblog/index.php/668/je-weniger-auslaender-desto-mehr-ja-stimmen-wirklich.",
+    "text": "Task 8\nReplicate the following plot from Kovic (2014) using ggplot and the tagi_data_gemeinden.csv dataset:\nHere’s a tip:\n\nUse geom_smooth.\n\n\n\nSample Solution\n# Solution to Task 8\n\nplot4 +\n  geom_smooth()\n\n\n\n\n\n\n\n\n\n\n\n\n\nKovic, Marko. 2014. “Je Weniger Ausländer, Desto Mehr Ja-Stimmen? Wirklich?” Tagesanzeiger Datenblog. https://blog.tagesanzeiger.ch/datenblog/index.php/668/je-weniger-auslaender-desto-mehr-ja-stimmen-wirklich.",
     "crumbs": [
       "Information Visualisation",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Infovis 1: Exercise</span>"
