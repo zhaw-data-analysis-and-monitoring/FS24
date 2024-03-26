@@ -743,7 +743,7 @@
     "href": "infovis/Infovis2_Uebung_A.html",
     "title": "Infovis 2: Exercise A",
     "section": "",
-    "text": "Task 1\nTransform the wide table into a long table using the following structure.\ntime\nstation\ntemperature\n\n\n\n\n2005-01-01\nALT\n1.3\n\n\n2005-01-01\nBUS\n1.5\n\n\n2005-01-01\nGVE\n1.1\n\n\n2005-01-01\nINT\n0.2\n\n\n2005-01-01\nOTL\n2.2\n\n\n2005-01-01\nLUG\n1.7\nNext, import the dataset temperature_2005_metadata.csv and join the two datasets with a left_join via station (or stn).",
+    "text": "Task 1\nTransform the wide table into a long table using the following code.\ntemperature_long &lt;- pivot_longer(\n  data = temperature, \n  cols = -time, \n  names_to = \"station\", \n  values_to = \"temperature\"\n  )\ntime\nstation\ntemperature\n\n\n\n\n2005-01-01\nALT\n1.3\n\n\n2005-01-01\nBUS\n1.5\n\n\n2005-01-01\nGVE\n1.1\n\n\n2005-01-01\nINT\n0.2\n\n\n2005-01-01\nOTL\n2.2\n\n\n2005-01-01\nLUG\n1.7\nNext, import the dataset temperature_2005_metadata.csv and join the two datasets with a left_join via station (or stn).",
     "crumbs": [
       "Information Visualisation",
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Infovis 2: Exercise A</span>"
@@ -787,7 +787,7 @@
     "href": "infovis/Infovis2_Uebung_A.html#task-5",
     "title": "Infovis 2: Exercise A",
     "section": "Task 5",
-    "text": "Task 5\nAdd a black, dashed trend line to the plot above.",
+    "text": "Task 5\nAdd a black, dashed trend line to the plot above (geom_smooth()).",
     "crumbs": [
       "Information Visualisation",
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Infovis 2: Exercise A</span>"
@@ -805,11 +805,11 @@
     ]
   },
   {
-    "objectID": "infovis/Infovis2_Uebung_A.html#task-7-optional-advanced",
-    "href": "infovis/Infovis2_Uebung_A.html#task-7-optional-advanced",
+    "objectID": "infovis/Infovis2_Uebung_A.html#task-7",
+    "href": "infovis/Infovis2_Uebung_A.html#task-7",
     "title": "Infovis 2: Exercise A",
-    "section": "Task 7 (optional, advanced)",
-    "text": "Task 7 (optional, advanced)\nAdd the temperature values on the y-axis with a °C (see below and this page for help)",
+    "section": "Task 7",
+    "text": "Task 7\nNow, let’s move away from the scatter plot and create a box plot with the temperature data. Colour the box plots again depending on the sea level.\n\nNote the difference between colour = and fill =\nNote the difference between facet_wrap() and facet_grid()\nRemember,facet_grid() requires a period (.) next to the tilde (~).\nNote the difference between “.~” and “~.” in facet_grid()\nAdjust the position of the legend as needed",
     "crumbs": [
       "Information Visualisation",
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Infovis 2: Exercise A</span>"
@@ -820,18 +820,7 @@
     "href": "infovis/Infovis2_Uebung_A.html#task-8",
     "title": "Infovis 2: Exercise A",
     "section": "Task 8",
-    "text": "Task 8\nNow, let’s move away from the scatter plot and create a box plot with the temperature data. Colour the box plots again depending on the sea level.\n\nNote the difference between colour = and fill =\nNote the difference between facet_wrap() and facet_grid()\nRemember,facet_grid() requires a period (.) next to the tilde (~).\nNote the difference between “.~” and “~.” in facet_grid()\nAdjust the position of the legend as needed",
-    "crumbs": [
-      "Information Visualisation",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Infovis 2: Exercise A</span>"
-    ]
-  },
-  {
-    "objectID": "infovis/Infovis2_Uebung_A.html#task-9",
-    "href": "infovis/Infovis2_Uebung_A.html#task-9",
-    "title": "Infovis 2: Exercise A",
-    "section": "Task 9",
-    "text": "Task 9\nAs a final important plot type, let’s complete two exercises with histograms. First, create a histogram geom_histogram() with the temperature values, then allocate the weather stations to different altitude levels (Low altitude [[&lt; 400 m]], Mid altitude [[400 - 600 m]] and High altitude [[&gt; 600 m]]). Finally, compare the distribution of temperature values at the different altitudes using a histogram.\nTip: Use cut to divide the stations into the three groups",
+    "text": "Task 8\nAs a final important plot type, let’s complete two exercises with histograms. First, create a histogram geom_histogram() with the temperature values, then allocate the weather stations to different altitude levels (Low altitude [[&lt; 400 m]], Mid altitude [[400 - 600 m]] and High altitude [[&gt; 600 m]]). Finally, compare the distribution of temperature values at the different altitudes using a histogram.\nTip: Use cut to divide the stations into the three groups",
     "crumbs": [
       "Information Visualisation",
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Infovis 2: Exercise A</span>"

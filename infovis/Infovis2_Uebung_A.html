@@ -398,9 +398,8 @@ window.onload = function() {
   <li><a href="#task-4" id="toc-task-4" class="nav-link" data-scroll-target="#task-4">Task 4</a></li>
   <li><a href="#task-5" id="toc-task-5" class="nav-link" data-scroll-target="#task-5">Task 5</a></li>
   <li><a href="#task-6" id="toc-task-6" class="nav-link" data-scroll-target="#task-6">Task 6</a></li>
-  <li><a href="#task-7-optional-advanced" id="toc-task-7-optional-advanced" class="nav-link" data-scroll-target="#task-7-optional-advanced">Task 7 (optional, advanced)</a></li>
+  <li><a href="#task-7" id="toc-task-7" class="nav-link" data-scroll-target="#task-7">Task 7</a></li>
   <li><a href="#task-8" id="toc-task-8" class="nav-link" data-scroll-target="#task-8">Task 8</a></li>
-  <li><a href="#task-9" id="toc-task-9" class="nav-link" data-scroll-target="#task-9">Task 9</a></li>
   </ul>
 </nav>
     </div>
@@ -445,7 +444,15 @@ window.onload = function() {
 </div>
 <section id="task-1" class="level2">
 <h2 class="anchored" data-anchor-id="task-1">Task 1</h2>
-<p>Transform the <em>wide table</em> into a <em>long table</em> using the following structure.</p>
+<p>Transform the <em>wide table</em> into a <em>long table</em> using the following code.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>temperature_long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> temperature, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cols =</span> <span class="sc">-</span>time, </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">"station"</span>, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">values_to =</span> <span class="st">"temperature"</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -500,7 +507,7 @@ window.onload = function() {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Infovis2_Uebung_A_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Infovis2_Uebung_A_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -518,7 +525,7 @@ window.onload = function() {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Infovis2_Uebung_A_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Infovis2_Uebung_A_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -526,12 +533,12 @@ window.onload = function() {
 </section>
 <section id="task-5" class="level2">
 <h2 class="anchored" data-anchor-id="task-5">Task 5</h2>
-<p>Add a black, dashed trend line to the plot above.</p>
+<p>Add a black, dashed trend line to the plot above (<code>geom_smooth()</code>).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Infovis2_Uebung_A_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Infovis2_Uebung_A_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -544,27 +551,14 @@ window.onload = function() {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Infovis2_Uebung_A_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="task-7-optional-advanced" class="level2">
-<h2 class="anchored" data-anchor-id="task-7-optional-advanced">Task 7 (optional, advanced)</h2>
-<p>Add the temperature values on the y-axis with a <code>°C</code> (see below and <a href="https://stackoverflow.com/a/35967126/4139249">this page</a> for help)</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
 <p><img src="Infovis2_Uebung_A_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="task-8" class="level2">
-<h2 class="anchored" data-anchor-id="task-8">Task 8</h2>
+<section id="task-7" class="level2">
+<h2 class="anchored" data-anchor-id="task-7">Task 7</h2>
 <p>Now, let’s move away from the scatter plot and create a box plot with the temperature data. Colour the box plots again depending on the sea level.</p>
 <ul>
 <li><p>Note the difference between <code>colour =</code> and <code>fill =</code></p></li>
@@ -583,8 +577,8 @@ window.onload = function() {
 </div>
 </div>
 </section>
-<section id="task-9" class="level2">
-<h2 class="anchored" data-anchor-id="task-9">Task 9</h2>
+<section id="task-8" class="level2">
+<h2 class="anchored" data-anchor-id="task-8">Task 8</h2>
 <p>As a final important plot type, let’s complete two exercises with histograms. First, create a histogram <code>geom_histogram()</code> with the temperature values, then allocate the weather stations to different altitude levels (Low altitude [[&lt; 400 m]], Mid altitude [[400 - 600 m]] and High altitude [[&gt; 600 m]]). Finally, compare the distribution of temperature values at the different altitudes using a histogram.</p>
 <p>Tip: Use <code>cut</code> to divide the stations into the three groups</p>
 <div class="cell">
