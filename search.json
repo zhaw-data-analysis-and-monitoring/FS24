@@ -508,7 +508,7 @@
     "href": "statistic/Stat0_Vorbereitung.html",
     "title": "Preparation",
     "section": "",
-    "text": "As part of Statistic 1 - 3, we will need some R packages. We recommend installing them before the first lesson. Similar to the preparation exercise in Prepro1 you can use the code below to automatically install all packages that have not yet been installed.\n\nipak <- function(pkg) {\n  new.pkg <- pkg[!(pkg %in% installed.packages()[, \"Package\"])]\n  if (length(new.pkg)) {\n    install.packages(new.pkg, dependencies = TRUE)\n  }\n}\n\npackages <- c('dplyr', 'wooldridge'\n \n)\n\nipak(packages)\n\nYou can also download the data for the exercises on Moodle."
+    "text": "As part of Statistic 1 - 3, we will need some R packages. We recommend installing them before the first lesson. Similar to the preparation exercise in Prepro1 you can use the code below to automatically install all packages that have not yet been installed.\n\nipak <- function(pkg) {\n  new.pkg <- pkg[!(pkg %in% installed.packages()[, \"Package\"])]\n  if (length(new.pkg)) {\n    install.packages(new.pkg, dependencies = TRUE)\n  }\n}\n\npackages <- c('dplyr', 'wooldridge')\n\nipak(packages)\n\nYou can download the datasets for the exercises from Moodle:\n\nStat1\nStat2\nStat3"
   },
   {
     "objectID": "statistic/Stat1_Uebung.html#exercise-1",
