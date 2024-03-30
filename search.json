@@ -564,7 +564,28 @@
     "href": "statistic/Stat1_Uebung.html#exercise-6",
     "title": "Statistics 1: The Basics of Statistics",
     "section": "Exercise 6",
-    "text": "Exercise 6\nThe data in 401K.RAW are a subset of data analyzed by Papke (1995) to study the relationship between participation in a 401(k) pension plan and the generosity of the plan. The variable prate is the percentage of eligible workers with an active account; this is the variable we would like to explain. The measure of generosity is the plan match rate, mrate. This variable gives the average amount the firm contributes to each worker’s plan for each $1 contribution by the worker. For example, if mrate = 0.50, then a $1 contribution by the worker is matched by a 50¢ contribution by the firm.\n\nFind the average participation rate and the average match rate in the sample of plans.\nNow, estimate the simple regression equation \\(\\widehat{prate} = \\hat{\\beta_0} + \\hat{\\beta_1}mrate,\\) and report the results along with the sample size and R-squared."
+    "text": "Exercise 6\nThe data in 401K.RAW are a subset of data analyzed by Papke (1995) to study the relationship between participation in a 401(k) pension plan and the generosity of the plan. The variable prate is the percentage of eligible workers with an active account; this is the variable we would like to explain. The measure of generosity is the plan match rate, mrate. This variable gives the average amount the firm contributes to each worker’s plan for each $1 contribution by the worker. For example, if mrate = 0.50, then a $1 contribution by the worker is matched by a 50¢ contribution by the firm.\n\nFind the average participation rate and the average match rate in the sample of plans.\nNow, estimate the simple regression equation \\(\\widehat{prate} = \\hat{\\beta_0} + \\hat{\\beta_1}mrate,\\) and report the results along with the sample size and R-squared.\nInterpret the intercept in your equation. Interpret the coefficient on mrate.\nFind the predicted prate when mrate = 3.5. Is this a reasonable prediction? Explain what is happening here.\nHow much of the variation in prate is explained by mrate? Is this a lot in your opinion?"
+  },
+  {
+    "objectID": "statistic/Stat1_Uebung.html#exercise-7",
+    "href": "statistic/Stat1_Uebung.html#exercise-7",
+    "title": "Statistics 1: The Basics of Statistics",
+    "section": "Exercise 7",
+    "text": "Exercise 7\nThe data set in CEOSAL2.RAW contains information on chief executive officers for U.S. corporations. The variable salary is annual compensation, in thousands of dollars, and ceoten is prior number of years as company CEO.\n\nFind the average salary and the average tenure in the sample.\nHow many CEOs are in their first year as CEO (that is, ceoten = 0)? What is the longest tenure as a CEO?\nEstimate the simple regression model \\(log(salary) = \\beta_0 + \\beta_1ceoten + u,\\) and report your results in the usual form. What is the (approximate) predicted percentage increase in salary given one more year as a CEO?"
+  },
+  {
+    "objectID": "statistic/Stat1_Uebung.html#exercise-8",
+    "href": "statistic/Stat1_Uebung.html#exercise-8",
+    "title": "Statistics 1: The Basics of Statistics",
+    "section": "Exercise 8",
+    "text": "Exercise 8\nUse the data in SLEEP75.RAW from Biddle and Hamermesh (1990) to study whether there is a tradeoff between the time spent sleeping per week and the time spent in paid work. We could use either variable as the dependent variable. For concreteness, estimate the model \\(sleep = \\beta_0 + \\beta_1totwrk + u,\\) where sleep is minutes spent sleeping at night per week and totwrk is total minutes worked during the week.\n\nReport your results in equation form along with the number of observations and R-squared. What does the intercept in this equation mean?\nIf totwrk increases by 2 hours, by how much is sleep estimated to fall? Do you find this to be a large effect?"
+  },
+  {
+    "objectID": "statistic/Stat1_Uebung.html#exercise-9",
+    "href": "statistic/Stat1_Uebung.html#exercise-9",
+    "title": "Statistics 1: The Basics of Statistics",
+    "section": "Exercise 9",
+    "text": "Exercise 9\nFor the population of firms in the chemical industry, let rd denote annual expenditures on research and development, and let sales denote annual sales (both are in millions of dollars).\n\nWrite down a model (not an estimated equation) that implies a constant elasticity between rd and sales. Which parameter is the elasticity?\nNow, estimate the model using the data in RDCHEM.RAW. Write out the estimated equation in the usual form. What is the estimated elasticity of rd with respect to sales? Explain in words what this elasticity means."
   },
   {
     "objectID": "statistic/Stat2_Uebung.html",

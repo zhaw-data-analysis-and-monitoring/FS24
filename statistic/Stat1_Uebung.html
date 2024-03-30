@@ -411,6 +411,9 @@ window.onload = function() {
   <li><a href="#exercise-5" id="toc-exercise-5" class="nav-link" data-scroll-target="#exercise-5">Exercise 5</a></li>
   <li><a href="#exercise-ii-the-simple-linear-regression-model" id="toc-exercise-ii-the-simple-linear-regression-model" class="nav-link" data-scroll-target="#exercise-ii-the-simple-linear-regression-model">Exercise II: The Simple Linear Regression Model</a></li>
   <li><a href="#exercise-6" id="toc-exercise-6" class="nav-link" data-scroll-target="#exercise-6">Exercise 6</a></li>
+  <li><a href="#exercise-7" id="toc-exercise-7" class="nav-link" data-scroll-target="#exercise-7">Exercise 7</a></li>
+  <li><a href="#exercise-8" id="toc-exercise-8" class="nav-link" data-scroll-target="#exercise-8">Exercise 8</a></li>
+  <li><a href="#exercise-9" id="toc-exercise-9" class="nav-link" data-scroll-target="#exercise-9">Exercise 9</a></li>
   </ul>
 </nav>
     </div>
@@ -544,7 +547,47 @@ window.onload = function() {
 <ol type="1">
 <li>Find the average participation rate and the average match rate in the sample of plans.</li>
 <li>Now, estimate the simple regression equation <span class="math inline">\(\widehat{prate} = \hat{\beta_0} + \hat{\beta_1}mrate,\)</span> and report the results along with the sample size and R-squared.</li>
+<li>Interpret the intercept in your equation. Interpret the coefficient on <code>mrate.</code></li>
+<li>Find the predicted <code>prate</code> when <code>mrate</code> = 3.5. Is this a reasonable prediction? Explain what is happening here.</li>
+<li>How much of the variation in <code>prate</code> is explained by <code>mrate</code>? Is this a lot in your opinion?</li>
 </ol>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-7" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-7">Exercise 7</h2>
+<p>The data set in CEOSAL2.RAW contains information on chief executive officers for U.S. corporations. The variable salary is annual compensation, in thousands of dollars, and ceoten is prior number of years as company CEO.</p>
+<ol type="1">
+<li>Find the average salary and the average tenure in the sample.</li>
+<li>How many CEOs are in their first year as CEO (that is, <code>ceoten</code> = 0)? What is the longest tenure as a CEO?</li>
+<li>Estimate the simple regression model <span class="math inline">\(log(salary) = \beta_0 + \beta_1ceoten + u,\)</span> and report your results in the usual form. What is the (approximate) predicted percentage increase in salary given one more year as a CEO?</li>
+</ol>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-8" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-8">Exercise 8</h2>
+<p>Use the data in SLEEP75.RAW from Biddle and Hamermesh (1990) to study whether there is a tradeoff between the time spent sleeping per week and the time spent in paid work. We could use either variable as the dependent variable. For concreteness, estimate the model <span class="math inline">\(sleep = \beta_0 + \beta_1totwrk + u,\)</span> where <code>sleep</code> is minutes spent sleeping at night per week and <code>totwrk</code> is total minutes worked during the week.</p>
+<ol type="1">
+<li>Report your results in equation form along with the number of observations and R-squared. What does the intercept in this equation mean?</li>
+<li>If <code>totwrk</code> increases by 2 hours, by how much is <code>sleep</code> estimated to fall? Do you find this to be a large effect?</li>
+</ol>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-9" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-9">Exercise 9</h2>
+<p>For the population of firms in the chemical industry, let <code>rd</code> denote annual expenditures on research and development, and let <code>sales</code> denote annual sales (both are in millions of dollars).</p>
+<ol type="1">
+<li>Write down a model (not an estimated equation) that implies a constant elasticity between rd and sales. Which parameter is the elasticity?</li>
+<li>Now, estimate the model using the data in RDCHEM.RAW. Write out the estimated equation in the usual form. What is the estimated elasticity of rd with respect to sales? Explain in words what this elasticity means.</li>
+</ol>
+<div class="cell">
+
+</div>
 
 
 </section>
