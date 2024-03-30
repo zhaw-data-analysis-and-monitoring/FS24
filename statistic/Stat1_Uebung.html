@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2024-04-02">
 
-<title>Data Analysis and Monitoring FS24 - 17&nbsp; Statistics 1: The basics of Statistics</title>
+<title>Data Analysis and Monitoring FS24 - 17&nbsp; Statistics 1: The Basics of Statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -175,7 +175,7 @@ window.onload = function() {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Statistics 1: The basics of Statistics</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Statistics 1: The Basics of Statistics</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -330,7 +330,7 @@ window.onload = function() {
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../statistic/Stat1_Uebung.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Statistics 1: The basics of Statistics</span></a>
+  <a href="../statistic/Stat1_Uebung.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Statistics 1: The Basics of Statistics</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -403,7 +403,14 @@ window.onload = function() {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link active" data-scroll-target="#exercise-1">Exercise 1</a></li>
+  <li><a href="#exercise-i-descriptive-statistics" id="toc-exercise-i-descriptive-statistics" class="nav-link active" data-scroll-target="#exercise-i-descriptive-statistics">Exercise I: Descriptive Statistics</a></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
+  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
+  <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3">Exercise 3</a></li>
+  <li><a href="#exercise-4" id="toc-exercise-4" class="nav-link" data-scroll-target="#exercise-4">Exercise 4</a></li>
+  <li><a href="#exercise-5" id="toc-exercise-5" class="nav-link" data-scroll-target="#exercise-5">Exercise 5</a></li>
+  <li><a href="#exercise-ii-the-simple-linear-regression-model" id="toc-exercise-ii-the-simple-linear-regression-model" class="nav-link" data-scroll-target="#exercise-ii-the-simple-linear-regression-model">Exercise II: The Simple Linear Regression Model</a></li>
+  <li><a href="#exercise-6" id="toc-exercise-6" class="nav-link" data-scroll-target="#exercise-6">Exercise 6</a></li>
   </ul>
 </nav>
     </div>
@@ -412,7 +419,7 @@ window.onload = function() {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-title">Statistics 1: The basics of Statistics</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-title">Statistics 1: The Basics of Statistics</span></h1>
 </div>
 
 
@@ -436,6 +443,9 @@ window.onload = function() {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<section id="exercise-i-descriptive-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-i-descriptive-statistics">Exercise I: Descriptive Statistics</h2>
+</section>
 <section id="exercise-1" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-1">Exercise 1</h2>
 <p>Use the data in WAGE1.RAW for this exercise.</p>
@@ -452,46 +462,89 @@ window.onload = function() {
 <div class="cell">
 
 </div>
-<p>Exercise 2<br>
-Use the data in BWGHT.RAW to answer this question.<br>
-1) How many women are in the sample, and how many report smoking during pregnancy?<br>
-2) What is the average number of cigarettes smoked per day? Is the average a good measure of the “typical” woman in this case? Explain.<br>
-3) Among women who smoked during pregnancy, what is the average number of cigarettes smoked per day? How does this compare with your answer from 2), and why?<br>
-4) Find the average of <span class="math inline">\(fatheduc\)</span> in the sample. Why are only 1,192 observations used to compute this average?<br>
-5) Report the average family income and its standard deviation in dollars.</p>
+</section>
+<section id="exercise-2" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2">Exercise 2</h2>
+<p>Use the data in BWGHT.RAW to answer this question.</p>
+<ol type="1">
+<li>How many women are in the sample, and how many report smoking during pregnancy?<br>
+</li>
+<li>What is the average number of cigarettes smoked per day? Is the average a good measure of the “typical” woman in this case? Explain.<br>
+</li>
+<li>Among women who smoked during pregnancy, what is the average number of cigarettes smoked per day? How does this compare with your answer from 2), and why?<br>
+</li>
+<li>Find the average of <code>fatheduc</code> in the sample. Why are only 1,192 observations used to compute this average?<br>
+</li>
+<li>Report the average family income and its standard deviation in dollars.</li>
+</ol>
 <div class="cell">
 
 </div>
-<p>Exercise 3<br>
-The data in MEAP01.RAW are for the state of Michigan in the year 2001. Use these data to answer the following questions.<br>
-1) Find the largest and smallest values of <span class="math inline">\(math4\)</span>. Does the range make sense? Explain.<br>
-2) How many schools have a perfect pass rate on the math test? What percentage is this of the total sample?<br>
-3) How many schools have math pass rates of exactly 50%?<br>
-4) Compare the average pass rates for the math and reading scores. Which test is harder to pass?<br>
-5) Find the correlation between <span class="math inline">\(math4\)</span> and <span class="math inline">\(read4\)</span>. What do you conclude?<br>
-6) The variable <span class="math inline">\(exppp\)</span> is expenditure per pupil. Find the average of <span class="math inline">\(exppp\)</span> along with its standard deviation. Would you say there is wide variation in per pupil spending?<br>
-7) Suppose School A spends $6,000 per student and School B spends $5,500 per student. By what percentage does School A’s spending exceed School B’s?</p>
+</section>
+<section id="exercise-3" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3">Exercise 3</h2>
+<p>The data in MEAP01.RAW are for the state of Michigan in the year 2001. Use these data to answer the following questions.</p>
+<ol type="1">
+<li>Find the largest and smallest values of <code>math4</code>. Does the range make sense? Explain.<br>
+</li>
+<li>How many schools have a perfect pass rate on the math test? What percentage is this of the total sample?<br>
+</li>
+<li>How many schools have math pass rates of exactly 50%?<br>
+</li>
+<li>Compare the average pass rates for the math and reading scores. Which test is harder to pass?<br>
+</li>
+<li>Find the correlation between <code>math4</code> and <code>read4</code>. What do you conclude?<br>
+</li>
+<li>The variable <code>exppp</code> is expenditure per pupil. Find the average of <code>exppp</code> along with its standard deviation. Would you say there is wide variation in per pupil spending?<br>
+</li>
+<li>Suppose School A spends $6,000 per student and School B spends $5,500 per student. By what percentage does School A’s spending exceed School B’s?</li>
+</ol>
 <div class="cell">
 
 </div>
-<p>Exercise 4<br>
-The data in JTRAIN2.RAW come from a job training experiment conducted for low-income men during 1976–1977.<br>
-1) Use the indicator variable <span class="math inline">\(train\)</span> to determine the fraction of men receiving job training.<br>
-2) The variable <code>re78</code> is earnings from 1978, measured in thousands of 1982 dollars. Find the averages of <span class="math inline">\(re78\)</span> for the sample of men receiving job training and the sample not receiving job training. Is the difference economically large?<br>
-3) The variable <span class="math inline">\(unem78\)</span> is an indicator of whether a man is unemployed or not in 1978. What fraction of the men who received job training are unemployed? What about for men who did not receive job training? Comment on the difference.<br>
-4) From questions 2) and 3), does it appear that the job training program was effective? What would make our conclusions more convincing?</p>
+</section>
+<section id="exercise-4" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4">Exercise 4</h2>
+<p>The data in JTRAIN2.RAW come from a job training experiment conducted for low-income men during 1976–1977.</p>
+<ol type="1">
+<li>Use the indicator variable <code>train</code> to determine the fraction of men receiving job training.<br>
+</li>
+<li>The variable <code>re78</code> is earnings from 1978, measured in thousands of 1982 dollars. Find the averages of <code>re78</code> for the sample of men receiving job training and the sample not receiving job training. Is the difference economically large?<br>
+</li>
+<li>The variable <code>unem78</code> is an indicator of whether a man is unemployed or not in 1978. What fraction of the men who received job training are unemployed? What about for men who did not receive job training? Comment on the difference.<br>
+</li>
+<li>From questions 2 and 3, does it appear that the job training program was effective? What would make our conclusions more convincing?</li>
+</ol>
 <div class="cell">
 
 </div>
-<p>Exercise 5<br>
-The data in FERTIL2.DTA were collected on women living in the Republic of Botswana in 1988. The variable children refers to the number of living children. The variable electric is a binary indicator equal to one if the woman’s home has electricity, and zero if not.<br>
-1) Find the smallest and largest values of <span class="math inline">\(children\)</span> in the sample. What is the average of <span class="math inline">\(children\)</span>?<br>
-2) What percentage of women have electricity in the home?<br>
-3) Compute the average of <span class="math inline">\(children\)</span> for those without electricity and do the same for those with electricity. Comment on what you find.<br>
-4) From question 3), can you infer that having electricity “causes” women to have fewer children? Explain.</p>
+</section>
+<section id="exercise-5" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-5">Exercise 5</h2>
+<p>The data in FERTIL2.DTA were collected on women living in the Republic of Botswana in 1988. The variable children refers to the number of living children. The variable electric is a binary indicator equal to one if the woman’s home has electricity, and zero if not.</p>
+<ol type="1">
+<li>Find the smallest and largest values of <code>children</code> in the sample. What is the average of <code>children</code>?<br>
+</li>
+<li>What percentage of women have electricity in the home?<br>
+</li>
+<li>Compute the average of <code>children</code> for those without electricity and do the same for those with electricity. Comment on what you find.<br>
+</li>
+<li>From question 3), can you infer that having electricity “causes” women to have fewer children? Explain.</li>
+</ol>
 <div class="cell">
 
 </div>
+</section>
+<section id="exercise-ii-the-simple-linear-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-ii-the-simple-linear-regression-model">Exercise II: The Simple Linear Regression Model</h2>
+</section>
+<section id="exercise-6" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6">Exercise 6</h2>
+<p>The data in 401K.RAW are a subset of data analyzed by Papke (1995) to study the relationship between participation in a 401(k) pension plan and the generosity of the plan. The variable <code>prate</code> is the percentage of eligible workers with an active account; this is the variable we would like to explain. The measure of generosity is the plan match rate, <code>mrate</code>. This variable gives the average amount the firm contributes to each worker’s plan for each $1 contribution by the worker. For example, if <code>mrate</code> = 0.50, then a $1 contribution by the worker is matched by a 50¢ contribution by the firm.</p>
+<ol type="1">
+<li>Find the average participation rate and the average match rate in the sample of plans.</li>
+<li>Now, estimate the simple regression equation <span class="math inline">\(\widehat{prate} = \hat{\beta_0} + \hat{\beta_1}mrate,\)</span> and report the results along with the sample size and R-squared.</li>
+</ol>
 
 
 </section>
