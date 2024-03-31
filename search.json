@@ -501,14 +501,14 @@
     "href": "Statistic.html",
     "title": "Statistic",
     "section": "",
-    "text": "Write Intro\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\nDate\n\n\nLesson\n\n\nTopic\n\n\n\n\n\n\nPreparation\n\n\n2024-04-02\n\n\nstat1\n\n\nPreparation\n\n\n\n\nStatistics 1: The Basics of Statistics\n\n\n2024-04-02\n\n\nstat1\n\n\nStatistic 1\n\n\n\n\nStatistic 2\n\n\n2024-04-09\n\n\nstat2\n\n\nStatistic 2\n\n\n\n\nStatistic 3\n\n\n2024-04-23\n\n\nstat3\n\n\nStatistic 3\n\n\n\n\n\n\nNo matching items"
+    "text": "Write Intro\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\nDate\n\n\nLesson\n\n\nTopic\n\n\n\n\n\n\nPreparation\n\n\n2024-04-02\n\n\nstat1\n\n\nPreparation\n\n\n\n\nStatistics 1: The Basics of Statistics\n\n\n2024-04-02\n\n\nstat1\n\n\nStatistic 1\n\n\n\n\nStatistic 2:\n\n\n2024-04-09\n\n\nstat2\n\n\nStatistic 2\n\n\n\n\nStatistic 3\n\n\n2024-04-23\n\n\nstat3\n\n\nStatistic 3\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "statistic/Stat0_Vorbereitung.html",
     "href": "statistic/Stat0_Vorbereitung.html",
     "title": "Preparation",
     "section": "",
-    "text": "As part of Statistic 1 - 3, we will need some R packages. We recommend installing them before the first lesson. Similar to the preparation exercise in Prepro1 you can use the code below to automatically install all packages that have not yet been installed.\n\nipak <- function(pkg) {\n  new.pkg <- pkg[!(pkg %in% installed.packages()[, \"Package\"])]\n  if (length(new.pkg)) {\n    install.packages(new.pkg, dependencies = TRUE)\n  }\n}\n\npackages <- c('dplyr', 'wooldridge')\n\nipak(packages)\n\nYou can download the datasets for the exercises from Moodle:\n\nStat1\nStat2\nStat3"
+    "text": "As part of Statistic 1 - 3, we will need some R packages. We recommend installing them before the first lesson. Similar to the preparation exercise in Prepro1 you can use the code below to automatically install all packages that have not yet been installed.\n\nipak <- function(pkg) {\n  new.pkg <- pkg[!(pkg %in% installed.packages()[, \"Package\"])]\n  if (length(new.pkg)) {\n    install.packages(new.pkg, dependencies = TRUE)\n  }\n}\n\npackages <- c('dplyr', 'wooldridge')\n\nipak(packages)"
   },
   {
     "objectID": "statistic/Stat1_Uebung.html#exercise-i-descriptive-statistics",
@@ -588,11 +588,18 @@
     "text": "Exercise 9\nFor the population of firms in the chemical industry, let rd denote annual expenditures on research and development, and let sales denote annual sales (both are in millions of dollars).\n\nWrite down a model (not an estimated equation) that implies a constant elasticity between rd and sales. Which parameter is the elasticity?\nNow, estimate the model using the data in RDCHEM.RAW. Write out the estimated equation in the usual form. What is the estimated elasticity of rd with respect to sales? Explain in words what this elasticity means."
   },
   {
-    "objectID": "statistic/Stat2_Uebung.html",
-    "href": "statistic/Stat2_Uebung.html",
-    "title": "Statistic 2",
-    "section": "",
-    "text": "Advanced applications of inductive and multivariate statistics, …"
+    "objectID": "statistic/Stat2_Uebung.html#exercise-1",
+    "href": "statistic/Stat2_Uebung.html#exercise-1",
+    "title": "Statistic 2:",
+    "section": "Exercise 1",
+    "text": "Exercise 1\nA problem of interest to health officials (and others) is to determine the effects of smoking during pregnancy on infant health. One measure of infant health is birth weight; a birth weight that is too low can put an infant at risk for contracting various illnesses. Since factors other than cigarette smoking that affect birth weight are likely to be correlated with smoking, we should take those factors into account. For example, higher income generally results in access to better prenatal care, as well as better nutrition forthe mother. An equation that recognizes this is \\(bwght = \\beta_0 + \\beta_1cigs + \\beta_2 faminc + u.\\)\n\nWhat is the most likely sign for \\beta_2?\nDo you think cigs and faminc are likely to be correlated? Explain why the correlation might be positive or negative.\nNow, estimate the equation with and without faminc, using the data in BWGHT.RAW. Report the results in equation form, including the sample size and R-squared. Discuss your results, focusing on whether adding faminc substantially changes the estimated effect of cigs on bwght."
+  },
+  {
+    "objectID": "statistic/Stat2_Uebung.html#exercise-2",
+    "href": "statistic/Stat2_Uebung.html#exercise-2",
+    "title": "Statistic 2:",
+    "section": "Exercise 2",
+    "text": "Exercise 2\nUse the data in HPRICE1.RAW to estimate the model \\(price = \\beta_0 + \\beta_1sqrft + \\beta_2bdrms + u,\\) where price is the house price measured in thousands of dollars.\n\nWrite out the results in equation form.\nWhat is the estimated increase in price for a house with one more bedroom, holding square footage constant?\nWhat is the estimated increase in price for a house with an additional bedroom that is 140 square feet in size? Compare this to your answer in question 2.\nWhat percentage of the variation in price is explained by square footage and number of bedrooms?\nThe first house in the sample has \\(sqrft = 2.438\\) and \\(bdrms = 4\\). Find the predicted selling price for this house from the OLS regression line.\nThe actual selling price of the first house in the sample was $300,000 (so price = 300). Find the residual for this house. Does it suggest that the buyer underpaid or overpaid for the house?"
   },
   {
     "objectID": "statistic/Stat3_Uebung.html",
