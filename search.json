@@ -501,7 +501,7 @@
     "href": "Statistic.html",
     "title": "Statistic",
     "section": "",
-    "text": "Write Intro\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\nDate\n\n\nLesson\n\n\nTopic\n\n\n\n\n\n\nPreparation\n\n\n2024-04-02\n\n\nstat1\n\n\nPreparation\n\n\n\n\nStatistics 1: The Basics of Statistics\n\n\n2024-04-02\n\n\nstat1\n\n\nStatistic 1\n\n\n\n\nStatistic 2:\n\n\n2024-04-09\n\n\nstat2\n\n\nStatistic 2\n\n\n\n\nStatistic 3\n\n\n2024-04-23\n\n\nstat3\n\n\nStatistic 3\n\n\n\n\n\n\nNo matching items"
+    "text": "Write Intro\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\nDate\n\n\nLesson\n\n\nTopic\n\n\n\n\n\n\nPreparation\n\n\n2024-04-02\n\n\nstat1\n\n\nPreparation\n\n\n\n\nStatistics 1: The Basics of Statistics\n\n\n2024-04-02\n\n\nstat1\n\n\nStatistic 1\n\n\n\n\nStatistic 2: Advanced Topics: Inductive and Multivariate Statistics\n\n\n2024-04-09\n\n\nstat2\n\n\nStatistic 2\n\n\n\n\nStatistic 3\n\n\n2024-04-23\n\n\nstat3\n\n\nStatistic 3\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "statistic/Stat0_Vorbereitung.html",
@@ -588,18 +588,53 @@
     "text": "Exercise 9\nFor the population of firms in the chemical industry, let rd denote annual expenditures on research and development, and let sales denote annual sales (both are in millions of dollars).\n\nWrite down a model (not an estimated equation) that implies a constant elasticity between rd and sales. Which parameter is the elasticity?\nNow, estimate the model using the data in RDCHEM.RAW. Write out the estimated equation in the usual form. What is the estimated elasticity of rd with respect to sales? Explain in words what this elasticity means."
   },
   {
+    "objectID": "statistic/Stat2_Uebung.html#exercise-i-estimation-of-multiple-regression-analysis",
+    "href": "statistic/Stat2_Uebung.html#exercise-i-estimation-of-multiple-regression-analysis",
+    "title": "Statistic 2: Advanced Topics: Inductive and Multivariate Statistics",
+    "section": "Exercise I: Estimation of Multiple Regression Analysis",
+    "text": "Exercise I: Estimation of Multiple Regression Analysis"
+  },
+  {
     "objectID": "statistic/Stat2_Uebung.html#exercise-1",
     "href": "statistic/Stat2_Uebung.html#exercise-1",
-    "title": "Statistic 2:",
+    "title": "Statistic 2: Advanced Topics: Inductive and Multivariate Statistics",
     "section": "Exercise 1",
     "text": "Exercise 1\nA problem of interest to health officials (and others) is to determine the effects of smoking during pregnancy on infant health. One measure of infant health is birth weight; a birth weight that is too low can put an infant at risk for contracting various illnesses. Since factors other than cigarette smoking that affect birth weight are likely to be correlated with smoking, we should take those factors into account. For example, higher income generally results in access to better prenatal care, as well as better nutrition forthe mother. An equation that recognizes this is \\(bwght = \\beta_0 + \\beta_1cigs + \\beta_2 faminc + u.\\)\n\nWhat is the most likely sign for \\beta_2?\nDo you think cigs and faminc are likely to be correlated? Explain why the correlation might be positive or negative.\nNow, estimate the equation with and without faminc, using the data in BWGHT.RAW. Report the results in equation form, including the sample size and R-squared. Discuss your results, focusing on whether adding faminc substantially changes the estimated effect of cigs on bwght."
   },
   {
     "objectID": "statistic/Stat2_Uebung.html#exercise-2",
     "href": "statistic/Stat2_Uebung.html#exercise-2",
-    "title": "Statistic 2:",
+    "title": "Statistic 2: Advanced Topics: Inductive and Multivariate Statistics",
     "section": "Exercise 2",
-    "text": "Exercise 2\nUse the data in HPRICE1.RAW to estimate the model \\(price = \\beta_0 + \\beta_1sqrft + \\beta_2bdrms + u,\\) where price is the house price measured in thousands of dollars.\n\nWrite out the results in equation form.\nWhat is the estimated increase in price for a house with one more bedroom, holding square footage constant?\nWhat is the estimated increase in price for a house with an additional bedroom that is 140 square feet in size? Compare this to your answer in question 2.\nWhat percentage of the variation in price is explained by square footage and number of bedrooms?\nThe first house in the sample has \\(sqrft = 2.438\\) and \\(bdrms = 4\\). Find the predicted selling price for this house from the OLS regression line.\nThe actual selling price of the first house in the sample was $300,000 (so price = 300). Find the residual for this house. Does it suggest that the buyer underpaid or overpaid for the house?"
+    "text": "Exercise 2\nUse the data in HPRICE1.RAW to estimate the model \\(price = \\beta_0 + \\beta_1sqrft + \\beta_2bdrms + u,\\) where price is the house price measured in thousands of dollars.\n\nWrite out the results in equation form.\nWhat is the estimated increase in price for a house with one more bedroom, holding square footage constant?\nWhat is the estimated increase in price for a house with an additional bedroom that is 140 square feet in size? Compare this to your answer in question 2.\nWhat percentage of the variation in price is explained by square footage and number of bedrooms?\nThe first house in the sample has sqrft = 2.438 and bdrms = 4. Find the predicted selling price for this house from the OLS regression line.\nThe actual selling price of the first house in the sample was $300,000 (so price = 300). Find the residual for this house. Does it suggest that the buyer underpaid or overpaid for the house?"
+  },
+  {
+    "objectID": "statistic/Stat2_Uebung.html#exercise-3",
+    "href": "statistic/Stat2_Uebung.html#exercise-3",
+    "title": "Statistic 2: Advanced Topics: Inductive and Multivariate Statistics",
+    "section": "Exercise 3",
+    "text": "Exercise 3\nThe file CEOSAL2.RAW contains data on 177 chief executive officers and can be used to examine the effects of firm performance on CEO salary.\n\nEstimate a model relating annual salary to firm sales and market value. Make the model of the constant elasticity variety for both independent variables. Write the results out in equation form.\nAdd profits to the model from question 1. Why can this variable not be included in logarithmic form? Would you say that these firm performance variables explain most of the variation in CEO salaries?\nAdd the variable ceoten to the model in question 2. What is the estimated percentage return for another year of CEO tenure, holding other factors fixed?\nFind the sample correlation coefficient between the variables log(mktval) and profits. Are these variables highly correlated? What does this say about the OLS estimators?"
+  },
+  {
+    "objectID": "statistic/Stat2_Uebung.html#exercise-4",
+    "href": "statistic/Stat2_Uebung.html#exercise-4",
+    "title": "Statistic 2: Advanced Topics: Inductive and Multivariate Statistics",
+    "section": "Exercise 4",
+    "text": "Exercise 4\nUse the data set in WAGE2.RAW for this problem. As usual, be sure all of the following regressions contain an intercept.\n\nRun a simple regression of IQ on educ to obtain the slope coefficient, say, \\(\\tilde{\\delta_1}\\).\nRun the simple regression of log(wage) on educ, and obtain the slope coefficient, \\(\\tilde{\\beta_1}\\).\nRun the multiple regression of log(wage) on educ and IQ, and obtain the slope coefficients, \\(\\hat{\\beta_1}\\) and \\(\\hat{\\beta_2}\\), respectively.\nVerify that b ˜ 1 5 bˆ 1 1 b ˆ 2 δ ˜ 1 \\(\\tilde{\\beta_1} = \\hat{\\beta_1} + \\hat{\\beta_2}\\tilde{\\delta_1}\\)."
+  },
+  {
+    "objectID": "statistic/Stat2_Uebung.html#exercise-ii-multiple-regression-analysis-inference",
+    "href": "statistic/Stat2_Uebung.html#exercise-ii-multiple-regression-analysis-inference",
+    "title": "Statistic 2: Advanced Topics: Inductive and Multivariate Statistics",
+    "section": "Exercise II: Multiple Regression Analysis: Inference",
+    "text": "Exercise II: Multiple Regression Analysis: Inference"
+  },
+  {
+    "objectID": "statistic/Stat2_Uebung.html#exercise-5",
+    "href": "statistic/Stat2_Uebung.html#exercise-5",
+    "title": "Statistic 2: Advanced Topics: Inductive and Multivariate Statistics",
+    "section": "Exercise 5",
+    "text": "Exercise 5\nThe following model can be used to study whether campaign expenditures affect election outcomes: voteA 5 b0 1 b1log(expendA) 1 b2log(expendB) 1 b3 prtystrA 1 u, where voteA is the percentage of the vote received by Candidate A, expendA and expendB are campaign expenditures by Candidates A and B, and prtystrA is a measure of party strength for Candidate A (the percentage of the most recent presidential vote that went to A’s party). (i) What is the interpretation of b1? (ii) In terms of the parameters, state the null hypothesis that a 1% increase in A’s expenditures is offset by a 1% increase in B’s expenditures. (iii) Estimate the given model using the data in VOTE1.RAW and report the results in usual form. Do A’s expenditures affect the outcome? What about B’s expenditures? Can you use these results to test the hypothesis in part (ii)? (iv) Estimate a model that directly gives the t statistic for testing the hypothesis in part (ii). What do you conclude? (Use a two-sided alternative.)"
   },
   {
     "objectID": "statistic/Stat3_Uebung.html",

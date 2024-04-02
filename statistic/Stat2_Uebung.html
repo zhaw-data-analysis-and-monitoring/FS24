@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2024-04-09">
 
-<title>Data Analysis and Monitoring FS24 - 18&nbsp; Statistic 2:</title>
+<title>Data Analysis and Monitoring FS24 - 18&nbsp; Statistic 2: Advanced Topics: Inductive and Multivariate Statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -112,7 +112,7 @@ window.onload = function() {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Statistic 2:</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Statistic 2: Advanced Topics: Inductive and Multivariate Statistics</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -273,7 +273,7 @@ window.onload = function() {
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../statistic/Stat2_Uebung.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Statistic 2:</span></a>
+  <a href="../statistic/Stat2_Uebung.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Statistic 2: Advanced Topics: Inductive and Multivariate Statistics</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -340,8 +340,13 @@ window.onload = function() {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link active" data-scroll-target="#exercise-1">Exercise 1</a></li>
+  <li><a href="#exercise-i-estimation-of-multiple-regression-analysis" id="toc-exercise-i-estimation-of-multiple-regression-analysis" class="nav-link active" data-scroll-target="#exercise-i-estimation-of-multiple-regression-analysis">Exercise I: Estimation of Multiple Regression Analysis</a></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
   <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
+  <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3">Exercise 3</a></li>
+  <li><a href="#exercise-4" id="toc-exercise-4" class="nav-link" data-scroll-target="#exercise-4">Exercise 4</a></li>
+  <li><a href="#exercise-ii-multiple-regression-analysis-inference" id="toc-exercise-ii-multiple-regression-analysis-inference" class="nav-link" data-scroll-target="#exercise-ii-multiple-regression-analysis-inference">Exercise II: Multiple Regression Analysis: Inference</a></li>
+  <li><a href="#exercise-5" id="toc-exercise-5" class="nav-link" data-scroll-target="#exercise-5">Exercise 5</a></li>
   </ul>
 </nav>
     </div>
@@ -350,7 +355,7 @@ window.onload = function() {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-title">Statistic 2:</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-title">Statistic 2: Advanced Topics: Inductive and Multivariate Statistics</span></h1>
 </div>
 
 
@@ -371,6 +376,9 @@ window.onload = function() {
 
 </header>
 
+<section id="exercise-i-estimation-of-multiple-regression-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-i-estimation-of-multiple-regression-analysis">Exercise I: Estimation of Multiple Regression Analysis</h2>
+</section>
 <section id="exercise-1" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-1">Exercise 1</h2>
 <p>A problem of interest to health officials (and others) is to determine the effects of smoking during pregnancy on infant health. One measure of infant health is birth weight; a birth weight that is too low can put an infant at risk for contracting various illnesses. Since factors other than cigarette smoking that affect birth weight are likely to be correlated with smoking, we should take those factors into account. For example, higher income generally results in access to better prenatal care, as well as better nutrition forthe mother. An equation that recognizes this is <span class="math inline">\(bwght = \beta_0 + \beta_1cigs + \beta_2 faminc + u.\)</span></p>
@@ -388,9 +396,36 @@ window.onload = function() {
 <li>What is the estimated increase in price for a house with one more bedroom, holding square footage constant?</li>
 <li>What is the estimated increase in price for a house with an additional bedroom that is 140 square feet in size? Compare this to your answer in question 2.</li>
 <li>What percentage of the variation in price is explained by square footage and number of bedrooms?</li>
-<li>The first house in the sample has <span class="math inline">\(sqrft = 2.438\)</span> and <span class="math inline">\(bdrms = 4\)</span>. Find the predicted selling price for this house from the OLS regression line.</li>
+<li>The first house in the sample has <code>sqrft</code> = 2.438 and <code>bdrms</code> = 4. Find the predicted selling price for this house from the OLS regression line.</li>
 <li>The actual selling price of the first house in the sample was $300,000 (so <code>price</code> = 300). Find the residual for this house. Does it suggest that the buyer underpaid or overpaid for the house?</li>
 </ol>
+</section>
+<section id="exercise-3" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3">Exercise 3</h2>
+<p>The file CEOSAL2.RAW contains data on 177 chief executive officers and can be used to examine the effects of firm performance on CEO salary.</p>
+<ol type="1">
+<li>Estimate a model relating annual salary to firm sales and market value. Make the model of the constant elasticity variety for both independent variables. Write the results out in equation form.</li>
+<li>Add profits to the model from question 1. Why can this variable not be included in logarithmic form? Would you say that these firm performance variables explain most of the variation in CEO salaries?</li>
+<li>Add the variable <code>ceoten</code> to the model in question 2. What is the estimated percentage return for another year of CEO tenure, holding other factors fixed?</li>
+<li>Find the sample correlation coefficient between the variables <code>log(mktval)</code> and <code>profits</code>. Are these variables highly correlated? What does this say about the OLS estimators?</li>
+</ol>
+</section>
+<section id="exercise-4" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4">Exercise 4</h2>
+<p>Use the data set in WAGE2.RAW for this problem. As usual, be sure all of the following regressions contain an intercept.</p>
+<ol type="1">
+<li>Run a simple regression of <code>IQ</code> on <code>educ</code> to obtain the slope coefficient, say, <span class="math inline">\(\tilde{\delta_1}\)</span>.</li>
+<li>Run the simple regression of <code>log(wage)</code> on <code>educ</code>, and obtain the slope coefficient, <span class="math inline">\(\tilde{\beta_1}\)</span>.</li>
+<li>Run the multiple regression of <code>log(wage)</code> on <code>educ</code> and <code>IQ</code>, and obtain the slope coefficients, <span class="math inline">\(\hat{\beta_1}\)</span> and <span class="math inline">\(\hat{\beta_2}\)</span>, respectively.</li>
+<li>Verify that b ˜ 1 5 bˆ 1 1 b ˆ 2 δ ˜ 1 <span class="math inline">\(\tilde{\beta_1} = \hat{\beta_1} + \hat{\beta_2}\tilde{\delta_1}\)</span>.</li>
+</ol>
+</section>
+<section id="exercise-ii-multiple-regression-analysis-inference" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-ii-multiple-regression-analysis-inference">Exercise II: Multiple Regression Analysis: Inference</h2>
+</section>
+<section id="exercise-5" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-5">Exercise 5</h2>
+<p>The following model can be used to study whether campaign expenditures affect election outcomes: voteA 5 b0 1 b1log(expendA) 1 b2log(expendB) 1 b3 prtystrA 1 u, where voteA is the percentage of the vote received by Candidate A, expendA and expendB are campaign expenditures by Candidates A and B, and prtystrA is a measure of party strength for Candidate A (the percentage of the most recent presidential vote that went to A’s party). (i) What is the interpretation of b1? (ii) In terms of the parameters, state the null hypothesis that a 1% increase in A’s expenditures is offset by a 1% increase in B’s expenditures. (iii) Estimate the given model using the data in VOTE1.RAW and report the results in usual form. Do A’s expenditures affect the outcome? What about B’s expenditures? Can you use these results to test the hypothesis in part (ii)? (iv) Estimate a model that directly gives the t statistic for testing the hypothesis in part (ii). What do you conclude? (Use a two-sided alternative.)</p>
 
 
 </section>
