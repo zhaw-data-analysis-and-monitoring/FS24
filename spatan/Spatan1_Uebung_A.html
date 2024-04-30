@@ -395,7 +395,7 @@ window.onload = function() {
   <li><a href="#task-1-import-vector-data" id="toc-task-1-import-vector-data" class="nav-link active" data-scroll-target="#task-1-import-vector-data">Task 1: Import vector data</a></li>
   <li><a href="#task-2-visualise-data" id="toc-task-2-visualise-data" class="nav-link" data-scroll-target="#task-2-visualise-data">Task 2: Visualise data</a></li>
   <li><a href="#input-coordinate-systems" id="toc-input-coordinate-systems" class="nav-link" data-scroll-target="#input-coordinate-systems">Input: Coordinate systems</a></li>
-  <li><a href="#task-3-transform-coordinate-systems" id="toc-task-3-transform-coordinate-systems" class="nav-link" data-scroll-target="#task-3-transform-coordinate-systems">Task 3: <em>Transform coordinate systems</em></a></li>
+  <li><a href="#task-3-transform-coordinate-systems" id="toc-task-3-transform-coordinate-systems" class="nav-link" data-scroll-target="#task-3-transform-coordinate-systems">Task 3: Transform coordinate systems</a></li>
   <li><a href="#task-4-tidyverse-functions" id="toc-task-4-tidyverse-functions" class="nav-link" data-scroll-target="#task-4-tidyverse-functions">Task 4: Tidyverse functions</a></li>
   <li><a href="#task-5-chloropleth-maps" id="toc-task-5-chloropleth-maps" class="nav-link" data-scroll-target="#task-5-chloropleth-maps">Task 5: Chloropleth Maps</a></li>
   </ul>
@@ -429,10 +429,10 @@ window.onload = function() {
 </header>
 
 
-<p>There are already a large number of packages for working with spatial data in R, which in turn are based on other packages (keyword <em>dependencies</em>). For <em>vector data</em>, the <a href="https://cran.r-project.org/package=sp"><code>sp</code></a> package dominated for a long time, and has now been replaced by <a href="https://r-spatial.github.io/sf/"><code>sf</code></a>. Wherever possible, we will work with <code>sf</code> and only use other packages in exceptional cases.</p>
+<p>You can download the datasets for the exercises from Moodle: <a href="https://moodle.zhaw.ch/mod/folder/view.php?id=1185332">SpatAn1</a></p>
 <section id="task-1-import-vector-data" class="level2">
 <h2 class="anchored" data-anchor-id="task-1-import-vector-data">Task 1: Import vector data</h2>
-<p>Import the <em>kantone.gpkg</em> and <em>gemeinden.gpkg</em> records as follows. These are geodata sets in the geopackage (“* .gpkg”) format, which is an alternative data format to the more well-known “Shapefiles” format.</p>
+<p>Import the <em>kantone.gpkg</em> and <em>gemeinden.gpkg</em> records as follows. These are geodatasets in the geopackage (<code>\* .gpkg</code>) format.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"sf"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -631,7 +631,7 @@ Figure&nbsp;21.1: The sampe location in different coordinate systems, displayed 
 <p>Now that the CRS of the datasets is known, we can use <code>ggplot2</code> to visualise our data. In InfoVis 1 &amp; 2, we worked intensively with <code>ggplot2</code> and got to know the <code>geom_point()</code> and <code>geom_line()</code> layers. <code>ggplot()</code> is also able to very easily plot vector data with <code>geom_sf()</code>.</p>
 </section>
 <section id="task-3-transform-coordinate-systems" class="level2">
-<h2 class="anchored" data-anchor-id="task-3-transform-coordinate-systems">Task 3: <em>Transform coordinate systems</em></h2>
+<h2 class="anchored" data-anchor-id="task-3-transform-coordinate-systems">Task 3: Transform coordinate systems</h2>
 <p>In the previous exercise, we <em>assigned</em> a coordinate system but we did <em>not</em> manipulate the existing coordinates (in the <code>geom</code> column). It is quite different to <em>transfer</em> the data from one coordinate system to the other. In the process of transforming the system, the coordinates are converted and thus manipulated. For practical reasons, <!-- What are the reasons? Can you explain in more detail? --> we will transfer all our data into the new Swiss coordinate system CH1903+ LV95. Transform the <code>cantons</code> record with <code>st_transform()</code> into CH1903+ LV95, using the correct EPSG code.</p>
 <p>Before transforming the data (consider the attributes <code>Bounding box</code>, <code>Projected CRS</code> as well as the values in the <code>geomcolumn</code>):</p>
 <div class="cell">
@@ -719,20 +719,11 @@ Figure&nbsp;21.1: The sampe location in different coordinate systems, displayed 
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>cantons <span class="ot">&lt;-</span> cantons <span class="sc">|&gt;</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">population_density_classes =</span> <span class="fu">cut</span>(population_density, breaks))</span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a colour palette: The number of colours needed is the number of "breaks" minus 1</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>ncols <span class="ot">&lt;-</span> <span class="fu">length</span>(breaks) <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a colour palette (see RColorBrewer::display.brewer.all())</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>red_yellow_green <span class="ot">&lt;-</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(ncols, <span class="st">"RdYlGn"</span>)</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Invert colour palette (to green-red-yellow)</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>green_red_yellow <span class="ot">&lt;-</span> <span class="fu">rev</span>(red_yellow_green)</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>p_cantons <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(cantons, <span class="fu">aes</span>(<span class="at">fill =</span> population_density_classes)) <span class="sc">+</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">colour =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> green_red_yellow) <span class="sc">+</span></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>p_cantons <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(cantons, <span class="fu">aes</span>(<span class="at">fill =</span> population_density_classes)) <span class="sc">+</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">colour =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"RdYlGn"</span>,<span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Create the same classes for the population density of the communities and compare the plots.</p>
 <div id="fig-ggplot-ex4" class="quarto-layout-panel page-columns page-full">
