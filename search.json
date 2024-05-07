@@ -834,7 +834,7 @@
     "href": "statistic/Stat0_Vorbereitung.html",
     "title": "Preparation",
     "section": "",
-    "text": "As part of Statistic 1 - 3, we will need some R packages. We recommend installing them before the first lesson. Similar to the preparation exercise in Prepro1 you can use the code below to automatically install all packages that have not yet been installed.\n\nipak &lt;- function(pkg) {\n  new.pkg &lt;- pkg[!(pkg %in% installed.packages()[, \"Package\"])]\n  if (length(new.pkg)) {\n    install.packages(new.pkg, dependencies = TRUE)\n  }\n}\n\npackages &lt;- c('dplyr'\n \n)\n\nipak(packages)\n\nYou can also download the data for the exercises on Moodle.",
+    "text": "As part of Statistic 1 - 3, we will need some R packages. We recommend installing them before the first lesson. Similar to the preparation exercise in Prepro1 you can use the code below to automatically install all packages that have not yet been installed.\n\nipak &lt;- function(pkg) {\n  new.pkg &lt;- pkg[!(pkg %in% installed.packages()[, \"Package\"])]\n  if (length(new.pkg)) {\n    install.packages(new.pkg, dependencies = TRUE)\n  }\n}\n\npackages &lt;- c('dplyr', 'wooldridge')\n\nipak(packages)",
     "crumbs": [
       "Statistic",
       "<span class='chapter-number'>16</span>  <span class='chapter-title'>Preparation</span>"
@@ -843,34 +843,243 @@
   {
     "objectID": "statistic/Stat1_Uebung.html",
     "href": "statistic/Stat1_Uebung.html",
-    "title": "Statistic 1",
+    "title": "Statistics 1: The Basics of Statistics",
     "section": "",
-    "text": "The basics, comparisons of two samples, ANOVA, Regression techniques (linear, multiple, non-linear)",
+    "text": "Exercise I: Descriptive Statistics",
     "crumbs": [
       "Statistic",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Statistic 1</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Statistics 1: The Basics of Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "statistic/Stat1_Uebung.html#exercise-1",
+    "href": "statistic/Stat1_Uebung.html#exercise-1",
+    "title": "Statistics 1: The Basics of Statistics",
+    "section": "Exercise 1",
+    "text": "Exercise 1\nUse the data in WAGE1.RAW for this exercise.\n\nFind the average education level in the sample. What are the lowest and highest years of education?\nFind the average hourly wage in the sample. Does it seem high or low?\n\nThe wage data are reported in 1976 dollars. Using the Economic Report of the President (2011 or later), obtain and report the Consumer Price Index (CPI) for the years 1976 and 2010.\n\nUse the CPI values from 3) to find the average hourly wage in 2010 dollars. Now does the average hourly wage seem reasonable?\n\nHow many women are in the sample? How many non-women?\n\n\n\nSample Solution\nlibrary('wooldridge')\ndata('wage1')\n?wage1\n\n#1)\nmean(wage1$educ)\nmin(wage1$educ)\nmax(wage1$educ)\n\n#2)\nmean(wage1$wage)\n#This seems low\n\n#3)\n#page 259 of the report\n#CPI in 1976 is 56.9\n#CPI in 2010 is 218.056\n\n#4)\nmean(wage1$wage)*218.056/56.9\n\n#5)\nnrow(wage1[wage1$female == 1, ])\nnrow(wage1[wage1$female == 0, ])",
+    "crumbs": [
+      "Statistic",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Statistics 1: The Basics of Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "statistic/Stat1_Uebung.html#exercise-2",
+    "href": "statistic/Stat1_Uebung.html#exercise-2",
+    "title": "Statistics 1: The Basics of Statistics",
+    "section": "Exercise 2",
+    "text": "Exercise 2\nUse the data in BWGHT.RAW to answer this question.\n\nHow many women are in the sample, and how many report smoking during pregnancy?\n\nWhat is the average number of cigarettes smoked per day? Is the average a good measure of the “typical” woman in this case? Explain.\n\nAmong women who smoked during pregnancy, what is the average number of cigarettes smoked per day? How does this compare with your answer from 2), and why?\n\nFind the average of fatheduc in the sample. Why are only 1,192 observations used to compute this average?\n\nReport the average family income and its standard deviation in dollars.\n\n\n\nSample Solution\nlibrary('wooldridge')\nlibrary('dplyr')\ndata('bwght')\n?bwght\n\n#1)\nnrow(bwght[is.na(bwght$mothereduc), ])\n#there is no missing information so we have 1388 women\n1388-nrow(bwght[(bwght$cigs==0), ])\n\n#2)\nmean(bwght$cigs)\n#No, because there is a lot of non-smokers\n\n#3)\nbwght %&gt;% filter(cigs&gt;0) %&gt;% summarise(mean(cigs))\n\n#4)\nmean(bwght$fatheduc, na.rm = TRUE)\n\n#5)\nmean(bwght$faminc)\nsd(bwght$faminc)",
+    "crumbs": [
+      "Statistic",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Statistics 1: The Basics of Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "statistic/Stat1_Uebung.html#exercise-3",
+    "href": "statistic/Stat1_Uebung.html#exercise-3",
+    "title": "Statistics 1: The Basics of Statistics",
+    "section": "Exercise 3",
+    "text": "Exercise 3\nThe data in MEAP01.RAW are for the state of Michigan in the year 2001. Use these data to answer the following questions.\n\nFind the largest and smallest values of math4. Does the range make sense? Explain.\n\nHow many schools have a perfect pass rate on the math test? What percentage is this of the total sample?\n\nHow many schools have math pass rates of exactly 50%?\n\nCompare the average pass rates for the math and reading scores. Which test is harder to pass?\n\nFind the correlation between math4 and read4. What do you conclude?\n\nThe variable exppp is expenditure per pupil. Find the average of exppp along with its standard deviation. Would you say there is wide variation in per pupil spending?\n\nSuppose School A spends $6,000 per student and School B spends $5,500 per student. By what percentage does School A’s spending exceed School B’s?\n\n\n\nSample Solution\nlibrary('wooldridge')\ndata('meap01')\n?meap01\n\n#1)\nmin(meap01$math4)\nmax(meap01$math4)\n\n#2)\nnrow(meap01[(meap01$math4==100), ])\nnrow(meap01[(meap01$math4==100), ])/1823*100\n\n#3)\nnrow(meap01[(meap01$math4==50), ])\n\n#4)\nmean(meap01$math4)\nmean(meap01$read4)\n\n#5)\ncorr=lm(math4 ~ read4, data = meap01)\nsummary(corr)\n\n#6)\nmean(meap01$exppp)\nsd(meap01$exppp)\n\n#7)\n(6000-5500)/5500*100",
+    "crumbs": [
+      "Statistic",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Statistics 1: The Basics of Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "statistic/Stat1_Uebung.html#exercise-4",
+    "href": "statistic/Stat1_Uebung.html#exercise-4",
+    "title": "Statistics 1: The Basics of Statistics",
+    "section": "Exercise 4",
+    "text": "Exercise 4\nThe data in JTRAIN2.RAW come from a job training experiment conducted for low-income men during 1976–1977.\n\nUse the indicator variable train to determine the fraction of men receiving job training.\n\nThe variable re78 is earnings from 1978, measured in thousands of 1982 dollars. Find the averages of re78 for the sample of men receiving job training and the sample not receiving job training. Is the difference economically large?\n\nThe variable unem78 is an indicator of whether a man is unemployed or not in 1978. What fraction of the men who received job training are unemployed? What about for men who did not receive job training? Comment on the difference.\n\nFrom questions 2 and 3, does it appear that the job training program was effective? What would make our conclusions more convincing?\n\n\n\nSample Solution\nlibrary('wooldridge')\ndata('jtrain2')\n?jtrain2\n\n#1)\nnrow(jtrain2[(jtrain2$train==1), ])/445\n\n#2)\njtrain2 %&gt;% filter(train==0) %&gt;% summarise(mean(re78))\njtrain2 %&gt;% filter(train==1) %&gt;% summarise(mean(re78))\n\n#3)\n(nrow(jtrain2[(jtrain2$train==1), ]) - (jtrain2 %&gt;% filter(train==1) %&gt;% summarise(sum(unem78))))/nrow(jtrain2[(jtrain2$train==1), ])\n\n(nrow(jtrain2[(jtrain2$train==0), ]) - (jtrain2 %&gt;% filter(train==0) %&gt;% summarise(sum(unem78))))/nrow(jtrain2[(jtrain2$train==0), ])\n\n#4)\n#No\n#To make a linear regression to find if there is evidence on the fact that the training does not have any effects on the employement rate",
+    "crumbs": [
+      "Statistic",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Statistics 1: The Basics of Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "statistic/Stat1_Uebung.html#exercise-5",
+    "href": "statistic/Stat1_Uebung.html#exercise-5",
+    "title": "Statistics 1: The Basics of Statistics",
+    "section": "Exercise 5",
+    "text": "Exercise 5\nThe data in FERTIL2.DTA were collected on women living in the Republic of Botswana in 1988. The variable children refers to the number of living children. The variable electric is a binary indicator equal to one if the woman’s home has electricity, and zero if not.\n\nFind the smallest and largest values of children in the sample. What is the average of children?\n\nWhat percentage of women have electricity in the home?\n\nCompute the average of children for those without electricity and do the same for those with electricity. Comment on what you find.\n\nFrom question 3), can you infer that having electricity “causes” women to have fewer children? Explain.\n\n\n\nSample Solution\nlibrary('wooldridge')\ndata('fertil2')\n?fertil2\n\n#1)\nmin(fertil2$children)\nmax(fertil2$children)\nmean(fertil2$children)\n\n#2)\nnrow(fertil2[(fertil2$electric==1), ])/4361*100\n\n#3)\nfertil2 %&gt;% filter(electric==0) %&gt;% summarise(mean(children))\nfertil2 %&gt;% filter(electric==1) %&gt;% summarise(mean(children))\n\n#4)\n#No",
+    "crumbs": [
+      "Statistic",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Statistics 1: The Basics of Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "statistic/Stat1_Uebung.html#exercise-ii-the-simple-linear-regression-model",
+    "href": "statistic/Stat1_Uebung.html#exercise-ii-the-simple-linear-regression-model",
+    "title": "Statistics 1: The Basics of Statistics",
+    "section": "Exercise II: The Simple Linear Regression Model",
+    "text": "Exercise II: The Simple Linear Regression Model",
+    "crumbs": [
+      "Statistic",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Statistics 1: The Basics of Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "statistic/Stat1_Uebung.html#exercise-6",
+    "href": "statistic/Stat1_Uebung.html#exercise-6",
+    "title": "Statistics 1: The Basics of Statistics",
+    "section": "Exercise 6",
+    "text": "Exercise 6\nThe data in 401K.RAW are a subset of data analyzed by Papke (1995) to study the relationship between participation in a 401(k) pension plan and the generosity of the plan. The variable prate is the percentage of eligible workers with an active account; this is the variable we would like to explain. The measure of generosity is the plan match rate, mrate. This variable gives the average amount the firm contributes to each worker’s plan for each $1 contribution by the worker. For example, if mrate = 0.50, then a $1 contribution by the worker is matched by a 50¢ contribution by the firm.\n\nFind the average participation rate and the average match rate in the sample of plans.\nNow, estimate the simple regression equation \\(\\widehat{prate} = \\hat{\\beta_0} + \\hat{\\beta_1}mrate,\\) and report the results along with the sample size and R-squared.\nInterpret the intercept in your equation. Interpret the coefficient on mrate.\nFind the predicted prate when mrate = 3.5. Is this a reasonable prediction? Explain what is happening here.\nHow much of the variation in prate is explained by mrate? Is this a lot in your opinion?\n\n\n\nSample Solution\nlibrary('wooldridge')\ndata('k401k')\n?k401k\n\n#1)\nmean(k401k$prate)\nmean(k401k$mrate)\n\n#2)\nLinMod &lt;- lm(prate ~ mrate, data=k401k)\nsummary(LinMod)\n\n#3)\n#Intercept is 83.0755\n#if mrate increase by 1% then prate increases by 5.86%\n\n#4)\n#No\n\n#5)\n#R-squared=0.075. No",
+    "crumbs": [
+      "Statistic",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Statistics 1: The Basics of Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "statistic/Stat1_Uebung.html#exercise-7",
+    "href": "statistic/Stat1_Uebung.html#exercise-7",
+    "title": "Statistics 1: The Basics of Statistics",
+    "section": "Exercise 7",
+    "text": "Exercise 7\nThe data set in CEOSAL2.RAW contains information on chief executive officers for U.S. corporations. The variable salary is annual compensation, in thousands of dollars, and ceoten is prior number of years as company CEO.\n\nFind the average salary and the average tenure in the sample.\nHow many CEOs are in their first year as CEO (that is, ceoten = 0)? What is the longest tenure as a CEO?\nEstimate the simple regression model \\(log(salary) = \\beta_0 + \\beta_1ceoten + u,\\) and report your results in the usual form. What is the (approximate) predicted percentage increase in salary given one more year as a CEO?\n\n\n\nSample Solution\nlibrary('wooldridge')\ndata('ceosal2')\n?ceosal2\n\n#1)\nmean(ceosal2$salary)\nmean(ceosal2$ceoten)\n\n#2)\nmax(ceosal2$ceoten)\nnrow(ceosal2[(ceosal2$ceoten==0), ])\n\n#3)\nLinMod &lt;- lm(log(salary) ~ ceoten, data=ceosal2)\nsummary(LinMod)",
+    "crumbs": [
+      "Statistic",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Statistics 1: The Basics of Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "statistic/Stat1_Uebung.html#exercise-8",
+    "href": "statistic/Stat1_Uebung.html#exercise-8",
+    "title": "Statistics 1: The Basics of Statistics",
+    "section": "Exercise 8",
+    "text": "Exercise 8\nUse the data in SLEEP75.RAW from Biddle and Hamermesh (1990) to study whether there is a tradeoff between the time spent sleeping per week and the time spent in paid work. We could use either variable as the dependent variable. For concreteness, estimate the model \\(sleep = \\beta_0 + \\beta_1totwrk + u,\\) where sleep is minutes spent sleeping at night per week and totwrk is total minutes worked during the week.\n\nReport your results in equation form along with the number of observations and R-squared. What does the intercept in this equation mean?\nIf totwrk increases by 2 hours, by how much is sleep estimated to fall? Do you find this to be a large effect?\n\n\n\nSample Solution\nlibrary('wooldridge')\ndata('sleep75')\n?sleep75\n\n#1)\nLinMod &lt;- lm(sleep ~ totwrk, data=sleep75)\nsummary(LinMod)\n\n#2)\n#120*0.15075=18.09 minutes",
+    "crumbs": [
+      "Statistic",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Statistics 1: The Basics of Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "statistic/Stat1_Uebung.html#exercise-9",
+    "href": "statistic/Stat1_Uebung.html#exercise-9",
+    "title": "Statistics 1: The Basics of Statistics",
+    "section": "Exercise 9",
+    "text": "Exercise 9\nFor the population of firms in the chemical industry, let rd denote annual expenditures on research and development, and let sales denote annual sales (both are in millions of dollars).\n\nWrite down a model (not an estimated equation) that implies a constant elasticity between rd and sales. Which parameter is the elasticity?\nNow, estimate the model using the data in RDCHEM.RAW. Write out the estimated equation in the usual form. What is the estimated elasticity of rd with respect to sales? Explain in words what this elasticity means.\n\n\n\nSample Solution\nlibrary('wooldridge')\ndata('rdchem')\n?rdchem\n\n#1) Constant elasticity -&gt; log ~ log regression, the elasticity is the slope parameter\n\n#2)\nLinMod &lt;- lm(log(rd) ~ log(sales), data=rdchem)\nsummary(LinMod)\n#when sales increase by 1%, R&D increase by 1.08%",
+    "crumbs": [
+      "Statistic",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Statistics 1: The Basics of Statistics</span>"
     ]
   },
   {
     "objectID": "statistic/Stat2_Uebung.html",
     "href": "statistic/Stat2_Uebung.html",
-    "title": "Statistic 2",
+    "title": "Statistics 2: Advanced Topics: Inductive and Multivariate Statistics",
     "section": "",
-    "text": "Advanced applications of inductive and multivariate statistics, …",
+    "text": "Exercise I: Estimation of Multiple Regression Analysis",
     "crumbs": [
       "Statistic",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Statistic 2</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Statistics 2: Advanced Topics: Inductive and Multivariate Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "statistic/Stat2_Uebung.html#exercise-1",
+    "href": "statistic/Stat2_Uebung.html#exercise-1",
+    "title": "Statistics 2: Advanced Topics: Inductive and Multivariate Statistics",
+    "section": "Exercise 1",
+    "text": "Exercise 1\nA problem of interest to health officials (and others) is to determine the effects of smoking during pregnancy on infant health. One measure of infant health is birth weight; a birth weight that is too low can put an infant at risk for contracting various illnesses. Since factors other than cigarette smoking that affect birth weight are likely to be correlated with smoking, we should take those factors into account. For example, higher income generally results in access to better prenatal care, as well as better nutrition forthe mother. An equation that recognizes this is \\(bwght = \\beta_0 + \\beta_1cigs + \\beta_2 faminc + u.\\)\n\nWhat is the most likely sign for \\beta_2?\nDo you think cigs and faminc are likely to be correlated? Explain why the correlation might be positive or negative.\nNow, estimate the equation with and without faminc, using the data in BWGHT.RAW. Report the results in equation form, including the sample size and R-squared. Discuss your results, focusing on whether adding faminc substantially changes the estimated effect of cigs on bwght.\n\n\n\nSample Solution\nlibrary('wooldridge')\ndata('bwght')\n?bwght\n\n#1)\n#likely to be positive\n\n#2)\n#Yes\n#negative correlation\nlinearBwght0 &lt;- lm(cigs ~ faminc, data=bwght)\nsummary(linearBwght0)\n\n#3)\nlinearBwght1 &lt;- lm(bwght ~ cigs + faminc, data=bwght)\nlinearBwght2 &lt;- lm(bwght ~ cigs, data=bwght)\n\nsummary(linearBwght1)\nsummary(linearBwght2)",
+    "crumbs": [
+      "Statistic",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Statistics 2: Advanced Topics: Inductive and Multivariate Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "statistic/Stat2_Uebung.html#exercise-2",
+    "href": "statistic/Stat2_Uebung.html#exercise-2",
+    "title": "Statistics 2: Advanced Topics: Inductive and Multivariate Statistics",
+    "section": "Exercise 2",
+    "text": "Exercise 2\nUse the data in HPRICE1.RAW to estimate the model \\(price = \\beta_0 + \\beta_1sqrft + \\beta_2bdrms + u,\\) where price is the house price measured in thousands of dollars.\n\nWrite out the results in equation form.\nWhat is the estimated increase in price for a house with one more bedroom, holding square footage constant?\nWhat is the estimated increase in price for a house with an additional bedroom that is 140 square feet in size? Compare this to your answer in question 2.\nWhat percentage of the variation in price is explained by square footage and number of bedrooms?\nThe first house in the sample has sqrft = 2,438 and bdrms = 4. Find the predicted selling price for this house from the OLS regression line.\nThe actual selling price of the first house in the sample was $300,000 (so price = 300). Find the residual for this house. Does it suggest that the buyer underpaid or overpaid for the house?\n\n\n\nSample Solution\nlibrary('wooldridge')\ndata('hprice1')\n?hprice1\n\n#1)\nlinearHprice &lt;- lm(price ~ sqrft + bdrms, data=hprice1)\nsummary(linearHprice)\n\n#2)\n#+15.2 thousand dollars\n\n#3)\n140*0.128+15.2\n#33.12 thousand dollars\n\n#4)\n#R2 = 0.63\n\n#5)\n2438*0.128+4*15.2-19.31\n#354 thousand dollars\n\n#6)\n354-300\n#residual of 54 thousand dollars\n#the buyer underpaid",
+    "crumbs": [
+      "Statistic",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Statistics 2: Advanced Topics: Inductive and Multivariate Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "statistic/Stat2_Uebung.html#exercise-3",
+    "href": "statistic/Stat2_Uebung.html#exercise-3",
+    "title": "Statistics 2: Advanced Topics: Inductive and Multivariate Statistics",
+    "section": "Exercise 3",
+    "text": "Exercise 3\nThe file CEOSAL2.RAW contains data on 177 chief executive officers and can be used to examine the effects of firm performance on CEO salary.\n\nEstimate a model relating annual salary to firm sales and market value. Make the model of the constant elasticity variety for both independent variables. Write the results out in equation form.\nAdd profits to the model from question 1. Why can this variable not be included in logarithmic form? Would you say that these firm performance variables explain most of the variation in CEO salaries?\nAdd the variable ceoten to the model in question 2. What is the estimated percentage return for another year of CEO tenure, holding other factors fixed?\nFind the sample correlation coefficient between the variables log(mktval) and profits. Are these variables highly correlated?\n\n\n\nSample Solution\nlibrary('wooldridge')\ndata('ceosal2')\n?ceosal2\n\n#1)\nlinearCEO &lt;- lm(log(salary) ~ log(sales) + log(mktval), data=ceosal2)\nsummary(linearCEO)\n\n#2)\nlinearCEO2 &lt;- lm(log(salary) ~ log(sales) + log(mktval) + profits, data=ceosal2)\nsummary(linearCEO2)\n\nmin(ceosal2$profits)\n#because it contains negative values\n#Yes, R2 is important\n\n#3)\nlinearCEO3 &lt;- lm(log(salary) ~ log(sales) + log(mktval) + profits + ceoten, data=ceosal2)\nsummary(linearCEO3)\n\n#4)\nlinearCEO4 &lt;- lm(log(mktval) ~ profits, data=ceosal2)\nsummary(linearCEO4)\n#Yes, R2 is important",
+    "crumbs": [
+      "Statistic",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Statistics 2: Advanced Topics: Inductive and Multivariate Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "statistic/Stat2_Uebung.html#exercise-ii-multiple-regression-analysis-inference",
+    "href": "statistic/Stat2_Uebung.html#exercise-ii-multiple-regression-analysis-inference",
+    "title": "Statistics 2: Advanced Topics: Inductive and Multivariate Statistics",
+    "section": "Exercise II: Multiple Regression Analysis: Inference",
+    "text": "Exercise II: Multiple Regression Analysis: Inference",
+    "crumbs": [
+      "Statistic",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Statistics 2: Advanced Topics: Inductive and Multivariate Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "statistic/Stat2_Uebung.html#exercise-4",
+    "href": "statistic/Stat2_Uebung.html#exercise-4",
+    "title": "Statistics 2: Advanced Topics: Inductive and Multivariate Statistics",
+    "section": "Exercise 4",
+    "text": "Exercise 4\nThe following model can be used to study whether campaign expenditures affect election outcomes: \\(voteA = \\beta_0 + \\beta_1log(expendA) + \\beta_2log(expendB) + \\beta_3 prtystrA + u,\\) where voteA is the percentage of the vote received by Candidate A, expendA and expendB are campaign expenditures by Candidates A and B, and prtystrA is a measure of party strength for Candidate A (the percentage of the most recent presidential vote that went to A’s party).\n\nWhat is the interpretation of \\(\\beta_1\\)?\nIn terms of the parameters, state the null hypothesis that a 1% increase in A’s expenditures is offset by a 1% increase in B’s expenditures.\nEstimate the given model using the data in VOTE1.RAW and report the results in usual form. Do A’s expenditures affect the outcome? What about B’s expenditures? Can you use these results to test the hypothesis in question 2?\nEstimate a model that directly gives the t statistic for testing the hypothesis in question 2. What do you conclude? (Use a two-sided alternative knowing that the 10% critical value against a two-side alternative with 169 df is 1.645)\n\n\n\nSample Solution\nlibrary('wooldridge')\ndata('vote1')\n?vote1\n\n#1)\n#beta_1 measures the percentage point candidate A votes increases when candidate A expenditures increase by 100%\n\n#2)\n#H_0: \\beta_1 + \\beta_2 = 0\n\n#3)\nlinearVote &lt;- lm(voteA ~ log(expendA) + log(expendB) + prtystrA, data=vote1)\nsummary(linearVote)\n#No (linear combination of two estimates)\n\n#4)\nlinearVote2 &lt;- lm(voteA ~ log(expendA) + log(expendB/expendA) + prtystrA, data=vote1)\nsummary(linearVote2)\n#We fail to reject H_0",
+    "crumbs": [
+      "Statistic",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Statistics 2: Advanced Topics: Inductive and Multivariate Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "statistic/Stat2_Uebung.html#exercise-5",
+    "href": "statistic/Stat2_Uebung.html#exercise-5",
+    "title": "Statistics 2: Advanced Topics: Inductive and Multivariate Statistics",
+    "section": "Exercise 5",
+    "text": "Exercise 5\nUse the data in WAGE2.RAW for this exercise.\n\nConsider the standard wage equation \\(log(wage) = \\beta_0 + \\beta_1 educ + \\beta_2 exper + \\beta_3 tenure + u\\). State the null hypothesis that another year of general workforce experience has no effect on log(wage).\nTest the null hypothesis in question 1. against a two-sided alternative, at the 5% significance level. What do you conclude?\nState the null hypothesis that another year of general workforce experience has the same effect on log(wage) as another year of tenure with the current employer.\nTest the null hypothesis in question 3. against a two-sided alternative, at the 5% significance level.\n\n\n\nSample Solution\nlibrary('wooldridge')\ndata('wage2')\n?wage2\n\n#1)\n#H_0: \\beta_2 = 0\n\n#2)\nlinearWage &lt;- lm(log(wage) ~ educ + exper + tenure, data=wage2)\nsummary(linearWage)\n#Significant. a 1-year experience increases wage by 1.53%\n\n#3)\n#H_0: \\beta_2 - \\beta_3 = 0\n\n#4)\nwage_new &lt;- wage2 %&gt;% mutate(var=exper+tenure)\nlinearWage2 &lt;- lm(log(wage) ~ educ + exper + var, data=wage_new)\nsummary(linearWage2)\n#We fail to reject H_0",
+    "crumbs": [
+      "Statistic",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Statistics 2: Advanced Topics: Inductive and Multivariate Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "statistic/Stat2_Uebung.html#exercise-6",
+    "href": "statistic/Stat2_Uebung.html#exercise-6",
+    "title": "Statistics 2: Advanced Topics: Inductive and Multivariate Statistics",
+    "section": "Exercise 6",
+    "text": "Exercise 6\nThe data set 401KSUBS.RAW contains information on net financial wealth nettfa, age of the survey respondent age, annual family income inc, family size fsize, and participation in certain pension plans for people in the United States. The wealth and income variables are both recorded in thousands of dollars. For this question, use only the data for single-person households (so fsize = 1).\n\nHow many single-person households are there in the data set?\nUse OLS to estimate the model \\(nettfa = \\beta_0 + \\beta_1inc + \\beta_2age + u,\\) and report the results using the usual format. Be sure to use only the single-person households in the sample. Interpret the slope coefficients. Are there any surprises in the slope estimates?\nDoes the intercept from the regression in question 2 have an interesting meaning? Explain.\nFind the p-value for the test \\(H_0: \\beta_2 = 0\\) against a two-side alternative. Do you reject \\(H_0\\) at the 1% significance level?\nIf you do a simple regression of nettfa on inc, is the estimated coefficient on inc much different from the estimate in question 2? Why or why not?\n\n\n\nSample Solution\nlibrary('wooldridge')\ndata('k401ksubs')\n?k401ksubs\n\n#1)\nk401ksubs %&gt;% filter(fsize==1) %&gt;% summarise(n())\n\n#2)\ndata_single &lt;- k401ksubs %&gt;% filter(fsize==1)\nlinear_single &lt;- lm(nettfa ~ inc + age, data=data_single)\nsummary(linear_single)\n#Not very surprising\n\n#3)\n#Not an interesting meaning\n\n#4)\n#Yes\n\n#5)\nsimple_linear &lt;- lm(nettfa ~ inc, data=data_single)\nsummary(simple_linear)\n#Not so different",
+    "crumbs": [
+      "Statistic",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Statistics 2: Advanced Topics: Inductive and Multivariate Statistics</span>"
     ]
   },
   {
     "objectID": "statistic/Stat3_Uebung.html",
     "href": "statistic/Stat3_Uebung.html",
-    "title": "Statistic 3",
+    "title": "Statistics 3: Cluster analysis and data classification approaches",
     "section": "",
-    "text": "Cluster analysis and data classification approaches",
+    "text": "K-means Clustering\ninstall.packages(\"factoextra\")\ninstall.packages(\"mclust\")\nlibrary(factoextra)\nConsider the \\(iris\\) dataset. Suppose we are given the petal and sepal length and widths, but not told which species each iris belongs to.\nOur goal is to find clusters within the data. These are groups of irises that are more similar to each other than to those in other groups (clusters). These clusters may correspond to the Species label (which we aren’t given), or they may not. The goal of cluster analysis is not to predict the species, but simply to group the data into similar clusters.\nLet’s look at finding 3 clusters. We can do this using the kmeans command in R.\niris2 &lt;- iris[,1:4]\n# nstart gives the number of random initialisations to try \nset.seed(123)\n(iris.k &lt;- kmeans(iris2, centers = 3, nstart=25))\nFrom this output we can read off the final cluster means. Also given is the final within-cluster sum of squares for each cluster.\nWe can visualise the output of K-means using the fviz_cluster command from the factoextra package. This first projects the points into two dimensions using PCA, and then shows the classification in 2D, and so some caution is needed in interpreting these plots.\nfviz_cluster(iris.k, data = iris2,\n             geom = \"point\")\nFinally, in this case we know that there really are three clusters in the data (the three species). We can compare the clusters found using K-means with the species label to see if they are similar. The easiest way to do this is with the table command.\ntable(iris$Species, iris.k$cluster)\nIn the iris data, we know there are 3 distinct species. But suppose we didn’t know this. What happens if we try other values for \\(K\\)?\nFor the iris data, we can create an elbow plot using the fviz_nbclust command from the factoextra package.\nfviz_nbclust(iris2, kmeans, method = \"wss\")\nIn this case, we would probably decide there most likely three natural clusters in the data, as there is a reasonable decrease in W when moving from 2 to 3 clusters, but moving to 3 clusters only yields a minor improvement. Note here the slight increase in W in moving from 9 to 10 clusters. This is due to only using a greed search, rather than an exhaustive one (we know the best 10-group cluster must be better than the best 9-group cluster, we just have found it).",
     "crumbs": [
       "Statistic",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Statistic 3</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Statistics 3: Cluster analysis and data classification approaches</span>"
+    ]
+  },
+  {
+    "objectID": "statistic/Stat3_Uebung.html#hierarchical-clustering",
+    "href": "statistic/Stat3_Uebung.html#hierarchical-clustering",
+    "title": "Statistics 3: Cluster analysis and data classification approaches",
+    "section": "Hierarchical Clustering",
+    "text": "Hierarchical Clustering\nSuppose we are given 5 observations with distance matrix\n\n(D &lt;- as.dist(matrix(c(0,0,0,0,0,\n                      2,0,0,0,0,\n                      11,9,0,0,0,\n                      15,13,10,0,0,\n                      7,5,4,8,0), nr=5, byrow=T)))\n\nThe hclust command does agglomerative clustering: we just have to specify the method to use.\n\nD.sl &lt;-hclust(D, method=\"single\")\n\nTo display the dendrogram\n\nplot(D.sl)\n\nChanging the method\n\nplot(hclust(D, method=\"complete\"))\n\nGroup average clustering produces the same hierarchy of clusters as single linkage, but the nodes (points where clusters join) are at different heights in the dendrogram.\n\nD.ga &lt;- hclust(D, method=\"average\")\nplot(D.ga)",
+    "crumbs": [
+      "Statistic",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Statistics 3: Cluster analysis and data classification approaches</span>"
+    ]
+  },
+  {
+    "objectID": "statistic/Stat3_Uebung.html#model-based-clustering",
+    "href": "statistic/Stat3_Uebung.html#model-based-clustering",
+    "title": "Statistics 3: Cluster analysis and data classification approaches",
+    "section": "Model-Based Clustering",
+    "text": "Model-Based Clustering\nModel-based clustering is similar to K-means clustering, in that we want to allocate each case to a cluster. The difference is that we will now assume a probability distribution for the observations within each cluster.\nThe mclust library can be used to perform model-based clustering with Gaussian clusters. We just have to specify the number of required clusters.\n\nlibrary(mclust)\niris.m &lt;- Mclust(iris2,G=3)\n\nPairs plots of the classification of each point can easily be obtained, as can the estimated probability density of each cluster.\n\nplot(iris.m, what = c(\"classification\"))\n\nChanging the representation\n\nplot(iris.m, what = c(\"density\"))",
+    "crumbs": [
+      "Statistic",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Statistics 3: Cluster analysis and data classification approaches</span>"
     ]
   },
   {
@@ -1072,46 +1281,13 @@
     ]
   },
   {
-    "objectID": "spatan/Spatan2_Uebung_C.html",
-    "href": "spatan/Spatan2_Uebung_C.html",
-    "title": "SpatAn 2: Exercise C1",
-    "section": "",
-    "text": "Task 1: Visualise red kite movement data\nThe first question typically asked in such movement studies is: where can this bird usually be found? To answer this question, the first thing to do is simply visualise the data points in a simple map. Create the map below to answer this question.",
-    "crumbs": [
-      "Spatial Analysis",
-      "<span class='chapter-number'>25</span>  <span class='chapter-title'>SpatAn 2: Exercise C1</span>"
-    ]
-  },
-  {
-    "objectID": "spatan/Spatan2_Uebung_C.html#task-2-calculate-kernel-density-estimation",
-    "href": "spatan/Spatan2_Uebung_C.html#task-2-calculate-kernel-density-estimation",
-    "title": "SpatAn 2: Exercise C1",
-    "section": "Task 2: Calculate Kernel Density Estimation",
-    "text": "Task 2: Calculate Kernel Density Estimation\nAt first, this approach appears to work, but here we encounter the typical problem of “overplotting”. This means that due to the overlay of many points in dense regions, we cannot estimate how many points are actually there and potentially overlapping. There are various ways to visualise the point density more clearly. A very popular method among biologists is density distribution with a Kernel Density Estimation (KDE). This is mainly because the habitat (home range) of an animal can be estimated using KDE. Home ranges are often defined with KDE95 and core areas are defined with KDE50 (Fleming C., Calabrese J., 2016).\nTo calculate the density, we use the density.ppp function fromspatstat. This library is somewhat complex to use, but so that we can still apply this method to our red kite data, we have created our own KDE function.\nWe encourage those of you who can study our function in detail to not use it, and instead to use spatstat directly. If you want to work with our function, you’ll need to copy and execute the code below into your script.\n\nmy_kde &lt;- function(points, cellsize, bandwith, extent = NULL){\n  library(\"spatstat.geom\")    # to convert to ppp\n  library(\"spatstat.explore\") # to calculate density\n\n  points_ppp &lt;- as.ppp(points) # convert sf &gt; ppp\n\n  if(!is.null(extent)){\n    # if an extent has been given, this will be used\n    # to set the observation window\n    Window(points_ppp) &lt;- as.owin(st_bbox(extent))\n  }\n\n  # Calculate density\n  points_density &lt;- density.ppp(x = points_ppp, sigma = bandwith, eps = cellsize)\n\n  # Convert Output in a DataFrame\n  points_density_df &lt;- as.data.frame(points_density)\n\n  points_density_df\n}\n\nThe parameters of the function should be relatively clear:\n\npoints: a point record from the class sf\ncellsize: the cell size of the output grid\nbandwith: The search radius for the density calculation\nextent (optional): the perimeter in which the density distribution is to be calculated. If no perimeter is specified, the “bounding box” of points should be used.\n\nIf we now use my_kde() to calculate density distribution, we get a data.frame with X and Y coordinates and a value column. Use these three columns with geom_raster() to visualise your data with ggplot aes(x = X, y = Y, fill = value).\n\nred_kites_kde &lt;- my_kde(points = red_kites, cellsize = 1000, bandwith = 10000, extent = switzerland)\n\nhead(red_kites_kde)\n##         x       y        value\n## 1 2485909 1075767 5.632740e-24\n## 2 2485909 1076766 8.290197e-23\n## 3 2485909 1077764 3.032138e-23\n## 4 2485909 1078763 6.522508e-23\n## 5 2485909 1079761 9.599267e-23\n## 6 2485909 1080760 1.183168e-22\n\n\n\n\n\n\n\n\n\n\nThe kernel density estimation is now very much dominated by low values, as the density in most cells of our study area is close to zero. As mentioned, scientists are often only interested in the highest 95% of values. Follow these steps to depict results a little better:\n\nCalculate the 95th percentile of all values with the function quantile and name this q95\nCreate a new column in red_kites_kde in which all values are lower than q95 NA\n(Optional): Transform the values with log10 to get a more differentiated gradient\n\nWe can hide the low values by representing only the highest 5% of the values. To accomplish this, we use raster::quantile to calculate the 95th percentile of all values and use this value as a “limit value” for the representation.\nIn addition, a logarithmic transformation of the values helps to make the colour scale somewhat more visible.",
-    "crumbs": [
-      "Spatial Analysis",
-      "<span class='chapter-number'>25</span>  <span class='chapter-title'>SpatAn 2: Exercise C1</span>"
-    ]
-  },
-  {
-    "objectID": "spatan/Spatan2_Uebung_C.html#task-3-density-distribution-with-thiessen-polygons",
-    "href": "spatan/Spatan2_Uebung_C.html#task-3-density-distribution-with-thiessen-polygons",
-    "title": "SpatAn 2: Exercise C1",
-    "section": "Task 3: Density distribution with Thiessen polygons",
-    "text": "Task 3: Density distribution with Thiessen polygons\nThiessen polygons offer an exciting alternative for visualising differences in the density distribution of points in data sets. We now want to try this out and construct Thiessen polygons for the red kite data in Switzerland. Use the instructions for creating Thiessen polygons from exercise B to create Thiessen polygons for the red kite positions.\n\n\n\n\n\n\n\n\nFigure 25.1: It will be clearer if we depict Thiessen polygons without points, just how density within clusters appears",
-    "crumbs": [
-      "Spatial Analysis",
-      "<span class='chapter-number'>25</span>  <span class='chapter-title'>SpatAn 2: Exercise C1</span>"
-    ]
-  },
-  {
     "objectID": "References.html",
     "href": "References.html",
     "title": "References",
     "section": "",
-    "text": "Kovic, Marko. 2014. “Je Weniger Ausländer, Desto Mehr Ja-Stimmen?\nWirklich?” Tagesanzeiger Datenblog. https://blog.tagesanzeiger.ch/datenblog/index.php/668/je-weniger-auslaender-desto-mehr-ja-stimmen-wirklich.\n\n\nScherler, Patrick. 2020. “Drivers of Departure and Prospecting in\nDispersing Juvenile Red Kites (Milvus Milvus).” PhD thesis,\nUniversity of Zurich.\n\n\nWickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023.\nR for Data Science: Import, Tidy, Transform, Visualize, and Model\nData. 2nd Edition. O’Reilly. https://r4ds.hadley.nz/.",
+    "text": "Kovic, Marko. 2014. “Je Weniger Ausländer, Desto Mehr Ja-Stimmen?\nWirklich?” Tagesanzeiger Datenblog. https://blog.tagesanzeiger.ch/datenblog/index.php/668/je-weniger-auslaender-desto-mehr-ja-stimmen-wirklich.\n\n\nWickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023.\nR for Data Science: Import, Tidy, Transform, Visualize, and Model\nData. 2nd Edition. O’Reilly. https://r4ds.hadley.nz/.",
     "crumbs": [
-      "<span class='chapter-number'>26</span>  <span class='chapter-title'>References</span>"
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>References</span>"
     ]
   },
   {
@@ -1149,7 +1325,7 @@
     "href": "Statistic.html",
     "title": "Statistic",
     "section": "",
-    "text": "Write Intro\n\n\n\n\n\n\n\n\n\nTitle\n\n\nDate\n\n\nLesson\n\n\nTopic\n\n\n\n\n\n\nPreparation\n\n\n2024-04-02\n\n\nstat1\n\n\nPreparation\n\n\n\n\nStatistic 1\n\n\n2024-04-02\n\n\nstat1\n\n\nStatistic 1\n\n\n\n\nStatistic 2\n\n\n2024-04-09\n\n\nstat2\n\n\nStatistic 2\n\n\n\n\nStatistic 3\n\n\n2024-04-23\n\n\nstat3\n\n\nStatistic 3\n\n\n\n\n\nNo matching items",
+    "text": "Write Intro\n\n\n\n\n\n\n\n\n\nTitle\n\n\nDate\n\n\nLesson\n\n\nTopic\n\n\n\n\n\n\nPreparation\n\n\n2024-04-02\n\n\nstat1\n\n\nPreparation\n\n\n\n\nStatistics 1: The Basics of Statistics\n\n\n2024-04-02\n\n\nstat1\n\n\nStatistic 1\n\n\n\n\nStatistics 2: Advanced Topics: Inductive and Multivariate Statistics\n\n\n2024-04-09\n\n\nstat2\n\n\nStatistic 2\n\n\n\n\nStatistics 3: Cluster analysis and data classification approaches\n\n\n2024-04-16\n\n\nstat3\n\n\nStatistic 3\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Statistic"
     ]
